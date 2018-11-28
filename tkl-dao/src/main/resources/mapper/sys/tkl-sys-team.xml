@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.sys.SysTeamMapper" >
+    <!-- -->
+    <!-- team相关 -->
+    <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
+    <!-- @author liuzhengjie -->
+    <!-- @version 1.0-->
+</mapper>

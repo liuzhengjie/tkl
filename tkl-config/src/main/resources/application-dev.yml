@@ -1,0 +1,92 @@
+#=====================================
+#======== 听客来系统主配置文件1.0======
+#=====================================
+
+#---------------------------------------------------------------------------------------------------
+#  说明：开发环境配置文件
+#  如有更改，请建楼说明原因！
+#
+#  @author liuzhengjie
+#  @email 869044232@qq.com
+#  @date 2018-11-22 14:31:15
+#                                                                                     1楼
+#                                                                          赞（10086） 踩（-10086）
+#---------------------------------------------------------------------------------------------------
+
+
+#---------------------------------------------------------------------------------------------------
+#  spring.profiles.include 配置说明
+#
+#  目的：说明该配置的原因
+#
+#  这个配置可以将其他配置文件给包含进来，这样我就可以吧数据库配置等常规配置放在外面，让配置看起来更清新！
+#  这里写的application-devdb.yml中并没有写数据库信息，在这里只是说一下使用方法。
+#  如果有需要扩展却又格格不入的参数，就另起炉灶吧！
+#
+#  吐槽：楼主太恶心了，改个文件还要写记录！ +1！  楼上说的对！
+#
+#  @author liuzhengjie
+#  @email 869044232@qq.com
+#  @date 2018-11-22 14:23:51
+#                                                                                   2楼
+#                                                                          赞（10086） 踩（-10086）
+#---------------------------------------------------------------------------------------------------
+
+# 测试环境使用端口号
+server:
+    port: 8088
+
+# 配置文件设置
+spring:
+  profiles:
+    include: devdb
+  datasource:
+    url: jdbc:mysql://localhost:3306/tingkelai?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    platform: mysql
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    filters: stat,wall,log4j
+    logSlowSql: true
+
+
+#指定映射文件,说明：指定xml前缀必须为tkl-
+#mybatis:
+#  mapper-locations: classpath:mapper/**/tkl-*.xml
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/tkl-*.xml
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 0
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置（下面3个配置）
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
