@@ -26,6 +26,7 @@
 		<module>tkl-import-export</module>
 		<module>tkl-sms</module>
 		<module>tkl-statistics</module>
+		<module>tkl-main</module>
 	</modules>
 
 	<parent>

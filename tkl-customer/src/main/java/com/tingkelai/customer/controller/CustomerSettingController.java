@@ -1,9 +1,7 @@
 package com.tingkelai.customer.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
-import com.tingkelai.api.controller.BaseCRUDController;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.customer.CustomerSettingApi;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerSettingController  implements CustomerSettingApi {
 
     @Override
-    public ApiResponseMessage customerSettingListGet(Object requestBody) {
+    public ResponseMessage customerSettingListGet(Object requestBody) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage customerSettingPut(Object requestBody) {
+    public ResponseMessage customerSettingPut(Object requestBody) {
         return null;
     }
 }

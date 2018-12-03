@@ -1,5 +1,9 @@
 package com.tingkelai.util;
 
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -259,6 +263,20 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 			}
 		}else{
 			return null;
+		}
+	}
+
+	public static void printJson(HttpServletResponse response, String content) {
+		try {
+			response.reset();
+			response.setContentType("application/json");
+			response.setHeader("Cache-Control", "no-store");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter pw = response.getWriter();
+			pw.write(content);
+			pw.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

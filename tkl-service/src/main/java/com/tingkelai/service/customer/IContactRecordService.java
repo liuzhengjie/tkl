@@ -10,5 +10,6 @@ import com.tingkelai.service.common.ICommonService;
  * @date 2018-11-27 20:36:37
  * @version 1.0
  */
-public interface IContactRecordService extends ICommonService<ContactRecord> {
+public interface IContactRecordService extends ICommonService<ContactRecord>{
+
 }

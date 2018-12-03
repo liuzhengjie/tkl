@@ -1,15 +1,11 @@
 package com.tingkelai.api.sys;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,11 +18,41 @@ import java.util.List;
 @Api(value = "sys", description = "系统相关api")
 public interface SysButtonApi<T> {
 
-    @ApiOperation(value = "获取按钮列表（指定菜单下的按钮列表）", nickname = "sysButtonListGet", notes = "通过菜单id，获取该菜单下所有的按钮", tags={ "sys/button", })
+    @ApiOperation(value = "获取按钮列表（指定按钮下的按钮列表）", nickname = "sysButtonListGet", notes = "通过菜单id，获取该菜单下所有的按钮", tags={ "sys/button", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/button/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<List<T>> sysButtonListGet(HttpServletRequest request, T body);
+    ResponseMessage<List<T>> sysButtonListGet(HttpServletRequest request, T body);
+
+    @ApiOperation(value = "删除资源（按钮）详情", nickname = "sysButtonDelete", notes = "", tags={ "sys/button", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 405, message = "Invalid input") })
+    @RequestMapping(value = "/sys/button",
+            method = RequestMethod.DELETE)
+    ResponseMessage<T> sysButtonDelete(HttpServletRequest request, T body);
+
+
+    @ApiOperation(value = "获取资源（按钮）详情", nickname = "sysButtonGet", notes = "", tags={ "sys/button", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 405, message = "Invalid input") })
+    @RequestMapping(value = "/sys/button",
+            method = RequestMethod.GET)
+    ResponseMessage<T> sysButtonGet(HttpServletRequest request, T body);
+
+    @ApiOperation(value = "添加资源（按钮）", nickname = "sysButtonPost", notes = "树形结构的菜单", tags={ "sys/button", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 405, message = "Invalid input") })
+    @RequestMapping(value = "/sys/button",
+            method = RequestMethod.POST)
+    ResponseMessage<T> sysMenuPost(HttpServletRequest request, T body);
+
+
+    @ApiOperation(value = "修改资源（按钮）详情", nickname = "sysButtonPut", notes = "", tags={ "sys/button", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 405, message = "Invalid input") })
+    @RequestMapping(value = "/sys/button",
+            method = RequestMethod.PUT)
+    ResponseMessage<T> sysButtonPut(HttpServletRequest request, T body);
 }
 

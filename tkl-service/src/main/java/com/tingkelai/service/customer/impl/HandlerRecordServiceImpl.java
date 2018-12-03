@@ -7,5 +7,5 @@ import com.tingkelai.service.customer.IHandlerRecordService;
 import org.springframework.stereotype.Service;
 
 @Service("handlerRecordService")
-public class HandlerRecordServiceImpl extends CommonServiceImpl<HandlerRecordMapper, HandlerRecord> implements IHandlerRecordService {
+public class HandlerRecordServiceImpl extends CommonServiceImpl<HandlerRecord> implements IHandlerRecordService {
 }

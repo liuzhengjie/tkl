@@ -1,13 +1,8 @@
 package com.tingkelai.sys.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
-import com.tingkelai.api.controller.BaseCRUDController;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.sys.SysApi;
 import com.tingkelai.domain.sys.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 public class SysController implements SysApi<User> {
 
     @Override
-    public ApiResponseMessage<User> sysLoginPost(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysLoginPost(HttpServletRequest request, User body) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage<User> sysLogoutGet(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysLogoutGet(HttpServletRequest request, User body) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage<User> sysRegisterPost(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysRegisterPost(HttpServletRequest request, User body) {
         return null;
     }
 }

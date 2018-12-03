@@ -21,6 +21,13 @@ import java.util.Objects;
 @Mapper
 public class User extends DataEntity<Long>{
 
+    /**
+     * 是否锁定（1：正常；-1：删除；0：锁定；）
+     */
+    public static final int STATUS_DELETE = -1;
+    public static final int STATUS_LOCKED = 0;
+    public static final int STATUS_NORMAL = 1;
+
     @JsonProperty("userName")
     @TableField("user_name")
     private String userName = null;
@@ -50,7 +57,7 @@ public class User extends DataEntity<Long>{
     private String phone = null;
 
     @JsonProperty("userStatus")
-    @TableField("user_status")
+    @TableField("status")
     private Integer userStatus = null;
 
     @JsonProperty("teamId")
@@ -268,4 +275,7 @@ public class User extends DataEntity<Long>{
         return o.toString().replace("\n", "\n    ");
     }
 
+    public String getCredentialsSalt() {
+        return userName + salt;
+    }
 }

@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service("dictGroupService")
-public class DictGroupServiceImpl extends CommonServiceImpl<DictGroupMapper, DictCategory> implements IDictGroupService {
+public class DictGroupServiceImpl extends CommonServiceImpl<DictCategory> implements IDictGroupService {
 }

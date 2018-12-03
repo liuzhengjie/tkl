@@ -1,6 +1,5 @@
-package com.tingkelai.api;
+package com.tingkelai.domain;
 
-import com.tingkelai.domain.entity.DataEntity;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -12,37 +11,42 @@ import javax.xml.bind.annotation.XmlTransient;
  * @date 2018-11-28 10:29:52
  * @version 1.0
  */
-public class ApiResponseMessage<T> {
+public class ResponseMessage<T> {
     public static final int ERROR = 1;
     public static final int WARNING = 2;
     public static final int INFO = 3;
     public static final int OK = 4;
     public static final int TOO_BUSY = 5;
 
+    public static final String ERROR_MSG = "error";
+    public static final String WARNING_MSG = "warning";
+    public static final String INFO_MSG = "info";
+    public static final String OK_MSG = "ok";
+    public static final String TOO_BUSY_MSG = "too busy";
+
     private int code = 1;
     private String type = "error";
     private String message = "系统内部bug";
     private T data;
 
-    public ApiResponseMessage(){}
+    public ResponseMessage(){}
 
-    public ApiResponseMessage(Exception e){
-
+    public ResponseMessage(Exception e){
     }
 
-    public ApiResponseMessage(T data){
+    public ResponseMessage(T data){
         this.setCode(4);
         this.setType("ok");
         this.setMessage("正常数据");
         this.setData(data);
     }
 
-    public ApiResponseMessage(int code, String message, T data){
+    public ResponseMessage(int code, String message, T data){
         this(code, message);
         this.setData(data);
     }
 
-    public ApiResponseMessage(int code, String message){
+    public ResponseMessage(int code, String message){
         this();
         this.code = code;
         switch(code){
@@ -103,5 +107,17 @@ public class ApiResponseMessage<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void success(String msg) {
+        this.code = OK;
+        this.message = msg;
+        this.type = "ok";
+    }
+
+    public void fail(String msg) {
+        this.code = ERROR;
+        this.message = msg;
+        this.type = ERROR_MSG;
     }
 }

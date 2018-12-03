@@ -1,10 +1,7 @@
 package com.tingkelai.api.customer;
 
-import com.tingkelai.api.ApiResponseMessage;
-import com.tingkelai.domain.customer.ServiceRecord;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +22,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.DELETE)
-    ApiResponseMessage<T> customerServiceRecordDelete(T requestBody);
+    ResponseMessage<T> customerServiceRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户服务记录", nickname = "customerServiceRecordGet", notes = "", tags={ "customer/service-record", })
@@ -33,7 +30,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.GET)
-    ApiResponseMessage<T> customerServiceRecordGet(T requestBody);
+    ResponseMessage<T> customerServiceRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户服务记录列表", nickname = "customerServiceRecordListGet", notes = "", tags={ "customer/service-record", })
@@ -41,7 +38,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<List<T>> customerServiceRecordListGet(T requestBody);
+    ResponseMessage<List<T>> customerServiceRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户服务记录", nickname = "customerServiceRecordPost", notes = "", tags={ "customer/service-record", })
@@ -49,7 +46,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.POST)
-    ApiResponseMessage<T> customerServiceRecordPost(T requestBody);
+    ResponseMessage<T> customerServiceRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户服务记录", nickname = "customerServiceRecordPut", notes = "", tags={ "customer/service-record", })
@@ -57,5 +54,5 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.PUT)
-    ApiResponseMessage<T> customerServiceRecordPut(T requestBody);
+    ResponseMessage<T> customerServiceRecordPut(T requestBody);
 }

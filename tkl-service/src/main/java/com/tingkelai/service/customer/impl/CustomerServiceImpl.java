@@ -7,6 +7,6 @@ import com.tingkelai.service.customer.ICustomerService;
 import org.springframework.stereotype.Service;
 
 @Service("customerService")
-public class CustomerServiceImpl extends CommonServiceImpl<CustomerMapper, Customer> implements ICustomerService {
+public class CustomerServiceImpl extends CommonServiceImpl<Customer> implements ICustomerService {
 
 }

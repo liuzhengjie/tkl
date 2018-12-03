@@ -6,4 +6,28 @@
     <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
     <!-- @author liuzhengjie -->
     <!-- @version 1.0-->
+
+
+<!--    &lt;!&ndash; 通过用户ID查询 &ndash;&gt;
+    <select id="findMenuByUserId"  resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Column_List" />
+        from sys_menu t
+        <include refid="parentJoins"/>
+        LEFT JOIN sys_role_menu rm on t.id=rm.menu_id
+        LEFT JOIN sys_user_role ur on rm.role_id=ur.role_id
+        WHERE ur.user_id= #{userId}
+        ORDER BY sort
+    </select>
+
+    &lt;!&ndash; 通过用户ID查询 &ndash;&gt;
+    <select id="findMenuByRoleId"  resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Column_List" />
+        from sys_menu t
+        <include refid="parentJoins"/>
+        LEFT JOIN sys_role_menu rm on t.id=rm.menu_id
+        WHERE rm.role_id= #{roleId}
+        ORDER BY sort
+    </select>-->
 </mapper>

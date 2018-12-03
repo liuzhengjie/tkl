@@ -52,6 +52,7 @@ public abstract class DataEntity<ID> extends AbstractEntity<ID> {
 	public DataEntity() {
 		super();
 		this.delFlag = DomainConstant.DEL_FLAG_NORMAL;
+		this.updateDate = new Date();
 	}
 
 	public Integer getVersion() {

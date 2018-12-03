@@ -7,5 +7,5 @@ import com.tingkelai.service.sys.ISysTeamService;
 import org.springframework.stereotype.Service;
 
 @Service("sysTeamService")
-public class SysTeamServiceImpl extends CommonServiceImpl<SysTeamMapper, Team> implements ISysTeamService{
+public class SysTeamServiceImpl extends CommonServiceImpl<Team> implements ISysTeamService{
 }

@@ -7,5 +7,5 @@ import com.tingkelai.service.customer.ISaleRecordService;
 import org.springframework.stereotype.Service;
 
 @Service("saleRecordService")
-public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecordMapper, SaleRecord> implements ISaleRecordService{
+public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> implements ISaleRecordService{
 }

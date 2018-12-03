@@ -1,12 +1,9 @@
 package com.tingkelai.customer.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleChanceApi;
 import com.tingkelai.domain.customer.SaleChance;
-import com.tingkelai.service.customer.ISaleChanceService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,27 +19,27 @@ import java.util.List;
 public class CustomerSaleChanceController extends BaseCRUDController<SaleChance, Long> implements CustomerSaleChanceApi<SaleChance> {
 
     @Override
-    public ApiResponseMessage<SaleChance> customerSaleChanceDelete(SaleChance requestBody) {
+    public ResponseMessage<SaleChance> customerSaleChanceDelete(SaleChance requestBody) {
         return deleteEntity(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<SaleChance> customerSaleChanceGet(SaleChance requestBody) {
+    public ResponseMessage<SaleChance> customerSaleChanceGet(SaleChance requestBody) {
         return getEntityById(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<List<SaleChance>> customerSaleChanceListGet(SaleChance requestBody) {
+    public ResponseMessage<List<SaleChance>> customerSaleChanceListGet(SaleChance requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ApiResponseMessage<SaleChance> customerSaleChancePost(SaleChance requestBody) {
+    public ResponseMessage<SaleChance> customerSaleChancePost(SaleChance requestBody) {
         return saveEntity(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<SaleChance> customerSaleChancePut(SaleChance requestBody) {
+    public ResponseMessage<SaleChance> customerSaleChancePut(SaleChance requestBody) {
         return updateEntity(requestBody);
     }
 }

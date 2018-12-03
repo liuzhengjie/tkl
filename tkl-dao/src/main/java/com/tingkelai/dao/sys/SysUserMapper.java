@@ -1,8 +1,12 @@
 package com.tingkelai.dao.sys;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.tingkelai.domain.sys.Button;
+import com.tingkelai.domain.sys.Menu;
+import com.tingkelai.domain.sys.Role;
 import com.tingkelai.domain.sys.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +33,12 @@ public interface SysUserMapper extends BaseMapper<User>{
 
     List<User> sysUserListGet();
 
+    /** 根据用户id获取用户角色 */
+    List<Role> findRoleListByUserId(@Param("id") Long id);
+
+    /** 根据用户id获取用户的所有菜单列表 */
+    List<Menu> findMenuByUserId(@Param("id") Long id);
+
+    /** 根据用户id获取用户的所有按钮列表 */
+    List<Button> findButtonByUserId(@Param("id") Long id);
 }

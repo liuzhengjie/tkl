@@ -22,4 +22,5 @@ import java.util.List;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<Role>{
 
+    List<Role> findListByUserId(Long id);
 }

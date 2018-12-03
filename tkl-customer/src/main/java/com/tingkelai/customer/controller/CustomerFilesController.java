@@ -1,9 +1,7 @@
 package com.tingkelai.customer.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
-import com.tingkelai.api.controller.BaseCRUDController;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.customer.CustomerFilesApi;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,27 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerFilesController implements CustomerFilesApi {
 
     @Override
-    public ApiResponseMessage customerFilesDelete(Object requestBody) {
+    public ResponseMessage customerFilesDelete(Object requestBody) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage customerFilesGet(Object requestBody) {
+    public ResponseMessage customerFilesGet(Object requestBody) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage customerFilesListGet(Object requestBody) {
+    public ResponseMessage customerFilesListGet(Object requestBody) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage customerFilesPost(Object requestBody) {
+    public ResponseMessage customerFilesPost(Object requestBody) {
         return null;
     }
 
     @Override
-    public ApiResponseMessage customerFilesPut(Object requestBody) {
+    public ResponseMessage customerFilesPut(Object requestBody) {
         return null;
     }
 }

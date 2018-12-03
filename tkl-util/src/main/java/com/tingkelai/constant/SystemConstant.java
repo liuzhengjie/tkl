@@ -8,4 +8,9 @@ package com.tingkelai.constant;
  */
 public class SystemConstant {
 
+    //缓存数据
+    public static final String CACHE_DICT_MAP = "cacheDictMap";
+    public static final String CURRENT_USER = "systemuser";
+    public static final String CURRENT_USERNAME = "systemusername";
+
 }

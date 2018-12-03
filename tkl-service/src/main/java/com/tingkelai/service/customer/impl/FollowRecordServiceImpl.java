@@ -7,5 +7,5 @@ import com.tingkelai.service.customer.IFollowRecordService;
 import org.springframework.stereotype.Service;
 
 @Service("followRecordService")
-public class FollowRecordServiceImpl extends CommonServiceImpl<FollowRecordMapper, FollowRecord> implements IFollowRecordService {
+public class FollowRecordServiceImpl extends CommonServiceImpl<FollowRecord> implements IFollowRecordService {
 }

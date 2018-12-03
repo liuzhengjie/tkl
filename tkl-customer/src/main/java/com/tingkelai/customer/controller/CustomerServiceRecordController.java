@@ -1,12 +1,9 @@
 package com.tingkelai.customer.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerServiceRecordApi;
 import com.tingkelai.domain.customer.ServiceRecord;
-import com.tingkelai.service.customer.IServiceRecordService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -21,27 +18,27 @@ public class CustomerServiceRecordController extends BaseCRUDController<ServiceR
         implements CustomerServiceRecordApi<ServiceRecord> {
 
     @Override
-    public ApiResponseMessage<ServiceRecord> customerServiceRecordDelete(ServiceRecord requestBody) {
+    public ResponseMessage<ServiceRecord> customerServiceRecordDelete(ServiceRecord requestBody) {
         return deleteEntity(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<ServiceRecord> customerServiceRecordGet(ServiceRecord requestBody) {
+    public ResponseMessage<ServiceRecord> customerServiceRecordGet(ServiceRecord requestBody) {
         return getEntityById(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<List<ServiceRecord>> customerServiceRecordListGet(ServiceRecord requestBody) {
+    public ResponseMessage<List<ServiceRecord>> customerServiceRecordListGet(ServiceRecord requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ApiResponseMessage<ServiceRecord> customerServiceRecordPost(ServiceRecord requestBody) {
+    public ResponseMessage<ServiceRecord> customerServiceRecordPost(ServiceRecord requestBody) {
         return saveEntity(requestBody);
     }
 
     @Override
-    public ApiResponseMessage<ServiceRecord> customerServiceRecordPut(ServiceRecord requestBody) {
+    public ResponseMessage<ServiceRecord> customerServiceRecordPut(ServiceRecord requestBody) {
         return updateEntity(requestBody);
     }
 }

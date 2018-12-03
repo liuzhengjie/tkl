@@ -7,5 +7,5 @@ import com.tingkelai.service.customer.ISaleChanceService;
 import org.springframework.stereotype.Service;
 
 @Service("saleChanceService")
-public class SaleChanceServiceImpl extends CommonServiceImpl<SaleChanceMapper, SaleChance> implements ISaleChanceService{
+public class SaleChanceServiceImpl extends CommonServiceImpl<SaleChance> implements ISaleChanceService{
 }

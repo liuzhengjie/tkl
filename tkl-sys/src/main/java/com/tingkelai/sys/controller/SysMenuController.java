@@ -1,6 +1,6 @@
 package com.tingkelai.sys.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.sys.SysMenuApi;
 import com.tingkelai.domain.sys.Menu;
@@ -13,27 +13,27 @@ import java.util.List;
 public class SysMenuController extends BaseCRUDController<Menu, Long> implements SysMenuApi<Menu> {
 
     @Override
-    public ApiResponseMessage<Menu> sysMenuDelete(HttpServletRequest request, Menu body) {
+    public ResponseMessage<Menu> sysMenuDelete(HttpServletRequest request, Menu body) {
         return deleteEntity(body);
     }
 
     @Override
-    public ApiResponseMessage<Menu> sysMenuGet(HttpServletRequest request, Menu body) {
+    public ResponseMessage<Menu> sysMenuGet(HttpServletRequest request, Menu body) {
         return getEntityById(body);
     }
 
     @Override
-    public ApiResponseMessage<List<Menu>> sysMenuListGet(HttpServletRequest request, Menu body) {
+    public ResponseMessage<List<Menu>> sysMenuListGet(HttpServletRequest request, Menu body) {
         return getEntityList();
     }
 
     @Override
-    public ApiResponseMessage<Menu> sysMenuPost(HttpServletRequest request, Menu body) {
+    public ResponseMessage<Menu> sysMenuPost(HttpServletRequest request, Menu body) {
         return saveEntity(body);
     }
 
     @Override
-    public ApiResponseMessage<Menu> sysMenuPut(HttpServletRequest request, Menu body) {
+    public ResponseMessage<Menu> sysMenuPut(HttpServletRequest request, Menu body) {
         return updateEntity(body);
     }
 }

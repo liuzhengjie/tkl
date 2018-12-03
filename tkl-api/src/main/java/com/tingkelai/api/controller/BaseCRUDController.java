@@ -1,8 +1,11 @@
 package com.tingkelai.api.controller;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.dao.customer.CustomerMapper;
+import com.tingkelai.domain.customer.Customer;
 import com.tingkelai.domain.entity.AbstractEntity;
 import com.tingkelai.service.common.ICommonService;
+import com.tingkelai.service.common.impl.CommonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -33,67 +36,67 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	/**
 	 * 获取列表
 	 */
-	protected ApiResponseMessage<List<Entity>> getEntityList() {
+	protected ResponseMessage<List<Entity>> getEntityList() {
 		try{
 			List<Entity> list = commonService.list();
-			return new ApiResponseMessage<>(list);
+			return new ResponseMessage<>(list);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return new ApiResponseMessage<>(e);
+			return new ResponseMessage<>(e);
 		}
 	}
 
 	/**
 	 * 根据id获取对象
 	 */
-	protected ApiResponseMessage<Entity> getEntityById(Entity entity) {
+	protected ResponseMessage<Entity> getEntityById(Entity entity) {
 		try{
 			entity = commonService.getById(entity.getId());
-			return new ApiResponseMessage<>(entity);
+			return new ResponseMessage<>(entity);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return new ApiResponseMessage<>(e);
+			return new ResponseMessage<>(e);
 		}
 	}
 
 	/**
 	 * 保存实体对象
 	 */
-	protected ApiResponseMessage<Entity> saveEntity(Entity entity) {
+	protected ResponseMessage<Entity> saveEntity(Entity entity) {
 		try{
 			commonService.save(entity);
-			return new ApiResponseMessage<>(entity);
+			return new ResponseMessage<>(entity);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return new ApiResponseMessage<>(e);
+			return new ResponseMessage<>(e);
 		}
 	}
 
 	/**
 	 * 修改实体对象
 	 */
-	protected ApiResponseMessage<Entity> updateEntity(Entity entity) {
+	protected ResponseMessage<Entity> updateEntity(Entity entity) {
 		try{
 			commonService.saveOrUpdate(entity);
-			return new ApiResponseMessage<>(entity);
+			return new ResponseMessage<>(entity);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return new ApiResponseMessage<>(e);
+			return new ResponseMessage<>(e);
 		}
 	}
 
-	protected ApiResponseMessage<Entity> deleteEntity(Entity entity) {
+	protected ResponseMessage<Entity> deleteEntity(Entity entity) {
 		try{
 			commonService.removeById(entity.getId());
-			return new ApiResponseMessage<>(entity);
+			return new ResponseMessage<>(entity);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
-			return new ApiResponseMessage<>(e);
+			return new ResponseMessage<>(e);
 		}
 	}
 }

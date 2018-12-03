@@ -1,8 +1,7 @@
 package com.tingkelai.api.customer;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,7 +22,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.DELETE)
-    ApiResponseMessage<T> customerSaleRecordDelete(T requestBody);
+    ResponseMessage<T> customerSaleRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取销售记录", nickname = "customerSaleRecordGet", notes = "", tags={ "customer/sale-record", })
@@ -31,7 +30,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.GET)
-    ApiResponseMessage<T> customerSaleRecordGet(T requestBody);
+    ResponseMessage<T> customerSaleRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取销售记录列表", nickname = "customerSaleRecordListGet", notes = "", tags={ "customer/sale-record", })
@@ -39,7 +38,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<List<T>> customerSaleRecordListGet(T requestBody);
+    ResponseMessage<List<T>> customerSaleRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加销售记录", nickname = "customerSaleRecordPost", notes = "", tags={ "customer/sale-record", })
@@ -47,7 +46,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.POST)
-    ApiResponseMessage<T> customerSaleRecordPost(T requestBody);
+    ResponseMessage<T> customerSaleRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改销售记录", nickname = "customerSaleRecordPut", notes = "", tags={ "customer/sale-record", })
@@ -55,5 +54,5 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.PUT)
-    ApiResponseMessage<T> customerSaleRecordPut(T requestBody);
+    ResponseMessage<T> customerSaleRecordPut(T requestBody);
 }

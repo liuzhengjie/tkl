@@ -13,4 +13,35 @@
         select id , user_name from tkl_sys_user
     </select>
 
+    <!-- 根据用户的id获取用户的所有角色 -->
+    <select id="findRoleListByUserId" resultType="com.tingkelai.domain.sys.Role">
+        SELECT DISTINCT r.* from tkl_sys_role r
+            LEFT JOIN tkl_sys_user_role ur ON r.id = ur.role_id
+            LEFT JOIN tkl_sys_user u ON u.id = ur.user_id
+        WHERE
+            u.id = #{id}
+    </select>
+
+    <!-- 根据用户id获取用户的所有菜单权限 -->
+    <select id="findMenuByUserId" resultType="com.tingkelai.domain.sys.Menu">
+        SELECT DISTINCT m.* from tkl_sys_menu m
+            LEFT JOIN tkl_sys_role_menu rm ON rm.menu_id = m.id
+            LEFT JOIN tkl_sys_role r ON r.id = rm.role_id
+            LEFT JOIN tkl_sys_user_role ur ON ur.role_id = r.id
+            LEFT JOIN tkl_sys_user u ON u.id = ur.user_id
+        WHERE
+            u.id = #{id}
+    </select>
+
+    <!-- 根据用户id获取用户的所有按钮权限 -->
+    <select id="findButtonByUserId" resultType="com.tingkelai.domain.sys.Button">
+        SELECT DISTINCT b.* from tkl_sys_button b
+            LEFT JOIN tkl_sys_role_button rb ON rb.button_id = b.id
+            LEFT JOIN tkl_sys_role r ON r.id = rb.role_id
+            LEFT JOIN tkl_sys_user_role ur ON ur.role_id = r.id
+            LEFT JOIN tkl_sys_user u ON u.id = ur.user_id
+        WHERE
+            u.id = #{id}
+    </select>
+
 </mapper>

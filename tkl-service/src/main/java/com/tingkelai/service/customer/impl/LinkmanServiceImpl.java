@@ -7,5 +7,5 @@ import com.tingkelai.service.customer.ILinkmanService;
 import org.springframework.stereotype.Service;
 
 @Service("linkmanService")
-public class LinkmanServiceImpl extends CommonServiceImpl<LinkManMapper, LinkMan> implements ILinkmanService{
+public class LinkmanServiceImpl extends CommonServiceImpl<LinkMan> implements ILinkmanService{
 }

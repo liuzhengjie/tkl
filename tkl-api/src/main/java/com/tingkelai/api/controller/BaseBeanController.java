@@ -1,8 +1,14 @@
 package com.tingkelai.api.controller;
 
 import com.tingkelai.util.ReflectionUtils;
+import com.tingkelai.util.StringUtils;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import sun.misc.MessageUtils;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 通用controller，用来加载bean
@@ -27,5 +33,32 @@ public class BaseBeanController <Entity extends Serializable> extends BaseContro
         } catch (Exception e) {
             throw new IllegalStateException("can not instantiated model : " + this.entityClass, e);
         }
+    }
+
+    /**
+     * 共享的验证规则 验证失败返回true
+     */
+    protected boolean hasError(Entity entity, BindingResult result) {
+        Assert.notNull(entity);
+        return result.hasErrors();
+    }
+
+    /**
+     * 未完成，需要修改
+     */
+    protected String errorMsg(BindingResult result) {
+        String errorMsg = "";
+        if (result.getErrorCount() > 0) {
+            List<ObjectError> objectErrorList = result.getAllErrors();
+            for (ObjectError objectError : objectErrorList) {
+/*                String message = MessageUtils.getMessage(objectError.getCode(), objectError.getDefaultMessage(),
+                        objectError.getArguments());*/
+                String message = objectError.getCode() + objectError.getDefaultMessage();
+                if (!StringUtils.isEmpty(message)) {
+                    errorMsg = errorMsg + message + "<br />";
+                }
+            }
+        }
+        return errorMsg;
     }
 }

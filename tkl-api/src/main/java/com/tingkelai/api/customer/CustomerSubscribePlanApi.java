@@ -1,8 +1,7 @@
 package com.tingkelai.api.customer;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,7 +22,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.DELETE)
-    ApiResponseMessage<T> customerSubscribePlanDelete(T requestBody);
+    ResponseMessage<T> customerSubscribePlanDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户预约计划", nickname = "customerSubscribePlanGet", notes = "", tags={ "customer/subscribe-plan", })
@@ -31,7 +30,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.GET)
-    ApiResponseMessage<T> customerSubscribePlanGet(T requestBody);
+    ResponseMessage<T> customerSubscribePlanGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户预约计划列表", nickname = "customerSubscribePlanListGet", notes = "", tags={ "customer/subscribe-plan", })
@@ -39,7 +38,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<List<T>> customerSubscribePlanListGet(T requestBody);
+    ResponseMessage<List<T>> customerSubscribePlanListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户预约计划", nickname = "customerSubscribePlanPost", notes = "", tags={ "customer/subscribe-plan", })
@@ -47,7 +46,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.POST)
-    ApiResponseMessage<T> customerSubscribePlanPost(T requestBody);
+    ResponseMessage<T> customerSubscribePlanPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户预约计划", nickname = "customerSubscribePlanPut", notes = "", tags={ "customer/subscribe-plan", })
@@ -55,5 +54,5 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.PUT)
-    ApiResponseMessage<T> customerSubscribePlanPut(T requestBody);
+    ResponseMessage<T> customerSubscribePlanPut(T requestBody);
 }

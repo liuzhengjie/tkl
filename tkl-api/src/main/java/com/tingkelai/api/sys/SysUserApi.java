@@ -1,10 +1,9 @@
 package com.tingkelai.api.sys;
 
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.tingkelai.domain.sys.UserRole;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,7 @@ import java.util.Map;
  * @version 1.0
  */
 @Api(value = "sys", description = "系统相关api")
-public interface SysUserApi {
+public interface SysUserApi<T> {
 
     @ApiOperation(value = "获取用户列表", nickname = "sysUserListGet", notes = "", response = List.class, tags={ "sys/user", })
     @ApiResponses(value = {
@@ -51,10 +50,16 @@ public interface SysUserApi {
     @ApiOperation(value = "添加用户", nickname = "sysUserPost", notes = "", response = User.class, tags={ "sys/user", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "username", value = "", required = true),
+//            @ApiImplicitParam(name = "password", value = "", required = true),
+//            @ApiImplicitParam(name = "realname", value = "", required = false),
+//            @ApiImplicitParam(name = "email", value = "", required = false),
+//            @ApiImplicitParam(name = "phone", value = "", required = false)
+//    })
     @RequestMapping(value = "/sys/user",
-            params = {"username" },
             method = RequestMethod.POST)
-    User sysUserPost(HttpServletRequest request);
+    User sysUserPost(HttpServletRequest request, T body);
 
 
     @ApiOperation(value = "修改用户信息", nickname = "sysUserPut", notes = "", response = User.class, tags={ "sys/user", })
@@ -65,5 +70,12 @@ public interface SysUserApi {
             method = RequestMethod.PUT)
     ResponseEntity<User> sysUserPut(HttpServletRequest request);
 
+    @ApiOperation(value = "设置指定用户的角色", nickname = "sysUserRolePost", notes = "", tags={ "sys/user", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 405, message = "Invalid input") })
+    @RequestMapping(value = "/sys/user/role",
+            params = {"roleIds"},
+            method = RequestMethod.PUT)
+    ResponseMessage<T> sysUserRolePost(HttpServletRequest request, UserRole body);
 }
 

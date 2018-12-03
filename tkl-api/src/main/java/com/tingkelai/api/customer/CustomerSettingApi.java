@@ -1,9 +1,7 @@
 package com.tingkelai.api.customer;
 
-import com.tingkelai.api.ApiResponseMessage;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +20,7 @@ public interface CustomerSettingApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<T> customerSettingListGet(T requestBody);
+    ResponseMessage<T> customerSettingListGet(T requestBody);
 
 
     @ApiOperation(value = "修改用户常用模块", nickname = "customerSettingPut", notes = "", tags={ "customer", })
@@ -30,5 +28,5 @@ public interface CustomerSettingApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting",
             method = RequestMethod.PUT)
-    ApiResponseMessage<T> customerSettingPut(T requestBody);
+    ResponseMessage<T> customerSettingPut(T requestBody);
 }

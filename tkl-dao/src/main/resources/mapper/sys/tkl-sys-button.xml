@@ -6,4 +6,9 @@
     <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
     <!-- @author liuzhengjie -->
     <!-- @version 1.0-->
+
+    <!-- 根据用户id获取按钮权限列表 -->
+    <select id="findButtonByUserId" resultType="com.tingkelai.domain.sys.Button">
+        SELECT * FROM sys_button WHERE id = #{userId};
+    </select>
 </mapper>

@@ -1,9 +1,7 @@
 package com.tingkelai.api.customer;
 
-import com.tingkelai.api.ApiResponseMessage;
-import com.tingkelai.domain.customer.FollowRecord;
+import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +23,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.DELETE)
-    ApiResponseMessage<T> customerFollowRecordDelete(@RequestBody T requestBody);
+    ResponseMessage<T> customerFollowRecordDelete(@RequestBody T requestBody);
 
 
     @ApiOperation(value = "获取客户跟进记录", nickname = "customerFollowRecordGet", notes = "", tags={ "customer/follow-record", })
@@ -33,7 +31,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.GET)
-    ApiResponseMessage<T> customerFollowRecordGet(T requestBody);
+    ResponseMessage<T> customerFollowRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户跟进记录列表", nickname = "customerFollowRecordListGet", notes = "", tags={ "customer/follow-record", })
@@ -41,7 +39,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record/list",
             method = RequestMethod.GET)
-    ApiResponseMessage<List<T>> customerFollowRecordListGet(T requestBody);
+    ResponseMessage<List<T>> customerFollowRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户跟进记录", nickname = "customerFollowRecordPost", notes = "", tags={ "customer/follow-record", })
@@ -49,7 +47,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.POST)
-    ApiResponseMessage<T> customerFollowRecordPost(T requestBody);
+    ResponseMessage<T> customerFollowRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户跟进记录", nickname = "customerFollowRecordPut", notes = "", tags={ "customer/follow-record", })
@@ -57,5 +55,5 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.PUT)
-    ApiResponseMessage<T> customerFollowRecordPut(T requestBody);
+    ResponseMessage<T> customerFollowRecordPut(T requestBody);
 }
