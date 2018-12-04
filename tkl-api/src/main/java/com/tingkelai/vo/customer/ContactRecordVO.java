@@ -8,6 +8,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 客户联系记录
  *
@@ -133,21 +136,61 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
      * 封装成业务需要的对象
      */
     public ContactRecord toDTO(){
+        return toDTO(this);
+    }
+
+    /**
+     *
+     * 封装成业务需要的对象
+     * 静态方法
+     */
+    public ContactRecord toDTO(ContactRecordVO vo){
         ContactRecord contactRecord = new ContactRecord();
-        contactRecord.setContactDate(getContactDate());
-        contactRecord.setContext(getContext());
-        contactRecord.setId(getId());
-        contactRecord.setNextContactDate(getNextContactDate());
-        contactRecord.setOrderFlag(getOrderFlag());
-        contactRecord.setType(getType());
-        contactRecord.setWay(getWay());
+        contactRecord.setId(vo.getId());
+        contactRecord.setContactDate(vo.getContactDate());
+        contactRecord.setContext(vo.getContext());
+        contactRecord.setNextContactDate(vo.getNextContactDate());
+        contactRecord.setOrderFlag(vo.getOrderFlag());
+        contactRecord.setType(vo.getType());
+        contactRecord.setWay(vo.getWay());
         return contactRecord;
+    }
+
+    /**
+     * 封装成业务需要的对象列表
+     * 静态方法
+     */
+    public List<ContactRecord> toDTO(List<ContactRecordVO> voList){
+        List<ContactRecord> list = new ArrayList<>();
+        for(ContactRecordVO contactRecord : voList){
+            list.add(contactRecord.toDTO(contactRecord));
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public ContactRecordVO toVO(ContactRecord contactRecord){
-        return null;
+        ContactRecordVO contactRecordVO = new ContactRecordVO();
+        contactRecordVO.setId(contactRecord.getId());
+        contactRecordVO.setContactDate(contactRecord.getContactDate());
+        contactRecordVO.setContext(contactRecord.getContext());
+        contactRecordVO.setNextContactDate(contactRecord.getNextContactDate());
+        contactRecordVO.setOrderFlag(contactRecord.getOrderFlag());
+        contactRecordVO.setType(contactRecord.getType());
+        contactRecordVO.setWay(contactRecord.getWay());
+        return contactRecordVO;
+    }
+
+    /**
+     * 封装成web需要的对象
+     */
+    public List<ContactRecordVO> toVO(List<ContactRecord> list){
+        List<ContactRecordVO> contactRecordVOList = new ArrayList<>();
+        for(ContactRecord contactRecord : list){
+            contactRecordVOList.add(toVO(contactRecord));
+        }
+        return contactRecordVOList;
     }
 }

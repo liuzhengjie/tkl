@@ -7,7 +7,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 销售产品记录
@@ -245,29 +247,67 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
      * 封装成业务需要的对象
      */
     public SaleProductRecord toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public SaleProductRecord toDTO(SaleProductRecordVO saleProductRecordVO) {
         SaleProductRecord saleProductRecord = new SaleProductRecord();
-        saleProductRecord.setDiscount(getDiscount());
-        saleProductRecord.setId(getId());
-        saleProductRecord.setLeftCode(getLeftCode());
-        saleProductRecord.setLeftDate(getLeftDate());
-        saleProductRecord.setLeftDesc(getLeftDesc());
-        saleProductRecord.setName(getName());
-        saleProductRecord.setNum(getNum());
-        saleProductRecord.setRealTotal(getRealTotal());
-        saleProductRecord.setRightCode(getRightCode());
-        saleProductRecord.setRightDate(getRightDate());
-        saleProductRecord.setRightDesc(getRightDesc());
-        saleProductRecord.setSaleMoney(getSaleMoney());
-        saleProductRecord.setTotal(getTotal());
-        saleProductRecord.setUnit(getUnit());
+        saleProductRecord.setDiscount(saleProductRecordVO.getDiscount());
+        saleProductRecord.setId(saleProductRecordVO.getId());
+        saleProductRecord.setLeftCode(saleProductRecordVO.getLeftCode());
+        saleProductRecord.setLeftDate(saleProductRecordVO.getLeftDate());
+        saleProductRecord.setLeftDesc(saleProductRecordVO.getLeftDesc());
+        saleProductRecord.setName(saleProductRecordVO.getName());
+        saleProductRecord.setNum(saleProductRecordVO.getNum());
+        saleProductRecord.setRealTotal(saleProductRecordVO.getRealTotal());
+        saleProductRecord.setRightCode(saleProductRecordVO.getRightCode());
+        saleProductRecord.setRightDate(saleProductRecordVO.getRightDate());
+        saleProductRecord.setRightDesc(saleProductRecordVO.getRightDesc());
+        saleProductRecord.setSaleMoney(saleProductRecordVO.getSaleMoney());
+        saleProductRecord.setTotal(saleProductRecordVO.getTotal());
+        saleProductRecord.setUnit(saleProductRecordVO.getUnit());
         return saleProductRecord;
+    }
+
+    @Override
+    public List<SaleProductRecord> toDTO(List<SaleProductRecordVO> voList) {
+        List<SaleProductRecord> list = new ArrayList<>();
+        for(SaleProductRecordVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public SaleProductRecordVO toVO(SaleProductRecord saleProductRecord){
-        return null;
+        SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
+        saleProductRecordVO.setDiscount(saleProductRecord.getDiscount());
+        saleProductRecordVO.setId(saleProductRecord.getId());
+        saleProductRecordVO.setLeftCode(saleProductRecord.getLeftCode());
+        saleProductRecordVO.setLeftDate(saleProductRecord.getLeftDate());
+        saleProductRecordVO.setLeftDesc(saleProductRecord.getLeftDesc());
+        saleProductRecordVO.setName(saleProductRecord.getName());
+        saleProductRecordVO.setNum(saleProductRecord.getNum());
+        saleProductRecordVO.setRealTotal(saleProductRecord.getRealTotal());
+        saleProductRecordVO.setRightCode(saleProductRecord.getRightCode());
+        saleProductRecordVO.setRightDate(saleProductRecord.getRightDate());
+        saleProductRecordVO.setRightDesc(saleProductRecord.getRightDesc());
+        saleProductRecordVO.setSaleMoney(saleProductRecord.getSaleMoney());
+        saleProductRecordVO.setTotal(saleProductRecord.getTotal());
+        saleProductRecordVO.setUnit(saleProductRecord.getUnit());
+        return saleProductRecordVO;
+    }
+
+    @Override
+    public List<SaleProductRecordVO> toVO(List<SaleProductRecord> list) {
+        List<SaleProductRecordVO> resList = new ArrayList<>();
+        for(SaleProductRecord temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }
 

@@ -7,6 +7,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 客户联系人
  *
@@ -273,30 +276,70 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
      * 封装成业务需要的对象
      */
     public LinkMan toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public LinkMan toDTO(LinkManVO linkManVO) {
         LinkMan linkMan = new LinkMan();
-        linkMan.setArea(getArea());
-        linkMan.setCity(getCity());
-        linkMan.setEmail(getEmail());
-        linkMan.setFax(getFax());
-        linkMan.setId(getId());
-        linkMan.setName(getName());
-        linkMan.setPhone(getPhone());
-        linkMan.setPostcode(getPostcode());
-        linkMan.setPrimaryFlag(getPrimaryFlag());
-        linkMan.setProvience(getProvience());
-        linkMan.setQq(getQq());
-        linkMan.setRegion(getRegion());
-        linkMan.setRelative(getRelative());
-        linkMan.setSex(getSex());
-        linkMan.setTel(getTel());
-        linkMan.setTelBackup(getTelBackup());
+        linkMan.setArea(linkManVO.getArea());
+        linkMan.setCity(linkManVO.getCity());
+        linkMan.setEmail(linkManVO.getEmail());
+        linkMan.setFax(linkManVO.getFax());
+        linkMan.setId(linkManVO.getId());
+        linkMan.setName(linkManVO.getName());
+        linkMan.setPhone(linkManVO.getPhone());
+        linkMan.setPostcode(linkManVO.getPostcode());
+        linkMan.setPrimaryFlag(linkManVO.getPrimaryFlag());
+        linkMan.setProvience(linkManVO.getProvience());
+        linkMan.setQq(linkManVO.getQq());
+        linkMan.setRegion(linkManVO.getRegion());
+        linkMan.setRelative(linkManVO.getRelative());
+        linkMan.setSex(linkManVO.getSex());
+        linkMan.setTel(linkManVO.getTel());
+        linkMan.setTelBackup(linkManVO.getTelBackup());
         return linkMan;
+    }
+
+    @Override
+    public List<LinkMan> toDTO(List<LinkManVO> voList) {
+        List<LinkMan> list = new ArrayList<>();
+        for(LinkManVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public LinkManVO toVO(LinkMan linkMan){
-        return null;
+        LinkManVO linkManVO = new LinkManVO();
+        linkManVO.setArea(linkMan.getArea());
+        linkManVO.setCity(linkMan.getCity());
+        linkManVO.setEmail(linkMan.getEmail());
+        linkManVO.setFax(linkMan.getFax());
+        linkManVO.setId(linkMan.getId());
+        linkManVO.setName(linkMan.getName());
+        linkManVO.setPhone(linkMan.getPhone());
+        linkManVO.setPostcode(linkMan.getPostcode());
+        linkManVO.setPrimaryFlag(linkMan.getPrimaryFlag());
+        linkManVO.setProvience(linkMan.getProvience());
+        linkManVO.setQq(linkMan.getQq());
+        linkManVO.setRegion(linkMan.getRegion());
+        linkManVO.setRelative(linkMan.getRelative());
+        linkManVO.setSex(linkMan.getSex());
+        linkManVO.setTel(linkMan.getTel());
+        linkManVO.setTelBackup(linkMan.getTelBackup());
+        return linkManVO;
+    }
+
+    @Override
+    public List<LinkManVO> toVO(List<LinkMan> list) {
+        List<LinkManVO> resList = new ArrayList<>();
+        for(LinkMan temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

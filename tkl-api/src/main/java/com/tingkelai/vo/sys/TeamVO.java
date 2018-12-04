@@ -6,6 +6,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 公司
  * @author liuzhengjie
@@ -45,17 +48,43 @@ public class TeamVO implements BaseVO<Team, TeamVO>{
    * 封装成业务需要的对象
    */
   public Team toDTO(){
+    return toDTO(this);
+  }
+
+  @Override
+  public Team toDTO(TeamVO vo) {
     Team team = new Team();
-    team.setId(getId());
-    team.setName(getName());
+    team.setId(vo.getId());
+    team.setName(vo.getName());
     return team;
+  }
+
+  @Override
+  public List<Team> toDTO(List<TeamVO> voList) {
+    List<Team> list = new ArrayList<>();
+    for(TeamVO temp : voList){
+      list.add(temp.toDTO());
+    }
+    return list;
   }
 
   /**
    * 封装成web需要的对象
    */
   public TeamVO toVO(Team team){
-    return null;
+    TeamVO teamVO = new TeamVO();
+    teamVO.setId(team.getId());
+    teamVO.setName(team.getName());
+    return teamVO;
+  }
+
+  @Override
+  public List<TeamVO> toVO(List<Team> list) {
+    List<TeamVO> resList = new ArrayList<>();
+    for(Team temp : list){
+      resList.add(toVO(temp));
+    }
+    return resList;
   }
 
 }

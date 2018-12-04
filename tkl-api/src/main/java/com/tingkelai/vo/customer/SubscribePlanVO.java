@@ -8,7 +8,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 客户预约计划
@@ -113,21 +115,51 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
      * 封装成业务需要的对象
      */
     public SubscribePlan toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public SubscribePlan toDTO(SubscribePlanVO subscribePlanVO) {
         SubscribePlan subscribePlan = new SubscribePlan();
-        subscribePlan.setDealType(getDealType());
-        subscribePlan.setDealWay(getDealWay());
-        subscribePlan.setId(getId());
-        subscribePlan.setPlanDate(getPlanDate());
-        subscribePlan.setPlanType(getPlanType());
-        subscribePlan.setTheme(getTheme());
+        subscribePlan.setDealType(subscribePlanVO.getDealType());
+        subscribePlan.setDealWay(subscribePlanVO.getDealWay());
+        subscribePlan.setId(subscribePlanVO.getId());
+        subscribePlan.setPlanDate(subscribePlanVO.getPlanDate());
+        subscribePlan.setPlanType(subscribePlanVO.getPlanType());
+        subscribePlan.setTheme(subscribePlanVO.getTheme());
         return subscribePlan;
+    }
+
+    @Override
+    public List<SubscribePlan> toDTO(List<SubscribePlanVO> voList) {
+        List<SubscribePlan> list = new ArrayList<>();
+        for(SubscribePlanVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public SubscribePlanVO toVO(SubscribePlan subscribePlan){
-        return null;
+        SubscribePlanVO subscribePlanVO = new SubscribePlanVO();
+        subscribePlanVO.setDealType(subscribePlan.getDealType());
+        subscribePlanVO.setDealWay(subscribePlan.getDealWay());
+        subscribePlanVO.setId(subscribePlan.getId());
+        subscribePlanVO.setPlanDate(subscribePlan.getPlanDate());
+        subscribePlanVO.setPlanType(subscribePlan.getPlanType());
+        subscribePlanVO.setTheme(subscribePlan.getTheme());
+        return subscribePlanVO;
+    }
+
+    @Override
+    public List<SubscribePlanVO> toVO(List<SubscribePlan> list) {
+        List<SubscribePlanVO> resList = new ArrayList<>();
+        for(SubscribePlan temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }
 

@@ -15,35 +15,27 @@ import java.util.List;
 public class SysButtonController extends BaseCRUDController<Button, Long> implements SysButtonApi<ButtonVO> {
 
     @Override
-    public ResponseMessage<List<Button>> sysButtonListGet(ButtonVO body) {
-        List<ButtonVO> resList = new ArrayList<>();
-        try{
-            List<Button> list = commonService.list();
-            return new ResponseMessage<>(list);
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<List<ButtonVO>> sysButtonListGet(ButtonVO body) {
+        return getEntityList(body);
     }
 
     @Override
-    public ResponseMessage<Button> sysButtonDelete(ButtonVO body) {
-        return deleteEntity(body.toDTO());
+    public ResponseMessage<ButtonVO> sysButtonDelete(ButtonVO body) {
+        return deleteEntity(body);
     }
 
     @Override
-    public ResponseMessage<Button> sysButtonGet(ButtonVO body) {
-        return getEntityById(body.toDTO());
+    public ResponseMessage<ButtonVO> sysButtonGet(ButtonVO body) {
+        return getEntity(body);
     }
 
     @Override
-    public ResponseMessage<Button> sysMenuPost(ButtonVO body) {
-        return saveEntity(body.toDTO());
+    public ResponseMessage<ButtonVO> sysMenuPost(ButtonVO body) {
+        return saveEntity(body);
     }
 
     @Override
-    public ResponseMessage<Button> sysButtonPut(ButtonVO body) {
-        return updateEntity(body.toDTO());
+    public ResponseMessage<ButtonVO> sysButtonPut(ButtonVO body) {
+        return updateEntity(body);
     }
 }

@@ -4,10 +4,11 @@ package com.tingkelai.vo.customer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.SaleChance;
 import com.tingkelai.vo.BaseVO;
-import com.tingkelai.vo.sys.DeptVO;
-import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 销售机会
@@ -99,19 +100,48 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
      * 封装成业务需要的对象
      */
     public SaleChance toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public SaleChance toDTO(SaleChanceVO saleChanceVO) {
         SaleChance saleChance = new SaleChance();
-        saleChance.setDiscoverDate(getDiscoverDate());
-        saleChance.setId(getId());
-        saleChance.setName(getName());
-        saleChance.setNextContactDate(getNextContactDate());
-        saleChance.setOrderFlag(getOrderFlag());
+        saleChance.setDiscoverDate(saleChanceVO.getDiscoverDate());
+        saleChance.setId(saleChanceVO.getId());
+        saleChance.setName(saleChanceVO.getName());
+        saleChance.setNextContactDate(saleChanceVO.getNextContactDate());
+        saleChance.setOrderFlag(saleChanceVO.getOrderFlag());
         return saleChance;
+    }
+
+    @Override
+    public List<SaleChance> toDTO(List<SaleChanceVO> voList) {
+        List<SaleChance> list = new ArrayList<>();
+        for(SaleChanceVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public SaleChanceVO toVO(SaleChance saleChance){
-        return null;
+        SaleChanceVO saleChanceVO = new SaleChanceVO();
+        saleChanceVO.setDiscoverDate(saleChance.getDiscoverDate());
+        saleChanceVO.setId(saleChance.getId());
+        saleChanceVO.setName(saleChance.getName());
+        saleChanceVO.setNextContactDate(saleChance.getNextContactDate());
+        saleChanceVO.setOrderFlag(saleChance.getOrderFlag());
+        return saleChanceVO;
+    }
+
+    @Override
+    public List<SaleChanceVO> toVO(List<SaleChance> list) {
+        List<SaleChanceVO> resList = new ArrayList<>();
+        for(SaleChance temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

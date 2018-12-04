@@ -40,40 +40,13 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	}
 
 	/**
-	 * 获取列表
-	 */
-	protected ResponseMessage<List<Entity>> getEntityList() {
-		try{
-			List<Entity> list = commonService.list();
-			return new ResponseMessage<>(list);
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
-	}
-
-	/**
 	 * 根据id获取对象
 	 */
-	protected ResponseMessage<Entity> getEntityById(Entity entity) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> getEntity(VO vo) {
 		try{
+			Entity entity = vo.toDTO();
 			entity = commonService.getById(entity.getId());
-			return new ResponseMessage<>(entity);
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
-	}
-
-	/**
-	 * 根据id获取对象
-	 */
-	protected ResponseMessage<Entity> getEntityById(String id) {
-		try{
-			Entity entity = commonService.getById(Long.parseLong(id));
-			return new ResponseMessage<>(entity);
+			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -84,10 +57,12 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	/**
 	 * 保存实体对象
 	 */
-	protected ResponseMessage<Entity> saveEntity(Entity entity) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> saveEntity(VO vo) {
 		try{
+			Entity entity = vo.toDTO();
 			commonService.save(entity);
-			return new ResponseMessage<>(entity);
+			vo = vo.toVO(entity);
+			return new ResponseMessage<>(vo);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -98,10 +73,11 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	/**
 	 * 修改实体对象
 	 */
-	protected ResponseMessage<Entity> updateEntity(Entity entity) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> updateEntity(VO vo) {
 		try{
+			Entity entity = vo.toDTO();
 			commonService.saveOrUpdate(entity);
-			return new ResponseMessage<>(entity);
+			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -112,10 +88,11 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	/**
 	 * 删除对象
 	 */
-	protected ResponseMessage<Entity> deleteEntity(Entity entity) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> deleteEntity(VO vo) {
 		try{
+			Entity entity = vo.toDTO();
 			commonService.removeById(entity.getId());
-			return new ResponseMessage<>(entity);
+			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -124,12 +101,13 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	}
 
 	/**
-	 * 根据id删除对象
+	 * 获取列表
 	 */
-	protected ResponseMessage<Entity> deleteEntity(String id) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> getEntityList(VO vo) {
 		try{
-			commonService.removeById(Long.parseLong(id));
-			return new ResponseMessage<>(newModel());
+			List<Entity> list = commonService.list();
+			List<VO> resList = vo.toVO(list);
+			return new ResponseMessage<>(resList);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());

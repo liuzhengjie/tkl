@@ -7,6 +7,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 角色
  * @author liuzhengjie
@@ -97,17 +100,44 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
      * 封装成业务需要的对象
      */
     public Role toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public Role toDTO(RoleVO roleVO) {
         Role role = new Role();
-        role.setCode(getCode());
-        role.setId(getId());
-        role.setName(getName());
-        return null;
+        role.setId(roleVO.getId());
+        role.setCode(roleVO.getCode());
+        role.setName(roleVO.getName());
+        return role;
+    }
+
+    @Override
+    public List<Role> toDTO(List<RoleVO> voList) {
+        List<Role> list = new ArrayList<>();
+        for(RoleVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public RoleVO toVO(Role role){
-        return null;
+        RoleVO roleVO = new RoleVO();
+        roleVO.setCode(role.getCode());
+        roleVO.setId(role.getId());
+        roleVO.setName(role.getName());
+        return roleVO;
+    }
+
+    @Override
+    public List<RoleVO> toVO(List<Role> list) {
+        List<RoleVO> resList = new ArrayList<>();
+        for(Role temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

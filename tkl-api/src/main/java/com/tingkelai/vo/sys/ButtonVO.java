@@ -6,6 +6,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 按钮
  * @author liuzhengjie
@@ -128,21 +131,51 @@ public class ButtonVO implements BaseVO<Button, ButtonVO>{
    * 封装成业务需要的对象
    */
   public Button toDTO(){
+    return toDTO(this);
+  }
+
+  @Override
+  public Button toDTO(ButtonVO buttonVO) {
     Button button = new Button();
-    button.setButtonIcon(getButtonIcon());
-    button.setId(getId());
-    button.setName(getName());
-    button.setPermission(getPermission());
-    button.setSort(getSort());
-    button.setType(getType());
+    button.setButtonIcon(buttonVO.getButtonIcon());
+    button.setName(buttonVO.getName());
+    button.setId(buttonVO.getId());
+    button.setPermission(buttonVO.getPermission());
+    button.setSort(buttonVO.getSort());
+    button.setType(buttonVO.getType());
     return button;
+  }
+
+  @Override
+  public List<Button> toDTO(List<ButtonVO> voList) {
+    List<Button> list = new ArrayList<>();
+    for(ButtonVO temp : voList){
+      list.add(temp.toDTO());
+    }
+    return list;
   }
 
   /**
    * 封装成web需要的对象
    */
   public ButtonVO toVO(Button button){
-    return null;
+    ButtonVO buttonVO = new ButtonVO();
+    buttonVO.setButtonIcon(button.getButtonIcon());
+    buttonVO.setId(button.getId());
+    buttonVO.setName(button.getName());
+    buttonVO.setPermission(button.getPermission());
+    buttonVO.setSort(button.getSort());
+    buttonVO.setType(button.getType());
+    return buttonVO;
+  }
+
+  @Override
+  public List<ButtonVO> toVO(List<Button> list) {
+    List<ButtonVO> resList = new ArrayList<>();
+    for(Button temp : list){
+      resList.add(toVO(temp));
+    }
+    return resList;
   }
 }
 

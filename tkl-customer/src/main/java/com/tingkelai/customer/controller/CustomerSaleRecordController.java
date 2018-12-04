@@ -20,29 +20,28 @@ import java.util.List;
 public class CustomerSaleRecordController extends BaseCRUDController<SaleRecord, Long>
         implements CustomerSaleRecordApi<SaleRecordVO> {
 
-
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordDelete(SaleRecordVO requestBody) {
-        return deleteEntity(requestBody.toDTO());
+    public ResponseMessage<SaleRecordVO> customerSaleRecordDelete(SaleRecordVO requestBody) {
+        return deleteEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordGet(SaleRecordVO requestBody) {
-        return getEntityById(requestBody.toDTO());
+    public ResponseMessage<SaleRecordVO> customerSaleRecordGet(SaleRecordVO requestBody) {
+        return getEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<List<SaleRecord>> customerSaleRecordListGet(SaleRecordVO requestBody) {
-        return getEntityList();
+    public ResponseMessage<List<SaleRecordVO>> customerSaleRecordListGet(SaleRecordVO requestBody) {
+        return getEntityList(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordPost(SaleRecordVO requestBody) {
-        return saveEntity(requestBody.toDTO());
+    public ResponseMessage<SaleRecordVO> customerSaleRecordPost(SaleRecordVO requestBody) {
+        return saveEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordPut(SaleRecordVO requestBody) {
-        return updateEntity(requestBody.toDTO());
+    public ResponseMessage<SaleRecordVO> customerSaleRecordPut(SaleRecordVO requestBody) {
+        return updateEntity(requestBody);
     }
 }

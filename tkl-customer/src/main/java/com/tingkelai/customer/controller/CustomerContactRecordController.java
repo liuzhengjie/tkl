@@ -1,14 +1,12 @@
 package com.tingkelai.customer.controller;
 
-import com.tingkelai.dao.customer.ContactRecordMapper;
-import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerContactRecordApi;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.customer.ContactRecord;
-import com.tingkelai.service.common.ICommonService;
-import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.customer.IContactRecordService;
 import com.tingkelai.vo.customer.ContactRecordVO;
+import io.swagger.models.Contact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,69 +22,33 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-public class CustomerContactRecordController implements CustomerContactRecordApi<ContactRecordVO>{
+public class CustomerContactRecordController extends BaseCRUDController<ContactRecord, Long> implements CustomerContactRecordApi<ContactRecordVO>{
 
     /** 日志 */
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private IContactRecordService contactRecordService;
-
     @Override
-    public ResponseMessage<ContactRecord> customerContactRecordDelete(ContactRecordVO requestBody) {
-        try{
-            contactRecordService.removeById(requestBody.toDTO());
-            return new ResponseMessage<>(requestBody.toDTO());
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<ContactRecordVO> customerContactRecordDelete(ContactRecordVO requestBody) {
+        return deleteEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<ContactRecord> customerContactRecordGet(ContactRecordVO requestBody) {
-        try{
-            ContactRecord contactRecord = requestBody.toDTO();
-            contactRecord = contactRecordService.getById(contactRecord.getId());
-            return new ResponseMessage<>(contactRecord);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<ContactRecordVO> customerContactRecordGet(ContactRecordVO requestBody) {
+        return getEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<List<ContactRecord>> customerContactRecordListGet(ContactRecordVO requestBody) {
-        try{
-            List<ContactRecord> list = contactRecordService.list();
-            return new ResponseMessage<>(list);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<List<ContactRecordVO>> customerContactRecordListGet(ContactRecordVO requestBody) {
+        return getEntityList(requestBody);
     }
 
     @Override
-    public ResponseMessage<ContactRecord> customerContactRecordPost(ContactRecordVO requestBody) {
-        try{
-            ContactRecord contactRecord = requestBody.toDTO();
-            contactRecordService.save(contactRecord);
-            return new ResponseMessage<>(contactRecord);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<ContactRecordVO> customerContactRecordPost(ContactRecordVO requestBody) {
+        return saveEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<ContactRecord> customerContactRecordPut(ContactRecordVO requestBody) {
-        try{
-            ContactRecord contactRecord = requestBody.toDTO();
-            contactRecordService.saveOrUpdate(contactRecord);
-            return new ResponseMessage<>(contactRecord);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return new ResponseMessage<>(e);
-        }
+    public ResponseMessage<ContactRecordVO> customerContactRecordPut(ContactRecordVO requestBody) {
+        return updateEntity(requestBody);
     }
 }

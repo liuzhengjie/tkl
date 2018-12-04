@@ -21,27 +21,27 @@ public class CustomerSubscribePlanController extends BaseCRUDController<Subscrib
         implements CustomerSubscribePlanApi<SubscribePlanVO> {
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanDelete(SubscribePlanVO requestBody) {
-        return deleteEntity(requestBody.toDTO());
+    public ResponseMessage<SubscribePlanVO> customerSubscribePlanDelete(SubscribePlanVO requestBody) {
+        return deleteEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanGet(SubscribePlanVO requestBody) {
-        return getEntityById(requestBody.toDTO());
+    public ResponseMessage<SubscribePlanVO> customerSubscribePlanGet(SubscribePlanVO requestBody) {
+        return getEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<List<SubscribePlan>> customerSubscribePlanListGet(SubscribePlanVO requestBody) {
-        return getEntityList();
+    public ResponseMessage<List<SubscribePlanVO>> customerSubscribePlanListGet(SubscribePlanVO requestBody) {
+        return getEntityList(requestBody);
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanPost(SubscribePlanVO requestBody) {
-        return saveEntity(requestBody.toDTO());
+    public ResponseMessage<SubscribePlanVO> customerSubscribePlanPost(SubscribePlanVO requestBody) {
+        return saveEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanPut(SubscribePlanVO requestBody) {
-        return updateEntity(requestBody.toDTO());
+    public ResponseMessage<SubscribePlanVO> customerSubscribePlanPut(SubscribePlanVO requestBody) {
+        return updateEntity(requestBody);
     }
 }

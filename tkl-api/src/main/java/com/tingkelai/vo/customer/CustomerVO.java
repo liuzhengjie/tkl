@@ -10,6 +10,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 客户主表
  *
@@ -200,25 +203,60 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
      * 封装成业务需要的对象
      */
     public Customer toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public Customer toDTO(CustomerVO vo) {
         Customer customer = new Customer();
-        customer.setAge(getAge());
-        customer.setArea(getArea());
-        customer.setBirthday(getBirthday());
-        customer.setCity(getCity());
-        customer.setCode(getCode());
-        customer.setId(getId());
-        customer.setName(getName());
-        customer.setProvience(getProvience());
-        customer.setRegion(getRegion());
-        customer.setRegistDate(getRegistDate());
-        customer.setSex(getSex());
+        customer.setAge(vo.getAge());
+        customer.setArea(vo.getArea());
+        customer.setBirthday(vo.getBirthday());
+        customer.setCity(vo.getCity());
+        customer.setCode(vo.getCode());
+        customer.setName(vo.getName());
+        customer.setId(vo.getId());
+        customer.setProvience(vo.getProvience());
+        customer.setRegion(vo.getRegion());
+        customer.setRegistDate(vo.getRegistDate());
+        customer.setSex(vo.getSex());
         return customer;
+    }
+
+    @Override
+    public List<Customer> toDTO(List<CustomerVO> voList) {
+        List<Customer> list = new ArrayList<>();
+        for(CustomerVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public CustomerVO toVO(Customer customer){
-        return null;
+        CustomerVO customerVO = new CustomerVO();
+        customerVO.setId(customer.getId());
+        customerVO.setAge(customer.getAge());
+        customerVO.setArea(customer.getArea());
+        customerVO.setBirthday(customer.getBirthday());
+        customerVO.setCity(customer.getCity());
+        customerVO.setCode(customer.getCode());
+        customerVO.setName(customer.getName());
+        customerVO.setProvience(customer.getProvience());
+        customerVO.setRegion(customer.getRegion());
+        customerVO.setRegistDate(customer.getRegistDate());
+        customerVO.setSex(customer.getSex());
+        return customerVO;
+    }
+
+    @Override
+    public List<CustomerVO> toVO(List<Customer> list) {
+        List<CustomerVO> resList = new ArrayList<>();
+        for(Customer temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

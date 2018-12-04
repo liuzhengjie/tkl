@@ -5,6 +5,9 @@ import com.tingkelai.domain.sys.UserRole;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 用户角色中间表
  *
@@ -50,17 +53,44 @@ public class UserRoleVO implements BaseVO<UserRole, UserRoleVO>{
      * 封装成业务需要的对象
      */
     public UserRole toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public UserRole toDTO(UserRoleVO userRoleVO) {
         UserRole userRole = new UserRole();
-        userRole.setUserId(getUserId());
         userRole.setId(getId());
+        userRole.setUserId(getUserId());
         userRole.setRoleId(getRoleId());
         return userRole;
+    }
+
+    @Override
+    public List<UserRole> toDTO(List<UserRoleVO> voList) {
+        List<UserRole> list = new ArrayList<>();
+        for(UserRoleVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public UserRoleVO toVO(UserRole userRole){
-        return null;
+        UserRoleVO userRoleVO = new UserRoleVO();
+        userRoleVO.setUserId(userRole.getUserId());
+        userRoleVO.setId(userRole.getId());
+        userRoleVO.setRoleId(userRole.getRoleId());
+        return userRoleVO;
+    }
+
+    @Override
+    public List<UserRoleVO> toVO(List<UserRole> list) {
+        List<UserRoleVO> resList = new ArrayList<>();
+        for(UserRole temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

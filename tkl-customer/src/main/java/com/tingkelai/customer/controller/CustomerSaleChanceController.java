@@ -20,27 +20,27 @@ import java.util.List;
 public class CustomerSaleChanceController extends BaseCRUDController<SaleChance, Long> implements CustomerSaleChanceApi<SaleChanceVO> {
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChanceDelete(SaleChanceVO requestBody) {
-        return deleteEntity(requestBody.toDTO());
+    public ResponseMessage<SaleChanceVO> customerSaleChanceDelete(SaleChanceVO requestBody) {
+        return deleteEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChanceGet(SaleChanceVO requestBody) {
-        return getEntityById(requestBody.toDTO());
+    public ResponseMessage<SaleChanceVO> customerSaleChanceGet(SaleChanceVO requestBody) {
+        return getEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<List<SaleChance>> customerSaleChanceListGet(SaleChanceVO requestBody) {
-        return getEntityList();
+    public ResponseMessage<List<SaleChanceVO>> customerSaleChanceListGet(SaleChanceVO requestBody) {
+        return getEntityList(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChancePost(SaleChanceVO requestBody) {
-        return saveEntity(requestBody.toDTO());
+    public ResponseMessage<SaleChanceVO> customerSaleChancePost(SaleChanceVO requestBody) {
+        return saveEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChancePut(SaleChanceVO requestBody) {
-        return updateEntity(requestBody.toDTO());
+    public ResponseMessage<SaleChanceVO> customerSaleChancePut(SaleChanceVO requestBody) {
+        return updateEntity(requestBody);
     }
 }

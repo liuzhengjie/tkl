@@ -32,42 +32,42 @@ public class SysRoleController extends BaseCRUDController<Role, Long> implements
     private SysRoleMenuServiceImpl sysRoleMenuService;
 
     @Override
-    public ResponseMessage<Role> sysRoleDelete(RoleVO vo) {
-        return deleteEntity(vo.toDTO());
+    public ResponseMessage<RoleVO> sysRoleDelete(RoleVO vo) {
+        return deleteEntity(vo);
     }
 
     @Override
-    public ResponseMessage<Role> sysRoleGet(RoleVO vo) {
-        return getEntityById(vo.toDTO());
+    public ResponseMessage<RoleVO> sysRoleGet(RoleVO vo) {
+        return getEntity(vo);
     }
 
     @Override
-    public ResponseMessage<Role> sysRolePost(RoleVO vo) {
-        return saveEntity(vo.toDTO());
+    public ResponseMessage<RoleVO> sysRolePost(RoleVO vo) {
+        return saveEntity(vo);
     }
 
     @Override
-    public ResponseMessage<Role> sysRolePut(RoleVO vo) {
-        return updateEntity(vo.toDTO());
+    public ResponseMessage<RoleVO> sysRolePut(RoleVO vo) {
+        return updateEntity(vo);
     }
 
     @Override
-    public ResponseMessage<List<Role>> sysRoleListGet(RoleVO vo) {
-        return getEntityList();
+    public ResponseMessage<List<RoleVO>> sysRoleListGet(RoleVO vo) {
+        return getEntityList(vo);
     }
 
     @Override
-    public ResponseMessage<Role> sysRoleLowerLevelRoleDelete(RoleVO vo) {
+    public ResponseMessage<RoleVO> sysRoleLowerLevelRoleDelete(RoleVO vo) {
         return null;
     }
 
     @Override
-    public ResponseMessage<Role> sysRoleLowerLevelRolePost(RoleVO vo) {
+    public ResponseMessage<RoleVO> sysRoleLowerLevelRolePost(RoleVO vo) {
         return null;
     }
 
     @Override
-    public ResponseMessage<Role> sysRoleLowerLevelRolePut(RoleVO vo) {
+    public ResponseMessage<RoleVO> sysRoleLowerLevelRolePut(RoleVO vo) {
         return null;
     }
 
@@ -78,8 +78,8 @@ public class SysRoleController extends BaseCRUDController<Role, Long> implements
      * @return 统一返回结构
      */
     @Override
-    public ResponseMessage<Role> sysRoleMenuPut(RoleMenuVO body) {
-        ResponseMessage<Role> roleResponseMessage = new ResponseMessage<>();
+    public ResponseMessage sysRoleMenuPut(RoleMenuVO body) {
+        ResponseMessage roleResponseMessage = new ResponseMessage<>();
         roleResponseMessage.success("权限设置成功");
         try {
             Long roleId = body.getRoleId();
@@ -115,8 +115,8 @@ public class SysRoleController extends BaseCRUDController<Role, Long> implements
      * @return 统一返回结构
      */
     @Override
-    public ResponseMessage<Role> sysRoleButtonPut(RoleButtonVO body) {
-        ResponseMessage<Role> roleResponseMessage = new ResponseMessage<>();
+    public ResponseMessage sysRoleButtonPut(RoleButtonVO body) {
+        ResponseMessage roleResponseMessage = new ResponseMessage<>();
         roleResponseMessage.success("权限设置成功");
         try {
             Long roleId = body.getRoleId();

@@ -6,6 +6,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 用户
  * @author liuzhengjie
@@ -168,23 +171,56 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 封装成业务需要的对象
      */
     public User toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public User toDTO(UserVO userVO) {
         User user = new User();
-        user.setEmail(getEmail());
-        user.setId(getId());
-        user.setPhone(getPhone());
-        user.setPortrait(getPortrait());
-        user.setRealName(getRealName());
-        user.setSalt(getSalt());
-        user.setTeamId(getTeamId());
-        user.setUserName(getUserName());
-        user.setUserStatus(getUserStatus());
+        user.setEmail(userVO.getEmail());
+        user.setId(userVO.getId());
+        user.setPhone(userVO.getPhone());
+        user.setPortrait(userVO.getPortrait());
+        user.setRealName(userVO.getRealName());
+        user.setSalt(userVO.getSalt());
+        user.setTeamId(userVO.getTeamId());
+        user.setUserName(userVO.getUserName());
+        user.setUserStatus(userVO.getUserStatus());
         return user;
+    }
+
+    @Override
+    public List<User> toDTO(List<UserVO> voList) {
+        List<User> list = new ArrayList<>();
+        for(UserVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public UserVO toVO(User user){
-        return null;
+        UserVO userVO = new UserVO();
+        userVO.setEmail(user.getEmail());
+        userVO.setId(user.getId());
+        userVO.setPhone(user.getPhone());
+        userVO.setPortrait(user.getPortrait());
+        userVO.setRealName(user.getRealName());
+        userVO.setSalt(user.getSalt());
+        userVO.setTeamId(user.getTeamId());
+        userVO.setUserName(user.getUserName());
+        userVO.setUserStatus(user.getUserStatus());
+        return userVO;
+    }
+
+    @Override
+    public List<UserVO> toVO(List<User> list) {
+        List<UserVO> resList = new ArrayList<>();
+        for(User temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }

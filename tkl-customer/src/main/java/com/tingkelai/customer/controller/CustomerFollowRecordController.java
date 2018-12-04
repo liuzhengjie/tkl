@@ -20,31 +20,27 @@ import java.util.List;
 public class CustomerFollowRecordController  extends BaseCRUDController<FollowRecord, Long> implements CustomerFollowRecordApi<FollowRecordVO> {
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordDelete(FollowRecordVO requestBody) {
-        FollowRecord followRecord = requestBody.toDTO();
-        return deleteEntity(followRecord);
+    public ResponseMessage<FollowRecordVO> customerFollowRecordDelete(FollowRecordVO requestBody) {
+        return deleteEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordGet(FollowRecordVO requestBody) {
-        FollowRecord followRecord = requestBody.toDTO();
-        return getEntityById(followRecord);
+    public ResponseMessage<FollowRecordVO> customerFollowRecordGet(FollowRecordVO requestBody) {
+        return getEntity(requestBody);
     }
 
     @Override
     public ResponseMessage customerFollowRecordListGet(FollowRecordVO requestBody) {
-        return getEntityList();
+        return getEntityList(requestBody);
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordPost(FollowRecordVO requestBody) {
-        FollowRecord followRecord = requestBody.toDTO();
-        return saveEntity(followRecord);
+    public ResponseMessage<FollowRecordVO> customerFollowRecordPost(FollowRecordVO requestBody) {
+        return saveEntity(requestBody);
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordPut(FollowRecordVO requestBody) {
-        FollowRecord followRecord = requestBody.toDTO();
-        return updateEntity(followRecord);
+    public ResponseMessage<FollowRecordVO> customerFollowRecordPut(FollowRecordVO requestBody) {
+        return updateEntity(requestBody);
     }
 }

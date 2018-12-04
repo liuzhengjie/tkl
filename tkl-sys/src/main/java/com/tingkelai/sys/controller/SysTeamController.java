@@ -13,17 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 public class SysTeamController extends BaseCRUDController<Team, Long> implements SysTeamApi<TeamVO> {
 
     @Override
-    public ResponseMessage<Team> sysTeamGet(TeamVO vo) {
-        return getEntityById(vo.toDTO());
+    public ResponseMessage<TeamVO> sysTeamGet(TeamVO vo) {
+        return getEntity(vo);
     }
 
     @Override
-    public ResponseMessage<Team> sysTeamPost(TeamVO vo) {
-        return saveEntity(vo.toDTO());
+    public ResponseMessage<TeamVO> sysTeamPost(TeamVO vo) {
+        return saveEntity(vo);
     }
 
     @Override
-    public ResponseMessage<Team> sysTeamPut(TeamVO vo) {
-        return updateEntity(vo.toDTO());
+    public ResponseMessage<TeamVO> sysTeamPut(TeamVO vo) {
+        return updateEntity(vo);
     }
 }

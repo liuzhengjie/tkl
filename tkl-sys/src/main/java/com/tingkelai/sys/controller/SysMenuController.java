@@ -14,27 +14,27 @@ import java.util.List;
 public class SysMenuController extends BaseCRUDController<Menu, Long> implements SysMenuApi<MenuVO> {
 
     @Override
-    public ResponseMessage<Menu> sysMenuDelete(MenuVO body) {
-        return deleteEntity(body.toDTO());
+    public ResponseMessage<MenuVO> sysMenuDelete(MenuVO body) {
+        return deleteEntity(body);
     }
 
     @Override
-    public ResponseMessage<Menu> sysMenuGet(MenuVO body) {
-        return getEntityById(body.toDTO());
+    public ResponseMessage<MenuVO> sysMenuGet(MenuVO body) {
+        return getEntity(body);
     }
 
     @Override
-    public ResponseMessage<List<Menu>> sysMenuListGet(MenuVO body) {
-        return getEntityList();
+    public ResponseMessage<List<MenuVO>> sysMenuListGet(MenuVO body) {
+        return getEntityList(body);
     }
 
     @Override
-    public ResponseMessage<Menu> sysMenuPost(MenuVO body) {
-        return saveEntity(body.toDTO());
+    public ResponseMessage<MenuVO> sysMenuPost(MenuVO body) {
+        return saveEntity(body);
     }
 
     @Override
-    public ResponseMessage<Menu> sysMenuPut(MenuVO body) {
-        return updateEntity(body.toDTO());
+    public ResponseMessage<MenuVO> sysMenuPut(MenuVO body) {
+        return updateEntity(body);
     }
 }

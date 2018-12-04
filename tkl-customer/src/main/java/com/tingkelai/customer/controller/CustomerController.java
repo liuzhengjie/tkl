@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,70 +26,58 @@ import java.util.Map;
  */
 @RestController
 @RequiresPermissions("sys:menu:custom")
-public class CustomerController extends BaseCRUDController<Customer, Long> implements CustomerApi {
+public class CustomerController extends BaseCRUDController<Customer, Long> implements CustomerApi<CustomerVO> {
 
     @Autowired
     private CustomerServiceImpl customerService;
 
     @Override
-    public ResponseMessage customerListGet() {
+    public ResponseMessage<List<CustomerVO>> customerListGet(CustomerVO customerVO) {
+        return getEntityList(customerVO);
+    }
+
+    @Override
+    public ResponseMessage<CustomerVO> customerDelete(CustomerVO customerVO) {
+        return deleteEntity(customerVO);
+    }
+
+    @Override
+    public ResponseMessage<CustomerVO> customerGet(CustomerVO customerVO) {
+        return getEntity(customerVO);
+    }
+
+    @Override
+    public ResponseMessage<CustomerVO> customerPost(CustomerVO customerVO) {
+        return saveEntity(customerVO);
+    }
+
+    @Override
+    public ResponseMessage<CustomerVO> customerPut(CustomerVO customerVO) {
+        return updateEntity(customerVO);
+    }
+
+    @Override
+    public ResponseMessage customerQueryListGet(CustomerVO customerVO) {
+        return getEntityList(customerVO);
+    }
+
+    @Override
+    public ResponseMessage customerUpdateDelete(CustomerVO customerVO) {
         return null;
     }
 
     @Override
-    public ResponseMessage customerQueryListGet() {
+    public ResponseMessage customerUpdateGet(CustomerVO customerVO) {
         return null;
     }
 
     @Override
-    public ResponseMessage customerDelete() {
+    public ResponseMessage customerUpdatePost(CustomerVO customerVO) {
         return null;
     }
 
     @Override
-    public ResponseMessage customerGet() {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage customerPost() {
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.success("权限设置成功");
-        try {
-            //请求参数中必须有method = customerPost，否则不予处理
-            if(getParameter(METHOD).equals("customerPost")){
-
-            }else{
-                responseMessage.fail("缺少请求参数");
-            }
-        } catch (Exception e) {
-            responseMessage.fail("权限设置失败");
-        }
-        return responseMessage;
-    }
-
-    @Override
-    public ResponseMessage customerPut() {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage customerUpdateDelete() {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage customerUpdateGet() {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage customerUpdatePost() {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage customerUpdatePut() {
+    public ResponseMessage customerUpdatePut(CustomerVO customerVO) {
         return null;
     }
 }

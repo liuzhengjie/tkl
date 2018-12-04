@@ -10,7 +10,9 @@ import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 客户服务记录
@@ -385,11 +387,55 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
         return serviceRecord;
     }
 
+    @Override
+    public ServiceRecord toDTO(ServiceRecordVO serviceRecordVO) {
+        return toDTO(this);
+    }
+
+    @Override
+    public List<ServiceRecord> toDTO(List<ServiceRecordVO> voList) {
+        List<ServiceRecord> list = new ArrayList<>();
+        for(ServiceRecordVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
+    }
+
     /**
      * 封装成web需要的对象
      */
     public ServiceRecordVO toVO(ServiceRecord serviceRecord){
-        return null;
+        ServiceRecordVO serviceRecordVO = new ServiceRecordVO();
+        serviceRecordVO.setAdornEar(serviceRecord.getAdornEar());
+        serviceRecordVO.setBuyDate(serviceRecord.getBuyDate());
+        serviceRecordVO.setCharge(serviceRecord.getCharge());
+        serviceRecordVO.setChargePrice(serviceRecord.getChargePrice());
+        serviceRecordVO.setCode(serviceRecord.getCode());
+        serviceRecordVO.setDealState(serviceRecord.getDealState());
+        serviceRecordVO.setFinishDate(serviceRecord.getFinishDate());
+        serviceRecordVO.setId(serviceRecord.getId());
+        serviceRecordVO.setNextServiceDate(serviceRecord.getNextServiceDate());
+        serviceRecordVO.setProblemDesc(serviceRecord.getProblemDesc());
+        serviceRecordVO.setProductCode(serviceRecord.getProductCode());
+        serviceRecordVO.setProblemTemplate(serviceRecord.getProblemTemplate());
+        serviceRecordVO.setProductCode(serviceRecord.getProductCode());
+        serviceRecordVO.setProductId(serviceRecord.getProductId());
+        serviceRecordVO.setProductName(serviceRecord.getProductName());
+        serviceRecordVO.setRepairDeadline(serviceRecord.getRepairDeadline());
+        serviceRecordVO.setServiceDate(serviceRecord.getServiceDate());
+        serviceRecordVO.setServiceType(serviceRecord.getServiceType());
+        serviceRecordVO.setServiceWay(serviceRecord.getServiceWay());
+        serviceRecordVO.setType(serviceRecord.getType());
+        return serviceRecordVO;
+    }
+
+    @Override
+    public List<ServiceRecordVO> toVO(List<ServiceRecord> list) {
+        List<ServiceRecordVO> resList = new ArrayList<>();
+        for(ServiceRecord temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }
 

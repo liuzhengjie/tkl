@@ -6,6 +6,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 菜单
  *
@@ -176,24 +179,57 @@ public class MenuVO implements BaseVO<Menu, MenuVO>{
    * 封装成业务需要的对象
    */
   public Menu toDTO(){
+    return toDTO(this);
+  }
+
+  @Override
+  public Menu toDTO(MenuVO menuVO) {
     Menu menu = new Menu();
-    menu.setId(getId());
-    menu.setMenuIcon(getMenuIcon());
-    menu.setName(getName());
-    menu.setParentId(getParentId());
-    menu.setParentIds(getParentIds());
-    menu.setPermission(getPermission());
-    menu.setSort(getSort());
-    menu.setType(getType());
-    menu.setUrl(getUrl());
+    menu.setId(menuVO.getId());
+    menu.setMenuIcon(menuVO.getMenuIcon());
+    menu.setName(menuVO.getName());
+    menu.setParentId(menuVO.getParentId());
+    menu.setParentIds(menuVO.getParentIds());
+    menu.setPermission(menuVO.getPermission());
+    menu.setSort(menuVO.getSort());
+    menu.setType(menuVO.getType());
+    menu.setUrl(menuVO.getUrl());
     return menu;
+  }
+
+  @Override
+  public List<Menu> toDTO(List<MenuVO> voList) {
+    List<Menu> list = new ArrayList<>();
+    for(MenuVO temp : voList){
+      list.add(temp.toDTO());
+    }
+    return list;
   }
 
   /**
    * 封装成web需要的对象
    */
   public MenuVO toVO(Menu menu){
-    return null;
+    MenuVO menuVO = new MenuVO();
+    menuVO.setId(menu.getId());
+    menuVO.setMenuIcon(menu.getMenuIcon());
+    menuVO.setName(menu.getName());
+    menuVO.setParentId(menu.getParentId());
+    menuVO.setParentIds(menu.getParentIds());
+    menuVO.setPermission(menu.getPermission());
+    menuVO.setSort(menu.getSort());
+    menuVO.setType(menu.getType());
+    menuVO.setUrl(menu.getUrl());
+    return menuVO;
+  }
+
+  @Override
+  public List<MenuVO> toVO(List<Menu> list) {
+    List<MenuVO> resList = new ArrayList<>();
+    for(Menu temp : list){
+      resList.add(toVO(temp));
+    }
+    return resList;
   }
 }
 

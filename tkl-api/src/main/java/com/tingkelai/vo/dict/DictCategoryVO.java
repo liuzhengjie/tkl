@@ -6,11 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.tingkelai.domain.dict.DictCategory;
 import com.tingkelai.vo.BaseVO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 
 	/** 主键 */
 	@TableId(value = "id", type = IdType.UUID)
-	private String id;
+	private Long id;
 	/** 分组名称 */
 	@TableField(value = "name")
 	private String name;
@@ -64,7 +67,7 @@ public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 	 * 
 	 * @return: String 主键
 	 */
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
@@ -74,7 +77,7 @@ public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 	 * @param: id
 	 *             主键
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -101,18 +104,46 @@ public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 	 * 封装成业务需要的对象
 	 */
 	public DictCategory toDTO(){
+		return toDTO(this);
+	}
+
+	@Override
+	public DictCategory toDTO(DictCategoryVO dictCategoryVO) {
 		DictCategory dictCategory = new DictCategory();
-		dictCategory.setCode(getCode());
-		dictCategory.setId(getId());
-		dictCategory.setName(getName());
-		dictCategory.setRemarks(getRemarks());
+		dictCategory.setCode(dictCategoryVO.getCode());
+		dictCategory.setId(dictCategoryVO.getId());
+		dictCategory.setName(dictCategoryVO.getName());
+		dictCategory.setRemarks(dictCategoryVO.getRemarks());
 		return dictCategory;
+	}
+
+	@Override
+	public List<DictCategory> toDTO(List<DictCategoryVO> voList) {
+		List<DictCategory> list = new ArrayList<>();
+		for(DictCategoryVO temp : voList){
+			list.add(temp.toDTO());
+		}
+		return list;
 	}
 
 	/**
 	 * 封装成web需要的对象
 	 */
 	public DictCategoryVO toVO(DictCategory dictCategory){
-		return null;
+		DictCategoryVO dictCategoryVO = new DictCategoryVO();
+		dictCategoryVO.setCode(dictCategory.getCode());
+		dictCategoryVO.setId(dictCategory.getId());
+		dictCategoryVO.setName(dictCategory.getName());
+		dictCategoryVO.setRemarks(dictCategory.getRemarks());
+		return dictCategoryVO;
+	}
+
+	@Override
+	public List<DictCategoryVO> toVO(List<DictCategory> list) {
+		List<DictCategoryVO> resList = new ArrayList<>();
+		for(DictCategory temp : list){
+			resList.add(toVO(temp));
+		}
+		return resList;
 	}
 }

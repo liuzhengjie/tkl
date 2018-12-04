@@ -1,5 +1,6 @@
 package com.tingkelai.sys.controller;
 
+import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.controller.BaseController;
 import com.tingkelai.api.sys.SysUserApi;
 import com.tingkelai.domain.ResponseMessage;
@@ -27,7 +28,7 @@ import java.util.Map;
  * @version 1.0
  */
 @RestController
-public class SysUserController extends BaseController implements SysUserApi<UserVO> {
+public class SysUserController extends BaseCRUDController<User, Long> implements SysUserApi<UserVO> {
 
     @Autowired
     private ISysUserService sysUserService;
@@ -38,47 +39,32 @@ public class SysUserController extends BaseController implements SysUserApi<User
     private static final Logger log = LoggerFactory.getLogger(SysUserController.class);
 
     @Override
-    public List<User> sysUserListGet(UserVO userVO) {
-        List<User> userList = sysUserService.sysUserListGet();
-        return userList;
+    public ResponseMessage<List<UserVO>> sysUserListGet(UserVO userVO) {
+        return getEntityList(userVO);
     }
 
     @Override
-    public Map<String, String> sysUserDelete(UserVO userVO) {
-        String id = getParameter("id");
-        User user = sysUserService.sysUserDelete(Long.parseLong(id));
-        Map<String, String> map = new HashMap<>();
-        map.put("success", "删除成功！");
-        return map;
+    public ResponseMessage<UserVO> sysUserDelete(UserVO userVO) {
+        return deleteEntity(userVO);
     }
 
-    public User sysUserGet(UserVO userVO) {
-        String id = getParameter("id");
-        User user = sysUserService.sysUserGet(Long.parseLong(id));
-        return user;
+    public ResponseMessage<UserVO> sysUserGet(UserVO userVO) {
+        return getEntity(userVO);
     }
 
     @Override
-    public User sysUserPost(UserVO userVO) {
-        User user = new User();
-        User tempUser = sysUserService.sysUserPost(user);
-        return tempUser;
+    public ResponseMessage<UserVO> sysUserPost(UserVO userVO) {
+        return saveEntity(userVO);
     }
 
     @Override
-    public ResponseEntity<User>  sysUserPut(UserVO userVO) {
-        String id = getParameter("id");
-        String username = getParameter("username");
-        User tempUser = new User();
-        tempUser.setId(Long.parseLong(id));
-        tempUser.setUserName(username);
-        sysUserService.sysUserPut(tempUser);
-        return new ResponseEntity<User>(tempUser, HttpStatus.OK);
+    public ResponseMessage<UserVO>  sysUserPut(UserVO userVO) {
+        return updateEntity(userVO);
     }
 
     @Override
-    public ResponseMessage<User> sysUserRolePost(UserRole body) {
-        ResponseMessage<User> roleResponseMessage = new ResponseMessage<>();
+    public ResponseMessage sysUserRolePost(UserRole body) {
+        ResponseMessage roleResponseMessage = new ResponseMessage<>();
         roleResponseMessage.success("权限设置成功");
         try {
             //获取用户id

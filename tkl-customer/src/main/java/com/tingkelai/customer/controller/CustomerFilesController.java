@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.customer.CustomerFilesApi;
 import org.springframework.web.bind.annotation.RestController;

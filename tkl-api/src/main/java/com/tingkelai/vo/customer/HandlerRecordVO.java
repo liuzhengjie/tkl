@@ -9,6 +9,9 @@ import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 经手人变更记录
  */
@@ -63,18 +66,45 @@ public class HandlerRecordVO implements BaseVO<HandlerRecord, HandlerRecordVO>{
      * 封装成业务需要的对象
      */
     public HandlerRecord toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public HandlerRecord toDTO(HandlerRecordVO vo) {
         HandlerRecord handlerRecord = new HandlerRecord();
-        handlerRecord.setChangeDate(getChangeDate());
-        handlerRecord.setId(getId());
-        handlerRecord.setReason(getReason());
+        handlerRecord.setChangeDate(vo.getChangeDate());
+        handlerRecord.setId(vo.getId());
+        handlerRecord.setReason(vo.getReason());
         return handlerRecord;
+    }
+
+    @Override
+    public List<HandlerRecord> toDTO(List<HandlerRecordVO> voList) {
+        List<HandlerRecord> list = new ArrayList<>();
+        for(HandlerRecordVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public HandlerRecordVO toVO(HandlerRecord handlerRecord){
-        return null;
+        HandlerRecordVO handlerRecordVO = new HandlerRecordVO();
+        handlerRecordVO.setChangeDate(handlerRecord.getChangeDate());
+        handlerRecordVO.setId(handlerRecord.getId());
+        handlerRecordVO.setReason(handlerRecord.getReason());
+        return handlerRecordVO;
+    }
+
+    @Override
+    public List<HandlerRecordVO> toVO(List<HandlerRecord> list) {
+        List<HandlerRecordVO> resList = new ArrayList<>();
+        for(HandlerRecord temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }
 

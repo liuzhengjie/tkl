@@ -7,6 +7,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 客户跟进记录
  */
@@ -158,24 +161,57 @@ public class FollowRecordVO implements BaseVO<FollowRecord, FollowRecordVO>{
      * 封装成业务需要的对象
      */
     public FollowRecord toDTO(){
+        return toDTO(this);
+    }
+
+    @Override
+    public FollowRecord toDTO(FollowRecordVO vo) {
         FollowRecord followRecord = new FollowRecord();
-        followRecord.setChanceLevel(getChanceLevel());
-        followRecord.setContactDate(getContactDate());
-        followRecord.setContext(getContext());
-        followRecord.setId(getId());
-        followRecord.setPlanSaleDate(getPlanSaleDate());
-        followRecord.setPlanSaleMoney(getPlanSaleMoney());
-        followRecord.setState(getState());
-        followRecord.setType(getType());
-        followRecord.setWay(getWay());
+        followRecord.setChanceLevel(vo.getChanceLevel());
+        followRecord.setContactDate(vo.getContactDate());
+        followRecord.setContext(vo.getContext());
+        followRecord.setId(vo.getId());
+        followRecord.setPlanSaleDate(vo.getPlanSaleDate());
+        followRecord.setPlanSaleMoney(vo.getPlanSaleMoney());
+        followRecord.setState(vo.getState());
+        followRecord.setType(vo.getType());
+        followRecord.setWay(vo.getWay());
         return followRecord;
+    }
+
+    @Override
+    public List<FollowRecord> toDTO(List<FollowRecordVO> voList) {
+        List<FollowRecord> list = new ArrayList<>();
+        for(FollowRecordVO temp : voList){
+            list.add(temp.toDTO());
+        }
+        return list;
     }
 
     /**
      * 封装成web需要的对象
      */
     public FollowRecordVO toVO(FollowRecord followRecord){
-        return null;
+        FollowRecordVO vo = new FollowRecordVO();
+        vo.setChanceLevel(followRecord.getChanceLevel());
+        vo.setContactDate(followRecord.getContactDate());
+        vo.setContext(followRecord.getContext());
+        vo.setId(followRecord.getId());
+        vo.setPlanSaleDate(followRecord.getPlanSaleDate());
+        vo.setPlanSaleMoney(followRecord.getPlanSaleMoney());
+        vo.setState(followRecord.getState());
+        vo.setType(followRecord.getType());
+        vo.setWay(followRecord.getWay());
+        return vo;
+    }
+
+    @Override
+    public List<FollowRecordVO> toVO(List<FollowRecord> list) {
+        List<FollowRecordVO> resList = new ArrayList<>();
+        for(FollowRecord temp : list){
+            resList.add(toVO(temp));
+        }
+        return resList;
     }
 }
 

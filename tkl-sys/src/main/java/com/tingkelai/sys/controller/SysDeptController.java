@@ -15,28 +15,28 @@ import java.util.List;
 public class SysDeptController extends BaseCRUDController<Dept, Long> implements SysDeptApi<DeptVO> {
 
     @Override
-    public ResponseMessage<Dept> sysDeptDelete(DeptVO deptVO) {
-        return deleteEntity(deptVO.toDTO());
+    public ResponseMessage<DeptVO> sysDeptDelete(DeptVO deptVO) {
+        return deleteEntity(deptVO);
     }
 
     @Override
-    public ResponseMessage<Dept> sysDeptGet(DeptVO deptVO) {
-        return getEntityById(deptVO.toDTO());
+    public ResponseMessage<DeptVO> sysDeptGet(DeptVO deptVO) {
+        return getEntity(deptVO);
     }
 
     @Override
-    public ResponseMessage<List<Dept>> sysDeptListGet(DeptVO deptVO) {
-        return getEntityList();
+    public ResponseMessage<List<DeptVO>> sysDeptListGet(DeptVO deptVO) {
+        return getEntityList(deptVO);
     }
 
     @Override
-    public ResponseMessage<Dept> sysDeptPost(DeptVO deptVO) {
-        return saveEntity(deptVO.toDTO());
+    public ResponseMessage<DeptVO> sysDeptPost(DeptVO deptVO) {
+        return saveEntity(deptVO);
     }
 
     @Override
-    public ResponseMessage<Dept> sysDeptPut(DeptVO deptVO) {
-        return updateEntity(deptVO.toDTO());
+    public ResponseMessage<DeptVO> sysDeptPut(DeptVO deptVO) {
+        return updateEntity(deptVO);
     }
 
 

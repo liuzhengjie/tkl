@@ -32,7 +32,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/list",
             method = RequestMethod.GET)
-    ResponseMessage customerListGet();
+    ResponseMessage customerListGet(VO requestBody);
 
 
     @ApiOperation(value = "获取客户列表（带有查询条件，高级查询功能）", nickname = "customerQueryListGet", notes = "", tags={ "customer", })
@@ -43,7 +43,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/query/list",
             method = RequestMethod.GET)
-    ResponseMessage customerQueryListGet();
+    ResponseMessage customerQueryListGet(VO requestBody);
 
 
     @ApiOperation(value = "删除客户信息", nickname = "customerDelete", notes = "", tags={ "customer", })
@@ -54,7 +54,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.DELETE)
-    ResponseMessage customerDelete();
+    ResponseMessage customerDelete(VO requestBody);
 
 
     @ApiOperation(value = "获取客户信息", nickname = "customerGet", notes = "", tags={ "customer", })
@@ -65,7 +65,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.GET)
-    ResponseMessage customerGet();
+    ResponseMessage customerGet(VO requestBody);
 
     
     @ApiOperation(value = "添加客户信息", nickname = "customerPost", notes = "", tags={ "customer", })
@@ -76,7 +76,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.POST)
-    ResponseMessage customerPost();
+    ResponseMessage customerPost(VO requestBody);
 
 
     @ApiOperation(value = "修改客户信息", nickname = "customerPut", notes = "", tags={ "customer", })
@@ -86,7 +86,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.PUT)
-    ResponseMessage customerPut();
+    ResponseMessage customerPut(VO requestBody);
 
     
     @ApiOperation(value = "批量删除客户信息", nickname = "customerUpdateDelete", notes = "", tags={ "customer", })
@@ -96,7 +96,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.DELETE)
-    ResponseMessage customerUpdateDelete();
+    ResponseMessage customerUpdateDelete(VO requestBody);
 
 
     @ApiOperation(value = "批量获取客户信息", nickname = "customerUpdateGet", notes = "", tags={ "customer", })
@@ -106,7 +106,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.GET)
-    ResponseMessage customerUpdateGet();
+    ResponseMessage customerUpdateGet(VO requestBody);
 
 
     @ApiOperation(value = "批量添加客户信息", nickname = "customerUpdatePost", notes = "", tags={ "customer", })
@@ -116,7 +116,7 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.POST)
-    ResponseMessage customerUpdatePost();
+    ResponseMessage customerUpdatePost(VO requestBody);
 
 
     @ApiOperation(value = "批量修改客户信息", nickname = "customerUpdatePut", notes = "", tags={ "customer", })
@@ -126,5 +126,5 @@ public interface CustomerApi<VO> {
     })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.PUT)
-    ResponseMessage customerUpdatePut();
+    ResponseMessage customerUpdatePut(VO requestBody);
 }

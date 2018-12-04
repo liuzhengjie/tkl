@@ -48,7 +48,6 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     @Override
     public List<User> sysUserListGet() {
         List<User> userList = sysUserMapper.sysUserListGet();
-//        List<User> userList = list();
         return userList;
     }
 

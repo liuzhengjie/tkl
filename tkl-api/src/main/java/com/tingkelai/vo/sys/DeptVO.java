@@ -6,6 +6,9 @@ import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 部门
  * @author liuzhengjie
@@ -89,19 +92,47 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
    * 封装成业务需要的对象
    */
   public Dept toDTO(){
+    return toDTO(this);
+  }
+
+  @Override
+  public Dept toDTO(DeptVO deptVO) {
     Dept dept = new Dept();
-    dept.setId(getId());
-    dept.setName(getName());
-    dept.setParentId(getParentId());
-    dept.setParentIds(getParentIds());
+    dept.setId(deptVO.getId());
+    dept.setName(deptVO.getName());
+    dept.setParentId(deptVO.getParentId());
+    dept.setParentIds(deptVO.getParentIds());
     return dept;
+  }
+
+  @Override
+  public List<Dept> toDTO(List<DeptVO> voList) {
+    List<Dept> list = new ArrayList<>();
+    for(DeptVO temp : voList){
+      list.add(temp.toDTO());
+    }
+    return list;
   }
 
   /**
    * 封装成web需要的对象
    */
   public DeptVO toVO(Dept dept){
-    return null;
+    DeptVO deptVO = new DeptVO();
+    deptVO.setId(dept.getId());
+    deptVO.setName(dept.getName());
+    deptVO.setParentId(dept.getParentId());
+    deptVO.setParentIds(dept.getParentIds());
+    return deptVO;
+  }
+
+  @Override
+  public List<DeptVO> toVO(List<Dept> list) {
+    List<DeptVO> resList = new ArrayList<>();
+    for(Dept temp : list){
+      resList.add(toVO(temp));
+    }
+    return resList;
   }
 }
 

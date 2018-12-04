@@ -8,11 +8,11 @@ import com.tingkelai.domain.entity.DataEntity;
 
 @TableName("tkl_dict_group")
 @SuppressWarnings("serial")
-public class DictCategory extends DataEntity<String> {
+public class DictCategory extends DataEntity<Long> {
 
 	/** 主键 */
 	@TableId(value = "id", type = IdType.UUID)
-	private String id;
+	private Long id;
 	/** 分组名称 */
 	@TableField(value = "name")
 	private String name;
@@ -66,7 +66,7 @@ public class DictCategory extends DataEntity<String> {
 	 * 
 	 * @return: String 主键
 	 */
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
@@ -76,7 +76,7 @@ public class DictCategory extends DataEntity<String> {
 	 * @param: id
 	 *             主键
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
