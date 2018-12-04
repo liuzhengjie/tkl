@@ -22,7 +22,7 @@ public interface CustomerHandlerRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/handler-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerHandlerRecordDelete(T requestBody);
+    ResponseMessage customerHandlerRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户经手人变更记录", nickname = "customerHandlerRecordGet", notes = "", tags={ "customer/handler-record", })
@@ -30,7 +30,7 @@ public interface CustomerHandlerRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/handler-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerHandlerRecordGet(T requestBody);
+    ResponseMessage customerHandlerRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户经手人变更记录列表", nickname = "customerHandlerRecordListGet", notes = "", tags={ "customer/handler-record", })
@@ -38,7 +38,7 @@ public interface CustomerHandlerRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/handler-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerHandlerRecordListGet(T requestBody);
+    ResponseMessage customerHandlerRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户经手人变更记录", nickname = "customerHandlerRecordPost", notes = "", tags={ "customer/handler-record", })
@@ -46,7 +46,7 @@ public interface CustomerHandlerRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/handler-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerHandlerRecordPost(T requestBody);
+    ResponseMessage customerHandlerRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户经手人变更记录", nickname = "customerHandlerRecordPut", notes = "", tags={ "customer/handler-record", })
@@ -54,5 +54,5 @@ public interface CustomerHandlerRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/handler-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerHandlerRecordPut(T requestBody);
+    ResponseMessage customerHandlerRecordPut(T requestBody);
 }

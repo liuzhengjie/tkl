@@ -22,7 +22,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerServiceRecordDelete(T requestBody);
+    ResponseMessage customerServiceRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户服务记录", nickname = "customerServiceRecordGet", notes = "", tags={ "customer/service-record", })
@@ -30,7 +30,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerServiceRecordGet(T requestBody);
+    ResponseMessage customerServiceRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户服务记录列表", nickname = "customerServiceRecordListGet", notes = "", tags={ "customer/service-record", })
@@ -38,7 +38,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerServiceRecordListGet(T requestBody);
+    ResponseMessage customerServiceRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户服务记录", nickname = "customerServiceRecordPost", notes = "", tags={ "customer/service-record", })
@@ -46,7 +46,7 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerServiceRecordPost(T requestBody);
+    ResponseMessage customerServiceRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户服务记录", nickname = "customerServiceRecordPut", notes = "", tags={ "customer/service-record", })
@@ -54,5 +54,5 @@ public interface CustomerServiceRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerServiceRecordPut(T requestBody);
+    ResponseMessage customerServiceRecordPut(T requestBody);
 }

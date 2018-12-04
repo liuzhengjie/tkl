@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleChanceApi;
 import com.tingkelai.domain.customer.SaleChance;
+import com.tingkelai.vo.customer.SaleChanceVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,30 +17,30 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-public class CustomerSaleChanceController extends BaseCRUDController<SaleChance, Long> implements CustomerSaleChanceApi<SaleChance> {
+public class CustomerSaleChanceController extends BaseCRUDController<SaleChance, Long> implements CustomerSaleChanceApi<SaleChanceVO> {
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChanceDelete(SaleChance requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<SaleChance> customerSaleChanceDelete(SaleChanceVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChanceGet(SaleChance requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<SaleChance> customerSaleChanceGet(SaleChanceVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<SaleChance>> customerSaleChanceListGet(SaleChance requestBody) {
+    public ResponseMessage<List<SaleChance>> customerSaleChanceListGet(SaleChanceVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChancePost(SaleChance requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SaleChance> customerSaleChancePost(SaleChanceVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleChance> customerSaleChancePut(SaleChance requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SaleChance> customerSaleChancePut(SaleChanceVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

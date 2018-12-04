@@ -22,7 +22,7 @@ public interface CustomerContactRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/contact-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerContactRecordDelete(T requestBody);
+    ResponseMessage customerContactRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户联系记录信息", nickname = "customerContactRecordGet", notes = "", tags={ "customer/contact-record", })
@@ -30,7 +30,7 @@ public interface CustomerContactRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/contact-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerContactRecordGet(T requestBody);
+    ResponseMessage customerContactRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户联系记录列表", nickname = "customerContactRecordListGet", notes = "", tags={ "customer/contact-record", })
@@ -38,7 +38,7 @@ public interface CustomerContactRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/contact-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerContactRecordListGet(T requestBody);
+    ResponseMessage customerContactRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户联系记录", nickname = "customerContactRecordPost", notes = "", tags={ "customer/contact-record", })
@@ -46,7 +46,7 @@ public interface CustomerContactRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/contact-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerContactRecordPost(T requestBody);
+    ResponseMessage customerContactRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户联系记录", nickname = "customerContactRecordPut", notes = "", tags={ "customer/contact-record", })
@@ -54,5 +54,5 @@ public interface CustomerContactRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/contact-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerContactRecordPut(T requestBody);
+    ResponseMessage customerContactRecordPut(T requestBody);
 }

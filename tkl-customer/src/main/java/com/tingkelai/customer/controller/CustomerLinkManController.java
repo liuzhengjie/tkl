@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerLinkManApi;
 import com.tingkelai.domain.customer.LinkMan;
+import com.tingkelai.vo.customer.LinkManVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,30 +17,30 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-public class CustomerLinkManController extends BaseCRUDController<LinkMan, Long> implements CustomerLinkManApi<LinkMan> {
+public class CustomerLinkManController extends BaseCRUDController<LinkMan, Long> implements CustomerLinkManApi<LinkManVO> {
 
     @Override
-    public ResponseMessage<LinkMan> customerLinkmanDelete(LinkMan requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<LinkMan> customerLinkmanDelete(LinkManVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<LinkMan> customerLinkmanGet(LinkMan requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<LinkMan> customerLinkmanGet(LinkManVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<LinkMan>> customerLinkmanListGet(LinkMan requestBody) {
+    public ResponseMessage<List<LinkMan>> customerLinkmanListGet(LinkManVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<LinkMan> customerLinkmanPost(LinkMan requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<LinkMan> customerLinkmanPost(LinkManVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<LinkMan> customerLinkmanPut(LinkMan requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<LinkMan> customerLinkmanPut(LinkManVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

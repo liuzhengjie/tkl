@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleRecordApi;
 import com.tingkelai.domain.customer.SaleRecord;
+import com.tingkelai.vo.customer.SaleRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,31 +18,31 @@ import java.util.List;
  */
 @RestController
 public class CustomerSaleRecordController extends BaseCRUDController<SaleRecord, Long>
-        implements CustomerSaleRecordApi<SaleRecord> {
+        implements CustomerSaleRecordApi<SaleRecordVO> {
 
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordDelete(SaleRecord requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<SaleRecord> customerSaleRecordDelete(SaleRecordVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordGet(SaleRecord requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<SaleRecord> customerSaleRecordGet(SaleRecordVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<SaleRecord>> customerSaleRecordListGet(SaleRecord requestBody) {
+    public ResponseMessage<List<SaleRecord>> customerSaleRecordListGet(SaleRecordVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordPost(SaleRecord requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SaleRecord> customerSaleRecordPost(SaleRecordVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleRecord> customerSaleRecordPut(SaleRecord requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SaleRecord> customerSaleRecordPut(SaleRecordVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

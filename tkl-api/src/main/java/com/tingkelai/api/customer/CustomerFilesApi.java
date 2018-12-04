@@ -19,7 +19,7 @@ public interface CustomerFilesApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/files",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerFilesDelete(T requestBody);
+    ResponseMessage customerFilesDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户文件资料", nickname = "customerFilesGet", notes = "", tags={ "customer/files", })
@@ -27,7 +27,7 @@ public interface CustomerFilesApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/files",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerFilesGet(T requestBody);
+    ResponseMessage customerFilesGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户文件资料列表", nickname = "customerFilesListGet", notes = "", tags={ "customer/files", })
@@ -35,7 +35,7 @@ public interface CustomerFilesApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/files/list",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerFilesListGet(T requestBody);
+    ResponseMessage customerFilesListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户文件资料", nickname = "customerFilesPost", notes = "", tags={ "customer/files", })
@@ -43,7 +43,7 @@ public interface CustomerFilesApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/files",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerFilesPost(T requestBody);
+    ResponseMessage customerFilesPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户文件资料", nickname = "customerFilesPut", notes = "", tags={ "customer/files", })
@@ -51,5 +51,5 @@ public interface CustomerFilesApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/files",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerFilesPut(T requestBody);
+    ResponseMessage customerFilesPut(T requestBody);
 }

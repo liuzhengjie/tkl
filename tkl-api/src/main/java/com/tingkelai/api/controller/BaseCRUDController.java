@@ -1,13 +1,18 @@
 package com.tingkelai.api.controller;
 
 import com.tingkelai.domain.ResponseMessage;
-import com.tingkelai.dao.customer.CustomerMapper;
-import com.tingkelai.domain.customer.Customer;
 import com.tingkelai.domain.entity.AbstractEntity;
 import com.tingkelai.service.common.ICommonService;
-import com.tingkelai.service.common.impl.CommonServiceImpl;
+import com.tingkelai.vo.BaseVO;
+import com.tingkelai.vo.sys.ButtonVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,10 +26,11 @@ import java.util.List;
  * @param <ID> 实体类id类型
  */
 public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID extends Serializable>
-		extends BaseBeanController<Entity> {
+		extends BaseBeanController<Entity>{
+
+	protected static final String METHOD = "method";
 
 	protected ICommonService<Entity> commonService;
-
 	/**
 	 * 设置基础service
 	 */
@@ -62,6 +68,20 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	}
 
 	/**
+	 * 根据id获取对象
+	 */
+	protected ResponseMessage<Entity> getEntityById(String id) {
+		try{
+			Entity entity = commonService.getById(Long.parseLong(id));
+			return new ResponseMessage<>(entity);
+		}catch (Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return new ResponseMessage<>(e);
+		}
+	}
+
+	/**
 	 * 保存实体对象
 	 */
 	protected ResponseMessage<Entity> saveEntity(Entity entity) {
@@ -89,10 +109,27 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 		}
 	}
 
+	/**
+	 * 删除对象
+	 */
 	protected ResponseMessage<Entity> deleteEntity(Entity entity) {
 		try{
 			commonService.removeById(entity.getId());
 			return new ResponseMessage<>(entity);
+		}catch (Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return new ResponseMessage<>(e);
+		}
+	}
+
+	/**
+	 * 根据id删除对象
+	 */
+	protected ResponseMessage<Entity> deleteEntity(String id) {
+		try{
+			commonService.removeById(Long.parseLong(id));
+			return new ResponseMessage<>(newModel());
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());

@@ -3,6 +3,7 @@ package com.tingkelai.sys.controller;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.sys.SysApi;
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.vo.sys.UserVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,20 +16,20 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 @RestController
-public class SysController implements SysApi<User> {
+public class SysController implements SysApi<UserVO> {
 
     @Override
-    public ResponseMessage<User> sysLoginPost(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysLoginPost(UserVO body) {
         return null;
     }
 
     @Override
-    public ResponseMessage<User> sysLogoutGet(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysLogoutGet(UserVO body) {
         return null;
     }
 
     @Override
-    public ResponseMessage<User> sysRegisterPost(HttpServletRequest request, User body) {
+    public ResponseMessage<User> sysRegisterPost(UserVO body) {
         return null;
     }
 }

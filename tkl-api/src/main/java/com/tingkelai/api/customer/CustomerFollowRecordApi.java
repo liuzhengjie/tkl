@@ -23,7 +23,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerFollowRecordDelete(@RequestBody T requestBody);
+    ResponseMessage customerFollowRecordDelete(@RequestBody T requestBody);
 
 
     @ApiOperation(value = "获取客户跟进记录", nickname = "customerFollowRecordGet", notes = "", tags={ "customer/follow-record", })
@@ -31,7 +31,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerFollowRecordGet(T requestBody);
+    ResponseMessage customerFollowRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户跟进记录列表", nickname = "customerFollowRecordListGet", notes = "", tags={ "customer/follow-record", })
@@ -39,7 +39,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerFollowRecordListGet(T requestBody);
+    ResponseMessage customerFollowRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户跟进记录", nickname = "customerFollowRecordPost", notes = "", tags={ "customer/follow-record", })
@@ -47,7 +47,7 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerFollowRecordPost(T requestBody);
+    ResponseMessage customerFollowRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户跟进记录", nickname = "customerFollowRecordPut", notes = "", tags={ "customer/follow-record", })
@@ -55,5 +55,5 @@ public interface CustomerFollowRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerFollowRecordPut(T requestBody);
+    ResponseMessage customerFollowRecordPut(T requestBody);
 }

@@ -22,7 +22,7 @@ public interface CustomerSaleProductRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-product-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerSaleProductRecordDelete(T requestBody);
+    ResponseMessage customerSaleProductRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取销售产品记录", nickname = "customerSaleProductRecordGet", notes = "", tags={ "customer/sale-product-record", })
@@ -30,7 +30,7 @@ public interface CustomerSaleProductRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-product-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerSaleProductRecordGet(T requestBody);
+    ResponseMessage customerSaleProductRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取销售产品记录列表", nickname = "customerSaleProductRecordListGet", notes = "", tags={ "customer/sale-product-record", })
@@ -38,7 +38,7 @@ public interface CustomerSaleProductRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-product-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerSaleProductRecordListGet(T requestBody);
+    ResponseMessage customerSaleProductRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加销售产品记录", nickname = "customerSaleProductRecordPost", notes = "", tags={ "customer/sale-product-record", })
@@ -46,7 +46,7 @@ public interface CustomerSaleProductRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-product-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerSaleProductRecordPost(T requestBody);
+    ResponseMessage customerSaleProductRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改销售产品记录", nickname = "customerSaleProductRecordPut", notes = "", tags={ "customer/sale-product-record", })
@@ -54,5 +54,5 @@ public interface CustomerSaleProductRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-product-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerSaleProductRecordPut(T requestBody);
+    ResponseMessage customerSaleProductRecordPut(T requestBody);
 }

@@ -22,7 +22,7 @@ public interface CustomerSaleChanceApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerSaleChanceDelete(T requestBody);
+    ResponseMessage customerSaleChanceDelete(T requestBody);
 
 
     @ApiOperation(value = "获取销售机会", nickname = "customerSaleChanceGet", notes = "", tags={ "customer/sale-chance", })
@@ -30,7 +30,7 @@ public interface CustomerSaleChanceApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerSaleChanceGet(T requestBody);
+    ResponseMessage customerSaleChanceGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户销售机会列表", nickname = "customerSaleChanceListGet", notes = "", tags={ "customer/sale-chance", })
@@ -38,7 +38,7 @@ public interface CustomerSaleChanceApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-chance/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerSaleChanceListGet(T requestBody);
+    ResponseMessage customerSaleChanceListGet(T requestBody);
 
 
     @ApiOperation(value = "添加销售机会", nickname = "customerSaleChancePost", notes = "", tags={ "customer/sale-chance", })
@@ -46,7 +46,7 @@ public interface CustomerSaleChanceApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerSaleChancePost(T requestBody);
+    ResponseMessage customerSaleChancePost(T requestBody);
 
 
     @ApiOperation(value = "修改销售机会", nickname = "customerSaleChancePut", notes = "", tags={ "customer/sale-chance", })
@@ -54,5 +54,5 @@ public interface CustomerSaleChanceApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerSaleChancePut(T requestBody);
+    ResponseMessage customerSaleChancePut(T requestBody);
 }

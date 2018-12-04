@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerHandlerRecordApi;
 import com.tingkelai.domain.customer.HandlerRecord;
+import com.tingkelai.vo.customer.HandlerRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,30 +17,30 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-public class CustomerHandlerRecordController extends BaseCRUDController<HandlerRecord, Long> implements CustomerHandlerRecordApi<HandlerRecord> {
+public class CustomerHandlerRecordController extends BaseCRUDController<HandlerRecord, Long> implements CustomerHandlerRecordApi<HandlerRecordVO> {
 
     @Override
-    public ResponseMessage<HandlerRecord> customerHandlerRecordDelete(HandlerRecord requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<HandlerRecord> customerHandlerRecordDelete(HandlerRecordVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<HandlerRecord> customerHandlerRecordGet(HandlerRecord requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<HandlerRecord> customerHandlerRecordGet(HandlerRecordVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<HandlerRecord>> customerHandlerRecordListGet(HandlerRecord requestBody) {
+    public ResponseMessage<List<HandlerRecord>> customerHandlerRecordListGet(HandlerRecordVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<HandlerRecord> customerHandlerRecordPost(HandlerRecord requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<HandlerRecord> customerHandlerRecordPost(HandlerRecordVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<HandlerRecord> customerHandlerRecordPut(HandlerRecord requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<HandlerRecord> customerHandlerRecordPut(HandlerRecordVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

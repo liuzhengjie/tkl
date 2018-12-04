@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSubscribePlanApi;
 import com.tingkelai.domain.customer.SubscribePlan;
+import com.tingkelai.vo.customer.SubscribePlanVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,30 +18,30 @@ import java.util.List;
  */
 @RestController
 public class CustomerSubscribePlanController extends BaseCRUDController<SubscribePlan, Long>
-        implements CustomerSubscribePlanApi<SubscribePlan> {
+        implements CustomerSubscribePlanApi<SubscribePlanVO> {
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanDelete(SubscribePlan requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<SubscribePlan> customerSubscribePlanDelete(SubscribePlanVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanGet(SubscribePlan requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<SubscribePlan> customerSubscribePlanGet(SubscribePlanVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<SubscribePlan>> customerSubscribePlanListGet(SubscribePlan requestBody) {
+    public ResponseMessage<List<SubscribePlan>> customerSubscribePlanListGet(SubscribePlanVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanPost(SubscribePlan requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SubscribePlan> customerSubscribePlanPost(SubscribePlanVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SubscribePlan> customerSubscribePlanPut(SubscribePlan requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SubscribePlan> customerSubscribePlanPut(SubscribePlanVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

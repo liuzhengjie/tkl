@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleProductRecordApi;
 import com.tingkelai.domain.customer.SaleProductRecord;
+import com.tingkelai.vo.customer.SaleProductRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,30 +18,30 @@ import java.util.List;
  */
 @RestController
 public class CustomerSaleProductRecordController extends BaseCRUDController<SaleProductRecord, Long>
-        implements CustomerSaleProductRecordApi<SaleProductRecord> {
+        implements CustomerSaleProductRecordApi<SaleProductRecordVO> {
 
     @Override
-    public ResponseMessage<SaleProductRecord> customerSaleProductRecordDelete(SaleProductRecord requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<SaleProductRecord> customerSaleProductRecordDelete(SaleProductRecordVO requestBody) {
+        return deleteEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleProductRecord> customerSaleProductRecordGet(SaleProductRecord requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<SaleProductRecord> customerSaleProductRecordGet(SaleProductRecordVO requestBody) {
+        return getEntityById(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<List<SaleProductRecord>> customerSaleProductRecordListGet(SaleProductRecord requestBody) {
+    public ResponseMessage<List<SaleProductRecord>> customerSaleProductRecordListGet(SaleProductRecordVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<SaleProductRecord> customerSaleProductRecordPost(SaleProductRecord requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SaleProductRecord> customerSaleProductRecordPost(SaleProductRecordVO requestBody) {
+        return saveEntity(requestBody.toDTO());
     }
 
     @Override
-    public ResponseMessage<SaleProductRecord> customerSaleProductRecordPut(SaleProductRecord requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SaleProductRecord> customerSaleProductRecordPut(SaleProductRecordVO requestBody) {
+        return updateEntity(requestBody.toDTO());
     }
 }

@@ -1,14 +1,13 @@
 package com.tingkelai.api.sys;
 
 import com.tingkelai.domain.ResponseMessage;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -19,21 +18,27 @@ import java.util.List;
  * @version 1.0
  */
 @Api(value = "sys", description = "系统相关api")
-public interface SysDeptApi<T> {
+public interface SysDeptApi<VO> {
     @ApiOperation(value = "删除部门", nickname = "sysDeptDelete", notes = "", tags={ "sys/dept", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true),
+    })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> sysDeptDelete(HttpServletRequest request, T body);
+    ResponseMessage sysDeptDelete(VO vo);
 
 
     @ApiOperation(value = "获取部门信息", nickname = "sysDeptGet", notes = "", tags={ "sys/dept", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true),
+    })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.GET)
-    ResponseMessage<T> sysDeptGet(HttpServletRequest request, T body);
+    ResponseMessage sysDeptGet(VO vo);
 
 
     @ApiOperation(value = "获取部门列表（树形结构）", nickname = "sysDeptListGet", notes = "", tags={ "sys/dept", })
@@ -41,7 +46,7 @@ public interface SysDeptApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> sysDeptListGet(HttpServletRequest request, T body);
+    ResponseMessage sysDeptListGet(VO vo);
 
 
     @ApiOperation(value = "创建部门", nickname = "sysDeptPost", notes = "", tags={ "sys/dept", })
@@ -49,7 +54,7 @@ public interface SysDeptApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.POST)
-    ResponseMessage<T> sysDeptPost(HttpServletRequest request, T body);
+    ResponseMessage sysDeptPost(VO vo);
 
 
     @ApiOperation(value = "修改部门信息", nickname = "sysDeptPut", notes = "", tags={ "sys/dept", })
@@ -57,6 +62,6 @@ public interface SysDeptApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.PUT)
-    ResponseMessage<T> sysDeptPut(HttpServletRequest request, T body);
+    ResponseMessage sysDeptPut(VO vo);
 }
 

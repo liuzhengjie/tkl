@@ -23,52 +23,52 @@ import java.util.Map;
 public class DictGroupController implements SysDictApi<DictCategory> {
 
     @Override
-    public List<DictCategory> sysDictCategoryListGet(HttpServletRequest request, DictCategory body) {
+    public List<DictCategory> sysDictCategoryListGet() {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryDelete(HttpServletRequest request, DictCategory body) {
+    public Map<String, String> sysDictCategoryDelete() {
         return null;
     }
 
     @Override
-    public DictCategory sysDictCategoryGet(HttpServletRequest request, DictCategory body) {
+    public DictCategory sysDictCategoryGet() {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryPost(HttpServletRequest request, DictCategory body) {
+    public Map<String, String> sysDictCategoryPost(DictCategory body) {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryPut(HttpServletRequest request, DictCategory body) {
+    public Map<String, String> sysDictCategoryPut(DictCategory body) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemDelete(HttpServletRequest request, DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemDelete(DictCategory body) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemGet(HttpServletRequest request, DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemGet(DictCategory body) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemListPost(HttpServletRequest request, DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemListPost(DictCategory body) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemPost(HttpServletRequest request, DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemPost(DictCategory body) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemPut(HttpServletRequest request, DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemPut(DictCategory body) {
         return null;
     }
 }

@@ -20,7 +20,7 @@ public interface CustomerSettingApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting/list",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerSettingListGet(T requestBody);
+    ResponseMessage customerSettingListGet(T requestBody);
 
 
     @ApiOperation(value = "修改用户常用模块", nickname = "customerSettingPut", notes = "", tags={ "customer", })
@@ -28,5 +28,5 @@ public interface CustomerSettingApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerSettingPut(T requestBody);
+    ResponseMessage customerSettingPut(T requestBody);
 }

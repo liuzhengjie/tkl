@@ -22,7 +22,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerSaleRecordDelete(T requestBody);
+    ResponseMessage customerSaleRecordDelete(T requestBody);
 
 
     @ApiOperation(value = "获取销售记录", nickname = "customerSaleRecordGet", notes = "", tags={ "customer/sale-record", })
@@ -30,7 +30,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerSaleRecordGet(T requestBody);
+    ResponseMessage customerSaleRecordGet(T requestBody);
 
 
     @ApiOperation(value = "获取销售记录列表", nickname = "customerSaleRecordListGet", notes = "", tags={ "customer/sale-record", })
@@ -38,7 +38,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerSaleRecordListGet(T requestBody);
+    ResponseMessage customerSaleRecordListGet(T requestBody);
 
 
     @ApiOperation(value = "添加销售记录", nickname = "customerSaleRecordPost", notes = "", tags={ "customer/sale-record", })
@@ -46,7 +46,7 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerSaleRecordPost(T requestBody);
+    ResponseMessage customerSaleRecordPost(T requestBody);
 
 
     @ApiOperation(value = "修改销售记录", nickname = "customerSaleRecordPut", notes = "", tags={ "customer/sale-record", })
@@ -54,5 +54,5 @@ public interface CustomerSaleRecordApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/sale-record",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerSaleRecordPut(T requestBody);
+    ResponseMessage customerSaleRecordPut(T requestBody);
 }

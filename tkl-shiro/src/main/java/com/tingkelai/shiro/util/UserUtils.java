@@ -112,7 +112,7 @@ public class UserUtils {
 	/**
 	 * 获取当前用户
 	 * 
-	 * @return 取不到返回 new User()
+	 * @return 取不到返回
 	 */
 	public static User getUser() {
 		Principal principal = getPrincipal();
@@ -275,7 +275,7 @@ public class UserUtils {
 		return null;
 	}
 
-	// ============== User Cache ==============
+	// ============== Cache ==============
 	public static Object getCache(String key) {
 		return getCache(key, null);
 	}

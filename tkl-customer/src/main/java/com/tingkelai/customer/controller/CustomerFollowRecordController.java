@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerFollowRecordApi;
 import com.tingkelai.domain.customer.FollowRecord;
+import com.tingkelai.vo.customer.FollowRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,30 +17,34 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-public class CustomerFollowRecordController  extends BaseCRUDController<FollowRecord, Long> implements CustomerFollowRecordApi<FollowRecord> {
+public class CustomerFollowRecordController  extends BaseCRUDController<FollowRecord, Long> implements CustomerFollowRecordApi<FollowRecordVO> {
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordDelete(FollowRecord requestBody) {
-        return deleteEntity(requestBody);
+    public ResponseMessage<FollowRecord> customerFollowRecordDelete(FollowRecordVO requestBody) {
+        FollowRecord followRecord = requestBody.toDTO();
+        return deleteEntity(followRecord);
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordGet(FollowRecord requestBody) {
-        return getEntityById(requestBody);
+    public ResponseMessage<FollowRecord> customerFollowRecordGet(FollowRecordVO requestBody) {
+        FollowRecord followRecord = requestBody.toDTO();
+        return getEntityById(followRecord);
     }
 
     @Override
-    public ResponseMessage<List<FollowRecord>> customerFollowRecordListGet(FollowRecord requestBody) {
+    public ResponseMessage customerFollowRecordListGet(FollowRecordVO requestBody) {
         return getEntityList();
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordPost(FollowRecord requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<FollowRecord> customerFollowRecordPost(FollowRecordVO requestBody) {
+        FollowRecord followRecord = requestBody.toDTO();
+        return saveEntity(followRecord);
     }
 
     @Override
-    public ResponseMessage<FollowRecord> customerFollowRecordPut(FollowRecord requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<FollowRecord> customerFollowRecordPut(FollowRecordVO requestBody) {
+        FollowRecord followRecord = requestBody.toDTO();
+        return updateEntity(followRecord);
     }
 }

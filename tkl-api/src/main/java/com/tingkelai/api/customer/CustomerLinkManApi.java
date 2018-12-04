@@ -22,7 +22,7 @@ public interface CustomerLinkManApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerLinkmanDelete(T requestBody);
+    ResponseMessage customerLinkmanDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户联系人信息", nickname = "customerLinkmanGet", notes = "", tags={ "customer/linkman", })
@@ -30,7 +30,7 @@ public interface CustomerLinkManApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerLinkmanGet(T requestBody);
+    ResponseMessage customerLinkmanGet(T requestBody);
 
 
     @ApiOperation(value = "获取指定客户的联系人列表", nickname = "customerLinkmanListGet", notes = "", tags={ "customer/linkman", })
@@ -38,7 +38,7 @@ public interface CustomerLinkManApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerLinkmanListGet(T requestBody);
+    ResponseMessage customerLinkmanListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户联系人", nickname = "customerLinkmanPost", notes = "", tags={ "customer/linkman", })
@@ -46,7 +46,7 @@ public interface CustomerLinkManApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerLinkmanPost(T requestBody);
+    ResponseMessage customerLinkmanPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户联系人", nickname = "customerLinkmanPut", notes = "", tags={ "customer/linkman", })
@@ -54,5 +54,5 @@ public interface CustomerLinkManApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerLinkmanPut(T requestBody);
+    ResponseMessage customerLinkmanPut(T requestBody);
 }

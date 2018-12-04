@@ -22,7 +22,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerSubscribePlanDelete(T requestBody);
+    ResponseMessage customerSubscribePlanDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户预约计划", nickname = "customerSubscribePlanGet", notes = "", tags={ "customer/subscribe-plan", })
@@ -30,7 +30,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerSubscribePlanGet(T requestBody);
+    ResponseMessage customerSubscribePlanGet(T requestBody);
 
 
     @ApiOperation(value = "获取客户预约计划列表", nickname = "customerSubscribePlanListGet", notes = "", tags={ "customer/subscribe-plan", })
@@ -38,7 +38,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerSubscribePlanListGet(T requestBody);
+    ResponseMessage customerSubscribePlanListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户预约计划", nickname = "customerSubscribePlanPost", notes = "", tags={ "customer/subscribe-plan", })
@@ -46,7 +46,7 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerSubscribePlanPost(T requestBody);
+    ResponseMessage customerSubscribePlanPost(T requestBody);
 
 
     @ApiOperation(value = "修改客户预约计划", nickname = "customerSubscribePlanPut", notes = "", tags={ "customer/subscribe-plan", })
@@ -54,5 +54,5 @@ public interface CustomerSubscribePlanApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerSubscribePlanPut(T requestBody);
+    ResponseMessage customerSubscribePlanPut(T requestBody);
 }

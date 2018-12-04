@@ -21,7 +21,7 @@ import java.util.Map;
  * @version 1.0
  */
 @Api(value = "sys", description = "系统相关api")
-public interface SysDictApi<T> {
+public interface SysDictApi<VO> {
 
     @ApiOperation(value = "获取用户数据字典分类列表", nickname = "sysDictCategoryListGet", response = List.class,
             notes = "每个公司都有自己的数据字典", tags={ "sys/dict", })
@@ -29,7 +29,7 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/list",
             method = RequestMethod.GET)
-    List<DictCategory> sysDictCategoryListGet(HttpServletRequest request, T body);
+    List<DictCategory> sysDictCategoryListGet();
 
     @ApiOperation(value = "删除数据字典分类", nickname = "sysDictCategoryDelete", notes = "", tags={ "sys/dict", })
     @ApiResponses(value = {
@@ -37,7 +37,7 @@ public interface SysDictApi<T> {
     @RequestMapping(value = "/sys/dict/category",
             params = {"id"},
             method = RequestMethod.DELETE)
-    Map<String, String> sysDictCategoryDelete(HttpServletRequest request, T body);
+    Map<String, String> sysDictCategoryDelete();
 
 
     @ApiOperation(value = "获取数据字典分类信息", nickname = "sysDictCategoryGet", notes = "",
@@ -45,9 +45,8 @@ public interface SysDictApi<T> {
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category",
-            params = {"id"},
             method = RequestMethod.GET)
-    DictCategory sysDictCategoryGet(HttpServletRequest request, T body);
+    DictCategory sysDictCategoryGet();
 
     @ApiOperation(value = "添加数据字典分类", nickname = "sysDictCategoryPost", notes = "",
             response = Map.class, tags={ "sys/dict", })
@@ -56,7 +55,7 @@ public interface SysDictApi<T> {
     @RequestMapping(value = "/sys/dict/category",
             params = {"id", "name", "code", "remarks"},
             method = RequestMethod.POST)
-    Map<String, String> sysDictCategoryPost(HttpServletRequest request, T body);
+    Map<String, String> sysDictCategoryPost(VO vo);
 
 
     @ApiOperation(value = "修改数据字典分类", nickname = "sysDictCategoryPut", notes = "",
@@ -66,7 +65,7 @@ public interface SysDictApi<T> {
     @RequestMapping(value = "/sys/dict/category",
             params = {"id", "name", "code", "remarks"},
             method = RequestMethod.PUT)
-    Map<String, String> sysDictCategoryPut(HttpServletRequest request, T body);
+    Map<String, String> sysDictCategoryPut(VO vo);
 
 
     @ApiOperation(value = "删除数据字典分类项", nickname = "sysDictCategoryItemDelete", notes = "", tags={ "sys/dict", })
@@ -74,7 +73,7 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/item",
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> sysDictCategoryItemDelete(HttpServletRequest request, T body);
+    ResponseEntity<Void> sysDictCategoryItemDelete(VO vo);
 
 
     @ApiOperation(value = "获取数据字典分类项信息", nickname = "sysDictCategoryItemGet", notes = "", tags={ "sys/dict", })
@@ -82,7 +81,7 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/item",
             method = RequestMethod.GET)
-    ResponseEntity<Void> sysDictCategoryItemGet(HttpServletRequest request, T body);
+    ResponseEntity<Void> sysDictCategoryItemGet(VO vo);
 
 
     @ApiOperation(value = "获取指定数据字典分类的所有分类项", nickname = "sysDictCategoryItemListPost", notes = "", tags={ "sys/dict", })
@@ -90,7 +89,7 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/item/list",
             method = RequestMethod.POST)
-    ResponseEntity<Void> sysDictCategoryItemListPost(HttpServletRequest request, T body);
+    ResponseEntity<Void> sysDictCategoryItemListPost(VO vo);
 
 
     @ApiOperation(value = "添加数据字典分类项", nickname = "sysDictCategoryItemPost", notes = "", tags={ "sys/dict", })
@@ -98,7 +97,7 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/item",
             method = RequestMethod.POST)
-    ResponseEntity<Void> sysDictCategoryItemPost(HttpServletRequest request, T body);
+    ResponseEntity<Void> sysDictCategoryItemPost(VO vo);
 
 
     @ApiOperation(value = "修改数据字典分类项", nickname = "sysDictCategoryItemPut", notes = "", tags={ "sys/dict", })
@@ -106,6 +105,6 @@ public interface SysDictApi<T> {
             @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dict/category/item",
             method = RequestMethod.PUT)
-    ResponseEntity<Void> sysDictCategoryItemPut(HttpServletRequest request, T body);
+    ResponseEntity<Void> sysDictCategoryItemPut(VO vo);
 }
 

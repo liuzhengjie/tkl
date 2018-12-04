@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.ibatis.annotations.Mapper;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 /**

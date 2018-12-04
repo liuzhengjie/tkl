@@ -25,8 +25,8 @@ public class ResponseMessage<T> {
     public static final String TOO_BUSY_MSG = "too busy";
 
     private int code = 1;
-    private String type = "error";
-    private String message = "系统内部bug";
+    private String type = "ok";
+    private String message = "请求成功";
     private T data;
 
     public ResponseMessage(){}

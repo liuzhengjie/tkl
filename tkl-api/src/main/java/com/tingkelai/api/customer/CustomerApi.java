@@ -1,12 +1,16 @@
 package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.customer.CustomerVO;
 import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * 客户相关api
@@ -19,83 +23,108 @@ import java.util.List;
         description = "客户信息相关api",
         tags = "customer")
 @RequestMapping(value = "/v1")
-public interface CustomerApi<T> {
+public interface CustomerApi<VO> {
 
     @ApiOperation(value = "获取客户列表（不带查询条件,带有排序）", nickname = "customerListGet", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "a", required = false),
     })
     @RequestMapping(value = "/customer/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerListGet(HttpServletRequest request);
+    ResponseMessage customerListGet();
 
 
     @ApiOperation(value = "获取客户列表（带有查询条件，高级查询功能）", nickname = "customerQueryListGet", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+
+    })
     @RequestMapping(value = "/customer/query/list",
             method = RequestMethod.GET)
-    ResponseMessage<List<T>> customerQueryListGet(HttpServletRequest request);
+    ResponseMessage customerQueryListGet();
+
 
     @ApiOperation(value = "删除客户信息", nickname = "customerDelete", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true),
+    })
     @RequestMapping(value = "/customer",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerDelete(HttpServletRequest request);
+    ResponseMessage customerDelete();
+
 
     @ApiOperation(value = "获取客户信息", nickname = "customerGet", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", required = true, dataTypeClass = Long.class),
+    })
     @RequestMapping(value = "/customer",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerGet(HttpServletRequest request);
+    ResponseMessage customerGet();
 
+    
     @ApiOperation(value = "添加客户信息", nickname = "customerPost", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "customerVO", required = true, dataType = "《CustomerVO》"),
+    })
     @RequestMapping(value = "/customer",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerPost(HttpServletRequest request);
+    ResponseMessage customerPost();
 
 
     @ApiOperation(value = "修改客户信息", nickname = "customerPut", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+    })
     @RequestMapping(value = "/customer",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerPut(HttpServletRequest request);
+    ResponseMessage customerPut();
 
+    
     @ApiOperation(value = "批量删除客户信息", nickname = "customerUpdateDelete", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+    })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.DELETE)
-    ResponseMessage<T> customerUpdateDelete(HttpServletRequest request);
+    ResponseMessage customerUpdateDelete();
 
 
     @ApiOperation(value = "批量获取客户信息", nickname = "customerUpdateGet", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+    })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.GET)
-    ResponseMessage<T> customerUpdateGet(HttpServletRequest request);
+    ResponseMessage customerUpdateGet();
 
 
     @ApiOperation(value = "批量添加客户信息", nickname = "customerUpdatePost", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+    })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.POST)
-    ResponseMessage<T> customerUpdatePost(HttpServletRequest request);
+    ResponseMessage customerUpdatePost();
 
 
     @ApiOperation(value = "批量修改客户信息", nickname = "customerUpdatePut", notes = "", tags={ "customer", })
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+    })
     @RequestMapping(value = "/customer/update",
             method = RequestMethod.PUT)
-    ResponseMessage<T> customerUpdatePut(HttpServletRequest request);
+    ResponseMessage customerUpdatePut();
 }
