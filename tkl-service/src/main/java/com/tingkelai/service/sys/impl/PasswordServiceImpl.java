@@ -29,10 +29,10 @@ public class PasswordServiceImpl {
 		user.setSalt(randomNumberGenerator.nextBytes().toHex());
 		String newPassword = new SimpleHash(algorithmName, user.getPassword(),
 				ByteSource.Util.bytes(user.getCredentialsSalt()), hashIterations).toHex();
-		Object a = new SimpleHash(algorithmName, user.getPassword(),
-				ByteSource.Util.bytes(user.getCredentialsSalt()), hashIterations);
-		System.err.println(a.toString());
-		System.err.println(a);
-		user.setPassword(a.toString());
+//		Object a = new SimpleHash(algorithmName, user.getPassword(),
+//				ByteSource.Util.bytes(user.getCredentialsSalt()), hashIterations);
+//		System.err.println(a.toString());
+//		System.err.println(a);
+		user.setPassword(newPassword);
 	}
 }

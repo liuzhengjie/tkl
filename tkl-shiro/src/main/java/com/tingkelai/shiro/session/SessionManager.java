@@ -1,4 +1,4 @@
-package com.tingkelai.shiro.config;
+package com.tingkelai.shiro.session;
 
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;

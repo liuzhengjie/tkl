@@ -48,7 +48,7 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
      * 角色名
      * @return name
      **/
-    @ApiModelProperty(value = "角色名")
+    @ApiModelProperty(value = "角色名", required = true)
     public String getName() {
         return name;
     }
@@ -61,7 +61,7 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
      * 角色编码
      * @return code
      **/
-    @ApiModelProperty(value = "角色编码")
+    @ApiModelProperty(value = "角色编码", required = true)
     public String getCode() {
         return code;
     }
@@ -74,7 +74,7 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
      * 是否可用
      * @return usable
      **/
-    @ApiModelProperty(value = "是否可用")
+    @ApiModelProperty(value = "是否可用", required = true)
     public Boolean isUsable() {
         return usable;
     }
@@ -87,7 +87,7 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
      * 是否是系统角色
      * @return isSys
      **/
-    @ApiModelProperty(value = "是否是系统角色")
+    @ApiModelProperty(value = "是否是系统角色", required = true)
     public String isIsSys() {
         return isSys;
     }

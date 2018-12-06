@@ -20,7 +20,7 @@ public class RoleMenuVO implements BaseVO<RoleMenu, RoleMenuVO>{
     @JsonProperty("id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
+    @ApiModelProperty(name = "id", value = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -30,10 +30,13 @@ public class RoleMenuVO implements BaseVO<RoleMenu, RoleMenuVO>{
     }
 
     /** 菜单编号 */
+    @JsonProperty("menuId")
     private Long menuId;
     /** 角色编号 */
+    @JsonProperty("roleId")
     private Long roleId;
 
+    @ApiModelProperty(value = "菜单id", required = true)
     public Long getMenuId() {
         return menuId;
     }
@@ -42,6 +45,7 @@ public class RoleMenuVO implements BaseVO<RoleMenu, RoleMenuVO>{
         this.menuId = menuId;
     }
 
+    @ApiModelProperty(value = "角色id", required = true)
     public Long getRoleId() {
         return roleId;
     }

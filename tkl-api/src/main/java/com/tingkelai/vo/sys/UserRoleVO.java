@@ -19,7 +19,7 @@ public class UserRoleVO implements BaseVO<UserRole, UserRoleVO>{
 
     @JsonProperty("id")
     private Long id = null;
-    @ApiModelProperty(name = "id", value = "id")
+    @ApiModelProperty(name = "id", value = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -28,11 +28,14 @@ public class UserRoleVO implements BaseVO<UserRole, UserRoleVO>{
     }
 
     /** 用户编号 */
+    @JsonProperty("userId")
     private Long userId;
 
     /** 角色编号 */
+    @JsonProperty("roleId")
     private Long roleId;
 
+    @ApiModelProperty(value = "用户id", required = true)
     public Long getUserId() {
         return userId;
     }
@@ -41,6 +44,7 @@ public class UserRoleVO implements BaseVO<UserRole, UserRoleVO>{
         this.userId = userId;
     }
 
+    @ApiModelProperty(value = "角色id", required = true)
     public Long getRoleId() {
         return roleId;
     }

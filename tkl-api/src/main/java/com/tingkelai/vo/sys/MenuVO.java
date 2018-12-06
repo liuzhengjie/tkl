@@ -62,7 +62,7 @@ public class MenuVO implements BaseVO<Menu, MenuVO>{
    * 菜单名
    * @return name
   **/
-  @ApiModelProperty(value = "菜单名")
+  @ApiModelProperty(value = "菜单名", required = true)
   public String getName() {
     return name;
   }
@@ -75,7 +75,7 @@ public class MenuVO implements BaseVO<Menu, MenuVO>{
    * 菜单类型
    * @return type
   **/
-  @ApiModelProperty(value = "菜单类型")
+  @ApiModelProperty(value = "菜单类型", required = true)
   public String getType() {
     return type;
   }
@@ -88,7 +88,7 @@ public class MenuVO implements BaseVO<Menu, MenuVO>{
    * 菜单类型
    * @return url
   **/
-  @ApiModelProperty(value = "菜单类型")
+  @ApiModelProperty(value = "菜单类型", required = true)
   public String getUrl() {
     return url;
   }
@@ -127,7 +127,7 @@ public class MenuVO implements BaseVO<Menu, MenuVO>{
    * 权限
    * @return permission
   **/
-  @ApiModelProperty(value = "权限")
+  @ApiModelProperty(value = "权限", required = true)
   public String getPermission() {
     return permission;
   }

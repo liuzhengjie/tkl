@@ -41,4 +41,14 @@ public interface SysUserMapper extends BaseMapper<User>{
 
     /** 根据用户id获取用户的所有按钮列表 */
     List<Button> findButtonByUserId(@Param("id") Long id);
+
+    /** 根据username获取用户 */
+    User findByUsername(@Param("username") String username);
+
+    /** 根据email获取用户 */
+    User findByEmail(@Param("email") String email);
+
+    /** 根据手机号获取用户 */
+    User findByPhone(@Param("phone") String phone);
+
 }

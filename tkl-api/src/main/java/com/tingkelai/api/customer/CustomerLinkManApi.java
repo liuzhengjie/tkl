@@ -2,9 +2,11 @@ package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -15,44 +17,41 @@ import java.util.List;
  * @version 1.0
  */
 @Api(value = "customer", description = "客户联系人相关api")
+@RequestMapping(value = "/v1")
 public interface CustomerLinkManApi<T> {
 
     @ApiOperation(value = "删除客户联系人", nickname = "customerLinkmanDelete", notes = "", tags={ "customer/linkman", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true),
+    })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.DELETE)
     ResponseMessage customerLinkmanDelete(T requestBody);
 
 
     @ApiOperation(value = "获取客户联系人信息", nickname = "customerLinkmanGet", notes = "", tags={ "customer/linkman", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true),
+    })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.GET)
     ResponseMessage customerLinkmanGet(T requestBody);
 
 
     @ApiOperation(value = "获取指定客户的联系人列表", nickname = "customerLinkmanListGet", notes = "", tags={ "customer/linkman", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman/list",
             method = RequestMethod.GET)
     ResponseMessage customerLinkmanListGet(T requestBody);
 
 
     @ApiOperation(value = "添加客户联系人", nickname = "customerLinkmanPost", notes = "", tags={ "customer/linkman", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.POST)
-    ResponseMessage customerLinkmanPost(T requestBody);
+    ResponseMessage customerLinkmanPost(@Valid @RequestBody T requestBody);
 
 
     @ApiOperation(value = "修改客户联系人", nickname = "customerLinkmanPut", notes = "", tags={ "customer/linkman", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/linkman",
             method = RequestMethod.PUT)
-    ResponseMessage customerLinkmanPut(T requestBody);
+    ResponseMessage customerLinkmanPut(@Valid @RequestBody T requestBody);
 }

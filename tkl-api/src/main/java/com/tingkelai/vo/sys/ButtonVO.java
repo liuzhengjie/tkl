@@ -52,7 +52,7 @@ public class ButtonVO implements BaseVO<Button, ButtonVO>{
    * 按钮名
    * @return name
   **/
-  @ApiModelProperty(value = "按钮名", name = "name11", required = true)
+  @ApiModelProperty(value = "按钮名", name = "name", required = true)
   public String getName() {
     return name;
   }
@@ -65,7 +65,7 @@ public class ButtonVO implements BaseVO<Button, ButtonVO>{
    * 按钮类型
    * @return type
   **/
-  @ApiModelProperty(value = "按钮类型")
+  @ApiModelProperty(value = "按钮类型", required = true)
   public String getType() {
     return type;
   }
@@ -78,7 +78,7 @@ public class ButtonVO implements BaseVO<Button, ButtonVO>{
    * 按钮权限
    * @return permission
   **/
-  @ApiModelProperty(value = "按钮权限")
+  @ApiModelProperty(value = "按钮权限", required = true)
   public String getPermission() {
     return permission;
   }

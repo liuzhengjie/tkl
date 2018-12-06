@@ -20,7 +20,7 @@ public class RoleButtonVO implements BaseVO<RoleButton, RoleButtonVO>{
     @JsonProperty("id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
+    @ApiModelProperty(name = "id", value = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -30,11 +30,14 @@ public class RoleButtonVO implements BaseVO<RoleButton, RoleButtonVO>{
     }
 
     /** 按钮编号 */
+    @JsonProperty("buttonId")
     private Long buttonId;
 
     /** 角色编号 */
+    @JsonProperty("roleId")
     private Long roleId;
 
+    @ApiModelProperty(value = "按钮id", required = true)
     public Long getButtonId() {
         return buttonId;
     }
@@ -43,6 +46,7 @@ public class RoleButtonVO implements BaseVO<RoleButton, RoleButtonVO>{
         this.buttonId = buttonId;
     }
 
+    @ApiModelProperty(value = "角色id", required = true)
     public Long getRoleId() {
         return roleId;
     }

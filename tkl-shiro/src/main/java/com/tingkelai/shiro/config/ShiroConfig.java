@@ -3,6 +3,7 @@ package com.tingkelai.shiro.config;
 import com.tingkelai.shiro.authc.credential.RetryLimitHashedCredentialsMatcher;
 import com.tingkelai.shiro.filter.SysUserFilter;
 import com.tingkelai.shiro.realm.UserRealm;
+import com.tingkelai.shiro.session.SessionManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -12,10 +13,8 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ import java.util.Map;
  * @author liuzhengjie
  * @version 1.0
  */
-@Configuration
+//@Configuration
 public class ShiroConfig {
     /** redis相关参数 */
     @Value("${spring.redis.shiro.host}")
@@ -63,7 +62,6 @@ public class ShiroConfig {
 
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
-        System.out.println("ShiroConfiguration.shirFilter()");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //自定义filter过滤器

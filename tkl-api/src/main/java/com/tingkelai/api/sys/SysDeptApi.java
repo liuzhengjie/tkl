@@ -18,10 +18,9 @@ import java.util.List;
  * @version 1.0
  */
 @Api(value = "sys", description = "系统相关api")
+@RequestMapping(value = "/v1")
 public interface SysDeptApi<VO> {
     @ApiOperation(value = "删除部门", nickname = "sysDeptDelete", notes = "", tags={ "sys/dept", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true),
     })
@@ -31,8 +30,6 @@ public interface SysDeptApi<VO> {
 
 
     @ApiOperation(value = "获取部门信息", nickname = "sysDeptGet", notes = "", tags={ "sys/dept", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true),
     })
@@ -42,26 +39,20 @@ public interface SysDeptApi<VO> {
 
 
     @ApiOperation(value = "获取部门列表（树形结构）", nickname = "sysDeptListGet", notes = "", tags={ "sys/dept", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept/list",
             method = RequestMethod.GET)
     ResponseMessage sysDeptListGet(VO vo);
 
 
     @ApiOperation(value = "创建部门", nickname = "sysDeptPost", notes = "", tags={ "sys/dept", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.POST)
-    ResponseMessage sysDeptPost(VO vo);
+    ResponseMessage sysDeptPost(@Valid @RequestBody VO vo);
 
 
     @ApiOperation(value = "修改部门信息", nickname = "sysDeptPut", notes = "", tags={ "sys/dept", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.PUT)
-    ResponseMessage sysDeptPut(VO vo);
+    ResponseMessage sysDeptPut(@Valid @RequestBody VO vo);
 }
 

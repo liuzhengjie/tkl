@@ -73,6 +73,15 @@ shiro:
   credentials:
     hashAlgorithmName: md5
     hashIterations: 2
+    storedCredentialsHexEncoded: true
+
+tkl:
+  jwt:
+    apiKey: tkl
+    sessionTokenExpireSeconds: 3600
+    authTokenExpireSeconds: 3600
+    showIssuedAt: true
+
 
 
 #指定映射文件,说明：指定xml前缀必须为tkl-

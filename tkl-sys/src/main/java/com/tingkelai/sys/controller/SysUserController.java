@@ -8,6 +8,7 @@ import com.tingkelai.domain.sys.User;
 import com.tingkelai.domain.sys.UserRole;
 import com.tingkelai.service.sys.ISysUserService;
 import com.tingkelai.service.sys.impl.SysUserRoleServiceImpl;
+import com.tingkelai.vo.sys.UserRoleVO;
 import com.tingkelai.vo.sys.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +64,7 @@ public class SysUserController extends BaseCRUDController<User, Long> implements
     }
 
     @Override
-    public ResponseMessage sysUserRolePost(UserRole body) {
+    public ResponseMessage sysUserRolePost(UserRoleVO body) {
         ResponseMessage roleResponseMessage = new ResponseMessage<>();
         roleResponseMessage.success("权限设置成功");
         try {
@@ -84,7 +85,7 @@ public class SysUserController extends BaseCRUDController<User, Long> implements
                     sysUserRoleService.saveOrUpdate(temp);
                 }
             }else{
-                sysUserRoleService.saveOrUpdate(body);
+                sysUserRoleService.saveOrUpdate(body.toDTO());
             }
             //保存用户按钮权限
 //            UserUtils.clearCache();
@@ -93,6 +94,14 @@ public class SysUserController extends BaseCRUDController<User, Long> implements
             roleResponseMessage.fail("权限设置失败");
         }
         return roleResponseMessage;
+    }
+
+    @Override
+    public ResponseMessage changePassword(String username, String password) {
+        ResponseMessage responseMessage = new ResponseMessage<>();
+        responseMessage.success("修改密码成功");
+        sysUserService.changePassword(username, password);
+        return responseMessage;
     }
 
 }

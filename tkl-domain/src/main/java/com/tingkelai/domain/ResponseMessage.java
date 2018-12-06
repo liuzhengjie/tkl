@@ -1,6 +1,8 @@
 package com.tingkelai.domain;
 
+import com.tingkelai.exception.BaseException;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.shiro.authz.UnauthorizedException;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -12,19 +14,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @version 1.0
  */
 public class ResponseMessage<T> {
-    public static final int ERROR = 1;
-    public static final int WARNING = 2;
-    public static final int INFO = 3;
-    public static final int OK = 4;
-    public static final int TOO_BUSY = 5;
 
-    public static final String ERROR_MSG = "error";
-    public static final String WARNING_MSG = "warning";
-    public static final String INFO_MSG = "info";
-    public static final String OK_MSG = "ok";
-    public static final String TOO_BUSY_MSG = "too busy";
-
-    private int code = 1;
+    private int code = 200;
     private String type = "ok";
     private String message = "请求成功";
     private T data;
@@ -32,6 +23,21 @@ public class ResponseMessage<T> {
     public ResponseMessage(){}
 
     public ResponseMessage(Exception e){
+        e.printStackTrace();
+        if(e instanceof BaseException){
+            BaseException baseException = (BaseException) e;
+            this.code = baseException.getCode();
+            this.type = baseException.getType();
+            this.message = baseException.getMessage();
+        }else if(e instanceof UnauthorizedException){
+            this.code = 401;
+            this.message = "无权限";
+            this.type = "error";
+        }else{
+            this.code = 500;
+            this.message = "系统异常";
+            this.type = "error";
+        }
     }
 
     public ResponseMessage(T data){
@@ -42,34 +48,7 @@ public class ResponseMessage<T> {
     }
 
     public ResponseMessage(int code, String message, T data){
-        this(code, message);
         this.setData(data);
-    }
-
-    public ResponseMessage(int code, String message){
-        this();
-        this.code = code;
-        switch(code){
-            case ERROR:
-                setType("error");
-                break;
-            case WARNING:
-                setType("warning");
-                break;
-            case INFO:
-                setType("info");
-                break;
-            case OK:
-                setType("ok");
-                break;
-            case TOO_BUSY:
-                setType("too busy");
-                break;
-            default:
-                setType("unknown");
-                break;
-        }
-        this.message = message;
     }
 
     @ApiModelProperty(value = "返回数据")
@@ -110,14 +89,13 @@ public class ResponseMessage<T> {
     }
 
     public void success(String msg) {
-        this.code = OK;
         this.message = msg;
-        this.type = "ok";
     }
 
     public void fail(String msg) {
-        this.code = ERROR;
         this.message = msg;
-        this.type = ERROR_MSG;
+        this.code = 500;
+        this.type = "error";
     }
+
 }

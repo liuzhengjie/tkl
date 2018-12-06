@@ -29,13 +29,13 @@ public class User extends DataEntity<Long>{
     public static final int STATUS_LOCKED = 0;
     public static final int STATUS_NORMAL = 1;
 
-    @JsonProperty("userName")
-    @TableField("user_name")
-    private String userName = null;
+    @JsonProperty("username")
+    @TableField("username")
+    private String username = null;
 
-    @JsonProperty("realName")
-    @TableField("real_name")
-    private String realName = null;
+    @JsonProperty("realname")
+    @TableField("realname")
+    private String realname = null;
 
     @JsonProperty("portrait")
     @TableField("portrait")
@@ -58,7 +58,7 @@ public class User extends DataEntity<Long>{
     private String phone = null;
 
     @JsonProperty("userStatus")
-    @TableField("status")
+    @TableField("user_status")
     private Integer userStatus = null;
 
     @JsonProperty("teamId")
@@ -72,12 +72,12 @@ public class User extends DataEntity<Long>{
     @ApiModelProperty(value = "用户登录名")
 
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -85,19 +85,12 @@ public class User extends DataEntity<Long>{
      * @return realName
      **/
     @ApiModelProperty(value = "用户真实姓名")
-
-
-    public String getRealName() {
-        return realName;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public User portrait(String portrait) {
-        this.portrait = portrait;
-        return this;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     /**
@@ -105,8 +98,6 @@ public class User extends DataEntity<Long>{
      * @return portrait
      **/
     @ApiModelProperty(value = "用户别名")
-
-
     public String getPortrait() {
         return portrait;
     }
@@ -115,18 +106,11 @@ public class User extends DataEntity<Long>{
         this.portrait = portrait;
     }
 
-    public User password(String password) {
-        this.password = password;
-        return this;
-    }
-
     /**
      * 密码
      * @return password
      **/
     @ApiModelProperty(value = "密码")
-
-
     public String getPassword() {
         return password;
     }
@@ -135,29 +119,17 @@ public class User extends DataEntity<Long>{
         this.password = password;
     }
 
-    public User salt(String salt) {
-        this.salt = salt;
-        return this;
-    }
-
     /**
      * salt
      * @return salt
      **/
     @ApiModelProperty(value = "salt")
-
-
     public String getSalt() {
         return salt;
     }
 
     public void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    public User email(String email) {
-        this.email = email;
-        return this;
     }
 
     /**
@@ -175,18 +147,11 @@ public class User extends DataEntity<Long>{
         this.email = email;
     }
 
-    public User phone(String phone) {
-        this.phone = phone;
-        return this;
-    }
-
     /**
      * 手机号
      * @return phone
      **/
     @ApiModelProperty(value = "手机号")
-
-
     public String getPhone() {
         return phone;
     }
@@ -195,18 +160,11 @@ public class User extends DataEntity<Long>{
         this.phone = phone;
     }
 
-    public User userStatus(Integer userStatus) {
-        this.userStatus = userStatus;
-        return this;
-    }
-
     /**
      * 用户状态
      * @return userStatus
      **/
     @ApiModelProperty(value = "用户状态")
-
-
     public Integer getUserStatus() {
         return userStatus;
     }
@@ -224,59 +182,7 @@ public class User extends DataEntity<Long>{
         this.teamId = teamId;
     }
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(this.userName, user.userName) &&
-                Objects.equals(this.realName, user.realName) &&
-                Objects.equals(this.portrait, user.portrait) &&
-                Objects.equals(this.password, user.password) &&
-                Objects.equals(this.salt, user.salt) &&
-                Objects.equals(this.email, user.email) &&
-                Objects.equals(this.phone, user.phone) &&
-                Objects.equals(this.userStatus, user.userStatus);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName, realName, portrait, password, salt, email, phone, userStatus);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class User {\n");
-
-        sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
-        sb.append("    realName: ").append(toIndentedString(realName)).append("\n");
-        sb.append("    portrait: ").append(toIndentedString(portrait)).append("\n");
-        sb.append("    password: ").append(toIndentedString(password)).append("\n");
-        sb.append("    salt: ").append(toIndentedString(salt)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-        sb.append("    userStatus: ").append(toIndentedString(userStatus)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
     public String getCredentialsSalt() {
-        return userName + salt;
+        return username + salt;
     }
 }

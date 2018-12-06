@@ -27,11 +27,11 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.id = id;
     }
 
-    @JsonProperty("userName")
-    private String userName = null;
+    @JsonProperty("username")
+    private String username = null;
 
-    @JsonProperty("realName")
-    private String realName = null;
+    @JsonProperty("realname")
+    private String realname = null;
 
     @JsonProperty("portrait")
     private String portrait = null;
@@ -48,8 +48,8 @@ public class UserVO implements BaseVO<User, UserVO>{
     @JsonProperty("phone")
     private String phone = null;
 
-    @JsonProperty("userStatus")
-    private Integer userStatus = null;
+    @JsonProperty("status")
+    private Integer userStatus = 1;
 
     @JsonProperty("teamId")
     private Integer teamId = null;
@@ -58,26 +58,26 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 用户登录名
      * @return userName
      **/
-    @ApiModelProperty(value = "用户登录名")
-    public String getUserName() {
-        return userName;
+    @ApiModelProperty(value = "用户登录名", required = true)
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
      * 用户真实姓名
      * @return realName
      **/
-    @ApiModelProperty(value = "用户真实姓名")
-    public String getRealName() {
-        return realName;
+    @ApiModelProperty(value = "用户真实姓名", required = true)
+    public String getRealname() {
+        return realname;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     /**
@@ -97,7 +97,7 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 密码
      * @return password
      **/
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "密码", hidden = true)
     public String getPassword() {
         return password;
     }
@@ -110,7 +110,7 @@ public class UserVO implements BaseVO<User, UserVO>{
      * salt
      * @return salt
      **/
-    @ApiModelProperty(value = "salt")
+    @ApiModelProperty(value = "salt", hidden = true)
     public String getSalt() {
         return salt;
     }
@@ -136,7 +136,7 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 手机号
      * @return phone
      **/
-    @ApiModelProperty(value = "手机号")
+    @ApiModelProperty(value = "手机号", required = true)
     public String getPhone() {
         return phone;
     }
@@ -158,7 +158,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.userStatus = userStatus;
     }
 
-    @ApiModelProperty(value = "用户所属公司id")
+    @ApiModelProperty(value = "用户所属公司id", required = true)
     public Integer getTeamId() {
         return teamId;
     }
@@ -181,10 +181,10 @@ public class UserVO implements BaseVO<User, UserVO>{
         user.setId(userVO.getId());
         user.setPhone(userVO.getPhone());
         user.setPortrait(userVO.getPortrait());
-        user.setRealName(userVO.getRealName());
+        user.setRealname(userVO.getRealname());
         user.setSalt(userVO.getSalt());
         user.setTeamId(userVO.getTeamId());
-        user.setUserName(userVO.getUserName());
+        user.setUsername(userVO.getUsername());
         user.setUserStatus(userVO.getUserStatus());
         return user;
     }
@@ -207,10 +207,10 @@ public class UserVO implements BaseVO<User, UserVO>{
         userVO.setId(user.getId());
         userVO.setPhone(user.getPhone());
         userVO.setPortrait(user.getPortrait());
-        userVO.setRealName(user.getRealName());
+        userVO.setRealname(user.getRealname());
         userVO.setSalt(user.getSalt());
         userVO.setTeamId(user.getTeamId());
-        userVO.setUserName(user.getUserName());
+        userVO.setUsername(user.getUsername());
         userVO.setUserStatus(user.getUserStatus());
         return userVO;
     }

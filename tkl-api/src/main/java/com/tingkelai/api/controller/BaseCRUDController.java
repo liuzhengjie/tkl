@@ -43,75 +43,45 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	 * 根据id获取对象
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> getEntity(VO vo) {
-		try{
-			Entity entity = vo.toDTO();
-			entity = commonService.getById(entity.getId());
-			return new ResponseMessage<>(vo.toVO(entity));
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		Entity entity = vo.toDTO();
+		entity = commonService.getById(entity.getId());
+		return new ResponseMessage<>(vo.toVO(entity));
 	}
 
 	/**
 	 * 保存实体对象
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> saveEntity(VO vo) {
-		try{
-			Entity entity = vo.toDTO();
-			commonService.save(entity);
-			vo = vo.toVO(entity);
-			return new ResponseMessage<>(vo);
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		Entity entity = vo.toDTO();
+		commonService.save(entity);
+		vo = vo.toVO(entity);
+		return new ResponseMessage<>(vo);
 	}
 
 	/**
 	 * 修改实体对象
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> updateEntity(VO vo) {
-		try{
-			Entity entity = vo.toDTO();
-			commonService.saveOrUpdate(entity);
-			return new ResponseMessage<>(vo.toVO(entity));
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		Entity entity = vo.toDTO();
+		commonService.saveOrUpdate(entity);
+		return new ResponseMessage<>(vo.toVO(entity));
 	}
 
 	/**
 	 * 删除对象
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> deleteEntity(VO vo) {
-		try{
-			Entity entity = vo.toDTO();
-			commonService.removeById(entity.getId());
-			return new ResponseMessage<>(vo.toVO(entity));
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		Entity entity = vo.toDTO();
+		commonService.removeById(entity.getId());
+		return new ResponseMessage<>(vo.toVO(entity));
 	}
 
 	/**
 	 * 获取列表
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> getEntityList(VO vo) {
-		try{
-			List<Entity> list = commonService.list();
-			List<VO> resList = vo.toVO(list);
-			return new ResponseMessage<>(resList);
-		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		List<Entity> list = commonService.list();
+		List<VO> resList = vo.toVO(list);
+		return new ResponseMessage<>(resList);
 	}
 }

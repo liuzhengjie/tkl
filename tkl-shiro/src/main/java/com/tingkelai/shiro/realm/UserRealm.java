@@ -102,8 +102,8 @@ public class UserRealm extends AuthorizingRealm {
 
 		public Principal(User user, boolean mobileLogin) {
 			this.id = user.getId();
-			this.username = user.getUserName();
-			this.realname = user.getRealName();
+			this.username = user.getUsername();
+			this.realname = user.getRealname();
 			this.mobileLogin = mobileLogin;
 		}
 

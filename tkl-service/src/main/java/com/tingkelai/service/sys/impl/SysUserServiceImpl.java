@@ -1,5 +1,7 @@
 package com.tingkelai.service.sys.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.dao.sys.SysUserMapper;
 import com.tingkelai.domain.sys.Button;
 import com.tingkelai.domain.sys.Menu;
@@ -10,7 +12,9 @@ import com.tingkelai.service.sys.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("sysUserService")
 public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysUserService {
@@ -41,7 +45,7 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
 
     @Override
     public User sysUserPut(User user) {
-        sysUserMapper.sysUserPut(user.getId(), user.getUserName());
+        sysUserMapper.sysUserPut(user.getId(), user.getUsername());
         return null;
     }
 
@@ -53,17 +57,17 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
 
     @Override
     public User findByUsername(String username) {
-        return getById(username);
+        return sysUserMapper.findByUsername(username);
     }
 
     @Override
     public User findByEmail(String email) {
-        return null;
+        return sysUserMapper.findByEmail(email);
     }
 
     @Override
     public User findByPhone(String phone) {
-        return null;
+        return sysUserMapper.findByPhone(phone);
     }
 
     @Override
@@ -79,6 +83,14 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     @Override
     public List<Menu> findMenuListByUserId(Long id) {
         return sysUserMapper.findMenuByUserId(id);
+    }
+
+    @Override
+    public boolean changePassword(String username, String password) {
+        User user = sysUserMapper.findByUsername(username);
+        user.setPassword(password);
+        passwordService.encryptPassword(user);
+        return saveOrUpdate(user);
     }
 
 }

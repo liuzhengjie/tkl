@@ -43,7 +43,7 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
    * 部门名称
    * @return name
   **/
-  @ApiModelProperty(value = "部门名称")
+  @ApiModelProperty(value = "部门名称", required = true)
   public String getName() {
     return name;
   }

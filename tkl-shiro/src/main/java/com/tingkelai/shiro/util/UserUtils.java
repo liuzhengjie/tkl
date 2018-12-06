@@ -80,7 +80,7 @@ public class UserUtils {
 				return null;
 			}
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getId(), user);
-			CacheUtils.put(USER_CACHE, USER_CACHE_USER_NAME_ + user.getUserName(), user);
+			CacheUtils.put(USER_CACHE, USER_CACHE_USER_NAME_ + user.getUsername(), user);
 		}
 		return user;
 	}
@@ -106,7 +106,7 @@ public class UserUtils {
 	 */
 	public static void clearCache(User user) {
 		CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getId());
-		CacheUtils.remove(USER_CACHE, USER_CACHE_USER_NAME_ + user.getUserName());
+		CacheUtils.remove(USER_CACHE, USER_CACHE_USER_NAME_ + user.getUsername());
 	}
 
 	/**

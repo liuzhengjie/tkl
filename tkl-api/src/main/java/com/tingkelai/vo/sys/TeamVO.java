@@ -35,7 +35,7 @@ public class TeamVO implements BaseVO<Team, TeamVO>{
    * 公司名
    * @return name
   **/
-  @ApiModelProperty(value = "公司名")
+  @ApiModelProperty(value = "公司名", required = true)
   public String getName() {
     return name;
   }

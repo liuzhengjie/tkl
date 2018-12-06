@@ -1,4 +1,4 @@
-package com.tingkelai.shiro;
+package com.tingkelai.shiro.cache;
 
 import net.sf.ehcache.Ehcache;
 import org.apache.shiro.cache.Cache;

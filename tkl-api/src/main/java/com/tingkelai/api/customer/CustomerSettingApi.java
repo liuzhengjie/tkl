@@ -13,19 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version 1.0
  */
 @Api(value = "customer", description = "常用设置相关api")
+@RequestMapping(value = "/v1")
 public interface CustomerSettingApi<T> {
 
     @ApiOperation(value = "获取用户设置的常用模块列表", nickname = "customerSettingListGet", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting/list",
             method = RequestMethod.GET)
     ResponseMessage customerSettingListGet(T requestBody);
 
 
     @ApiOperation(value = "修改用户常用模块", nickname = "customerSettingPut", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/customer/setting",
             method = RequestMethod.PUT)
     ResponseMessage customerSettingPut(T requestBody);

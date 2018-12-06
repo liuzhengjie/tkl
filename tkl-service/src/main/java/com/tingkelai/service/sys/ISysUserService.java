@@ -38,4 +38,6 @@ public interface ISysUserService extends ICommonService<User> {
 
     /** 根据用户id获取用户的所有角色 */
     List<Menu> findMenuListByUserId(Long id);
+
+    boolean changePassword(String username, String password);
 }

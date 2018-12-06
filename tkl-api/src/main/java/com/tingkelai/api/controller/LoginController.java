@@ -1,10 +1,11 @@
-package com.tingkelai;
+package com.tingkelai.api.controller;
 
 import com.tingkelai.api.login.LoginApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
 import com.tingkelai.shiro.authc.UsernamePasswordToken;
+import com.tingkelai.shiro.jwt.JwtUtil;
 import com.tingkelai.shiro.util.UserUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
@@ -38,6 +39,22 @@ public class LoginController implements LoginApi {
     @RequestMapping("/")
     public String helloWorld(){
         return "redirect:/swagger-ui.html";
+    }
+
+
+    @Override
+    @ResponseBody
+    public ResponseMessage getToken(String username, String password) {
+        ResponseMessage<String> responseMessage = new ResponseMessage<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("password", password);
+        String token = JwtUtil.signSessionToken(map);
+        responseMessage.setMessage("获取token成功");
+        map.clear();
+        map.put("token", token);
+        responseMessage.setData(token);
+        return responseMessage;
     }
 
     @Override
@@ -96,6 +113,7 @@ public class LoginController implements LoginApi {
     }
 
     @Override
+    @ResponseBody
     public ResponseMessage logout(HttpServletRequest request) {
         ResponseMessage responseMessage = new ResponseMessage();
         try {

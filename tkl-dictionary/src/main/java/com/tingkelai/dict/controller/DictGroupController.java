@@ -1,13 +1,16 @@
 package com.tingkelai.dict.controller;
 
+import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.sys.SysDictApi;
 import com.tingkelai.domain.dict.DictCategory;
 import com.tingkelai.service.dict.IDictGroupService;
+import com.tingkelai.vo.dict.DictCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,55 +23,55 @@ import java.util.Map;
  * @version 1.0
  */
 @RestController
-public class DictGroupController implements SysDictApi<DictCategory> {
+public class DictGroupController extends BaseCRUDController<DictCategory, Long> implements SysDictApi<DictCategoryVO> {
 
     @Override
-    public List<DictCategory> sysDictCategoryListGet() {
+    public ResponseEntity sysDictCategoryListGet(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryDelete() {
+    public ResponseEntity sysDictCategoryDelete(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public DictCategory sysDictCategoryGet() {
+    public ResponseEntity sysDictCategoryGet(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryPost(DictCategory body) {
+    public ResponseEntity sysDictCategoryPost(@Valid DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public Map<String, String> sysDictCategoryPut(DictCategory body) {
+    public ResponseEntity sysDictCategoryPut(@Valid DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemDelete(DictCategory body) {
+    public ResponseEntity<Void> sysDictCategoryItemDelete(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemGet(DictCategory body) {
+    public ResponseEntity sysDictCategoryItemGet(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemListPost(DictCategory body) {
+    public ResponseEntity sysDictCategoryItemListPost(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemPost(DictCategory body) {
+    public ResponseEntity sysDictCategoryItemPost(DictCategoryVO dictCategoryVO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> sysDictCategoryItemPut(DictCategory body) {
+    public ResponseEntity sysDictCategoryItemPut(DictCategoryVO dictCategoryVO) {
         return null;
     }
 }

@@ -18,18 +18,15 @@ import java.util.List;
  * @version 1.0
  */
 @Api(value = "sys", description = "系统相关api")
+@RequestMapping(value = "/v1")
 public interface SysButtonApi<VO> {
 
     @ApiOperation(value = "获取按钮列表（指定按钮下的按钮列表）", nickname = "sysButtonListGet", notes = "通过菜单id，获取该菜单下所有的按钮", tags={ "sys/button", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/button/list",
             method = RequestMethod.GET)
     ResponseMessage sysButtonListGet(VO body);
 
     @ApiOperation(value = "删除资源（按钮）详情", nickname = "sysButtonDelete", notes = "", tags={ "sys/button", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true),
     })
@@ -39,8 +36,6 @@ public interface SysButtonApi<VO> {
 
 
     @ApiOperation(value = "获取资源（按钮）详情", nickname = "sysButtonGet", notes = "", tags={ "sys/button", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true),
     })
@@ -49,15 +44,11 @@ public interface SysButtonApi<VO> {
     ResponseMessage sysButtonGet(VO vo);
 
     @ApiOperation(value = "添加资源（按钮）", nickname = "sysButtonPost", notes = "树形结构的菜单", tags={ "sys/button", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/button",
             method = RequestMethod.POST)
     ResponseMessage sysMenuPost(@Valid @RequestBody VO vo);
 
     @ApiOperation(value = "修改资源（按钮）详情", nickname = "sysButtonPut", notes = "", tags={ "sys/button", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/sys/button",
             method = RequestMethod.PUT)
     ResponseMessage sysButtonPut(@Valid @RequestBody VO vo);

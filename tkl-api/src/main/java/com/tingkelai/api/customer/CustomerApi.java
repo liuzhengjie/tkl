@@ -26,20 +26,14 @@ import java.util.Map;
 public interface CustomerApi<VO> {
 
     @ApiOperation(value = "获取客户列表（不带查询条件,带有排序）", nickname = "customerListGet", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
-    @ApiImplicitParams({
-    })
     @RequestMapping(value = "/customer/list",
             method = RequestMethod.GET)
     ResponseMessage customerListGet(VO requestBody);
 
 
     @ApiOperation(value = "获取客户列表（带有查询条件，高级查询功能）", nickname = "customerQueryListGet", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
-
+            @ApiImplicitParam(name = "id", value = "id", required = true),
     })
     @RequestMapping(value = "/customer/query/list",
             method = RequestMethod.GET)
@@ -47,8 +41,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "删除客户信息", nickname = "customerDelete", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true),
     })
@@ -58,8 +50,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "获取客户信息", nickname = "customerGet", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", required = true, dataTypeClass = Long.class),
     })
@@ -69,29 +59,24 @@ public interface CustomerApi<VO> {
 
     
     @ApiOperation(value = "添加客户信息", nickname = "customerPost", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "customerVO", required = true, dataType = "《CustomerVO》"),
+            @ApiImplicitParam(name = "customerVO", required = true),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.POST)
-    ResponseMessage customerPost(VO requestBody);
+    ResponseMessage customerPost(@Valid @RequestBody VO requestBody);
 
 
     @ApiOperation(value = "修改客户信息", nickname = "customerPut", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "customerVO", required = true),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.PUT)
-    ResponseMessage customerPut(VO requestBody);
+    ResponseMessage customerPut(@Valid @RequestBody VO requestBody);
 
     
     @ApiOperation(value = "批量删除客户信息", nickname = "customerUpdateDelete", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
     })
     @RequestMapping(value = "/customer/update",
@@ -100,8 +85,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "批量获取客户信息", nickname = "customerUpdateGet", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
     })
     @RequestMapping(value = "/customer/update",
@@ -110,8 +93,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "批量添加客户信息", nickname = "customerUpdatePost", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
     })
     @RequestMapping(value = "/customer/update",
@@ -120,8 +101,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "批量修改客户信息", nickname = "customerUpdatePut", notes = "", tags={ "customer", })
-    @ApiResponses(value = {
-            @ApiResponse(code = 405, message = "Invalid input") })
     @ApiImplicitParams({
     })
     @RequestMapping(value = "/customer/update",

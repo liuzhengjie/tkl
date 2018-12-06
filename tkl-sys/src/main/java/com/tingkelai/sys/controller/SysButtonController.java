@@ -1,14 +1,12 @@
 package com.tingkelai.sys.controller;
 
-import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.sys.SysButtonApi;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.Button;
 import com.tingkelai.vo.sys.ButtonVO;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
