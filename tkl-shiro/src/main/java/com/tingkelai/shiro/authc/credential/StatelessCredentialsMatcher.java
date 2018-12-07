@@ -25,24 +25,6 @@ public class StatelessCredentialsMatcher extends HashedCredentialsMatcher {
 
 	@Override
 	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-		Hash tokenHashedCredentials = (Hash)this.hashProvidedCredentials(token, info);
-		Hash  accountCredentials = (Hash)this.getCredentials(info);
-		System.out.println(tokenHashedCredentials.toHex());
-		System.out.println(accountCredentials.toHex());
-
-		String a = accountCredentials.toHex();
-		super.doCredentialsMatch(token, info);
-
-//		String password = (String)token.getCredentials();
-		Hash simpleHash = new SimpleHash("md5", "123",
-				ByteSource.Util.bytes("admin" + "d5c7539a44e6c1c9798037ab5693a6d8"), 2);
-
-		String pas = new SimpleHash("md5", "123",
-				ByteSource.Util.bytes("admin"), 2).toHex();
-
-		String paasdfss = new SimpleHash("md5", "123",
-				ByteSource.Util.bytes("d5c7539a44e6c1c9798037ab5693a6d8"), 2).toHex();
-
 		return super.doCredentialsMatch(token, info);
 	}
 

@@ -6,10 +6,10 @@ import com.tingkelai.domain.sys.Role;
 import com.tingkelai.domain.sys.User;
 import com.tingkelai.service.sys.ISysUserService;
 import com.tingkelai.shiro.authc.StatelessToken;
-import com.tingkelai.shiro.authc.UsernamePasswordToken;
-import com.tingkelai.shiro.jwt.JwtUtil;
-import com.tingkelai.shiro.util.UserUtils;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -17,10 +17,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -91,8 +89,6 @@ public class StatelessUserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		//获取认证token
 		StatelessToken authcToken = (StatelessToken) token;
-		//token
-		String tokenKey = authcToken.getToken();
 		//获取用户登录名
 		String username = authcToken.getUsername();
 		//用户id不存在，抛出认证异常错误
@@ -113,10 +109,7 @@ public class StatelessUserRealm extends AuthorizingRealm {
 				ByteSource.Util.bytes(user.getCredentialsSalt()), // salt=username+salt
 				getName() // realm name
 		);
-
 		System.out.println("====username:" + username);
-		// 记录登录日志
-//		LogUtils.saveLog(ServletUtils.getRequest(), "系统登录");
 		return authenticationInfo;
 	}
 }

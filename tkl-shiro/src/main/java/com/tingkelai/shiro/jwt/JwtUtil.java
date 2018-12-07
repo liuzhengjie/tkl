@@ -2,8 +2,11 @@ package com.tingkelai.shiro.jwt;
 
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,20 +19,30 @@ import java.util.Map;
  */
 public class JwtUtil {
 
+    /** 日志 */
+    private static Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+
+    //默认token名字
+    @Value("${tkl.jwt.tokenName}")
+    public static String TOKEN_NAME = "token";
+
     //密钥
     @Value("${tkl.jwt.apiKey}")
-    private static String apiKey = "ktl";
+    public static String apiKey = "liuzhengjie";
 
-    //session token有效期为30天
-    @Value("${tkl.jwt.sessionTokenExpireSeconds}")
-    private static int sessionTokenExpireSeconds = 60 * 60 * 24 * 30;
+    //token到期时间小于autoUpdateSeconds时，自动更新token
+    @Value("${tkl.jwt.autoUpdateSeconds}")
+    private static int autoUpdateSeconds = 60;
 
     //auth token有效期为15天
     @Value("${tkl.jwt.authTokenExpireSeconds}")
-    private static int authTokenExpireSeconds = 60 * 60 * 24 * 15;
+    private static int authTokenExpireSeconds = 60 * 60;
 
     @Value("${tkl.jwt.showIssuedAt}")
     private static boolean showIssuedAt = true;
+
+    // 到期时间标识
+    private static final String DEADLINE_FLAG = "deadLine";
 
     /**
      * 生成sessionToken签名
@@ -39,8 +52,10 @@ public class JwtUtil {
     public static String signSessionToken(Map<String, Object> map){
         JWTSigner signer = new JWTSigner(apiKey);
         JWTSigner.Options options = new JWTSigner.Options();
-        options.setExpirySeconds(sessionTokenExpireSeconds);
+        options.setExpirySeconds(authTokenExpireSeconds);
         options.setIssuedAt(showIssuedAt);
+        map.put(TOKEN_NAME, apiKey);
+        map.put(DEADLINE_FLAG, new Date());
         return signer.sign(map, options);
     }
 
@@ -55,6 +70,51 @@ public class JwtUtil {
             return verifier.verify(token);
         } catch (Exception e) {
             return new HashMap<>();
+        }
+    }
+
+    /**
+     * 判断token是否过期，是否需要更新
+     * @param token
+     * @param map
+     * @return
+     */
+    public static String refreshToken(String token, Map<String, Object> map){
+        String refreshToken = token;
+        try{
+            //获取token到期时间，如果现在还有指定时间到期，则刷新token
+            Date deadline = (Date)map.get("deadline");
+            if(deadline == null){
+                logger.warn("====token已过期，需重新登录");
+                return null;
+            }
+
+            //当前时间
+            Date newDate = new Date();
+            long surplus = newDate.getTime() - deadline.getTime();
+            if(surplus < 0){
+                logger.warn("====token已过期，需重新登录");
+                return null;
+            }else if(surplus < autoUpdateSeconds){
+                map.put(DEADLINE_FLAG, newDate);
+                refreshToken = signSessionToken(map);
+            }
+        }catch (Exception e){
+            logger.warn("====更新token失败" + e);
+        }
+        return refreshToken;
+    }
+
+    /**
+     * 将token设置为失效
+     * @param token
+     */
+    public static void expireToken(String token) {
+        if(token != null){
+            Map<String, Object> map = verifySessionToken(token);
+            if(map.containsKey(apiKey)){
+                map.remove(DEADLINE_FLAG);
+            }
         }
     }
 }

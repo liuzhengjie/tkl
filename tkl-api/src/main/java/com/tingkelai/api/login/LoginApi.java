@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 系统用户信息相关api
@@ -31,7 +32,7 @@ public interface LoginApi {
     })
     @RequestMapping(value = "/ajaxLogin",
             method = RequestMethod.POST)
-    ResponseMessage ajaxLogin(HttpServletRequest request);
+    ResponseMessage ajaxLogin(HttpServletRequest request, HttpServletResponse response);
 
     @ApiOperation(value = "登录成功页面", nickname = "login", notes = "登录成功返回信息", tags={ "login", })
     @ApiImplicitParams({

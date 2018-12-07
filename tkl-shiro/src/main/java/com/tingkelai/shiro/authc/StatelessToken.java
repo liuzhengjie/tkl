@@ -1,5 +1,6 @@
 package com.tingkelai.shiro.authc;
 
+import com.tingkelai.shiro.jwt.JwtUtil;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
@@ -15,8 +16,6 @@ import java.util.Map;
 public class StatelessToken extends org.apache.shiro.authc.UsernamePasswordToken {
 
 	private static final long serialVersionUID = 1L;
-
-	public static final String TOKEN_NAME = "token";
 
 	private String token;
 

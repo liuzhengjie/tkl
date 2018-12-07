@@ -77,8 +77,11 @@ shiro:
 
 tkl:
   jwt:
+    tokenName: token
     apiKey: tkl
-    sessionTokenExpireSeconds: 3600
+    # token剩余时间小于n秒时，自动更新token
+    autoUpdateSeconds: 60
+    # token有效期
     authTokenExpireSeconds: 3600
     showIssuedAt: true
 

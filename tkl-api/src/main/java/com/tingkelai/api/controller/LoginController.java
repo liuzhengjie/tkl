@@ -3,7 +3,9 @@ package com.tingkelai.api.controller;
 import com.tingkelai.api.login.LoginApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.exception.TokenFailureException;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
+import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.authc.UsernamePasswordToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
 import com.tingkelai.shiro.util.UserUtils;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,35 +63,34 @@ public class LoginController implements LoginApi {
     @Override
     @RequestMapping("/ajaxLogin")
     @ResponseBody
-    public ResponseMessage ajaxLogin(HttpServletRequest request) {
+    public ResponseMessage<Map<String, Object>> ajaxLogin(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        ResponseMessage responseMessage = new ResponseMessage();
+        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage();
         try {
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-            subject.login(usernamePasswordToken);
+            StatelessToken statelessToken = new StatelessToken(username, password);
+            subject.login(statelessToken);
             responseMessage.setMessage("登录成功");
 
-            User user = UserUtils.getUser();
+            //生成token
+            Map<String, Object> tokenMap = new HashMap<>();
+            tokenMap.put("username", username);
+            String token = JwtUtil.signSessionToken(tokenMap);
+            response.setHeader(JwtUtil.TOKEN_NAME, token);
 
-            Map map = new HashMap();
-            map.put("button", sysUserService.findButtonListByUserId(user.getId()));
+            User user = sysUserService.findByUsername(username);
+            Map<String, Object> map = new HashMap<>();
             map.put("menu", sysUserService.findMenuListByUserId(user.getId()));
             map.put("role", sysUserService.findRoleListByUserId(user.getId()));
-
+            map.put("button", sysUserService.findButtonListByUserId(user.getId()));
             responseMessage.setData(map);
-        } catch (UnavailableSecurityManagerException e) {
-
-        } catch (InvalidSessionException e) {
-
         } catch (LockedAccountException e){
             responseMessage.setMessage("账号已锁定");
         } catch (UnknownAccountException e){
             responseMessage.setMessage("没有找到该账号");
         } catch (Exception e){
             System.err.print(e.getClass() + e.getMessage());
-            e.printStackTrace();
             responseMessage.setMessage("账号或密码错误");
         }
         return responseMessage;
