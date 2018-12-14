@@ -5,7 +5,6 @@ import com.tingkelai.util.StringUtils;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import sun.misc.MessageUtils;
 
 import java.io.Serializable;
 import java.util.List;

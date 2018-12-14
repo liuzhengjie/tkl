@@ -7,7 +7,6 @@ import com.tingkelai.domain.sys.User;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
  * 数据Entity类

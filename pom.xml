@@ -12,6 +12,7 @@
 	<description>听客来crm系统主pom文件</description>
 
 	<modules>
+		<module>tkl-util</module>
 		<module>tkl-config</module>
 		<module>tkl-domain</module>
 		<module>tkl-dao</module>
@@ -29,11 +30,13 @@
 		<module>tkl-main</module>
 	</modules>
 
+<!--
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.0.RELEASE</version>
 	</parent>
+-->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,6 +51,7 @@
 		<sub-module-version>0.0.1-SNAPSHOT</sub-module-version>
 		<shiro.version>1.2.2</shiro.version>
 		<baomidao-version>3.0.6</baomidao-version>
+        <quartz.version>2.3.0</quartz.version>
 	</properties>
 
 	<dependencies>
@@ -144,16 +148,29 @@
 		</dependency>
 		<!-- shiro结束 -->
 
-		<!-- 自定义工具类包 -->
+		<!-- 常用jar -->
 		<dependency>
-			<groupId>com.tingkelai</groupId>
-			<artifactId>tkl-util</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		<!-- 常用jar -->
 	</dependencies>
 
 	<!-- 版本管理 -->
 	<dependencyManagement>
 		<dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 			<!-- 模块依赖关系，基础部分 -->
 			<!-- util层 -->
 			<dependency>
@@ -278,8 +295,14 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -1,7 +1,5 @@
 package com.tingkelai.util;
 
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
