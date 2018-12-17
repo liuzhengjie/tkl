@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.resource.PathResourceResolver;
-import org.springframework.web.servlet.resource.WebJarsResourceResolver;
 
 /**
  * 解决swagger2样式加载不全bug
@@ -30,7 +28,5 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
                 .allowCredentials(true)//是否允许证书 不再默认开启
                 .allowedMethods("GET", "POST", "PUT", "DELETE")//设置允许的方法
                 .maxAge(3600);//跨域允许时间
-
     }
-
 }

@@ -26,36 +26,6 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     private SysUserMapper sysUserMapper;
 
     @Override
-    public User sysUserGet(Long id) {
-        return sysUserMapper.sysUserGet(id);
-    }
-
-    @Override
-    public User sysUserDelete(Long id) {
-        sysUserMapper.sysUserDelete(id);
-        return null;
-    }
-
-    @Override
-    public User sysUserPost(User user){
-        passwordService.encryptPassword(user);
-        save(user);
-        return user;
-    }
-
-    @Override
-    public User sysUserPut(User user) {
-        sysUserMapper.sysUserPut(user.getId(), user.getUsername());
-        return null;
-    }
-
-    @Override
-    public List<User> sysUserListGet() {
-        List<User> userList = sysUserMapper.sysUserListGet();
-        return userList;
-    }
-
-    @Override
     public User findByUsername(String username) {
         return sysUserMapper.findByUsername(username);
     }

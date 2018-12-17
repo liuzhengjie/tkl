@@ -14,7 +14,6 @@ public class TklCustomerApplication {
 		logger.debug("====tingkelai sys module start");
 		System.out.println("========== 听客来customer模块启动 ===========");
 		SpringApplication.run(TklCustomerApplication.class, args);
-		logger.debug("====tingkelai sys module start");
 		System.out.println("========== 听客来customer模块启动 ===========");
 	}
 }

@@ -97,7 +97,7 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 密码
      * @return password
      **/
-    @ApiModelProperty(value = "密码", hidden = true)
+    @ApiModelProperty(value = "密码")
     public String getPassword() {
         return password;
     }
@@ -185,6 +185,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         user.setSalt(userVO.getSalt());
         user.setTeamId(userVO.getTeamId());
         user.setUsername(userVO.getUsername());
+        user.setPassword(userVO.getPassword());
         user.setUserStatus(userVO.getUserStatus());
         return user;
     }

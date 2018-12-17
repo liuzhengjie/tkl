@@ -1,7 +1,6 @@
 package com.tingkelai.shiro.filter;
 
-import com.tingkelai.domain.ResponseMessage;
-import com.tingkelai.exception.TokenFailureException;
+import com.tingkelai.exception.ex500.TokenFailureException;
 import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
 import org.apache.shiro.authc.*;
@@ -14,8 +13,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

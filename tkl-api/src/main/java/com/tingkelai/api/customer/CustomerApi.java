@@ -60,7 +60,7 @@ public interface CustomerApi<VO> {
     
     @ApiOperation(value = "添加客户信息", nickname = "customerPost", notes = "", tags={ "customer", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "customerVO", required = true),
+//            @ApiImplicitParam(name = "customerVO", required = true),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.POST)
@@ -69,7 +69,7 @@ public interface CustomerApi<VO> {
 
     @ApiOperation(value = "修改客户信息", nickname = "customerPut", notes = "", tags={ "customer", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "customerVO", required = true),
+//            @ApiImplicitParam(name = "customerVO", required = true),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.PUT)

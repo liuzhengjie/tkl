@@ -37,8 +37,6 @@ public class SysUserController extends BaseCRUDController<User, Long> implements
     @Autowired
     private SysUserRoleServiceImpl sysUserRoleService;
 
-    private static final Logger log = LoggerFactory.getLogger(SysUserController.class);
-
     @Override
     public ResponseMessage<List<UserVO>> sysUserListGet(UserVO userVO) {
         return getEntityList(userVO);

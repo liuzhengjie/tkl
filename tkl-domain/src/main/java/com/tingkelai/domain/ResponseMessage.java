@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.shiro.authz.UnauthorizedException;
 
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 设置统一返回值
@@ -15,10 +17,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public class ResponseMessage<T> {
 
+    private String token = "";
     private int code = 200;
     private String type = "ok";
     private String message = "请求成功";
     private T data;
+    private Map<String, Object> ext = new HashMap<>();
 
     public ResponseMessage(){}
 
@@ -86,6 +90,24 @@ public class ResponseMessage<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @ApiModelProperty(value = "扩展信息")
+    public Map<String, Object> getExt() {
+        return ext;
+    }
+
+    public void setExt(Map<String, Object> ext) {
+        this.ext = ext;
+    }
+
+    @ApiModelProperty(value = "token")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void success(String msg) {

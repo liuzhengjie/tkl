@@ -98,6 +98,11 @@ public class CommonServiceImpl<T> extends ServiceImpl<BaseMapper<T>, T> implemen
     }
 
     @Override
+    public T getOne(Wrapper<T> wrapper){
+        return super.getOne(wrapper, true);
+    }
+
+    @Override
     public T getOne(Wrapper<T> wrapper, boolean b) {
         return super.getOne(wrapper, b);
     }

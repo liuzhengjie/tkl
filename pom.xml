@@ -27,6 +27,7 @@
 		<module>tkl-import-export</module>
 		<module>tkl-sms</module>
 		<module>tkl-statistics</module>
+		<module>tkl-template</module>
 		<module>tkl-main</module>
 	</modules>
 
@@ -238,6 +239,12 @@
 			<dependency>
 				<groupId>com.tingkelai</groupId>
 				<artifactId>tkl-customer</artifactId>
+				<version>${sub-module-version}</version>
+			</dependency>
+			<!-- 动态模板字段模块 -->
+			<dependency>
+				<groupId>com.tingkelai</groupId>
+				<artifactId>tkl-template</artifactId>
 				<version>${sub-module-version}</version>
 			</dependency>
 			<!-- 导入导出相关 -->

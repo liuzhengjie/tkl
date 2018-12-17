@@ -2,12 +2,27 @@ package com.tingkelai;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.exception.BaseException;
+import com.tingkelai.shiro.jwt.JwtUtil;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.http.server.ServletServerHttpResponse;
+import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -17,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
  * 参考url：https://www.cnblogs.com/sxdcgaq8080/p/8797318.html
  */
 @ControllerAdvice
-public class MyControllerAdvice {
+public class MyControllerAdvice implements ResponseBodyAdvice {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -34,6 +49,7 @@ public class MyControllerAdvice {
     public void addAttributes(Model model) {
         model.addAttribute("sys", "tingkelai");
     }
+
 
     /**
      * 全局异常捕捉处理
@@ -60,5 +76,24 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = BaseException.class)
     public ResponseMessage myErrorHandler(BaseException ex) {
         return new ResponseMessage(ex);
+    }
+
+    @Override
+    public boolean supports(MethodParameter methodParameter, Class aClass) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public Object beforeBodyWrite(@Nullable Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        if(o instanceof ResponseMessage){
+            ServletServerHttpResponse response = (ServletServerHttpResponse)serverHttpResponse;
+            HttpServletResponse httpServletResponse = response.getServletResponse();
+            String token = httpServletResponse.getHeader(JwtUtil.TOKEN_NAME);
+            if(token != null){
+                ((ResponseMessage) o).setToken(token);
+            }
+        }
+        return o;
     }
 }

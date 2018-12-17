@@ -38,7 +38,7 @@ public class BaseBeanController <Entity extends Serializable> extends BaseContro
      * 共享的验证规则 验证失败返回true
      */
     protected boolean hasError(Entity entity, BindingResult result) {
-        Assert.notNull(entity);
+//        Assert.notNull(entity);
         return result.hasErrors();
     }
 

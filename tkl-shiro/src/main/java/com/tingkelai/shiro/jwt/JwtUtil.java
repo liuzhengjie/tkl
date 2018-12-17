@@ -32,7 +32,7 @@ public class JwtUtil {
 
     //token到期时间小于autoUpdateSeconds时，自动更新token
     @Value("${tkl.jwt.autoUpdateSeconds}")
-    private static int autoUpdateSeconds = 60;
+    private static int autoUpdateSeconds = 60 * 60 * 60;
 
     //auth token有效期为15天
     @Value("${tkl.jwt.authTokenExpireSeconds}")
@@ -55,7 +55,7 @@ public class JwtUtil {
         options.setExpirySeconds(authTokenExpireSeconds);
         options.setIssuedAt(showIssuedAt);
         map.put(TOKEN_NAME, apiKey);
-        map.put(DEADLINE_FLAG, new Date());
+        map.put(DEADLINE_FLAG, new Date().getTime());
         return signer.sign(map, options);
     }
 
@@ -83,7 +83,7 @@ public class JwtUtil {
         String refreshToken = token;
         try{
             //获取token到期时间，如果现在还有指定时间到期，则刷新token
-            Date deadline = (Date)map.get("deadline");
+            Long deadline = (Long)map.get(DEADLINE_FLAG);
             if(deadline == null){
                 logger.warn("====token已过期，需重新登录");
                 return null;
@@ -91,7 +91,7 @@ public class JwtUtil {
 
             //当前时间
             Date newDate = new Date();
-            long surplus = newDate.getTime() - deadline.getTime();
+            long surplus = newDate.getTime() - deadline;
             if(surplus < 0){
                 logger.warn("====token已过期，需重新登录");
                 return null;

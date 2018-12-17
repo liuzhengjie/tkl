@@ -24,4 +24,5 @@ public class TklShiroApplication {
 		SpringApplication.run(TklShiroApplication.class, args);
 		System.out.println("======== 听客来shiro模块启动完成！ ===========");
 	}
+
 }

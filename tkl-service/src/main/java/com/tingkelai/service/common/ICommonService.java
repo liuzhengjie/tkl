@@ -1,5 +1,8 @@
 package com.tingkelai.service.common;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,9 +23,18 @@ public interface ICommonService<T>{
     /** R 根据id删除对象*/
     boolean removeById(Serializable serializable);
 
+    /** R 根据条件删除对象 */
+    boolean remove(Wrapper<T> wrapper);
+
     /** U 更新或保存，更新有变化的字段 */
     boolean saveOrUpdate(T t);
 
-    /** D 根据id获取对象 */
+    /**  根据id获取对象 */
     T getById(Serializable serializable);
+
+    /** 根据条件获取对象 */
+    T getOne(Wrapper<T> var1);
+
+    /** 通过条件获取分页列表 */
+    IPage<T> page(IPage<T> page, Wrapper<T> queryWrapper);
 }
