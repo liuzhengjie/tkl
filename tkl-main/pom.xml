@@ -25,5 +25,9 @@
 			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-sys</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-template</artifactId>
+		</dependency>
 	</dependencies>
 </project>

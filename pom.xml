@@ -273,6 +273,13 @@
 				<version>${sub-module-version}</version>
 			</dependency>
 
+			<!-- 动态模板相关 -->
+			<dependency>
+				<groupId>com.tingkelai</groupId>
+				<artifactId>tkl-template</artifactId>
+				<version>${sub-module-version}</version>
+			</dependency>
+
 			<!-- 模块依赖关系，部分jar包版本限制 -->
 			<!-- 引用jar默认版本控制，和父类相同 -->
 			<dependency>

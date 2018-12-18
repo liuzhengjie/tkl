@@ -5,19 +5,14 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +63,6 @@ public class DruidConfig {
     private String filters;
     @Value("{spring.datasource.connectionProperties:#{null}}")
     private String connectionProperties;
-
-    @Value("${mybatis-plus.mapper-locations}")
-    private String mapperLocations;
 
     @Bean
     @Primary
@@ -152,33 +144,7 @@ public class DruidConfig {
         datasource.setProxyFilters(filters);
 
         logger.debug("====datasource start:" + datasource);
-
         return datasource;
-    }
-
-    @Bean
-    public MybatisSqlSessionFactoryBean createSqlSessionFactory() {
-        MybatisSqlSessionFactoryBean sqlSessionFactoryBean = null;
-        try {
-            // 加载JNDI配置
-            Context context = new InitialContext();
-            DataSource dataSource = dataSource();
-
-            // 实例SessionFactory
-            sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
-            // 配置数据源
-            sqlSessionFactoryBean.setDataSource(dataSource);
-
-            // 加载MyBatis配置文件
-            PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-            // 能加载多个，所以可以配置通配符(如：classpath*:mapper/**/*.xml)
-            sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources(mapperLocations));
-            // 配置mybatis的config文件(我目前用不上)
-            // sqlSessionFactoryBean.setConfigLocation("mybatis-config.xml");
-        } catch (Exception e) {
-            logger.error("创建SqlSession连接工厂错误：{}", e);
-        }
-        return sqlSessionFactoryBean;
     }
 
     @Bean

@@ -3,6 +3,7 @@ package com.tingkelai.service.template.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.tingkelai.domain.sys.Team;
 import com.tingkelai.domain.template.Template;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
