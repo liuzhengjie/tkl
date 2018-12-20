@@ -20,36 +20,43 @@ import java.util.Objects;
 @TableName("tkl_sys_button")
 @Mapper
 public class Button  extends DataEntity<Long> {
-  @JsonProperty("name")
-  @TableField("name")
-  private String name = null;
 
-  @JsonProperty("type")
-  @TableField("type")
-  private String type = null;
-
-  @JsonProperty("permission")
-  @TableField("permission")
-  private String permission = null;
-
-  @JsonProperty("isShow")
-  @TableField("is_show")
-  private String isShow = null;
-
-  @JsonProperty("sort")
-  @TableField("sort")
-  private Integer sort = null;
-
-  @JsonProperty("buttonIcon")
-  @TableField("button_icon")
-  private String buttonIcon = null;
 
   /**
    * 按钮名
-   * @return name
-  **/
-  @ApiModelProperty(value = "按钮名")
+   */
+  @TableField("name")
+  private String name = null;
 
+  /**
+   * 按钮类型
+   */
+  @TableField("type")
+  private String type = null;
+
+  /**
+   * 按钮权限
+   */
+  @TableField("permission")
+  private String permission = null;
+
+  /**
+   * 是否显示
+   */
+  @TableField("is_show")
+  private String isShow = null;
+
+  /**
+   * 排序
+   **/
+  @TableField("sort")
+  private Integer sort = null;
+
+  /**
+   * 按钮图标
+   */
+  @TableField("button_icon")
+  private String buttonIcon = null;
 
   public String getName() {
     return name;
@@ -64,13 +71,6 @@ public class Button  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 按钮类型
-   * @return type
-  **/
-  @ApiModelProperty(value = "按钮类型")
-
-
   public String getType() {
     return type;
   }
@@ -84,13 +84,6 @@ public class Button  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 按钮权限
-   * @return permission
-  **/
-  @ApiModelProperty(value = "按钮权限")
-
-
   public String getPermission() {
     return permission;
   }
@@ -103,12 +96,6 @@ public class Button  extends DataEntity<Long> {
     this.isShow = isShow;
     return this;
   }
-
-  /**
-   * 是否显示
-   * @return isShow
-  **/
-  @ApiModelProperty(value = "是否显示")
 
 
   public String isIsShow() {
@@ -124,12 +111,6 @@ public class Button  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 排序
-   * @return sort
-  **/
-  @ApiModelProperty(value = "排序")
-
 
   public Integer getSort() {
     return sort;
@@ -144,68 +125,12 @@ public class Button  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 按钮图标
-   * @return buttonIcon
-  **/
-  @ApiModelProperty(value = "按钮图标")
-
-
   public String getButtonIcon() {
     return buttonIcon;
   }
 
   public void setButtonIcon(String buttonIcon) {
     this.buttonIcon = buttonIcon;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Button button = (Button) o;
-    return Objects.equals(this.name, button.name) &&
-        Objects.equals(this.type, button.type) &&
-        Objects.equals(this.permission, button.permission) &&
-        Objects.equals(this.isShow, button.isShow) &&
-        Objects.equals(this.sort, button.sort) &&
-        Objects.equals(this.buttonIcon, button.buttonIcon);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, type, permission, isShow, sort, buttonIcon);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Button {\n");
-    
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    permission: ").append(toIndentedString(permission)).append("\n");
-    sb.append("    isShow: ").append(toIndentedString(isShow)).append("\n");
-    sb.append("    sort: ").append(toIndentedString(sort)).append("\n");
-    sb.append("    buttonIcon: ").append(toIndentedString(buttonIcon)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
   }
 }
 

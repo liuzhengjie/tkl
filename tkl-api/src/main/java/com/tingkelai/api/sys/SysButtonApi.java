@@ -17,8 +17,8 @@ import java.util.List;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统按钮相关api", tags = "sys/button")
+@RequestMapping(value = "/admin/v1")
 public interface SysButtonApi<VO> {
 
     @ApiOperation(value = "获取按钮列表（指定按钮下的按钮列表）", nickname = "sysButtonListGet", notes = "通过菜单id，获取该菜单下所有的按钮", tags={ "sys/button", })

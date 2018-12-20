@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.product.ProductMapper" >
+
+    <!-- 动态模板 -->
+    <resultMap id="BaseResultMap" type="com.tingkelai.domain.product.Product" >
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        t.*,
+                        typeDict.id as "typeDict.id",
+        typeDict.name as "typeDict.name",
+        typeDict.code as "typeDict.code",
+                brandDict.id as "brandDict.id",
+        brandDict.name as "brandDict.name",
+        brandDict.code as "brandDict.code",
+                        seriesDict.id as "seriesDict.id",
+        seriesDict.name as "seriesDict.name",
+        seriesDict.code as "seriesDict.code",
+                                supplierDict.id as "supplierDict.id",
+        supplierDict.name as "supplierDict.name",
+        supplierDict.code as "supplierDict.code"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_product_type typeDict ON typeDict.id = t.dict_type_id
+        LEFT JOIN tkl_dict_item brandDict ON brandDict.id = t.dict_brand_id
+        LEFT JOIN tkl_dict_item seriesDict ON seriesDict.id = t.dict_series_id
+        LEFT JOIN tkl_dict_item supplierDict ON supplierDict.id = t.dict_supplier_id
+    </sql>
+
+    <select id="page" resultType="com.tingkelai.domain.product.Product">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_product t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+    <select id="getById" resultType="com.tingkelai.domain.product.Product">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_product t
+        <include refid="parentJoins"/>
+        <where>
+            t.id = #{id}
+        </where>
+    </select>
+
+</mapper>

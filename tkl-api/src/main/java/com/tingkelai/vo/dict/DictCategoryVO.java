@@ -1,10 +1,10 @@
 package com.tingkelai.vo.dict;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.dict.DictCategory;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +12,26 @@ import java.util.List;
 public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 
 	/** 主键 */
-	@TableId(value = "id", type = IdType.UUID)
+	@JsonProperty("id")
+	@ApiModelProperty(value = "id")
 	private Long id;
+
 	/** 分组名称 */
-	@TableField(value = "name")
+	@JsonProperty("name")
+	@ApiModelProperty(value = "分组名称")
 	private String name;
+
 	/** 备注 */
-	@TableField(value = "remarks")
+	@JsonProperty("remarks")
+	@ApiModelProperty(value = "备注")
 	private String remarks;
+
 	/** 分组编码 */
-	@TableField(value = "code")
+	@JsonProperty("code")
+	@ApiModelProperty(value = "分组编码")
 	private String code;
+
+	private Long teamId;
 
 	/**
 	 * 获取 remarks
@@ -71,6 +80,17 @@ public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 		return this.id;
 	}
 
+	@Override
+	public void setTeamId(Long teamId) {
+		this.teamId = teamId;
+	}
+
+	@Override
+	public Long getTeamId() {
+		return teamId;
+	}
+
+
 	/**
 	 * 设置 id
 	 * 
@@ -114,6 +134,7 @@ public class DictCategoryVO implements BaseVO<DictCategory, DictCategoryVO>{
 		dictCategory.setId(dictCategoryVO.getId());
 		dictCategory.setName(dictCategoryVO.getName());
 		dictCategory.setRemarks(dictCategoryVO.getRemarks());
+		dictCategory.setTeamId(dictCategoryVO.getTeamId());
 		return dictCategory;
 	}
 

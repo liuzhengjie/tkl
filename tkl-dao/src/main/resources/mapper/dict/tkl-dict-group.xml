@@ -6,13 +6,19 @@
     <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
     <!-- @author liuzhengjie -->
     <!-- @version 1.0-->
-    <resultMap id="BaseResultMap" type="com.tingkelai.domain.dict.DictCategory" >
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="gid" property="gid" jdbcType="VARCHAR" />
-        <result column="label" property="label" jdbcType="VARCHAR" />
-        <result column="value" property="value" jdbcType="VARCHAR" />
-        <result column="sort" property="sort" jdbcType="INTEGER" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-        <result column="code" property="code" jdbcType="VARCHAR" />
-    </resultMap>
+
+    <sql id="Base_Column_List" >
+        t.id,
+        t.name,
+        t.parent_id as "parent.id",
+        t.code,
+        t.remarks
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_product_type p ON p.id = t.parent_id
+    </sql>
+
+    <select id="getByCode" resultType="com.tingkelai.domain.dict.DictCategory">
+        SELECT * FROM tkl_dict_category WHERE code = #{code}
+    </select>
 </mapper>

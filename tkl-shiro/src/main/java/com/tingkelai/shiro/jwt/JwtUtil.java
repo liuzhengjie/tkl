@@ -26,13 +26,17 @@ public class JwtUtil {
     @Value("${tkl.jwt.tokenName}")
     public static String TOKEN_NAME = "token";
 
+    public static String USER_ID_NAME = "userId";
+
+    public static String TEAM_ID_NAME = "teamId";
+
     //密钥
     @Value("${tkl.jwt.apiKey}")
     public static String apiKey = "liuzhengjie";
 
     //token到期时间小于autoUpdateSeconds时，自动更新token
     @Value("${tkl.jwt.autoUpdateSeconds}")
-    private static int autoUpdateSeconds = 60 * 60 * 60;
+    private static int autoUpdateSeconds = 60 * 60 * 60 * 100;
 
     //auth token有效期为15天
     @Value("${tkl.jwt.authTokenExpireSeconds}")

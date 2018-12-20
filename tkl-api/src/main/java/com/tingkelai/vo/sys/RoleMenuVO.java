@@ -2,6 +2,7 @@ package com.tingkelai.vo.sys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.sys.RoleMenu;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -23,6 +24,16 @@ public class RoleMenuVO implements BaseVO<RoleMenu, RoleMenuVO>{
     @ApiModelProperty(name = "id", value = "id", required = true)
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+
+    }
+
+    @Override
+    public Long getTeamId() {
+        return null;
     }
 
     public void setId(Long id) {

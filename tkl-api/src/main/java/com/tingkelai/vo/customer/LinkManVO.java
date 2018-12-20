@@ -3,6 +3,7 @@ package com.tingkelai.vo.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.LinkMan;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,13 +21,64 @@ import java.util.List;
 @ApiModel(description = "客户联系人")
 public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
 
+    public LinkManVO(){
+
+    }
+
+    public LinkManVO(LinkMan linkMan){
+        setArea(linkMan.getArea());
+        setCity(linkMan.getCity());
+        setEmail(linkMan.getEmail());
+        setFax(linkMan.getFax());
+        setId(linkMan.getId());
+        setName(linkMan.getName());
+        setPhone(linkMan.getPhone());
+        setPostcode(linkMan.getPostcode());
+        setPrimaryFlag(linkMan.getPrimaryFlag());
+        setProvience(linkMan.getProvience());
+        setQq(linkMan.getQq());
+        setRegion(linkMan.getRegion());
+        setRelative(linkMan.getRelative());
+        setSex(linkMan.getSex());
+        setTel(linkMan.getTel());
+        setTelBackup(linkMan.getTelBackup());
+        setCustomer(new CustomerVO(linkMan.getCustomer()));
+    }
+
     @JsonProperty("id")
     private Long id = null;
+
+    @JsonProperty("teamId")
+    @ApiModelProperty(hidden = true)
+    private Long teamId;
+
+    @JsonProperty("customer")
+    @ApiModelProperty("关联客户")
+    private CustomerVO customer;
+
+    public CustomerVO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerVO customer) {
+        this.customer = customer;
+    }
 
     @ApiModelProperty(name = "id", value = "id")
     public Long getId() {
         return id;
     }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    @Override
+    public Long getTeamId() {
+        return teamId;
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -298,6 +350,10 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
         linkMan.setSex(linkManVO.getSex());
         linkMan.setTel(linkManVO.getTel());
         linkMan.setTelBackup(linkManVO.getTelBackup());
+        if(linkManVO.getCustomer() != null){
+            linkMan.setCustomer(linkManVO.getCustomer().toDTO());
+        }
+        linkMan.setTeamId(linkManVO.getTeamId());
         return linkMan;
     }
 
@@ -314,24 +370,7 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
      * 封装成web需要的对象
      */
     public LinkManVO toVO(LinkMan linkMan){
-        LinkManVO linkManVO = new LinkManVO();
-        linkManVO.setArea(linkMan.getArea());
-        linkManVO.setCity(linkMan.getCity());
-        linkManVO.setEmail(linkMan.getEmail());
-        linkManVO.setFax(linkMan.getFax());
-        linkManVO.setId(linkMan.getId());
-        linkManVO.setName(linkMan.getName());
-        linkManVO.setPhone(linkMan.getPhone());
-        linkManVO.setPostcode(linkMan.getPostcode());
-        linkManVO.setPrimaryFlag(linkMan.getPrimaryFlag());
-        linkManVO.setProvience(linkMan.getProvience());
-        linkManVO.setQq(linkMan.getQq());
-        linkManVO.setRegion(linkMan.getRegion());
-        linkManVO.setRelative(linkMan.getRelative());
-        linkManVO.setSex(linkMan.getSex());
-        linkManVO.setTel(linkMan.getTel());
-        linkManVO.setTelBackup(linkMan.getTelBackup());
-        return linkManVO;
+        return new LinkManVO(linkMan);
     }
 
     @Override

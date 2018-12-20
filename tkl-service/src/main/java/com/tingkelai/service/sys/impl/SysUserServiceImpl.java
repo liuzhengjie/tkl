@@ -63,4 +63,15 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
         return saveOrUpdate(user);
     }
 
+    @Override
+    public boolean saveOrUpdate(User user) {
+        passwordService.encryptPassword(user);
+        return super.saveOrUpdate(user);
+    }
+
+    @Override
+    public boolean save(User user) {
+        passwordService.encryptPassword(user);
+        return super.save(user);
+    }
 }

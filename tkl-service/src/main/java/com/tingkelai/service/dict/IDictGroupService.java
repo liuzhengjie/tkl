@@ -14,4 +14,9 @@ import com.tingkelai.service.common.ICommonService;
  */
 public interface IDictGroupService extends ICommonService<DictCategory> {
 
+    /**
+     * 根据分组code获取所有字典项
+     * @return
+     */
+    DictCategory getByCode(String code);
 }

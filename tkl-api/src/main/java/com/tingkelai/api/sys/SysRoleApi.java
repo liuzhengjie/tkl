@@ -21,8 +21,8 @@ import java.util.List;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统角色相关api", tags = "sys/role")
+@RequestMapping(value = "/admin/v1")
 public interface SysRoleApi<VO> {
 
     @ApiOperation(value = "删除角色", nickname = "sysRoleDelete", notes = "删除角色", tags={ "sys/role", })

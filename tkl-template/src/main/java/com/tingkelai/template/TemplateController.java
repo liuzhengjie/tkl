@@ -25,7 +25,7 @@ public class TemplateController extends BaseCRUDController<Template, Long> imple
     public ResponseMessage<List<TemplateVO>> templateListGet(TemplateVO templateVO, BasePage basePage) {
         QueryWrapper<Template> queryWrapper = new QueryWrapper<>();
         queryWrapper.setEntity(templateVO.toDTO());
-        return list(templateVO, templateVO.toDTO(), queryWrapper, basePage);
+        return list(templateVO, queryWrapper, basePage);
     }
 
     @Override

@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class ResponseMessage<T> {
 
-    private String token = "";
     private int code = 200;
     private String type = "ok";
     private String message = "请求成功";
@@ -99,15 +98,6 @@ public class ResponseMessage<T> {
 
     public void setExt(Map<String, Object> ext) {
         this.ext = ext;
-    }
-
-    @ApiModelProperty(value = "token")
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public void success(String msg) {

@@ -24,6 +24,17 @@ public class TeamVO implements BaseVO<Team, TeamVO>{
   public Long getId() {
     return id;
   }
+
+  @Override
+  public void setTeamId(Long teamId) {
+
+  }
+
+  @Override
+  public Long getTeamId() {
+    return null;
+  }
+
   public void setId(Long id) {
     this.id = id;
   }

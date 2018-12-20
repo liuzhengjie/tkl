@@ -1,6 +1,7 @@
 package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.CustomerVO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,15 +26,16 @@ import java.util.Map;
 @RequestMapping(value = "/v1")
 public interface CustomerApi<VO> {
 
-    @ApiOperation(value = "获取客户列表（不带查询条件,带有排序）", nickname = "customerListGet", notes = "", tags={ "customer", })
+    @ApiOperation(value = "获取客户列表（不带查询条件,带有排序）", nickname = "customerListGet",
+            notes = "支持模糊查询", tags={ "customer", })
     @RequestMapping(value = "/customer/list",
             method = RequestMethod.GET)
-    ResponseMessage customerListGet(VO requestBody);
+    ResponseMessage customerListGet(VO requestBody, BasePage basePage);
 
 
     @ApiOperation(value = "获取客户列表（带有查询条件，高级查询功能）", nickname = "customerQueryListGet", notes = "", tags={ "customer", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/customer/query/list",
             method = RequestMethod.GET)
@@ -42,7 +44,7 @@ public interface CustomerApi<VO> {
 
     @ApiOperation(value = "删除客户信息", nickname = "customerDelete", notes = "", tags={ "customer", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
+            @ApiImplicitParam(name = "id", value = "id", required = true,  paramType = "query"),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.DELETE)
@@ -51,7 +53,7 @@ public interface CustomerApi<VO> {
 
     @ApiOperation(value = "获取客户信息", nickname = "customerGet", notes = "", tags={ "customer", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", required = true, dataTypeClass = Long.class),
+            @ApiImplicitParam(name = "id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/customer",
             method = RequestMethod.GET)

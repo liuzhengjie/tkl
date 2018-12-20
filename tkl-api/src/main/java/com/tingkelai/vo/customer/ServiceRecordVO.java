@@ -4,6 +4,7 @@ package com.tingkelai.vo.customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.ServiceRecord;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import com.tingkelai.vo.sys.DeptVO;
 import com.tingkelai.vo.sys.UserVO;
@@ -31,6 +32,17 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
     public Long getId() {
         return id;
     }
+
+    @Override
+    public void setTeamId(Long teamId) {
+
+    }
+
+    @Override
+    public Long getTeamId() {
+        return null;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

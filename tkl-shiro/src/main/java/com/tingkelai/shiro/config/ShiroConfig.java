@@ -73,13 +73,17 @@ public class ShiroConfig {
 
         System.out.println(shiroFilterFactoryBean.getFilters());
 
-        //定义过滤链
+        // 定义过滤链
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/", "anon");
+        // swagger不进行拦截
         filterChainDefinitionMap.put("/swagger-ui.html/**", "anon");
-        filterChainDefinitionMap.put("/webjars/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        //系统用拦截器
+        filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/v1/**", "formAuthenticationFilter");

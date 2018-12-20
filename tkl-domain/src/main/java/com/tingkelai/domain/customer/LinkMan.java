@@ -18,7 +18,6 @@ import java.util.Objects;
  * @date 2018-11-27 19:35:07
  * @version 1.0
  */
-@ApiModel(description = "客户联系人")
 @TableName("tkl_customer_linkman")
 @Mapper
 public class LinkMan  extends DataEntity<Long> {
@@ -86,17 +85,27 @@ public class LinkMan  extends DataEntity<Long> {
     @TableField("region")
     private String region = null;
 
-    /**
-     * Get customer
-     * @return customer
-     **/
-    @ApiModelProperty(value = "关联客户")
+    /** 数据所属公司 */
+    @TableField("team_id")
+    private Long teamId;
+
     public Customer getCustomer() {
+        if(customer == null){
+            customer = new Customer();
+        }
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     /**
@@ -112,11 +121,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.name = name;
     }
 
-    public LinkMan tel(String tel) {
-        this.tel = tel;
-        return this;
-    }
-
     /**
      * 联系人电话
      * @return tel
@@ -128,11 +132,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public LinkMan telBackup(String telBackup) {
-        this.telBackup = telBackup;
-        return this;
     }
 
     /**
@@ -148,11 +147,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.telBackup = telBackup;
     }
 
-    public LinkMan phone(String phone) {
-        this.phone = phone;
-        return this;
-    }
-
     /**
      * 联系人手机
      * @return phone
@@ -164,11 +158,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public LinkMan email(String email) {
-        this.email = email;
-        return this;
     }
 
     /**
@@ -184,11 +173,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.email = email;
     }
 
-    public LinkMan fax(String fax) {
-        this.fax = fax;
-        return this;
-    }
-
     /**
      * 传真
      * @return fax
@@ -200,11 +184,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setFax(String fax) {
         this.fax = fax;
-    }
-
-    public LinkMan qq(String qq) {
-        this.qq = qq;
-        return this;
     }
 
     /**
@@ -220,11 +199,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.qq = qq;
     }
 
-    public LinkMan area(String area) {
-        this.area = area;
-        return this;
-    }
-
     /**
      * 联系人地址
      * @return area
@@ -236,11 +210,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public LinkMan postcode(String postcode) {
-        this.postcode = postcode;
-        return this;
     }
 
     /**
@@ -256,11 +225,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.postcode = postcode;
     }
 
-    public LinkMan primaryFlag(String primaryFlag) {
-        this.primaryFlag = primaryFlag;
-        return this;
-    }
-
     /**
      * 主联系人标识
      * @return primaryFlag
@@ -272,11 +236,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setPrimaryFlag(String primaryFlag) {
         this.primaryFlag = primaryFlag;
-    }
-
-    public LinkMan relative(String relative) {
-        this.relative = relative;
-        return this;
     }
 
     /**
@@ -292,11 +251,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.relative = relative;
     }
 
-    public LinkMan sex(String sex) {
-        this.sex = sex;
-        return this;
-    }
-
     /**
      * 联系人性别
      * @return sex
@@ -308,11 +262,6 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public LinkMan provience(String provience) {
-        this.provience = provience;
-        return this;
     }
 
     /**
@@ -328,11 +277,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.provience = provience;
     }
 
-    public LinkMan city(String city) {
-        this.city = city;
-        return this;
-    }
-
     /**
      * 市
      * @return city
@@ -346,11 +290,6 @@ public class LinkMan  extends DataEntity<Long> {
         this.city = city;
     }
 
-    public LinkMan region(String region) {
-        this.region = region;
-        return this;
-    }
-
     /**
      * 区
      * @return region
@@ -362,74 +301,5 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LinkMan linkMan = (LinkMan) o;
-        return Objects.equals(this.customer, linkMan.customer) &&
-                Objects.equals(this.name, linkMan.name) &&
-                Objects.equals(this.tel, linkMan.tel) &&
-                Objects.equals(this.telBackup, linkMan.telBackup) &&
-                Objects.equals(this.phone, linkMan.phone) &&
-                Objects.equals(this.email, linkMan.email) &&
-                Objects.equals(this.fax, linkMan.fax) &&
-                Objects.equals(this.qq, linkMan.qq) &&
-                Objects.equals(this.area, linkMan.area) &&
-                Objects.equals(this.postcode, linkMan.postcode) &&
-                Objects.equals(this.primaryFlag, linkMan.primaryFlag) &&
-                Objects.equals(this.relative, linkMan.relative) &&
-                Objects.equals(this.sex, linkMan.sex) &&
-                Objects.equals(this.provience, linkMan.provience) &&
-                Objects.equals(this.city, linkMan.city) &&
-                Objects.equals(this.region, linkMan.region);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customer, name, tel, telBackup, phone, email, fax, qq, area, postcode, primaryFlag, relative, sex, provience, city, region);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class LinkMan {\n");
-
-        sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    tel: ").append(toIndentedString(tel)).append("\n");
-        sb.append("    telBackup: ").append(toIndentedString(telBackup)).append("\n");
-        sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    fax: ").append(toIndentedString(fax)).append("\n");
-        sb.append("    qq: ").append(toIndentedString(qq)).append("\n");
-        sb.append("    area: ").append(toIndentedString(area)).append("\n");
-        sb.append("    postcode: ").append(toIndentedString(postcode)).append("\n");
-        sb.append("    primaryFlag: ").append(toIndentedString(primaryFlag)).append("\n");
-        sb.append("    relative: ").append(toIndentedString(relative)).append("\n");
-        sb.append("    sex: ").append(toIndentedString(sex)).append("\n");
-        sb.append("    provience: ").append(toIndentedString(provience)).append("\n");
-        sb.append("    city: ").append(toIndentedString(city)).append("\n");
-        sb.append("    region: ").append(toIndentedString(region)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
     }
 }

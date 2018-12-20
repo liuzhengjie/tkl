@@ -15,7 +15,7 @@ import javax.validation.Valid;
  * @date 2018-11-27 11:30:50
  * @version 1.0
  */
-@Api(value = "customer", description = "客户文件资料相关api")
+@Api(value = "customer", description = "客户文件资料相关api", tags = "customer/files")
 @RequestMapping(value = "/v1")
 public interface CustomerFilesApi<T> {
     @ApiOperation(value = "删除客户文件资料", nickname = "customerFilesDelete", notes = "", tags={ "customer/files", })

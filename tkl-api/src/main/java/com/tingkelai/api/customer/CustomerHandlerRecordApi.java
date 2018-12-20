@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2018-11-27 11:30:50
  * @version 1.0
  */
-@Api(value = "customer", description = "客户经手人变更记录相关api")
+@Api(value = "customer", description = "客户经手人变更记录相关api", tags = "customer/handler-record")
 @RequestMapping(value = "/v1")
 public interface CustomerHandlerRecordApi<T> {
 

@@ -41,39 +41,51 @@ public class StatelessAuthenticationFilter extends org.apache.shiro.web.filter.a
 			String token = getToken(request);
 			//token为空，拒绝访问
 			if(token == null){
-				return false;
+				throw new TokenFailureException();
 			}
 			//解析token
 			Map<String, Object> map = JwtUtil.verifySessionToken(token);
 			//token不含apikey，非法登录，拒绝访问
 			if(map.get(JwtUtil.TOKEN_NAME) == null){
 				logger.warn("====非法访问！伪造的token：" + map);
-				return false;
+				throw new TokenFailureException();
 			}else{
+				HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+				Object teamId = map.get(JwtUtil.TEAM_ID_NAME);
+				Object userId = map.get(JwtUtil.USER_ID_NAME);
+				if(teamId == null || userId == null){
+					throw new TokenFailureException();
+				}
+				httpServletResponse.setHeader(JwtUtil.TEAM_ID_NAME, teamId.toString());
+				httpServletResponse.setHeader(JwtUtil.USER_ID_NAME, userId.toString());
 				//判断token到期时间，如果快要到期，则更新token
                 String refreshToken = JwtUtil.refreshToken(token, map);
                 if(refreshToken == null){
                     //token已过期，抛出异常
                     throw new TokenFailureException();
                 }else{
-                    HttpServletResponse httpServletResponse = (HttpServletResponse) response;
                     httpServletResponse.setHeader(JwtUtil.TOKEN_NAME, refreshToken);
                 }
 				return true;
 			}
 		}catch (Exception e){
-			return false;
+			throw new TokenFailureException();
 		}
 	}
 
 	/** 获取请求token */
 	private String getToken(ServletRequest request){
-		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-		String token = httpServletRequest.getHeader(JwtUtil.TOKEN_NAME);
-		if(token == null || token.length() == 0){
-			token = httpServletRequest.getParameter(JwtUtil.TOKEN_NAME);
+		try{
+			HttpServletRequest httpServletRequest = (HttpServletRequest)request;
+			String token = httpServletRequest.getHeader(JwtUtil.TOKEN_NAME);
+			if(token == null || token.length() == 0){
+				token = httpServletRequest.getParameter(JwtUtil.TOKEN_NAME);
+			}
+			return StringUtils.clean(token);
+		}catch (Exception e){
+			throw new TokenFailureException();
 		}
-		return StringUtils.clean(token);
+
 	}
 
 	/**

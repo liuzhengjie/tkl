@@ -7,21 +7,16 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -78,6 +73,7 @@ public class MyControllerAdvice implements ResponseBodyAdvice {
         return new ResponseMessage(ex);
     }
 
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
         return true;
@@ -86,14 +82,14 @@ public class MyControllerAdvice implements ResponseBodyAdvice {
     @Nullable
     @Override
     public Object beforeBodyWrite(@Nullable Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if(o instanceof ResponseMessage){
-            ServletServerHttpResponse response = (ServletServerHttpResponse)serverHttpResponse;
-            HttpServletResponse httpServletResponse = response.getServletResponse();
-            String token = httpServletResponse.getHeader(JwtUtil.TOKEN_NAME);
-            if(token != null){
-                ((ResponseMessage) o).setToken(token);
-            }
-        }
+//        if(o instanceof ResponseMessage){
+//            ServletServerHttpResponse response = (ServletServerHttpResponse)serverHttpResponse;
+//            HttpServletResponse httpServletResponse = response.getServletResponse();
+//            String token = httpServletResponse.getHeader(JwtUtil.TOKEN_NAME);
+//            if(token != null){
+//                ((ResponseMessage) o).setToken(token);
+//            }
+//        }
         return o;
     }
 }

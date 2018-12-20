@@ -5,6 +5,7 @@ import com.tingkelai.api.customer.CustomerContactRecordApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.customer.ContactRecord;
 import com.tingkelai.service.customer.IContactRecordService;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.ContactRecordVO;
 import io.swagger.models.Contact;
 import org.slf4j.Logger;
@@ -38,8 +39,8 @@ public class CustomerContactRecordController extends BaseCRUDController<ContactR
     }
 
     @Override
-    public ResponseMessage<List<ContactRecordVO>> customerContactRecordListGet(ContactRecordVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage<List<ContactRecordVO>> customerContactRecordListGet(ContactRecordVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

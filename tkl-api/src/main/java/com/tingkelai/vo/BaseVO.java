@@ -1,5 +1,7 @@
 package com.tingkelai.vo;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,7 +11,23 @@ import java.util.List;
  */
 public interface BaseVO<T, VO> extends Serializable{
 
+
+    /**
+     * 获取id
+     */
     Long getId();
+
+    /**
+     * 设置teamId
+     */
+    void setTeamId(Long teamId);
+
+    /**
+     * 获取teamId
+     */
+    @ApiModelProperty(hidden = true)
+    Long getTeamId();
+
 
     /**
      * 封装成业务需要的对象

@@ -20,13 +20,13 @@ import javax.validation.Valid;
  * @author liuzhengjie
  * @version 1.0
  */
-@Api(value = "template", description = "动态模板相关api")
+@Api(value = "template", description = "动态模板相关api", tags = "template")
 @RequestMapping(value = "/v1")
 public interface TemplateApi<VO> {
 
     @ApiOperation(value = "获取指定公司动态模板list", nickname = "templateListGet", notes = "获取指定公司动态模板列表", tags={ "template", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "teamId", value = "公司id", required = true, paramType = "query"),
+//            @ApiImplicitParam(name = "teamId", value = "公司id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/template/list",
             method = RequestMethod.GET)
@@ -34,7 +34,7 @@ public interface TemplateApi<VO> {
 
     @ApiOperation(value = "根据id获取动态模板", nickname = "templateGet", notes = "根据id获取动态模板", tags={ "template", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "动态模板id", required = true),
+            @ApiImplicitParam(name = "id", value = "动态模板id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/template",
             method = RequestMethod.GET)
@@ -55,7 +55,7 @@ public interface TemplateApi<VO> {
 
     @ApiOperation(value = "删除公司动态模板", nickname = "templateDelete", notes = "删除公司动态模板", tags={ "template", })
     @ApiImplicitParams({
-//            @ApiImplicitParam(name = "id", value = "动态模板id", required = true),
+            @ApiImplicitParam(name = "id", value = "动态模板id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/template",
             method = RequestMethod.DELETE)

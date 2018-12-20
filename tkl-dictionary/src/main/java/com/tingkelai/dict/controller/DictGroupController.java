@@ -1,9 +1,12 @@
 package com.tingkelai.dict.controller;
 
 import com.tingkelai.api.controller.BaseCRUDController;
+import com.tingkelai.api.dict.DictGroupApi;
 import com.tingkelai.api.sys.SysDictApi;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.dict.DictCategory;
 import com.tingkelai.service.dict.IDictGroupService;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.dict.DictCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,55 +26,30 @@ import java.util.Map;
  * @version 1.0
  */
 @RestController
-public class DictGroupController extends BaseCRUDController<DictCategory, Long> implements SysDictApi<DictCategoryVO> {
+public class DictGroupController extends BaseCRUDController<DictCategory, Long> implements DictGroupApi<DictCategoryVO> {
 
     @Override
-    public ResponseEntity sysDictCategoryListGet(DictCategoryVO dictCategoryVO) {
-        return null;
+    public ResponseMessage dictGroupListGet(DictCategoryVO dictCategoryVO, BasePage basePage) {
+        return list(dictCategoryVO, basePage);
     }
 
     @Override
-    public ResponseEntity sysDictCategoryDelete(DictCategoryVO dictCategoryVO) {
-        return null;
+    public ResponseMessage dictGroupGet(DictCategoryVO dictCategoryVO) {
+        return getEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseEntity sysDictCategoryGet(DictCategoryVO dictCategoryVO) {
-        return null;
+    public ResponseMessage dictGroupPost(@Valid DictCategoryVO dictCategoryVO) {
+        return saveEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseEntity sysDictCategoryPost(@Valid DictCategoryVO dictCategoryVO) {
-        return null;
+    public ResponseMessage dictGroupPut(@Valid DictCategoryVO dictCategoryVO) {
+        return updateEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseEntity sysDictCategoryPut(@Valid DictCategoryVO dictCategoryVO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Void> sysDictCategoryItemDelete(DictCategoryVO dictCategoryVO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity sysDictCategoryItemGet(DictCategoryVO dictCategoryVO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity sysDictCategoryItemListPost(DictCategoryVO dictCategoryVO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity sysDictCategoryItemPost(DictCategoryVO dictCategoryVO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity sysDictCategoryItemPut(DictCategoryVO dictCategoryVO) {
-        return null;
+    public ResponseMessage dictGroupDelete(DictCategoryVO dictCategoryVO) {
+        return deleteEntity(dictCategoryVO);
     }
 }

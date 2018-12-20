@@ -17,7 +17,6 @@ import java.util.Objects;
  * @date 2018-11-23 19:54:33
  * @version 1.0
  */
-@ApiModel(description = "用户")
 @TableName("tkl_sys_user")
 @Mapper
 public class User extends DataEntity<Long>{
@@ -29,48 +28,61 @@ public class User extends DataEntity<Long>{
     public static final int STATUS_LOCKED = 0;
     public static final int STATUS_NORMAL = 1;
 
-    @JsonProperty("username")
+    /**
+     * 用户登录名
+     **/
     @TableField("username")
     private String username = null;
 
-    @JsonProperty("realname")
+    /**
+     * 用户真实姓名
+     **/
     @TableField("realname")
     private String realname = null;
 
-    @JsonProperty("portrait")
+    /**
+     * 用户别名
+     **/
     @TableField("portrait")
     private String portrait = null;
 
+    /**
+     * 密码
+     **/
     @JsonProperty("password")
     @TableField("password")
     private String password = null;
 
-    @JsonProperty("salt")
+    /**
+     * salt
+     **/
     @TableField("salt")
     private String salt = null;
 
-    @JsonProperty("email")
+    /**
+     * 邮箱
+     **/
     @TableField("email")
     private String email = null;
 
-    @JsonProperty("phone")
+    /**
+     * 手机号
+     **/
     @TableField("phone")
     private String phone = null;
 
-    @JsonProperty("userStatus")
+    /**
+     * 用户状态
+     **/
     @TableField("user_status")
-    private Integer userStatus = null;
-
-    @JsonProperty("teamId")
-    @TableField("team_id")
-    private Integer teamId = null;
+    private Integer userStatus = 1;
 
     /**
-     * 用户登录名
-     * @return userName
-     **/
-    @ApiModelProperty(value = "用户登录名")
-
+     * 用户所属公司id
+     */
+    @JsonProperty("teamId")
+    @TableField("team_id")
+    private Long teamId = null;
 
     public String getUsername() {
         return username;
@@ -80,11 +92,6 @@ public class User extends DataEntity<Long>{
         this.username = username;
     }
 
-    /**
-     * 用户真实姓名
-     * @return realName
-     **/
-    @ApiModelProperty(value = "用户真实姓名")
     public String getRealname() {
         return realname;
     }
@@ -93,11 +100,6 @@ public class User extends DataEntity<Long>{
         this.realname = realname;
     }
 
-    /**
-     * 用户别名
-     * @return portrait
-     **/
-    @ApiModelProperty(value = "用户别名")
     public String getPortrait() {
         return portrait;
     }
@@ -106,11 +108,6 @@ public class User extends DataEntity<Long>{
         this.portrait = portrait;
     }
 
-    /**
-     * 密码
-     * @return password
-     **/
-    @ApiModelProperty(value = "密码")
     public String getPassword() {
         return password;
     }
@@ -119,11 +116,6 @@ public class User extends DataEntity<Long>{
         this.password = password;
     }
 
-    /**
-     * salt
-     * @return salt
-     **/
-    @ApiModelProperty(value = "salt")
     public String getSalt() {
         return salt;
     }
@@ -131,13 +123,6 @@ public class User extends DataEntity<Long>{
     public void setSalt(String salt) {
         this.salt = salt;
     }
-
-    /**
-     * 邮箱
-     * @return email
-     **/
-    @ApiModelProperty(value = "邮箱")
-
 
     public String getEmail() {
         return email;
@@ -147,11 +132,6 @@ public class User extends DataEntity<Long>{
         this.email = email;
     }
 
-    /**
-     * 手机号
-     * @return phone
-     **/
-    @ApiModelProperty(value = "手机号")
     public String getPhone() {
         return phone;
     }
@@ -160,11 +140,7 @@ public class User extends DataEntity<Long>{
         this.phone = phone;
     }
 
-    /**
-     * 用户状态
-     * @return userStatus
-     **/
-    @ApiModelProperty(value = "用户状态")
+
     public Integer getUserStatus() {
         return userStatus;
     }
@@ -173,12 +149,11 @@ public class User extends DataEntity<Long>{
         this.userStatus = userStatus;
     }
 
-    @ApiModelProperty(value = "用户所属公司id")
-    public Integer getTeamId() {
+    public Long getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(Integer teamId) {
+    public void setTeamId(Long teamId){
         this.teamId = teamId;
     }
 

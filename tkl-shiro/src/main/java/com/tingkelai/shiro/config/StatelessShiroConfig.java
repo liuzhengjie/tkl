@@ -62,14 +62,24 @@ public class StatelessShiroConfig {
         //定义过滤链
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/", "anon");
+        // swagger不进行拦截
         filterChainDefinitionMap.put("/swagger-ui.html/**", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs/**", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
+
+        // 听客来主系统拦截器
+        filterChainDefinitionMap.put("/v1/**", "statelessAuthenticationFilter");
+        // 听客来后台管理系统拦截器
+        filterChainDefinitionMap.put("/admin/**", "statelessAuthenticationFilter");
+
+        //系统用拦截器
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/getToken", "anon");
-        filterChainDefinitionMap.put("/v1/**", "statelessAuthenticationFilter");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
         shiroFilterFactoryBean.setLoginUrl("/ajaxLogin");
         // 登录成功后要跳转的链接

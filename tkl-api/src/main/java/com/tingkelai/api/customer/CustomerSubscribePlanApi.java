@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2018-11-27 11:30:50
  * @version 1.0
  */
-@Api(value = "customer", description = "客户预约计划相关api")
+@Api(value = "customer", description = "客户预约计划相关api", tags = "customer/subscribe-plan")
 @RequestMapping(value = "/v1")
 public interface CustomerSubscribePlanApi<T> {
 

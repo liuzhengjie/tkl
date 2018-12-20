@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.customer.UseRecordMapper" >
+    <!-- -->
+    <!-- button相关 -->
+    <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
+    <!-- @author liuzhengjie -->
+    <!-- @version 1.0-->
+    <sql id="Base_Column_List" >
+        t.*,
+                dictMachineType.id as "dictMachineType.id",
+        dictMachineType.name as "dictMachineType.name",
+        dictMachineType.code as "dictMachineType.code",
+                dictBrand.id as "dictBrand.id",
+        dictBrand.name as "dictBrand.name",
+        dictBrand.code as "dictBrand.code",
+                        dictUseOrNo.id as "dictUseOrNo.id",
+        dictUseOrNo.name as "dictUseOrNo.name",
+        dictUseOrNo.code as "dictUseOrNo.code",
+                                dictEar.id as "dictEar.id",
+        dictEar.name as "dictEar.name",
+        dictEar.code as "dictEar.code",
+                                dictUseYear.id as "dictUseYear.id",
+        dictUseYear.name as "dictUseYear.name",
+        dictUseYear.code as "dictUseYear.code",
+                                        dictUseResult.id as "dictUseResult.id",
+        dictUseResult.name as "dictUseResult.name",
+        dictUseResult.code as "dictUseResult.code",
+
+        customer.id as "customer.id",
+        customer.name as "customer.name",
+        customer.code as "customer.code"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
+        LEFT JOIN tkl_dict_item dictMachineType ON dictMachineType.id = t.dict_machine_type
+        LEFT JOIN tkl_dict_item dictBrand ON dictBrand.id = t.dict_brand
+        LEFT JOIN tkl_dict_item dictUseOrNo ON dictUseOrNo.id = t.dict_use_or_no
+        LEFT JOIN tkl_dict_item dictEar ON dictEar.id = t.dict_ear
+        LEFT JOIN tkl_dict_item dictUseYear ON dictUseYear.id = t.dict_use_year
+        LEFT JOIN tkl_dict_item dictUseResult ON dictUseResult.id = t.dict_use_result
+    </sql>
+
+
+    <select id="page" resultType="com.tingkelai.domain.customer.UseRecord">
+        select
+          <include refid="Base_Column_List" />
+        from tkl_customer_use_record t
+          <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="getById" resultType="com.tingkelai.domain.customer.UseRecord">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_use_record t
+        <include refid="parentJoins"/>
+        <where>
+            t.id = #{id}
+        </where>
+    </select>
+
+</mapper>

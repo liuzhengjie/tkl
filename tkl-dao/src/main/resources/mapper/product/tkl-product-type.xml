@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.product.ProductTypeMapper" >
+
+    <!-- 动态模板 -->
+    <resultMap id="BaseResultMap" type="com.tingkelai.domain.product.ProductType" >
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        t.id,
+        t.name,
+        t.parent_id as "parent.id",
+        t.code,
+        t.remarks
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_product_type p ON p.id = t.parent_id
+    </sql>
+
+    <select id="asyncTree" resultType="com.tingkelai.domain.product.ProductType">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_product_type t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+</mapper>

@@ -1,6 +1,7 @@
 package com.tingkelai.vo.sys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.domain.sys.User;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
@@ -17,48 +18,86 @@ import java.util.List;
  */
 @ApiModel(description = "用户")
 public class UserVO implements BaseVO<User, UserVO>{
+
+    public UserVO(){}
+
+    public UserVO(User user){
+        setEmail(user.getEmail());
+        setId(user.getId());
+        setPhone(user.getPhone());
+        setPortrait(user.getPortrait());
+        setRealname(user.getRealname());
+        setTeamId(user.getTeamId());
+        setUsername(user.getUsername());
+        setUserStatus(user.getUserStatus());
+        setRemarks(user.getRemarks());
+    }
+
     @JsonProperty("id")
     private Long id = null;
     @ApiModelProperty(name = "id", value = "id")
     public Long getId() {
         return id;
     }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    @ApiModelProperty(value = "用户所属公司id", required = true)
+    public Long getTeamId() {
+        return teamId;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     @JsonProperty("username")
+    @ApiModelProperty(value = "用户登录名")
     private String username = null;
 
     @JsonProperty("realname")
+    @ApiModelProperty(value = "用户真实姓名")
     private String realname = null;
 
     @JsonProperty("portrait")
+    @ApiModelProperty(value = "用户头像url")
     private String portrait = null;
 
     @JsonProperty("password")
-    private String password = null;
-
-    @JsonProperty("salt")
-    private String salt = null;
+    @ApiModelProperty(value = "密码")
+    private transient String password = null;
 
     @JsonProperty("email")
+    @ApiModelProperty(value = "邮箱")
     private String email = null;
 
     @JsonProperty("phone")
+    @ApiModelProperty(value = "手机号")
     private String phone = null;
 
     @JsonProperty("status")
+    @ApiModelProperty(value = "用户状态")
     private Integer userStatus = 1;
 
     @JsonProperty("teamId")
-    private Integer teamId = null;
+    @ApiModelProperty(hidden = true)
+    private Long teamId = null;
 
-    /**
-     * 用户登录名
-     * @return userName
-     **/
-    @ApiModelProperty(value = "用户登录名", required = true)
+    @JsonProperty("remarks")
+    @ApiModelProperty(value = "备注信息")
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -67,11 +106,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.username = username;
     }
 
-    /**
-     * 用户真实姓名
-     * @return realName
-     **/
-    @ApiModelProperty(value = "用户真实姓名", required = true)
+
     public String getRealname() {
         return realname;
     }
@@ -80,11 +115,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.realname = realname;
     }
 
-    /**
-     * 用户别名
-     * @return portrait
-     **/
-    @ApiModelProperty(value = "用户别名")
+
     public String getPortrait() {
         return portrait;
     }
@@ -93,11 +124,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.portrait = portrait;
     }
 
-    /**
-     * 密码
-     * @return password
-     **/
-    @ApiModelProperty(value = "密码")
+
     public String getPassword() {
         return password;
     }
@@ -106,24 +133,6 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.password = password;
     }
 
-    /**
-     * salt
-     * @return salt
-     **/
-    @ApiModelProperty(value = "salt", hidden = true)
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    /**
-     * 邮箱
-     * @return email
-     **/
-    @ApiModelProperty(value = "邮箱")
     public String getEmail() {
         return email;
     }
@@ -132,11 +141,7 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.email = email;
     }
 
-    /**
-     * 手机号
-     * @return phone
-     **/
-    @ApiModelProperty(value = "手机号", required = true)
+
     public String getPhone() {
         return phone;
     }
@@ -145,26 +150,13 @@ public class UserVO implements BaseVO<User, UserVO>{
         this.phone = phone;
     }
 
-    /**
-     * 用户状态
-     * @return userStatus
-     **/
-    @ApiModelProperty(value = "用户状态")
+
     public Integer getUserStatus() {
         return userStatus;
     }
 
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
-    }
-
-    @ApiModelProperty(value = "用户所属公司id", required = true)
-    public Integer getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
     }
 
     /**
@@ -182,11 +174,11 @@ public class UserVO implements BaseVO<User, UserVO>{
         user.setPhone(userVO.getPhone());
         user.setPortrait(userVO.getPortrait());
         user.setRealname(userVO.getRealname());
-        user.setSalt(userVO.getSalt());
         user.setTeamId(userVO.getTeamId());
         user.setUsername(userVO.getUsername());
         user.setPassword(userVO.getPassword());
         user.setUserStatus(userVO.getUserStatus());
+        user.setRemarks(userVO.getRemarks());
         return user;
     }
 
@@ -203,17 +195,7 @@ public class UserVO implements BaseVO<User, UserVO>{
      * 封装成web需要的对象
      */
     public UserVO toVO(User user){
-        UserVO userVO = new UserVO();
-        userVO.setEmail(user.getEmail());
-        userVO.setId(user.getId());
-        userVO.setPhone(user.getPhone());
-        userVO.setPortrait(user.getPortrait());
-        userVO.setRealname(user.getRealname());
-        userVO.setSalt(user.getSalt());
-        userVO.setTeamId(user.getTeamId());
-        userVO.setUsername(user.getUsername());
-        userVO.setUserStatus(user.getUserStatus());
-        return userVO;
+        return new UserVO(user);
     }
 
     @Override

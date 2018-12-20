@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleRecordApi;
 import com.tingkelai.domain.customer.SaleRecord;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.SaleRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +32,8 @@ public class CustomerSaleRecordController extends BaseCRUDController<SaleRecord,
     }
 
     @Override
-    public ResponseMessage<List<SaleRecordVO>> customerSaleRecordListGet(SaleRecordVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage<List<SaleRecordVO>> customerSaleRecordListGet(SaleRecordVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

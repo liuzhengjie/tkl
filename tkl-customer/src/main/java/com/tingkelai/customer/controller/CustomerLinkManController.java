@@ -4,6 +4,7 @@ import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerLinkManApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.customer.LinkMan;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.LinkManVO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,8 @@ public class CustomerLinkManController extends BaseCRUDController<LinkMan, Long>
     }
 
     @Override
-    public ResponseMessage<List<LinkManVO>> customerLinkmanListGet(LinkManVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage<List<LinkManVO>> customerLinkmanListGet(LinkManVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

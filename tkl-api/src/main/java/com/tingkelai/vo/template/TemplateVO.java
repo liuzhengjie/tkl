@@ -84,6 +84,7 @@ public class TemplateVO implements BaseVO<Template, TemplateVO>{
 		return this.id;
 	}
 
+
 	/**
 	 * 设置 id
 	 * 

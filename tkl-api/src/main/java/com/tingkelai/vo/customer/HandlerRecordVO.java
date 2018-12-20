@@ -3,6 +3,7 @@ package com.tingkelai.vo.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.HandlerRecord;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import com.tingkelai.vo.sys.DeptVO;
 import com.tingkelai.vo.sys.UserVO;
@@ -25,6 +26,17 @@ public class HandlerRecordVO implements BaseVO<HandlerRecord, HandlerRecordVO>{
     public Long getId() {
         return id;
     }
+
+    @Override
+    public void setTeamId(Long teamId) {
+
+    }
+
+    @Override
+    public Long getTeamId() {
+        return null;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

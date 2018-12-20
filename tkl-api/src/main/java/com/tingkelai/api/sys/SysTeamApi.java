@@ -16,8 +16,8 @@ import javax.validation.Valid;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统公司相关api", tags = "sys/team")
+@RequestMapping(value = "/admin/v1")
 public interface SysTeamApi<VO> {
 
     @ApiOperation(value = "获取公司信息", nickname = "sysTeamGet", notes = "获取公司信息", tags={ "sys/team", })

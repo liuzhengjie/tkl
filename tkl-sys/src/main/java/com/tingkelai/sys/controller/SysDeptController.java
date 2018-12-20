@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.sys.SysDeptApi;
 import com.tingkelai.domain.sys.Dept;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.BaseVO;
 import com.tingkelai.vo.sys.DeptVO;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,8 @@ public class SysDeptController extends BaseCRUDController<Dept, Long> implements
     }
 
     @Override
-    public ResponseMessage<List<DeptVO>> sysDeptListGet(DeptVO deptVO) {
-        return getEntityList(deptVO);
+    public ResponseMessage<List<DeptVO>> sysDeptListGet(DeptVO deptVO, BasePage basePage) {
+        return list(deptVO, basePage);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.tingkelai.domain.sys.User;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * 数据Entity类
@@ -46,12 +47,15 @@ public abstract class DataEntity<ID> extends AbstractEntity<ID> {
 	protected Date updateDate; // 更新日期
 
 	@TableField(value = "del_flag", fill = FieldFill.INSERT)
+	@TableLogic
 	protected String delFlag = "0"; // 删除标记（0：正常；1：删除 ）
+
+//	protected String uuid; // 唯一标识
 
 	public DataEntity() {
 		super();
 		this.delFlag = DomainConstant.DEL_FLAG_NORMAL;
-		this.updateDate = new Date();
+//		uuid = UUID.randomUUID().toString();
 	}
 
 	public Integer getVersion() {

@@ -22,8 +22,8 @@ import java.util.Map;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统字典相关api", tags = "sys/dict")
+@RequestMapping(value = "/admin/v1")
 public interface SysDictApi<VO> {
 
     @ApiOperation(value = "获取用户数据字典分类列表", nickname = "sysDictCategoryListGet", response = List.class,

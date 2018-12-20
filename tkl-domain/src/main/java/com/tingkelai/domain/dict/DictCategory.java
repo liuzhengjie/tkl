@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.tingkelai.domain.entity.DataEntity;
 
-@TableName("tkl_dict_group")
+@TableName("tkl_dict_category")
 @SuppressWarnings("serial")
 public class DictCategory extends DataEntity<Long> {
 
@@ -22,6 +22,18 @@ public class DictCategory extends DataEntity<Long> {
 	/** 分组编码 */
 	@TableField(value = "code")
 	private String code;
+
+	/** 公司id */
+	@TableField(value = "team_id")
+	private Long teamId;
+
+	public Long getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(Long teamId) {
+		this.teamId = teamId;
+	}
 
 	/**
 	 * 获取 remarks

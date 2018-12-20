@@ -4,18 +4,12 @@ import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.customer.Customer;
-import com.tingkelai.service.customer.impl.CustomerServiceImpl;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.CustomerVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 客户管理模块，客户主类
@@ -28,12 +22,9 @@ import java.util.Map;
 @RequiresPermissions("sys:menu:custom")
 public class CustomerController extends BaseCRUDController<Customer, Long> implements CustomerApi<CustomerVO> {
 
-    @Autowired
-    private CustomerServiceImpl customerService;
-
     @Override
-    public ResponseMessage<List<CustomerVO>> customerListGet(CustomerVO customerVO) {
-        return getEntityList(customerVO);
+    public ResponseMessage<List<CustomerVO>> customerListGet(CustomerVO customerVO, BasePage basePage) {
+        return list(customerVO, basePage);
     }
 
     @Override

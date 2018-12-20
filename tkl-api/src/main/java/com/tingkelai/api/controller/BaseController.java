@@ -1,5 +1,8 @@
 package com.tingkelai.api.controller;
 
+import com.tingkelai.domain.sys.Team;
+import com.tingkelai.domain.sys.User;
+import com.tingkelai.shiro.jwt.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -97,4 +100,33 @@ public class BaseController {
         return request.getParameter(key);
     }
 
+    /**
+     * 获取请求参数（header里的）
+     * @param key 参数名
+     * @return 参数值
+     */
+    protected final String getHeader(String key) {
+        HttpServletRequest request = getRequest();
+        return request.getHeader(key);
+    }
+
+    /**
+     * 获取当前用户所在公司
+     * @return 当前用户所在公司id
+     */
+    protected final Long getCurrentUserTeamId() {
+        HttpServletResponse response = getResponse();
+        String teamId = response.getHeader(JwtUtil.TEAM_ID_NAME);
+        return Long.parseLong(teamId);
+    }
+
+    /**
+     * 获取当前用户id
+     * @return 当前用户id
+     */
+    protected final Long getCurrentUserId(){
+        HttpServletResponse response = getResponse();
+        String userId = response.getHeader(JwtUtil.USER_ID_NAME);
+        return Long.parseLong(userId);
+    }
 }

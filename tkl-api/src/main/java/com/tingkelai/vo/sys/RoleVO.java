@@ -3,6 +3,7 @@ package com.tingkelai.vo.sys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.sys.Role;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,6 +26,16 @@ public class RoleVO implements BaseVO<Role, RoleVO>{
     @ApiModelProperty(name = "id", value = "id")
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+
+    }
+
+    @Override
+    public Long getTeamId() {
+        return null;
     }
 
     public void setId(Long id) {

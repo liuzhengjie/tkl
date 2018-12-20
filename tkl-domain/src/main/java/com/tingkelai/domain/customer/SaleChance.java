@@ -20,32 +20,28 @@ import java.util.Objects;
  * @date 2018-11-27 19:42:19
  * @version 1.0
  */
-@ApiModel(description = "销售机会")
 @TableName("tkl_customer_sale_chance")
 @Mapper
 public class SaleChance  extends DataEntity<Long> {
 
-    @JsonProperty("name")
+    @TableField("team_id")
+    private Long teamId;
+
     @TableField("name")
     private String name = null;
 
-    @JsonProperty("orderFlag")
     @TableField("order_flag")
     private String orderFlag = null;
 
-    @JsonProperty("discoverDate")
     @TableField("discover_date")
     private String discoverDate = null;
 
-    @JsonProperty("dept")
     @TableField(value = "dept_id", el = "dept.id")
     private Dept dept = null;
 
-    @JsonProperty("user")
     @TableField(value = "user_id", el = "user.id")
     private User user = null;
 
-    @JsonProperty("customer")
     @TableField(value = "customer_id", el = "customer.id")
     private Customer customer = null;
 
@@ -58,8 +54,6 @@ public class SaleChance  extends DataEntity<Long> {
      * @return name
      **/
     @ApiModelProperty(value = "销售机会名称")
-
-
     public String getName() {
         return name;
     }
@@ -68,18 +62,11 @@ public class SaleChance  extends DataEntity<Long> {
         this.name = name;
     }
 
-    public SaleChance orderFlag(String orderFlag) {
-        this.orderFlag = orderFlag;
-        return this;
-    }
-
     /**
      * 预约计划标识
      * @return orderFlag
      **/
     @ApiModelProperty(value = "预约计划标识")
-
-
     public String getOrderFlag() {
         return orderFlag;
     }
@@ -88,18 +75,11 @@ public class SaleChance  extends DataEntity<Long> {
         this.orderFlag = orderFlag;
     }
 
-    public SaleChance discoverDate(String discoverDate) {
-        this.discoverDate = discoverDate;
-        return this;
-    }
-
     /**
      * 发现日期
      * @return discoverDate
      **/
     @ApiModelProperty(value = "发现日期")
-
-
     public String getDiscoverDate() {
         return discoverDate;
     }
@@ -108,27 +88,20 @@ public class SaleChance  extends DataEntity<Long> {
         this.discoverDate = discoverDate;
     }
 
-    public SaleChance dept(Dept dept) {
-        this.dept = dept;
-        return this;
-    }
-
     /**
      * Get dept
      * @return dept
      **/
     @ApiModelProperty(value = "部门")
     public Dept getDept() {
+        if(dept == null){
+            dept = new Dept();
+        }
         return dept;
     }
 
     public void setDept(Dept dept) {
         this.dept = dept;
-    }
-
-    public SaleChance user(User user) {
-        this.user = user;
-        return this;
     }
 
     /**
@@ -137,16 +110,14 @@ public class SaleChance  extends DataEntity<Long> {
      **/
     @ApiModelProperty(value = "用户")
     public User getUser() {
+        if(user == null){
+            user = new User();
+        }
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public SaleChance customer(Customer customer) {
-        this.customer = customer;
-        return this;
     }
 
     /**
@@ -155,6 +126,9 @@ public class SaleChance  extends DataEntity<Long> {
      **/
     @ApiModelProperty(value = "关联客户")
     public Customer getCustomer() {
+        if(customer == null){
+            customer = new Customer();
+        }
         return customer;
     }
 
@@ -162,18 +136,11 @@ public class SaleChance  extends DataEntity<Long> {
         this.customer = customer;
     }
 
-    public SaleChance nextContactDate(String nextContactDate) {
-        this.nextContactDate = nextContactDate;
-        return this;
-    }
-
     /**
      * 下次联系日期
      * @return nextContactDate
      **/
     @ApiModelProperty(value = "下次联系日期")
-
-
     public String getNextContactDate() {
         return nextContactDate;
     }
@@ -182,54 +149,11 @@ public class SaleChance  extends DataEntity<Long> {
         this.nextContactDate = nextContactDate;
     }
 
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SaleChance saleChance = (SaleChance) o;
-        return Objects.equals(this.name, saleChance.name) &&
-                Objects.equals(this.orderFlag, saleChance.orderFlag) &&
-                Objects.equals(this.discoverDate, saleChance.discoverDate) &&
-                Objects.equals(this.dept, saleChance.dept) &&
-                Objects.equals(this.user, saleChance.user) &&
-                Objects.equals(this.customer, saleChance.customer) &&
-                Objects.equals(this.nextContactDate, saleChance.nextContactDate);
+    public Long getTeamId() {
+        return teamId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, orderFlag, discoverDate, dept, user, customer, nextContactDate);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class SaleChance {\n");
-
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    orderFlag: ").append(toIndentedString(orderFlag)).append("\n");
-        sb.append("    discoverDate: ").append(toIndentedString(discoverDate)).append("\n");
-        sb.append("    dept: ").append(toIndentedString(dept)).append("\n");
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
-        sb.append("    nextContactDate: ").append(toIndentedString(nextContactDate)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }

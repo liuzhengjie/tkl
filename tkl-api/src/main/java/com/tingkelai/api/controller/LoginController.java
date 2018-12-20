@@ -1,11 +1,13 @@
 package com.tingkelai.api.controller;
 
+import com.tingkelai.api.LoginUserVO;
 import com.tingkelai.api.login.LoginApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
 import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
+import com.tingkelai.vo.sys.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -55,30 +57,33 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    @RequestMapping("/ajaxLogin")
     @ResponseBody
-    public ResponseMessage<Map<String, Object>> ajaxLogin(HttpServletRequest request, HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage();
+    public ResponseMessage<Map<String, Object>> ajaxLogin(HttpServletResponse response, LoginUserVO loginUserVO) {
+        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage<>();
         try {
+            String username = loginUserVO.getUsername();
+            String password = loginUserVO.getPassword();
             Subject subject = SecurityUtils.getSubject();
             StatelessToken statelessToken = new StatelessToken(username, password);
             subject.login(statelessToken);
             responseMessage.setMessage("登录成功");
-
-            //生成token
-            Map<String, Object> tokenMap = new HashMap<>();
-            tokenMap.put("username", username);
-            String token = JwtUtil.signSessionToken(tokenMap);
-            response.setHeader(JwtUtil.TOKEN_NAME, token);
 
             User user = sysUserService.findByUsername(username);
             Map<String, Object> map = new HashMap<>();
             map.put("menu", sysUserService.findMenuListByUserId(user.getId()));
             map.put("role", sysUserService.findRoleListByUserId(user.getId()));
             map.put("button", sysUserService.findButtonListByUserId(user.getId()));
+            UserVO userVO = new UserVO();
+            map.put("user", userVO.toVO(user));
             responseMessage.setData(map);
+
+            //生成token
+            Map<String, Object> tokenMap = new HashMap<>();
+            tokenMap.put("username", username);
+            tokenMap.put("userId", user.getId());
+            tokenMap.put("teamId", user.getTeamId());
+            String token = JwtUtil.signSessionToken(tokenMap);
+            response.setHeader(JwtUtil.TOKEN_NAME, token);
         } catch (LockedAccountException e){
             responseMessage.setMessage("账号已锁定");
         } catch (UnknownAccountException e){
@@ -91,7 +96,6 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    @RequestMapping("/login")
     @ResponseBody
     public ResponseMessage login(HttpServletRequest request) {
         ResponseMessage responseMessage = new ResponseMessage();
@@ -100,7 +104,6 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    @RequestMapping("/toLogin")
     @ResponseBody
     public ResponseMessage toLogin(HttpServletRequest request) {
         ResponseMessage responseMessage = new ResponseMessage();

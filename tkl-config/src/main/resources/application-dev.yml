@@ -35,6 +35,8 @@
 # 测试环境使用端口号
 server:
     port: 8088
+    servlet:
+      context-path: /task
 
 # 配置文件设置
 spring:
@@ -82,7 +84,7 @@ tkl:
     # token剩余时间小于n秒时，自动更新token
     autoUpdateSeconds: 60
     # token有效期
-    authTokenExpireSeconds: 3600
+    authTokenExpireSeconds: 3600000
     showIssuedAt: true
 
 
@@ -112,7 +114,7 @@ mybatis-plus:
       id-type: auto
       db-type: mysql
     #自定义SQL注入器
-    #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+#    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
     #自定义填充策略接口实现
     #meta-object-handler: com.baomidou.springboot.xxx
   configuration:

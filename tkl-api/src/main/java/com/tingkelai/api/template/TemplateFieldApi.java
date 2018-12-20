@@ -18,10 +18,11 @@ import javax.validation.Valid;
  * @date 2018-12-17 10:16:41
  * @version 1.0
  */
-@Api(value = "template/field", description = "动态模板字段相关api")
+@Api(value = "template/field", description = "动态模板字段相关api", tags = "template/field")
+@RequestMapping(value = "/v1")
 public interface TemplateFieldApi<VO> {
 
-    @ApiOperation(value = "获取指定动态模板的所有字段list", nickname = "templateFieldListGet", notes = "获取指定动态模板的所有字段list", tags={ "template", })
+    @ApiOperation(value = "获取指定动态模板的所有字段list", nickname = "templateFieldListGet", notes = "获取指定动态模板的所有字段list", tags={ "template/field", })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "templateId", value = "动态模板id", required = true),
     })
@@ -30,7 +31,7 @@ public interface TemplateFieldApi<VO> {
     ResponseMessage templateFieldListGet(VO vo);
 
 
-    @ApiOperation(value = "获取动态模板字段", nickname = "templateFieldGet", notes = "获取动态模板字段", tags={ "template", })
+    @ApiOperation(value = "获取动态模板字段", nickname = "templateFieldGet", notes = "获取动态模板字段", tags={ "template/field", })
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "动态模板字段id", required = true),
     })
@@ -39,19 +40,19 @@ public interface TemplateFieldApi<VO> {
     ResponseMessage templateFieldGet(VO vo);
 
 
-    @ApiOperation(value = "创建公司动态模板", nickname = "templateFieldPost", notes = "创建公司动态模板", tags={ "template", })
+    @ApiOperation(value = "创建公司动态模板", nickname = "templateFieldPost", notes = "创建公司动态模板", tags={ "template/field", })
     @RequestMapping(value = "/template/field",
             method = RequestMethod.POST)
     ResponseMessage templateFieldPost(@Valid @RequestBody VO vo);
 
 
-    @ApiOperation(value = "更新公司动态模板", nickname = "templateFieldPut", notes = "更新公司动态模板", tags={ "template", })
+    @ApiOperation(value = "更新公司动态模板", nickname = "templateFieldPut", notes = "更新公司动态模板", tags={ "template/field", })
     @RequestMapping(value = "/template/field",
             method = RequestMethod.PUT)
     ResponseMessage templateFieldPut(@Valid @RequestBody VO vo);
 
 
-    @ApiOperation(value = "删除公司动态模板", nickname = "templateFieldDelete", notes = "删除公司动态模板", tags={ "template", })
+    @ApiOperation(value = "删除公司动态模板", nickname = "templateFieldDelete", notes = "删除公司动态模板", tags={ "template/field", })
     @RequestMapping(value = "/template/field",
             method = RequestMethod.DELETE)
     ResponseMessage templateFieldDelete(@Valid @RequestBody VO vo);

@@ -1,6 +1,7 @@
 package com.tingkelai.api.sys;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.BasePage;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,12 @@ import java.util.List;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统部门相关api", tags = "sys/dept")
+@RequestMapping(value = "/admin/v1")
 public interface SysDeptApi<VO> {
     @ApiOperation(value = "删除部门", nickname = "sysDeptDelete", notes = "", tags={ "sys/dept", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.DELETE)
@@ -31,7 +32,7 @@ public interface SysDeptApi<VO> {
 
     @ApiOperation(value = "获取部门信息", nickname = "sysDeptGet", notes = "", tags={ "sys/dept", })
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query"),
     })
     @RequestMapping(value = "/sys/dept",
             method = RequestMethod.GET)
@@ -41,7 +42,7 @@ public interface SysDeptApi<VO> {
     @ApiOperation(value = "获取部门列表（树形结构）", nickname = "sysDeptListGet", notes = "", tags={ "sys/dept", })
     @RequestMapping(value = "/sys/dept/list",
             method = RequestMethod.GET)
-    ResponseMessage sysDeptListGet(VO vo);
+    ResponseMessage sysDeptListGet(VO vo, BasePage basePage);
 
 
     @ApiOperation(value = "创建部门", nickname = "sysDeptPost", notes = "", tags={ "sys/dept", })

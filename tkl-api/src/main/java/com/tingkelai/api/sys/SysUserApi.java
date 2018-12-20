@@ -2,6 +2,7 @@ package com.tingkelai.api.sys;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.sys.UserRoleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,14 +22,14 @@ import javax.validation.Valid;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/")
+@Api(value = "sys", description = "系统用户相关api", tags = "sys/user")
+@RequestMapping(value = "/admin/v1")
 public interface SysUserApi<VO> {
 
     @ApiOperation(value = "获取用户列表", nickname = "sysUserListGet", notes = "获取用户列表", tags={ "sys/user", })
     @RequestMapping(value = "/sys/user/list",
             method = RequestMethod.GET)
-    ResponseMessage sysUserListGet(VO vo);
+    ResponseMessage sysUserListGet(VO vo, BasePage basePage);
 
     @ApiOperation(value = "删除用户", nickname = "sysUserDelete", notes = "删除用户", tags={ "sys/user", })
     @ApiResponses(value = {

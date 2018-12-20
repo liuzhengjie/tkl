@@ -1,8 +1,16 @@
 package com.tingkelai.service.customer.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tingkelai.dao.customer.ContactRecordMapper;
+import com.tingkelai.dao.customer.LinkManMapper;
 import com.tingkelai.domain.customer.ContactRecord;
+import com.tingkelai.domain.customer.LinkMan;
+import com.tingkelai.exception.ex400.LackParamsException;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.customer.IContactRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,35 +23,36 @@ import org.springframework.stereotype.Service;
 @Service("contactRecordService")
 public class ContactRecordServiceImpl extends CommonServiceImpl<ContactRecord> implements IContactRecordService{
 
-/*    private ICommonService<ContactRecord> commonService;
-
     @Autowired
-    public void setCommonService(ICommonService<ContactRecord> commonService) {
-        this.commonService = commonService;
+    private ContactRecordMapper contactRecordMapper;
+
+    @Override
+    public IPage<ContactRecord> page(IPage<ContactRecord> iPage, Wrapper<ContactRecord> wrapper) {
+        try {
+            //设置查询条件
+            ContactRecord contactRecord = wrapper.getEntity();
+            QueryWrapper<ContactRecord> queryWrapper = new QueryWrapper<>();
+            if(contactRecord.getCustomer() == null || contactRecord.getCustomer().getId() == null){
+                throw new LackParamsException("缺少参数customer.id");
+            }else{
+                queryWrapper.eq("customer_id", contactRecord.getCustomer().getId());
+            }
+            queryWrapper.setEntity(contactRecord);
+            //获取查询结果
+            IPage<ContactRecord> contactRecordIPage = contactRecordMapper.page(iPage, queryWrapper);
+            //加工返回值
+            return contactRecordIPage;
+        }catch (Exception e){
+            throw e;
+        }
     }
 
     @Override
-    public List<ContactRecord> list() {
-        return commonService.list();
+    public ContactRecord getOne(Wrapper<ContactRecord> wrapper) {
+        ContactRecord contactRecord = wrapper.getEntity();
+        if(contactRecord.getId() != null){
+            return contactRecordMapper.getById(contactRecord.getId());
+        }
+        return super.getOne(wrapper);
     }
-
-    @Override
-    public boolean save(ContactRecord contactRecord) {
-        return commonService.save(contactRecord);
-    }
-
-    @Override
-    public boolean removeById(Serializable serializable) {
-        return commonService.removeById(serializable);
-    }
-
-    @Override
-    public boolean saveOrUpdate(ContactRecord contactRecord) {
-        return commonService.saveOrUpdate(contactRecord);
-    }
-
-    @Override
-    public ContactRecord getById(Serializable serializable) {
-        return commonService.getById(serializable);
-    }*/
 }

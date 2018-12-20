@@ -17,5 +17,9 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>

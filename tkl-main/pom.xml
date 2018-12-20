@@ -27,7 +27,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-product</artifactId>
+		</dependency>
+<!--		<dependency>
+			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-template</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-dictionary</artifactId>
 		</dependency>
 	</dependencies>
 </project>

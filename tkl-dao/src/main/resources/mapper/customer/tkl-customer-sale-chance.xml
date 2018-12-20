@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.customer.SaleChanceMapper" >
+    <!-- -->
+    <!-- button相关 -->
+    <!-- 说明：每个方法上面必须写备注说明！参数，返回值，作用等,修改记得添加修改记录 -->
+    <!-- @author liuzhengjie -->
+    <!-- @version 1.0-->
+    <sql id="Base_Column_List" >
+        t.*,
+           customer.id as "customer.id",
+        customer.name as "customer.name",
+        customer.code as "customer.code",
+
+        userOwner.id as "user.id",
+        userOwner.username as "user.username",
+        userOwner.realname as "user.realname",
+
+        deptOwner.id as "dept.id",
+        deptOwner.name as "dept.name"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
+        LEFT JOIN tkl_sys_user userOwner ON userOwner.id = t.user_id
+        LEFT JOIN tkl_sys_dept deptOwner ON deptOwner.id = t.dept_id
+    </sql>
+
+
+    <select id="page" resultType="com.tingkelai.domain.customer.SaleChance">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_sale_chance t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="getById" resultType="com.tingkelai.domain.customer.SaleChance">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_sale_chance t
+        <include refid="parentJoins"/>
+        <where>
+            t.id = #{id}
+        </where>
+    </select>
+
+</mapper>

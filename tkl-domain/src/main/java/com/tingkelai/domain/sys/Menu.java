@@ -20,48 +20,60 @@ import java.util.Objects;
 @TableName("tkl_sys_menu")
 @Mapper
 public class Menu  extends DataEntity<Long> {
-  @JsonProperty("name")
-  @TableField("name")
-  private String name = null;
-
-  @JsonProperty("type")
-  @TableField("type")
-  private String type = null;
-
-  @JsonProperty("url")
-  @TableField("url")
-  private String url = null;
-
-  @JsonProperty("parentId")
-  @TableField("parent_id")
-  private Integer parentId = null;
-
-  @JsonProperty("parentIds")
-  @TableField("parent_ids")
-  private String parentIds = null;
-
-  @JsonProperty("permission")
-  @TableField("permission")
-  private String permission = null;
-
-  @JsonProperty("isShow")
-  @TableField("is_show")
-  private String isShow = null;
-
-  @JsonProperty("sort")
-  @TableField("sort")
-  private Integer sort = null;
-
-  @JsonProperty("menuIcon")
-  @TableField("menu_icon")
-  private String menuIcon = null;
 
   /**
    * 菜单名
-   * @return name
-  **/
-  @ApiModelProperty(value = "菜单名")
+   */
+  @TableField("name")
+  private String name = null;
 
+  /**
+   * 菜单类型
+   */
+  @TableField("type")
+  private String type = null;
+
+  /**
+   * 菜单url
+   */
+  @TableField("url")
+  private String url = null;
+
+  /**
+   * 父级id
+   */
+  @TableField("parent_id")
+  private Integer parentId = null;
+
+  /**
+   * 所有父级id构成的string
+   */
+  @TableField("parent_ids")
+  private String parentIds = null;
+
+  /**
+   * 权限
+   */
+  @TableField("permission")
+  private String permission = null;
+
+  /**
+   * 是否显示
+   */
+  @TableField("is_show")
+  private String isShow = null;
+
+  /**
+   * 排序
+   */
+  @TableField("sort")
+  private Integer sort = null;
+
+  /**
+   * 菜单图标
+   */
+  @TableField("menu_icon")
+  private String menuIcon = null;
 
   public String getName() {
     return name;
@@ -76,13 +88,6 @@ public class Menu  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 菜单类型
-   * @return type
-  **/
-  @ApiModelProperty(value = "菜单类型")
-
-
   public String getType() {
     return type;
   }
@@ -95,13 +100,6 @@ public class Menu  extends DataEntity<Long> {
     this.url = url;
     return this;
   }
-
-  /**
-   * 菜单类型
-   * @return url
-  **/
-  @ApiModelProperty(value = "菜单类型")
-
 
   public String getUrl() {
     return url;
@@ -116,13 +114,6 @@ public class Menu  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 父级id
-   * @return parentId
-  **/
-  @ApiModelProperty(value = "父级id")
-
-
   public Integer getParentId() {
     return parentId;
   }
@@ -135,13 +126,6 @@ public class Menu  extends DataEntity<Long> {
     this.parentIds = parentIds;
     return this;
   }
-
-  /**
-   * 所有父级id构成的string
-   * @return parentIds
-  **/
-  @ApiModelProperty(value = "所有父级id构成的string")
-
 
   public String getParentIds() {
     return parentIds;
@@ -156,13 +140,6 @@ public class Menu  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 权限
-   * @return permission
-  **/
-  @ApiModelProperty(value = "权限")
-
-
   public String getPermission() {
     return permission;
   }
@@ -175,13 +152,6 @@ public class Menu  extends DataEntity<Long> {
     this.isShow = isShow;
     return this;
   }
-
-  /**
-   * 是否显示
-   * @return isShow
-  **/
-  @ApiModelProperty(value = "是否显示")
-
 
   public String isIsShow() {
     return isShow;
@@ -196,13 +166,6 @@ public class Menu  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 排序
-   * @return sort
-  **/
-  @ApiModelProperty(value = "排序")
-
-
   public Integer getSort() {
     return sort;
   }
@@ -216,74 +179,12 @@ public class Menu  extends DataEntity<Long> {
     return this;
   }
 
-  /**
-   * 菜单图标
-   * @return menuIcon
-  **/
-  @ApiModelProperty(value = "菜单图标")
-
-
   public String getMenuIcon() {
     return menuIcon;
   }
 
   public void setMenuIcon(String menuIcon) {
     this.menuIcon = menuIcon;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Menu menu = (Menu) o;
-    return Objects.equals(this.name, menu.name) &&
-        Objects.equals(this.type, menu.type) &&
-        Objects.equals(this.url, menu.url) &&
-        Objects.equals(this.parentId, menu.parentId) &&
-        Objects.equals(this.parentIds, menu.parentIds) &&
-        Objects.equals(this.permission, menu.permission) &&
-        Objects.equals(this.isShow, menu.isShow) &&
-        Objects.equals(this.sort, menu.sort) &&
-        Objects.equals(this.menuIcon, menu.menuIcon);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, type, url, parentId, parentIds, permission, isShow, sort, menuIcon);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Menu {\n");
-    
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
-    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
-    sb.append("    parentIds: ").append(toIndentedString(parentIds)).append("\n");
-    sb.append("    permission: ").append(toIndentedString(permission)).append("\n");
-    sb.append("    isShow: ").append(toIndentedString(isShow)).append("\n");
-    sb.append("    sort: ").append(toIndentedString(sort)).append("\n");
-    sb.append("    menuIcon: ").append(toIndentedString(menuIcon)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -1,6 +1,7 @@
 package com.tingkelai.vo.template;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.domain.template.TemplateField;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
@@ -81,6 +82,16 @@ public class TemplateFieldVO implements BaseVO<TemplateField, TemplateFieldVO>{
 	 */
 	public Long getId() {
 		return this.id;
+	}
+
+	@Override
+	public void setTeamId(Long teamId) {
+
+	}
+
+	@Override
+	public Long getTeamId() {
+		return null;
 	}
 
 	/**

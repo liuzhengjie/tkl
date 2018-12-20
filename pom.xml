@@ -53,6 +53,7 @@
 		<shiro.version>1.2.2</shiro.version>
 		<baomidao-version>3.0.6</baomidao-version>
         <quartz.version>2.3.0</quartz.version>
+		<fastjson-lib.version>1.1.37</fastjson-lib.version>
 	</properties>
 
 	<dependencies>
@@ -158,6 +159,11 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson-lib.version}</version>
 		</dependency>
 		<!-- 常用jar -->
 	</dependencies>

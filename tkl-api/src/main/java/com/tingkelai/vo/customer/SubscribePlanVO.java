@@ -4,6 +4,7 @@ package com.tingkelai.vo.customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.SubscribePlan;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,6 +26,17 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
     public Long getId() {
         return id;
     }
+
+    @Override
+    public void setTeamId(Long teamId) {
+
+    }
+
+    @Override
+    public Long getTeamId() {
+        return null;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

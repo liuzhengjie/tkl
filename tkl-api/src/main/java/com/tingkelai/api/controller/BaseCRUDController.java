@@ -2,12 +2,16 @@ package com.tingkelai.api.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.EmptyWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.entity.AbstractEntity;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.exception.ex400.LackParamsException;
 import com.tingkelai.service.common.ICommonService;
+import com.tingkelai.service.sys.ISysTeamService;
+import com.tingkelai.service.sys.ISysUserService;
 import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.BaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +34,27 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	protected static final String METHOD = "method";
 
 	protected ICommonService<Entity> commonService;
+
+	protected ISysTeamService sysTeamService;
+
+	protected ISysUserService sysUserService;
+
+	/**
+	 * 设置team service
+	 */
+	@Autowired
+	public void setSysTeamService(ISysTeamService sysTeamService){
+		this.sysTeamService = sysTeamService;
+	}
+
+	/**
+	 * 设置user service
+	 */
+	@Autowired
+	public void setSysUserService(ISysUserService sysUserService){
+		this.sysUserService = sysUserService;
+	}
+
 	/**
 	 * 设置基础service
 	 */
@@ -76,11 +101,24 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	/** 根据id获取对象 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> getEntity(VO vo, Entity entity){
 		try {
-			if(entity.getId() == null){
-				logger.error("====缺少查询条件");
-				return new ResponseMessage<>(new LackParamsException("====缺少查询条件"));
-			}
-			entity = commonService.getById(entity.getId());
+			setCurrentTeam(vo);
+			QueryWrapper<Entity> queryWrapper = new QueryWrapper<>();
+			queryWrapper.setEntity(entity);
+			entity = commonService.getOne(queryWrapper);
+			return new ResponseMessage<>(vo.toVO(entity));
+		}catch (Exception e){
+			logger.error(e.getMessage());
+			return new ResponseMessage<>(e);
+		}
+	}
+
+	/**
+	 * 保存实体对象
+	 */
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> saveEntity(VO vo, Entity entity) {
+		try {
+			setCurrentTeam(vo);
+			commonService.save(vo.toDTO());
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			logger.error(e.getMessage());
@@ -101,24 +139,13 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 		}
 	}
 
-	/**
-	 * 保存实体对象
-	 */
-	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> saveEntity(VO vo, Entity entity) {
-		try {
-			commonService.save(entity);
-			return new ResponseMessage<>(vo.toVO(entity));
-		}catch (Exception e){
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
-	}
 
 	/**
 	 * 修改实体对象
 	 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> updateEntity(VO vo, Entity entity) {
 		try {
+			setCurrentTeam(vo);
 			commonService.saveOrUpdate(entity);
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
@@ -129,30 +156,17 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 
 	/** 删除对象，默认按vo的id删除 */
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> removeEntity(VO vo) {
-		return removeEntity(vo, vo.toDTO());
-	}
-
-	/** 删除对象，默认按id删除 */
-	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> removeEntity(VO vo, Entity entity) {
-		try {
-			if(entity.getId() == null){
-				logger.error("====缺少删除条件");
-				LackParamsException exception = new LackParamsException("缺少删除条件");
-				return new ResponseMessage<>(exception);
-			}
-			commonService.removeById(vo.getId());
-			return new ResponseMessage<>(vo);
-		}catch (Exception e){
-			logger.error(e.getMessage());
-			return new ResponseMessage<>(e);
-		}
+		QueryWrapper<Entity> queryWrapper = new QueryWrapper<>();
+		queryWrapper.setEntity(vo.toDTO());
+		return removeEntity(vo, queryWrapper);
 	}
 
 	/**
 	 * 删除对象
 	 */
-	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> removeEntity(VO vo, Entity entity, Wrapper<Entity> wrapper) {
+	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> removeEntity(VO vo, Wrapper<Entity> wrapper) {
 		try {
+			setCurrentTeam(vo);
 			if(wrapper == null){
 				logger.error("====缺少删除条件");
 				LackParamsException exception = new LackParamsException("缺少删除条件");
@@ -170,24 +184,20 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 
 	/** 根据条件获取列表，带分页信息 */
 	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo) {
-		return list(vo, vo.toDTO());
+			return list(vo, null);
 	}
 
 	/** 根据条件获取列表，带分页信息 */
-	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo, Entity entity) {
-		return list(vo, entity, null);
-	}
-
-	/** 根据条件获取列表，带分页信息 */
-	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo, Entity entity, BasePage basePage) {
-		return list(vo, entity, new EmptyWrapper<>(), basePage);
+	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo,  BasePage basePage) {
+		return list(vo,null, basePage);
 	}
 
 	/**
 	 * 根据条件获取列表，带分页信息
 	 */
-	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo, Entity entity, Wrapper<Entity> wrapper, BasePage basePage) {
+	public <VO extends BaseVO<Entity, VO>> ResponseMessage<List<VO>> list(VO vo, Wrapper<Entity> wrapper, BasePage basePage) {
 		try {
+			setCurrentTeam(vo);
 			//设置分页信息，默认第一页，每页显示10条
 			Page<Entity> page = new Page<>();
 			if(basePage != null){
@@ -195,10 +205,14 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 				page.setSize(basePage.getSize());
 			}
 			//按条件查询
-			if(wrapper == null){
-				wrapper = new EmptyWrapper<>();
+			QueryWrapper<Entity> queryWrapper = new QueryWrapper<>();
+			if(wrapper != null){
+				queryWrapper = (QueryWrapper<Entity>) wrapper;
+				queryWrapper.setEntity(vo.toDTO());
+			}else{
+				queryWrapper.setEntity(vo.toDTO());
 			}
-			IPage<Entity> pageList = commonService.page(page, wrapper);
+			IPage<Entity> pageList = commonService.page(page, queryWrapper);
 			//查询结果
 			List<Entity> list = pageList.getRecords();
 			basePage.setTotal(pageList.getTotal());
@@ -213,5 +227,13 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 			logger.error(e.getMessage());
 			return new ResponseMessage<>(e);
 		}
+	}
+
+	/**
+	 * 将teamId设置到vo里面
+	 */
+	protected <VO extends BaseVO<Entity, VO>> VO setCurrentTeam(VO vo) throws Exception{
+		vo.setTeamId(getCurrentUserTeamId());
+		return vo;
 	}
 }

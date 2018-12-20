@@ -2,6 +2,7 @@ package com.tingkelai.vo.sys;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.sys.Button;
+import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +25,16 @@ public class ButtonVO implements BaseVO<Button, ButtonVO>{
   @ApiModelProperty(name = "id", value = "id")
   public Long getId() {
     return id;
+  }
+
+  @Override
+  public void setTeamId(Long teamId) {
+
+  }
+
+  @Override
+  public Long getTeamId() {
+    return null;
   }
 
   public void setId(Long id) {

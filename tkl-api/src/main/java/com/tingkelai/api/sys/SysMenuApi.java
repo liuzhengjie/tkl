@@ -17,8 +17,8 @@ import java.util.List;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
-@RequestMapping(value = "/v1")
+@Api(value = "sys", description = "系统菜单相关api", tags = "sys/menu")
+@RequestMapping(value = "/admin/v1")
 public interface SysMenuApi<VO> {
 
     @ApiOperation(value = "删除资源（菜单）详情", nickname = "sysMenuDelete", notes = "", tags={ "sys/menu", })

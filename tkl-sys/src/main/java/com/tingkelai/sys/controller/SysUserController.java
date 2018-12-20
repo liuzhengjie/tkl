@@ -8,6 +8,7 @@ import com.tingkelai.domain.sys.User;
 import com.tingkelai.domain.sys.UserRole;
 import com.tingkelai.service.sys.ISysUserService;
 import com.tingkelai.service.sys.impl.SysUserRoleServiceImpl;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.sys.UserRoleVO;
 import com.tingkelai.vo.sys.UserVO;
 import org.slf4j.Logger;
@@ -38,8 +39,8 @@ public class SysUserController extends BaseCRUDController<User, Long> implements
     private SysUserRoleServiceImpl sysUserRoleService;
 
     @Override
-    public ResponseMessage<List<UserVO>> sysUserListGet(UserVO userVO) {
-        return getEntityList(userVO);
+    public ResponseMessage<List<UserVO>> sysUserListGet(UserVO userVO, BasePage basePage) {
+        return list(userVO, basePage);
     }
 
     @Override

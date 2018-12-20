@@ -1,10 +1,9 @@
 package com.tingkelai.api.login;
 
+import com.tingkelai.api.LoginUserVO;
 import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +25,9 @@ public interface LoginApi {
                              @RequestParam("password") String password);
 
     @ApiOperation(value = "登录", nickname = "ajaxLogin", notes = "登录请求地址", tags={ "login", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name ="username",value="用户名",paramType="query",dataType="string",required=true),
-            @ApiImplicitParam(name ="password",value="密码",paramType="query",dataType="string",required=true),
-    })
     @RequestMapping(value = "/ajaxLogin",
             method = RequestMethod.POST)
-    ResponseMessage ajaxLogin(HttpServletRequest request, HttpServletResponse response);
+    ResponseMessage ajaxLogin(HttpServletResponse response, @RequestBody LoginUserVO loginUserVO);
 
     @ApiOperation(value = "登录成功页面", nickname = "login", notes = "登录成功返回信息", tags={ "login", })
     @ApiImplicitParams({

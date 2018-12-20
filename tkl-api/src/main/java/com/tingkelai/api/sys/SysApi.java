@@ -19,7 +19,8 @@ import javax.validation.Valid;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "sys", description = "系统相关api")
+@Api(value = "sys", description = "系统相关api", tags = "sys")
+@RequestMapping(value = "/admin/v1")
 public interface SysApi<VO> {
 
     @ApiOperation(value = "登录接口", nickname = "sysLoginPost", notes = "", tags={ "sys", })
