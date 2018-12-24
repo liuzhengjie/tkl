@@ -30,6 +30,7 @@
 		<module>tkl-template</module>
 		<module>tkl-main</module>
 		<module>tkl-order</module>
+		<module>tkl-package</module>
 	</modules>
 
 <!--
@@ -290,6 +291,13 @@
 			<dependency>
 				<groupId>com.tingkelai</groupId>
 				<artifactId>tkl-template</artifactId>
+				<version>${sub-module-version}</version>
+			</dependency>
+
+			<!-- 打包专用 -->
+			<dependency>
+				<groupId>com.tingkelai</groupId>
+				<artifactId>tkl-package</artifactId>
 				<version>${sub-module-version}</version>
 			</dependency>
 
