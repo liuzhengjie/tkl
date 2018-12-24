@@ -1,12 +1,18 @@
 package com.tingkelai.api.controller;
 
-import com.tingkelai.api.LoginUserVO;
+import com.tingkelai.domain.sys.Team;
+import com.tingkelai.exception.ex200.VerifyCodeException;
+import com.tingkelai.exception.ex400.LackParamsException;
+import com.tingkelai.vo.LoginUserVO;
 import com.tingkelai.api.login.LoginApi;
+import com.tingkelai.constant.SystemConstant;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.exception.ex200.MultipleTeamException;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
 import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
+import com.tingkelai.vo.RegistUserVO;
 import com.tingkelai.vo.sys.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
@@ -21,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 登录相关controller
@@ -43,6 +50,7 @@ public class LoginController implements LoginApi {
 
     @Override
     @ResponseBody
+    @Deprecated
     public ResponseMessage getToken(String username, String password) {
         ResponseMessage<String> responseMessage = new ResponseMessage<>();
         Map<String, Object> map = new HashMap<>();
@@ -58,21 +66,28 @@ public class LoginController implements LoginApi {
 
     @Override
     @ResponseBody
-    public ResponseMessage<Map<String, Object>> ajaxLogin(HttpServletResponse response, LoginUserVO loginUserVO) {
+    public ResponseMessage<Map<String, Object>> ajaxLogin(HttpServletRequest request, HttpServletResponse response, LoginUserVO loginUserVO) {
         ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage<>();
         try {
+            // 登录账号
             String username = loginUserVO.getUsername();
+            // 登录密码
             String password = loginUserVO.getPassword();
+            // 登录公司id
+            String teamId = loginUserVO.getTeamId();
             Subject subject = SecurityUtils.getSubject();
             StatelessToken statelessToken = new StatelessToken(username, password);
+            if(teamId != null){
+                Map<String, String> paramsMap = new HashMap<>();
+                paramsMap.put(SystemConstant.TEAM_ID_NAME, teamId);
+                statelessToken.setParams(paramsMap);
+            }
             subject.login(statelessToken);
             responseMessage.setMessage("登录成功");
 
-            User user = sysUserService.findByUsername(username);
+            //添加用户基本信息
+            User user = sysUserService.findByPhone(username);
             Map<String, Object> map = new HashMap<>();
-            map.put("menu", sysUserService.findMenuListByUserId(user.getId()));
-            map.put("role", sysUserService.findRoleListByUserId(user.getId()));
-            map.put("button", sysUserService.findButtonListByUserId(user.getId()));
             UserVO userVO = new UserVO();
             map.put("user", userVO.toVO(user));
             responseMessage.setData(map);
@@ -88,11 +103,62 @@ public class LoginController implements LoginApi {
             responseMessage.setMessage("账号已锁定");
         } catch (UnknownAccountException e){
             responseMessage.setMessage("没有找到该账号");
-        } catch (Exception e){
-            System.err.print(e.getClass() + e.getMessage());
+        } catch (MultipleTeamException e){
+            responseMessage.setCode(200001);
+            responseMessage.setMessage("当前账号属于多个公司，请选择要登录的公司！");
+            Map<String, Object> map = new HashMap<>();
+            map.put("teamList", e.getTeamList());
+            responseMessage.setData(map);
+        }catch (Exception e){
             responseMessage.setMessage("账号或密码错误");
         }
         return responseMessage;
+    }
+
+    @Override
+    @ResponseBody
+    public ResponseMessage<Map<String, Object>> regist(HttpServletRequest request, HttpServletResponse response, RegistUserVO registUserVO) {
+        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage<>();
+        try {
+            // 判断验证码是否存在
+            if(registUserVO.getVerifyCode() == null){
+                return new ResponseMessage<>(new VerifyCodeException());
+            }else{
+                // 校验验证码
+                boolean verifyFlag = verifyCode(registUserVO.getPhone(), registUserVO.getVerifyCode());
+                if(!verifyFlag){
+                    return new ResponseMessage<>(new VerifyCodeException());
+                }
+                User user = new User();
+                // 手机号、密码、公司名都必须存在
+                if(registUserVO.getPhone() == null || registUserVO.getPassword() == null || registUserVO.getTeamName() == null){
+                    return new ResponseMessage<>(new LackParamsException());
+                }
+                user.setPhone(registUserVO.getPhone());
+                user.setUsername(UUID.randomUUID().toString());
+                user.setPassword(registUserVO.getPassword());
+                Team team = new Team();
+                team.setName(registUserVO.getTeamName());
+                boolean flag = sysUserService.regist(user, team);
+                if(flag){
+                    responseMessage.setMessage("注册成功");
+                }else{
+                    responseMessage.setCode(200002);
+                    responseMessage.setMessage("注册失败");
+                }
+            }
+        }catch (Exception e){
+            responseMessage = new ResponseMessage<>(e);
+        }
+        return responseMessage;
+    }
+
+    /** 校验验证码是否正确 */
+    private boolean verifyCode(String phone, String verifyCode) {
+        if("123456".equals(verifyCode)){
+            return true;
+        }
+        return false;
     }
 
     @Override

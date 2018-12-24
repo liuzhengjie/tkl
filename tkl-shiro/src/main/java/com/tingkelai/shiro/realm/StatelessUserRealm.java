@@ -1,9 +1,11 @@
 package com.tingkelai.shiro.realm;
 
+import com.tingkelai.constant.SystemConstant;
 import com.tingkelai.domain.sys.Button;
 import com.tingkelai.domain.sys.Menu;
 import com.tingkelai.domain.sys.Role;
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.exception.ex200.MultipleTeamException;
 import com.tingkelai.service.sys.ISysUserService;
 import com.tingkelai.shiro.authc.StatelessToken;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,9 +19,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 无状态user认证处理类
@@ -89,15 +89,38 @@ public class StatelessUserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		//获取认证token
 		StatelessToken authcToken = (StatelessToken) token;
-		//获取用户登录名
+		//获取用户登录名（手机号）
 		String username = authcToken.getUsername();
 		//用户id不存在，抛出认证异常错误
 		if(username == null){
 			throw new AuthenticationException();
 		}
 
-		//通过用户名查找
-		User user = userService.findByUsername(username);
+		User user = null;
+		//如果是选择公司之后再次登录，则用选择的公司登录，否则要判断账号是否存在多公司情况
+		if(authcToken.getParams() != null && authcToken.getParams().containsKey(SystemConstant.TEAM_ID_NAME)){
+			String teamId = (String) authcToken.getParams().get(SystemConstant.TEAM_ID_NAME);
+			user = userService.findByPhoneAndTeamId(username, teamId);
+		}else{
+			//判断当前登陆账号是否存在多个公司
+			List<User> userList = userService.findListByPhone(username);
+			if(userList != null && userList.size() > 1){
+				// 返回公司信息让用户选择
+				List<Map<String, String>> teamList = new ArrayList<>();
+				for(User temp : userList){
+					Map<String, String> tempMap = new HashMap<>();
+					tempMap.put(SystemConstant.TEAM_ID_NAME, temp.getTeamId() + "");
+					tempMap.put("teamName", temp.getTeamName());
+					teamList.add(tempMap);
+				}
+				MultipleTeamException multipleTeamException = new MultipleTeamException();
+				multipleTeamException.setTeamList(teamList);
+				throw multipleTeamException;
+			}else if(userList != null && userList.size() == 1){
+				user = userList.get(0);
+			}
+		}
+
 		if (user == null) {
 			throw new AuthenticationException();
 		}
@@ -109,7 +132,6 @@ public class StatelessUserRealm extends AuthorizingRealm {
 				ByteSource.Util.bytes(user.getCredentialsSalt()), // salt=username+salt
 				getName() // realm name
 		);
-		System.out.println("====username:" + username);
 		return authenticationInfo;
 	}
 }

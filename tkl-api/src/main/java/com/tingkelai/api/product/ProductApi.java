@@ -25,11 +25,12 @@ public interface ProductApi<VO> {
 
     @ApiOperation(value = "商品列表list", nickname = "productListGet", notes = "获取商品列表", tags={ "product", })
     @ApiImplicitParams({
-//            @ApiImplicitParam(name = "teamId", value = "公司id", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "当前页", required = false, paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示条数", required = false, paramType = "query"),
     })
     @RequestMapping(value = "/product/list",
-            method = RequestMethod.GET)
-    ResponseMessage productListGet(VO vo, BasePage basePage);
+            method = RequestMethod.POST)
+    ResponseMessage productListGet(@RequestBody VO vo, BasePage basePage);
 
     @ApiOperation(value = "根据id获取商品信息", nickname = "productGet", notes = "根据id获取商品信息", tags={ "product", })
     @ApiImplicitParams({

@@ -51,7 +51,7 @@ public class ProductTypeController extends BaseCRUDController<ProductType, Long>
             }else{
                 map.put("pid", productType.getParent().getId());
             }
-            map.put("value", productType.getCode());
+            map.put("value", productType.getId() + "");
             map.put("label", productType.getName());
             data.add(map);
         }

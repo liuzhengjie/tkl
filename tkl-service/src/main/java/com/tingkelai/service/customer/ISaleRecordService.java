@@ -1,5 +1,8 @@
 package com.tingkelai.service.customer;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.service.common.ICommonService;
 
@@ -11,4 +14,5 @@ import com.tingkelai.service.common.ICommonService;
  * @version 1.0
  */
 public interface ISaleRecordService extends ICommonService<SaleRecord>{
+    IPage<SaleRecord> pageAll(Page<SaleRecord> page, QueryWrapper<SaleRecord> queryWrapper);
 }

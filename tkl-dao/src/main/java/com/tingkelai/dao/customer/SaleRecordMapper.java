@@ -17,7 +17,11 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface SaleRecordMapper extends BaseMapper<SaleRecord> {
+    /** 获取指定用户下所有销售记录（订单、账单） */
     IPage<SaleRecord> page(@Param("iPage") IPage<SaleRecord> iPage, @Param(Constants.WRAPPER) QueryWrapper<SaleRecord> queryWrapper);
 
     SaleRecord getById(@Param("id") Long id);
+
+    /** 获取公司所有用户销售记录（订单、账单） */
+    IPage<SaleRecord> pageAll(@Param("iPage") IPage<SaleRecord> iPage, @Param(Constants.WRAPPER) QueryWrapper<SaleRecord> queryWrapper);
 }

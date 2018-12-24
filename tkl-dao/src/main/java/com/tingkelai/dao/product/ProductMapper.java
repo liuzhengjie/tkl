@@ -21,4 +21,7 @@ public interface ProductMapper extends BaseMapper<Product> {
     IPage<Product> page(@Param("iPage") IPage<Product> iPage,  @Param(Constants.WRAPPER)  QueryWrapper<Product> queryWrapper);
 
     Product getById(@Param("id") Long id);
+
+    Product getOne(@Param(Constants.WRAPPER)  QueryWrapper<Product> queryWrapper);
+
 }

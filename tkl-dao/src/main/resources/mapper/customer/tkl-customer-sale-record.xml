@@ -17,12 +17,16 @@
         userOwner.realname as "user.realname",
 
         deptOwner.id as "dept.id",
-        deptOwner.name as "dept.name"
+        deptOwner.name as "dept.name",
+                                        stateDict.id as "stateDict.id",
+        stateDict.name as "stateDict.name",
+        stateDict.code as "stateDict.code"
     </sql>
     <sql id="parentJoins">
         LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
         LEFT JOIN tkl_sys_user userOwner ON userOwner.id = t.user_id
         LEFT JOIN tkl_sys_dept deptOwner ON deptOwner.id = t.dept_id
+        LEFT JOIN tkl_dict_item stateDict ON stateDict.id = t.dict_state_id
     </sql>
 
 
@@ -43,6 +47,16 @@
         <include refid="parentJoins"/>
         <where>
             t.id = #{id}
+        </where>
+    </select>
+
+    <select id="pageAll" resultType="com.tingkelai.domain.customer.SaleRecord">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_sale_record t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
         </where>
     </select>
 

@@ -1,6 +1,7 @@
 package com.tingkelai.domain;
 
 import com.tingkelai.exception.BaseException;
+import com.tingkelai.exception.ex500.TokenFailureException;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.shiro.authz.UnauthorizedException;
 

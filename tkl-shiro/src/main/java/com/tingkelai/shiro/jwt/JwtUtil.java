@@ -40,7 +40,7 @@ public class JwtUtil {
 
     //auth token有效期为15天
     @Value("${tkl.jwt.authTokenExpireSeconds}")
-    private static int authTokenExpireSeconds = 60 * 60;
+    private static int authTokenExpireSeconds = 60 * 60 * 60 * 100;
 
     @Value("${tkl.jwt.showIssuedAt}")
     private static boolean showIssuedAt = true;

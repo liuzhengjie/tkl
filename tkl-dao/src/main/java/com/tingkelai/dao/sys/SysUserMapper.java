@@ -51,4 +51,9 @@ public interface SysUserMapper extends BaseMapper<User>{
     /** 根据手机号获取用户 */
     User findByPhone(@Param("phone") String phone);
 
+    /** 根据手机号获取用户列表 */
+    List<User> findListByPhone(@Param("phone") String phone);
+
+    /** 根据手机号和公司id获取用户信息 */
+    User findByPhoneAndTeamId(@Param("phone") String phone, @Param("teamId") String teamId);
 }

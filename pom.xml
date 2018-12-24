@@ -29,6 +29,7 @@
 		<module>tkl-statistics</module>
 		<module>tkl-template</module>
 		<module>tkl-main</module>
+		<module>tkl-order</module>
 	</modules>
 
 <!--
@@ -53,7 +54,7 @@
 		<shiro.version>1.2.2</shiro.version>
 		<baomidao-version>3.0.6</baomidao-version>
         <quartz.version>2.3.0</quartz.version>
-		<fastjson-lib.version>1.1.37</fastjson-lib.version>
+		<fastjson-lib.version>1.2.54</fastjson-lib.version>
 	</properties>
 
 	<dependencies>
@@ -245,6 +246,12 @@
 			<dependency>
 				<groupId>com.tingkelai</groupId>
 				<artifactId>tkl-customer</artifactId>
+				<version>${sub-module-version}</version>
+			</dependency>
+			<!-- 订单（账单）管理模块相关 -->
+			<dependency>
+				<groupId>com.tingkelai</groupId>
+				<artifactId>tkl-order</artifactId>
 				<version>${sub-module-version}</version>
 			</dependency>
 			<!-- 动态模板字段模块 -->

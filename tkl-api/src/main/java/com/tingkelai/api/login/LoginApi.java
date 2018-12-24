@@ -1,7 +1,8 @@
 package com.tingkelai.api.login;
 
-import com.tingkelai.api.LoginUserVO;
+import com.tingkelai.vo.LoginUserVO;
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.RegistUserVO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2018-11-27 11:41:26
  * @version 1.0
  */
-@Api(value = "login", description = "登录相关Api", tags = "login")
+@Api(value = "login", description = "登录相关(用户基本信息，注册)Api", tags = "login")
 public interface LoginApi {
 
     @ApiOperation(value = "获取token", nickname = "getToken", notes = "获取token", tags={ "login", })
@@ -27,7 +28,12 @@ public interface LoginApi {
     @ApiOperation(value = "登录", nickname = "ajaxLogin", notes = "登录请求地址", tags={ "login", })
     @RequestMapping(value = "/ajaxLogin",
             method = RequestMethod.POST)
-    ResponseMessage ajaxLogin(HttpServletResponse response, @RequestBody LoginUserVO loginUserVO);
+    ResponseMessage ajaxLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginUserVO loginUserVO);
+
+    @ApiOperation(value = "注册", nickname = "regist", notes = "注册", tags={ "login", })
+    @RequestMapping(value = "/regist",
+            method = RequestMethod.POST)
+    ResponseMessage regist(HttpServletRequest request, HttpServletResponse response, @RequestBody RegistUserVO registUserVO);
 
     @ApiOperation(value = "登录成功页面", nickname = "login", notes = "登录成功返回信息", tags={ "login", })
     @ApiImplicitParams({

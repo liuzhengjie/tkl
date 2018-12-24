@@ -147,18 +147,31 @@ public class ProductVO implements BaseVO<Product, ProductVO> {
 	@Override
 	public Product toDTO(ProductVO productVO) {
 		Product product = new Product();
-//		product.setBrandDict(productVO.getBrandDict());
+		if(productVO.getBrandDict() != null){
+			product.setBrandDict(productVO.getBrandDict().toDTO());
+		}else{
+		}
+		if(productVO.getSeriesDict() != null){
+			product.setSeriesDict(productVO.getSeriesDict().toDTO());
+		}
+		if(productVO.getSupplierDict() != null){
+			product.setSupplierDict(productVO.getSupplierDict().toDTO());
+		}
+		if(productVO.getTypeDict() != null){
+			product.setTypeDict(productVO.getTypeDict().toDTO());
+		}
 		product.setCode(productVO.getCode());
-		product.setId(productVO.getId());
+		if(productVO.getId() == null){
+			product.setId(0l);
+		}else{
+			product.setId(productVO.getId());
+		}
 		product.setMaxNum(productVO.getMaxNum());
 		product.setMinNum(productVO.getMinNum());
 		product.setName(productVO.getName());
 		product.setPrice(productVO.getPrice());
-//		product.setSeriesId(productVO.getSeriesId());
-//		product.setSupplierId(productVO.getSupplierId());
 		product.setUnit(productVO.getUnit());
 		product.setTotalNum(productVO.getTotalNum());
-//		product.setTypeId(productVO.getTypeId());
 		product.setTeamId(productVO.getTeamId());
 		return product;
 	}
@@ -174,6 +187,9 @@ public class ProductVO implements BaseVO<Product, ProductVO> {
 
 	@Override
 	public ProductVO toVO(Product vo) {
+		if(vo == null){
+			return null;
+		}
 		return new ProductVO(vo);
 	}
 

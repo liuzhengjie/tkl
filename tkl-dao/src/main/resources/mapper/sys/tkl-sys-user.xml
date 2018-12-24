@@ -59,5 +59,17 @@
         select * from tkl_sys_user WHERE phone = #{phone} limit 1;
     </select>
 
+    <!-- 根据手机号获取用列表 -->
+    <select id="findListByPhone" resultType="com.tingkelai.domain.sys.User">
+        select t.*, team.name as "teamName" from tkl_sys_user t
+        LEFT JOIN tkl_sys_team team ON t.team_id = team.id
+        WHERE t.phone = #{phone}
+    </select>
+
+    <!-- 根据手机号和公司id获取用户信息 -->
+    <select id="findByPhoneAndTeamId" resultType="com.tingkelai.domain.sys.User">
+        select * from tkl_sys_user WHERE phone = #{phone} and team_id = #{teamId} limit 1;
+    </select>
+
 
 </mapper>

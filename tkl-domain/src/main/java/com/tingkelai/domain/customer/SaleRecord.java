@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.dict.DictItem;
 import com.tingkelai.domain.entity.DataEntity;
 import com.tingkelai.domain.sys.Dept;
 import com.tingkelai.domain.sys.User;
@@ -29,33 +30,75 @@ public class SaleRecord  extends DataEntity<Long> {
     @TableField("team_id")
     private Long teamId;
 
-    @TableField("code")
-    private String code = null;
-
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @TableField("sale_date")
-    private Date saleDate = null;
-
-    @TableField(value = "dept_id", el = "dept.id")
-    private Dept dept = null;
-
-    @TableField(value = "user_id", el = "user.id")
-    private User user = null;
-
-    @JsonProperty("channel")
-    private String channel = null;
-
-    @TableField("order_flag")
-    private String orderFlag = null;
-
-    @TableField(value = "customer_id", el = "customer.id")
-    private Customer customer = null;
-
     /**
      * 单据编号
      * @return code
      **/
-    @ApiModelProperty(value = "单据编号")
+    @TableField("code")
+    private String code = null;
+
+    /**
+     * 销售时间
+     * @return saleDate
+     **/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("sale_date")
+    private Date saleDate = null;
+
+    /**
+     * 关联部门
+     **/
+    @TableField(value = "dept_id", el = "dept.id")
+    private Dept dept = null;
+
+    /**
+     * 关联人员
+     **/
+    @TableField(value = "user_id", el = "user.id")
+    private User user = null;
+
+    /**
+     * 销售来源
+     **/
+    @TableField("channel")
+    private String channel = null;
+
+    /**
+     * 预约标识
+     **/
+    @TableField("order_flag")
+    private String orderFlag = null;
+
+    /**
+     * 原价
+     */
+    @TableField("original_price")
+    private Double originalPrice;
+
+    /**
+     * 折扣
+     */
+    @TableField("discount")
+    private String discount;
+
+    /**
+     * 实际价格
+     */
+    @TableField("real_price")
+    private Double realPrice;
+
+    /**
+     * 状态
+     */
+    @TableField(value = "dict_state_id", el = "stateDict")
+    private DictItem stateDict;
+
+    /**
+     * 关联客户
+     */
+    @TableField(value = "customer_id", el = "customer.id")
+    private Customer customer = null;
+
     public String getCode() {
         return code;
     }
@@ -64,11 +107,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.code = code;
     }
 
-    /**
-     * 销售时间
-     * @return saleDate
-     **/
-    @ApiModelProperty(value = "销售时间")
     public Date getSaleDate() {
         return saleDate;
     }
@@ -77,11 +115,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.saleDate = saleDate;
     }
 
-    /**
-     * Get dept
-     * @return dept
-     **/
-    @ApiModelProperty(value = "部门")
     public Dept getDept() {
         if(dept == null){
             dept = new Dept();
@@ -93,11 +126,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.dept = dept;
     }
 
-    /**
-     * Get user
-     * @return user
-     **/
-    @ApiModelProperty(value = "用户")
     public User getUser() {
         if(user == null){
             user = new User();
@@ -109,11 +137,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.user = user;
     }
 
-    /**
-     * 销售来源
-     * @return channel
-     **/
-    @ApiModelProperty(value = "销售来源")
     public String getChannel() {
         return channel;
     }
@@ -122,11 +145,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.channel = channel;
     }
 
-    /**
-     * 预约标识
-     * @return orderFlag
-     **/
-    @ApiModelProperty(value = "预约标识")
     public String getOrderFlag() {
         return orderFlag;
     }
@@ -135,11 +153,6 @@ public class SaleRecord  extends DataEntity<Long> {
         this.orderFlag = orderFlag;
     }
 
-    /**
-     * Get customer
-     * @return customer
-     **/
-    @ApiModelProperty(value = "关联客户")
     public Customer getCustomer() {
         if(customer == null){
             customer = new Customer();
@@ -157,6 +170,41 @@ public class SaleRecord  extends DataEntity<Long> {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public Double getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public Double getRealPrice() {
+        return realPrice;
+    }
+
+    public void setRealPrice(Double realPrice) {
+        this.realPrice = realPrice;
+    }
+
+    public DictItem getStateDict() {
+        if(stateDict == null){
+            stateDict = new DictItem();
+        }
+        return stateDict;
+    }
+
+    public void setStateDict(DictItem stateDict) {
+        this.stateDict = stateDict;
     }
 }
 

@@ -11,13 +11,17 @@ import com.tingkelai.exception.BaseException;
  */
 public class TokenFailureException extends BaseException {
 
+    public final static int STATUS = 500001;
+
+    public final static String REASON = "token失效";
+
     public TokenFailureException(){
-        setCode(500001);
-        setMessage("token失效");
+        setCode(STATUS);
+        setMessage(REASON);
     }
 
     public TokenFailureException(String message){
-        super("token失效");
-        setCode(500001);
+        super(message);
+        setCode(STATUS);
     }
 }

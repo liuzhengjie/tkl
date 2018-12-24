@@ -3,7 +3,9 @@ package com.tingkelai.domain.customer;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.dict.DictItem;
 import com.tingkelai.domain.entity.DataEntity;
 import com.tingkelai.domain.sys.Dept;
 import com.tingkelai.domain.sys.User;
@@ -11,6 +13,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -45,9 +48,21 @@ public class SaleChance  extends DataEntity<Long> {
     @TableField(value = "customer_id", el = "customer.id")
     private Customer customer = null;
 
-    @JsonProperty("nextContactDate")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField("next_contact_date")
-    private String nextContactDate = null;
+    private Date nextContactDate = null;
+
+    /** 关联联系人 */
+    @TableField(value = "linkman_id", el = "linkman.id")
+    private LinkMan linkMan;
+
+    /** 目前阶段 */
+    @TableField(value = "dict_phase_id", el = "phaseDict.id")
+    private DictItem phaseDict;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("last_follow_date")
+    private Date lastFollowFate = null;
 
     /**
      * 销售机会名称
@@ -141,13 +156,7 @@ public class SaleChance  extends DataEntity<Long> {
      * @return nextContactDate
      **/
     @ApiModelProperty(value = "下次联系日期")
-    public String getNextContactDate() {
-        return nextContactDate;
-    }
 
-    public void setNextContactDate(String nextContactDate) {
-        this.nextContactDate = nextContactDate;
-    }
 
     public Long getTeamId() {
         return teamId;
@@ -155,5 +164,43 @@ public class SaleChance  extends DataEntity<Long> {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public Date getNextContactDate() {
+        return nextContactDate;
+    }
+
+    public void setNextContactDate(Date nextContactDate) {
+        this.nextContactDate = nextContactDate;
+    }
+
+    public LinkMan getLinkMan() {
+        if(linkMan == null){
+            linkMan = new LinkMan();
+        }
+        return linkMan;
+    }
+
+    public void setLinkMan(LinkMan linkMan) {
+        this.linkMan = linkMan;
+    }
+
+    public DictItem getPhaseDict() {
+        if(phaseDict == null){
+            phaseDict = new DictItem();
+        }
+        return phaseDict;
+    }
+
+    public void setPhaseDict(DictItem phaseDict) {
+        this.phaseDict = phaseDict;
+    }
+
+    public Date getLastFollowFate() {
+        return lastFollowFate;
+    }
+
+    public void setLastFollowFate(Date lastFollowFate) {
+        this.lastFollowFate = lastFollowFate;
     }
 }

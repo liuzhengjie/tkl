@@ -29,27 +29,27 @@ import java.util.Map;
 public class DictGroupController extends BaseCRUDController<DictCategory, Long> implements DictGroupApi<DictCategoryVO> {
 
     @Override
-    public ResponseMessage dictGroupListGet(DictCategoryVO dictCategoryVO, BasePage basePage) {
+    public ResponseMessage<List<DictCategoryVO>> dictGroupListGet(DictCategoryVO dictCategoryVO, BasePage basePage) {
         return list(dictCategoryVO, basePage);
     }
 
     @Override
-    public ResponseMessage dictGroupGet(DictCategoryVO dictCategoryVO) {
+    public ResponseMessage<DictCategoryVO> dictGroupGet(DictCategoryVO dictCategoryVO) {
         return getEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseMessage dictGroupPost(@Valid DictCategoryVO dictCategoryVO) {
+    public ResponseMessage<DictCategoryVO> dictGroupPost(@Valid DictCategoryVO dictCategoryVO) {
         return saveEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseMessage dictGroupPut(@Valid DictCategoryVO dictCategoryVO) {
+    public ResponseMessage<DictCategoryVO> dictGroupPut(@Valid DictCategoryVO dictCategoryVO) {
         return updateEntity(dictCategoryVO);
     }
 
     @Override
-    public ResponseMessage dictGroupDelete(DictCategoryVO dictCategoryVO) {
+    public ResponseMessage<DictCategoryVO> dictGroupDelete(DictCategoryVO dictCategoryVO) {
         return deleteEntity(dictCategoryVO);
     }
 }

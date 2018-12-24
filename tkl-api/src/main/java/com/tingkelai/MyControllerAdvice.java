@@ -2,11 +2,13 @@ package com.tingkelai;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.exception.BaseException;
+import com.tingkelai.exception.ex500.TokenFailureException;
 import com.tingkelai.shiro.jwt.JwtUtil;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -47,20 +49,20 @@ public class MyControllerAdvice implements ResponseBodyAdvice {
 
 
     /**
-     * 全局异常捕捉处理
-     */
-    @ResponseBody
-    @ExceptionHandler(value = Exception.class)
-    public ResponseMessage errorHandler(Exception ex) {
-        return new ResponseMessage(ex);
-    }
-
-    /**
      * 无权限异常捕捉处理
      */
     @ResponseBody
     @ExceptionHandler({ UnauthorizedException.class })
     public ResponseMessage unauthenticatedHandler(Exception ex) {
+        return new ResponseMessage(ex);
+    }
+
+    /**
+     * 全局异常捕捉处理
+     */
+    @ResponseBody
+    @ExceptionHandler(value = Exception.class)
+    public ResponseMessage errorHandler(Exception ex) {
         return new ResponseMessage(ex);
     }
 
@@ -72,7 +74,6 @@ public class MyControllerAdvice implements ResponseBodyAdvice {
     public ResponseMessage myErrorHandler(BaseException ex) {
         return new ResponseMessage(ex);
     }
-
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {

@@ -28,12 +28,12 @@ public class ProductServiceImpl extends CommonServiceImpl<Product> implements IP
             QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
             //产品名非空，则模糊查询
             if(product.getName() != null){
-                queryWrapper.like("name", product.getName());
+                queryWrapper.like("t.name", product.getName());
                 product.setName(null);
             }
             //产品code非空，则模糊查询
             if(product.getCode() != null){
-                queryWrapper.like("code", product.getCode());
+                queryWrapper.like("t.code", product.getCode());
                 product.setCode(null);
             }
 
@@ -51,9 +51,9 @@ public class ProductServiceImpl extends CommonServiceImpl<Product> implements IP
     @Override
     public Product getOne(Wrapper<Product> wrapper) {
         Product product = wrapper.getEntity();
-        if(product.getId() != null){
-            return productMapper.getById(product.getId());
-        }
-        return super.getOne(wrapper);
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("team_id", product.getTeamId());
+        queryWrapper.eq("id", product.getId());
+        return super.getOne(queryWrapper);
     }
 }

@@ -43,6 +43,7 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
         setTel(linkMan.getTel());
         setTelBackup(linkMan.getTelBackup());
         setCustomer(new CustomerVO(linkMan.getCustomer()));
+        setWeixin(linkMan.getWeixin());
     }
 
     @JsonProperty("id")
@@ -128,6 +129,10 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
 
     @JsonProperty("region")
     private String region = null;
+
+    @JsonProperty("weixin")
+    @ApiModelProperty(value = "微信")
+    private String weixin = null;
 
     /**
      * 联系人名字
@@ -324,6 +329,14 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
         this.region = region;
     }
 
+    public String getWeixin() {
+        return weixin;
+    }
+
+    public void setWeixin(String weixin) {
+        this.weixin = weixin;
+    }
+
     /**
      * 封装成业务需要的对象
      */
@@ -354,6 +367,7 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
             linkMan.setCustomer(linkManVO.getCustomer().toDTO());
         }
         linkMan.setTeamId(linkManVO.getTeamId());
+        linkMan.setWeixin(linkManVO.getWeixin());
         return linkMan;
     }
 

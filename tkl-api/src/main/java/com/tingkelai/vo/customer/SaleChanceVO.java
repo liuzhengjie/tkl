@@ -1,16 +1,19 @@
 package com.tingkelai.vo.customer;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.SaleChance;
 import com.tingkelai.domain.sys.Team;
 import com.tingkelai.vo.BaseVO;
+import com.tingkelai.vo.dict.DictItemVO;
 import com.tingkelai.vo.sys.DeptVO;
 import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +39,9 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         setDept(new DeptVO(saleChance.getDept()));
         setUser(new UserVO(saleChance.getUser()));
         setCustomer(new CustomerVO(saleChance.getCustomer()));
+        setLinkMan(new LinkManVO(saleChance.getLinkMan()));
+        setLastFollowFate(saleChance.getLastFollowFate());
+        setPhaseDict(new DictItemVO(saleChance.getPhaseDict()));
     }
 
     @JsonProperty("id")
@@ -73,7 +79,8 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     private String discoverDate = null;
 
     @JsonProperty("nextContactDate")
-    private String nextContactDate = null;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date nextContactDate = null;
 
     @ApiModelProperty("服务人员")
     private UserVO user;
@@ -83,6 +90,18 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
 
     @ApiModelProperty("关联客户")
     private CustomerVO customer;
+
+    /** 关联联系人 */
+    @ApiModelProperty("联系人")
+    private LinkManVO linkMan;
+
+    /** 目前阶段 */
+    @ApiModelProperty("目前阶段")
+    private DictItemVO phaseDict;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("最后跟进时间")
+    private Date lastFollowFate = null;
 
     /**
      * 销售机会名称
@@ -110,16 +129,17 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.orderFlag = orderFlag;
     }
 
+
     /**
      * 下次联系日期
      * @return nextContactDate
      **/
     @ApiModelProperty(value = "下次联系日期")
-    public String getNextContactDate() {
+    public Date getNextContactDate() {
         return nextContactDate;
     }
 
-    public void setNextContactDate(String nextContactDate) {
+    public void setNextContactDate(Date nextContactDate) {
         this.nextContactDate = nextContactDate;
     }
 
@@ -160,6 +180,30 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.customer = customer;
     }
 
+    public LinkManVO getLinkMan() {
+        return linkMan;
+    }
+
+    public void setLinkMan(LinkManVO linkMan) {
+        this.linkMan = linkMan;
+    }
+
+    public DictItemVO getPhaseDict() {
+        return phaseDict;
+    }
+
+    public void setPhaseDict(DictItemVO phaseDict) {
+        this.phaseDict = phaseDict;
+    }
+
+    public Date getLastFollowFate() {
+        return lastFollowFate;
+    }
+
+    public void setLastFollowFate(Date lastFollowFate) {
+        this.lastFollowFate = lastFollowFate;
+    }
+
     /**
      * 封装成业务需要的对象
      */
@@ -177,6 +221,15 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         saleChance.setOrderFlag(saleChanceVO.getOrderFlag());
         if(saleChanceVO.getCustomer() != null){
             saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
+        }
+        if(saleChance.getPhaseDict() != null){
+            saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
+        }
+        if(saleChance.getUser() != null){
+            saleChance.setUser(saleChanceVO.getUser().toDTO());
+        }
+        if(saleChance.getDept() != null){
+            saleChance.setDept(saleChanceVO.getDept().toDTO());
         }
         saleChance.setTeamId(saleChanceVO.getTeamId());
         return saleChance;

@@ -85,6 +85,10 @@ public class LinkMan  extends DataEntity<Long> {
     @TableField("region")
     private String region = null;
 
+    @JsonProperty("weixin")
+    @TableField("weixin")
+    private String weixin = null;
+
     /** 数据所属公司 */
     @TableField("team_id")
     private Long teamId;
@@ -301,5 +305,13 @@ public class LinkMan  extends DataEntity<Long> {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getWeixin() {
+        return weixin;
+    }
+
+    public void setWeixin(String weixin) {
+        this.weixin = weixin;
     }
 }

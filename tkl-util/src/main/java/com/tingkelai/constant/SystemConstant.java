@@ -13,4 +13,7 @@ public class SystemConstant {
     public static final String CURRENT_USER = "systemuser";
     public static final String CURRENT_USERNAME = "systemusername";
 
+    //teamId标识
+    public static final String TEAM_ID_NAME = "teamId";
+
 }

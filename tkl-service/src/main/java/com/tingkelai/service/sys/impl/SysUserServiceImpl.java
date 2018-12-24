@@ -1,26 +1,28 @@
 package com.tingkelai.service.sys.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.dao.sys.SysUserMapper;
-import com.tingkelai.domain.sys.Button;
-import com.tingkelai.domain.sys.Menu;
-import com.tingkelai.domain.sys.Role;
-import com.tingkelai.domain.sys.User;
+import com.tingkelai.domain.sys.*;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.sys.ISysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service("sysUserService")
 public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysUserService {
 
+    private static Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
+
     @Autowired
     private PasswordServiceImpl passwordService;
+
+    @Autowired
+    private SysTeamServiceImpl sysTeamService;
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -38,6 +40,16 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     @Override
     public User findByPhone(String phone) {
         return sysUserMapper.findByPhone(phone);
+    }
+
+    @Override
+    public List<User> findListByPhone(String phone) {
+        return sysUserMapper.findListByPhone(phone);
+    }
+
+    @Override
+    public User findByPhoneAndTeamId(String phone, String teamId) {
+        return sysUserMapper.findByPhoneAndTeamId(phone, teamId);
     }
 
     @Override
@@ -73,5 +85,25 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     public boolean save(User user) {
         passwordService.encryptPassword(user);
         return super.save(user);
+    }
+
+    @Override
+    public boolean regist(User user, Team team) {
+        try {
+            //保存公司信息
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.DATE, 30);
+            team.setDeadline(calendar.getTime());
+            sysTeamService.save(team);
+            Long teamId = team.getId();
+            //保存用户信息
+            user.setTeamId(teamId);
+            save(user);
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
     }
 }

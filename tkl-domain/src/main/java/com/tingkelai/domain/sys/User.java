@@ -84,6 +84,17 @@ public class User extends DataEntity<Long>{
     @TableField("team_id")
     private Long teamId = null;
 
+    @JsonProperty("teamName")
+    private String teamName;
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
     public String getUsername() {
         return username;
     }

@@ -17,10 +17,10 @@
 	</parent>
 
 	<dependencies>
-		<dependency>
+<!--		<dependency>
 			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-customer</artifactId>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-sys</artifactId>
@@ -36,6 +36,10 @@
 		<dependency>
 			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-dictionary</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-order</artifactId>
 		</dependency>
 	</dependencies>
 </project>

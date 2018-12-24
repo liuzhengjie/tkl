@@ -103,7 +103,7 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 		try {
 			setCurrentTeam(vo);
 			QueryWrapper<Entity> queryWrapper = new QueryWrapper<>();
-			queryWrapper.setEntity(entity);
+			queryWrapper.setEntity(vo.toDTO());
 			entity = commonService.getOne(queryWrapper);
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
@@ -146,7 +146,7 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> updateEntity(VO vo, Entity entity) {
 		try {
 			setCurrentTeam(vo);
-			commonService.saveOrUpdate(entity);
+			commonService.saveOrUpdate(vo.toDTO());
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			logger.error(e.getMessage());

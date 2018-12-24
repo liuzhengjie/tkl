@@ -3,6 +3,7 @@ package com.tingkelai.service.customer.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.dao.customer.SaleRecordMapper;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.exception.ex400.LackParamsException;
@@ -44,5 +45,21 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
             return saleRecordMapper.getById(saleRecord.getId());
         }
         return super.getOne(wrapper);
+    }
+
+    @Override
+    public IPage<SaleRecord> pageAll(Page<SaleRecord> page, QueryWrapper<SaleRecord> wrapper) {
+        try {
+            //设置查询条件
+            SaleRecord saleRecord = wrapper.getEntity();
+            QueryWrapper<SaleRecord> queryWrapper = new QueryWrapper<>();
+            queryWrapper.setEntity(saleRecord);
+            //获取查询结果
+            IPage<SaleRecord> saleRecordIPage = saleRecordMapper.page(page, queryWrapper);
+            //加工返回值
+            return saleRecordIPage;
+        }catch (Exception e){
+            throw e;
+        }
     }
 }

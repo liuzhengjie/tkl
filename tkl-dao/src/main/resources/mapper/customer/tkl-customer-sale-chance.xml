@@ -17,12 +17,20 @@
         userOwner.realname as "user.realname",
 
         deptOwner.id as "dept.id",
-        deptOwner.name as "dept.name"
+        deptOwner.name as "dept.name",
+
+              linkman.id as "linkMan.id",
+        linkman.name as "linkMan.name",
+                                                phaseDict.id as "phaseDict.id",
+        phaseDict.name as "phaseDict.name",
+        phaseDict.code as "phaseDict.code"
     </sql>
     <sql id="parentJoins">
         LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
         LEFT JOIN tkl_sys_user userOwner ON userOwner.id = t.user_id
         LEFT JOIN tkl_sys_dept deptOwner ON deptOwner.id = t.dept_id
+        LEFT JOIN tkl_customer_linkman linkman ON linkman.id = t.linkman_id
+        LEFT JOIN tkl_dict_item phaseDict ON phaseDict.id = t.dict_phase_id
     </sql>
 
 

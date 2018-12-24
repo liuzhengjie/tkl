@@ -4,8 +4,10 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleRecordApi;
 import com.tingkelai.domain.customer.SaleRecord;
+import com.tingkelai.service.customer.ISaleRecordService;
 import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.SaleRecordVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +22,9 @@ import java.util.List;
 @RestController
 public class CustomerSaleRecordController extends BaseCRUDController<SaleRecord, Long>
         implements CustomerSaleRecordApi<SaleRecordVO> {
+
+    @Autowired
+    private ISaleRecordService saleRecordService;
 
     @Override
     public ResponseMessage<SaleRecordVO> customerSaleRecordDelete(SaleRecordVO requestBody) {
