@@ -137,6 +137,7 @@ public class LoginController implements LoginApi {
                 user.setPhone(registUserVO.getPhone());
                 user.setUsername(UUID.randomUUID().toString());
                 user.setPassword(registUserVO.getPassword());
+                user.setRealname(registUserVO.getRealname());
                 Team team = new Team();
                 team.setName(registUserVO.getTeamName());
                 boolean flag = sysUserService.regist(user, team);

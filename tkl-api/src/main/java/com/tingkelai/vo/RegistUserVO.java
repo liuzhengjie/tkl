@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class RegistUserVO {
 
+    @ApiModelProperty(value = "用户名", name = "realname", example = "我是用户名")
+    private String realname;
+
     @ApiModelProperty(value = "用户名（手机号，必须是手机号）", name = "15239198710", example = "15239198710")
     private String phone;
 
@@ -56,5 +59,13 @@ public class RegistUserVO {
 
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 }

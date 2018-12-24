@@ -7,10 +7,12 @@ import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -64,11 +66,18 @@ public class DruidConfig {
     @Value("{spring.datasource.connectionProperties:#{null}}")
     private String connectionProperties;
 
+    @Autowired
+    private Environment env;
+
     @Bean
     @Primary
     public DataSource dataSource(){
         DruidDataSource datasource = new DruidDataSource();
-        datasource.setUrl(dbUrl);
+        if(env.getProperty("dbUrl") != null){
+            datasource.setUrl(env.getProperty("dbUrl"));
+        }else{
+            datasource.setUrl(dbUrl);
+        }
         datasource.setUsername(username);
         datasource.setPassword(password);
         datasource.setDriverClassName(driverClassName);

@@ -86,6 +86,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/toLogin", "anon");
+        filterChainDefinitionMap.put("/regist/**", "anon");
         filterChainDefinitionMap.put("/v1/**", "formAuthenticationFilter");
         filterChainDefinitionMap.put("/**", "anon");
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
