@@ -34,7 +34,7 @@
 
 # 测试环境使用端口号
 server:
-    port: 8088
+    port: 8080
     servlet:
       context-path: /task
 
