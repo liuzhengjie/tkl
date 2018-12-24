@@ -8,12 +8,10 @@ import com.tingkelai.dao.product.ProductTypeMapper;
 import com.tingkelai.domain.product.ProductType;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.product.IProductTypeService;
-import com.tingkelai.util.tree.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
