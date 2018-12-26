@@ -27,6 +27,7 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
     setParentId(dept.getParentId());
     setParentIds(dept.getParentIds());
     setRemarks(dept.getRemarks());
+    setType(dept.getType());
   }
 
   @JsonProperty("id")
@@ -52,6 +53,10 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
   @JsonProperty("remarks")
   @ApiModelProperty(name = "备注", value = "remarks")
   private String remarks;
+
+  @JsonProperty("type")
+  @ApiModelProperty(name = "部门类型（shop：门店，dept：部门）", value = "type")
+  private String type;
 
   public Long getId() {
     return id;
@@ -104,6 +109,14 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
     this.parentIds = parentIds;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
   /**
    * 封装成业务需要的对象
    */
@@ -120,6 +133,7 @@ public class DeptVO implements BaseVO<Dept, DeptVO>{
     dept.setParentIds(deptVO.getParentIds());
     dept.setTeamId(deptVO.getTeamId());
     dept.setRemarks(deptVO.getRemarks());
+    dept.setType(deptVO.getType());
     return dept;
   }
 

@@ -1,30 +1,24 @@
 package com.tingkelai.api.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.tingkelai.api.login.LoginApi;
+import com.tingkelai.constant.SystemConstant;
+import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.sys.Team;
+import com.tingkelai.domain.sys.User;
+import com.tingkelai.exception.ex200.MultipleTeamException;
 import com.tingkelai.exception.ex200.PhoneNotFoundException;
 import com.tingkelai.exception.ex200.VerifyCodeException;
 import com.tingkelai.exception.ex300.AccountPasswordException;
 import com.tingkelai.exception.ex400.LackParamsException;
-import com.tingkelai.service.sms.bean.SmsBean;
-import com.tingkelai.service.sms.bean.SmsSendResult;
-import com.tingkelai.service.sms.sender.SmsSender;
-import com.tingkelai.util.RandomUtils;
-import com.tingkelai.util.redis.RedisUtils;
-import com.tingkelai.vo.user.LoginUserVO;
-import com.tingkelai.api.login.LoginApi;
-import com.tingkelai.constant.SystemConstant;
-import com.tingkelai.domain.ResponseMessage;
-import com.tingkelai.domain.sys.User;
-import com.tingkelai.exception.ex200.MultipleTeamException;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
 import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
-import com.tingkelai.vo.user.RegistUserVO;
+import com.tingkelai.util.redis.RedisUtils;
 import com.tingkelai.vo.sys.UserVO;
+import com.tingkelai.vo.user.LoginUserVO;
+import com.tingkelai.vo.user.RegistUserVO;
 import com.tingkelai.vo.user.ResetUserVO;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
@@ -97,7 +91,7 @@ public class LoginController implements LoginApi {
             responseMessage.setMessage("登录成功");
 
             //添加用户基本信息
-            User user = sysUserService.findByPhone(username);
+            User user = sysUserService.findByPhoneAndTeamId(username, teamId);
             Map<String, Object> map = new HashMap<>();
             UserVO userVO = new UserVO();
             map.put("user", userVO.toVO(user));

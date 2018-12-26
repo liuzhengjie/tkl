@@ -45,7 +45,7 @@ public class ResponseMessage<T> {
     }
 
     public ResponseMessage(T data){
-        this.setCode(4);
+        this.setCode(200);
         this.setType("ok");
         this.setMessage("正常数据");
         this.setData(data);

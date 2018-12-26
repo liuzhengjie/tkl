@@ -30,7 +30,7 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     }
 
     public SaleRecordVO(SaleRecord saleRecord){
-        setChannel(saleRecord.getChannel());
+        setChannelDict(new DictItemVO(saleRecord.getChannelDict()));
         setCode(saleRecord.getCode());
         setId(saleRecord.getId());
         setOrderFlag(saleRecord.getOrderFlag());
@@ -80,8 +80,8 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     private Date saleDate = null;
 
     @ApiModelProperty(value = "销售来源")
-    @JsonProperty("channel")
-    private String channel = null;
+    @JsonProperty("channelDict")
+    private DictItemVO channelDict = null;
 
     @ApiModelProperty(value = "预约标识")
     @JsonProperty("orderFlag")
@@ -131,12 +131,15 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
         this.saleDate = saleDate;
     }
 
-    public String getChannel() {
-        return channel;
+    public DictItemVO getChannelDict() {
+        if(channelDict == null){
+            channelDict = new DictItemVO();
+        }
+        return channelDict;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setChannelDict(DictItemVO channelDict) {
+        this.channelDict = channelDict;
     }
 
     public String getOrderFlag() {
@@ -148,6 +151,9 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     }
 
     public DeptVO getDept() {
+        if(dept == null){
+            dept = new DeptVO();
+        }
         return dept;
     }
 
@@ -156,6 +162,9 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     }
 
     public UserVO getUser() {
+        if(user == null){
+            user = new UserVO();
+        }
         return user;
     }
 
@@ -164,6 +173,9 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     }
 
     public CustomerVO getCustomer() {
+        if(customer == null){
+            customer = new CustomerVO();
+        }
         return customer;
     }
 
@@ -196,6 +208,9 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     }
 
     public DictItemVO getStateDict() {
+        if(stateDict == null){
+            stateDict = new DictItemVO();
+        }
         return stateDict;
     }
 
@@ -213,19 +228,24 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     @Override
     public SaleRecord toDTO(SaleRecordVO saleRecordVO) {
         SaleRecord saleRecord = new SaleRecord();
-        saleRecord.setChannel(saleRecordVO.getChannel());
         saleRecord.setCode(saleRecordVO.getCode());
         saleRecord.setId(saleRecordVO.getId());
         saleRecord.setOrderFlag(saleRecordVO.getOrderFlag());
         saleRecord.setSaleDate(saleRecordVO.getSaleDate());
-        if(saleRecordVO.getCustomer() != null){
-            saleRecord.setCustomer(saleRecordVO.getCustomer().toDTO());
-        }
         saleRecord.setTeamId(saleRecordVO.getTeamId());
         saleRecord.setDiscount(saleRecordVO.getDiscount());
         saleRecord.setOriginalPrice(saleRecordVO.getOriginalPrice());
         saleRecord.setRealPrice(saleRecordVO.getRealPrice());
-//        saleRecord.setStateDict(saleRecordVO.getStateDict().toDTO());
+        // 关联客户
+        saleRecord.setCustomer(saleRecordVO.getCustomer().toDTO());
+        // 销售状态
+        saleRecord.setStateDict(saleRecordVO.getStateDict().toDTO());
+        // 销售来源
+        saleRecord.setChannelDict(saleRecordVO.getChannelDict().toDTO());
+        // 门店
+        saleRecord.setDept(saleRecordVO.getDept().toDTO());
+        // 服务人员
+        saleRecord.setUser(saleRecordVO.getUser().toDTO());
         return saleRecord;
     }
 

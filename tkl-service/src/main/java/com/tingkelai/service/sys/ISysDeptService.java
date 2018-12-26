@@ -3,6 +3,8 @@ package com.tingkelai.service.sys;
 import com.tingkelai.domain.sys.Dept;
 import com.tingkelai.service.common.ICommonService;
 
+import java.util.List;
+
 /**
  * 部门service
  *
@@ -11,4 +13,7 @@ import com.tingkelai.service.common.ICommonService;
  * @version 1.0
  */
 public interface ISysDeptService extends ICommonService<Dept> {
+
+    /** 通过用户获取指定公司的门店列表 */
+    List<Dept> getShopList(Long userId, Long teamId) throws Exception;
 }

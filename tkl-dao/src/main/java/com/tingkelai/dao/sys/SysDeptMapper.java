@@ -23,4 +23,6 @@ import java.util.List;
 public interface SysDeptMapper extends BaseMapper<Dept>{
 
 
+    /** 获取指定用户能看到的门店列表 */
+    List<Dept> getShopList(@Param("userId") Long userId, @Param("teamId") Long teamId);
 }

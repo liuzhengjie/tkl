@@ -2,10 +2,7 @@ package com.tingkelai.api.user;
 
 import com.tingkelai.domain.ResponseMessage;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,22 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Api(value = "user", description = "用户相关api", tags = "user")
 @RequestMapping(value = "/v1")
-public interface UserApi<VO> {
+public interface UserApi{
 
-    @ApiOperation(value = "获取用户信息（通过id或phone）", nickname = "userGet", notes = "获取用户信息", tags={ "user", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
-    @RequestMapping(value = "/user/id-info",
+    @ApiOperation(value = "获取用户信息", nickname = "userGet", notes = "获取用户信息", tags={ "user", })
+    @RequestMapping(value = "/user",
             method = RequestMethod.GET)
-    ResponseMessage userGetById();
+    ResponseMessage userGet();
 
-    @ApiOperation(value = "获取用户信息（通过id或phone）", nickname = "userGet", notes = "获取用户信息", tags={ "user", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "phone", value = "phone", required = true),
-    })
-    @RequestMapping(value = "/user/phone-info",
+    @ApiOperation(value = "获取用户能看到的门店信息", nickname = "shopGet", notes = "获取用户能看到的门店信息", tags={ "user", })
+    @RequestMapping(value = "/user/shop",
             method = RequestMethod.GET)
-    ResponseMessage userGetByPhone();
+    ResponseMessage shopGet();
 }
 

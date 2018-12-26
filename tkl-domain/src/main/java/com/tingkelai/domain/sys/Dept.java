@@ -21,14 +21,12 @@ import java.util.Objects;
 public class Dept extends DataEntity<Long> {
   /**
    * 部门名称
-   * @return name
    **/
   @TableField("name")
   private String name = null;
 
   /**
    * 父部门id
-   * @return parentId
    **/
   @TableField("parent_id")
   private Integer parentId = null;
@@ -43,6 +41,10 @@ public class Dept extends DataEntity<Long> {
   /** 所属公司id */
   @TableField("team_id")
   private Long teamId;
+
+  /** 部门类型 */
+  @TableField("type")
+  private String type;
 
   public Long getTeamId() {
     return teamId;
@@ -74,6 +76,14 @@ public class Dept extends DataEntity<Long> {
 
   public void setParentIds(String parentIds) {
     this.parentIds = parentIds;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }
 

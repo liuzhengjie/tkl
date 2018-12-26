@@ -31,6 +31,7 @@
 		<module>tkl-main</module>
 		<module>tkl-order</module>
 		<module>tkl-package</module>
+		<module>tkl-user</module>
 	</modules>
 
 <!--
@@ -311,6 +312,13 @@
 			<dependency>
 				<groupId>com.tingkelai</groupId>
 				<artifactId>tkl-package</artifactId>
+				<version>${sub-module-version}</version>
+			</dependency>
+
+			<!-- 普通用户获取系统信息模块 -->
+			<dependency>
+				<groupId>com.tingkelai</groupId>
+				<artifactId>tkl-user</artifactId>
 				<version>${sub-module-version}</version>
 			</dependency>
 

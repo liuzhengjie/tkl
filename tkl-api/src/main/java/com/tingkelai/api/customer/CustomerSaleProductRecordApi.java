@@ -1,6 +1,7 @@
 package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.BasePage;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,13 @@ public interface CustomerSaleProductRecordApi<T> {
 
 
     @ApiOperation(value = "获取销售产品记录列表", nickname = "customerSaleProductRecordListGet", notes = "", tags={ "customer/sale-product-record", })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页", required = false, paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示条数", required = false, paramType = "query"),
+    })
     @RequestMapping(value = "/customer/sale-product-record/list",
             method = RequestMethod.GET)
-    ResponseMessage customerSaleProductRecordListGet(T requestBody);
+    ResponseMessage customerSaleProductRecordListGet(T requestBody, BasePage basePage);
 
 
     @ApiOperation(value = "添加销售产品记录", nickname = "customerSaleProductRecordPost", notes = "", tags={ "customer/sale-product-record", })

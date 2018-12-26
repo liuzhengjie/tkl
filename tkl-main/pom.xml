@@ -17,13 +17,17 @@
 	</parent>
 
 	<dependencies>
-		<!--		<dependency>
-                    <groupId>com.tingkelai</groupId>
-                    <artifactId>tkl-customer</artifactId>
-                </dependency>-->
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-customer</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-sys</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-user</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.tingkelai</groupId>

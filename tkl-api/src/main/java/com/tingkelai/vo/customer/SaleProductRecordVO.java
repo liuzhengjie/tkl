@@ -22,75 +22,94 @@ import java.util.List;
 @ApiModel(description = "销售产品记录")
 public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProductRecordVO>{
 
+    public SaleProductRecordVO(){
+
+    }
+
+    public SaleProductRecordVO(SaleProductRecord saleProductRecord){
+        setDiscount(saleProductRecord.getDiscount());
+        setId(saleProductRecord.getId());
+        setLeftCode(saleProductRecord.getLeftCode());
+        setLeftDate(saleProductRecord.getLeftDate());
+        setLeftDesc(saleProductRecord.getLeftDesc());
+        setName(saleProductRecord.getName());
+        setNum(saleProductRecord.getNum());
+        setRealTotal(saleProductRecord.getRealTotal());
+        setRightCode(saleProductRecord.getRightCode());
+        setRightDate(saleProductRecord.getRightDate());
+        setRightDesc(saleProductRecord.getRightDesc());
+        setSaleMoney(saleProductRecord.getSaleMoney());
+        setTotal(saleProductRecord.getTotal());
+        setUnit(saleProductRecord.getUnit());
+        // 关联销售记录
+        setSaleRecord(new SaleRecordVO(saleProductRecord.getSaleRecord()));
+    }
+
     @JsonProperty("id")
+    @ApiModelProperty(name = "id", value = "id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setTeamId(Long teamId) {
-
-    }
-
-    @Override
-    public Long getTeamId() {
-        return null;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @ApiModelProperty(value = "产品名")
     @JsonProperty("name")
     private String name = null;
 
+    @ApiModelProperty(value = "统一零售价")
     @JsonProperty("saleMoney")
     private String saleMoney = null;
 
+    @ApiModelProperty(value = "单位（计量单位）")
     @JsonProperty("unit")
     private String unit = null;
 
+    @ApiModelProperty(value = "数量")
     @JsonProperty("num")
     private String num = null;
 
+    @ApiModelProperty(value = "总价")
     @JsonProperty("total")
     private String total = null;
 
+    @ApiModelProperty(value = "实际成交价")
     @JsonProperty("realTotal")
     private String realTotal = null;
 
+    @ApiModelProperty(value = "左耳产品描述")
     @JsonProperty("leftDesc")
     private String leftDesc = null;
 
+    @ApiModelProperty(value = "左耳产品编号")
     @JsonProperty("leftCode")
     private String leftCode = null;
 
+    @ApiModelProperty(value = "左耳产品维护到期时间")
     @JsonProperty("leftDate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date leftDate = null;
 
+    @ApiModelProperty(value = "右耳产品描述")
     @JsonProperty("rightDesc")
     private String rightDesc = null;
 
+    @ApiModelProperty(value = "右耳产品编号")
     @JsonProperty("rightCode")
     private String rightCode = null;
 
+    @ApiModelProperty(value = "右耳产品维护到期时间")
     @JsonProperty("rightDate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date rightDate = null;
 
+    @ApiModelProperty(value = "折扣")
     @JsonProperty("discount")
     private String discount = null;
 
-    /**
-     * 产品名
-     * @return name
-     **/
-    @ApiModelProperty(value = "产品名")
+    @ApiModelProperty(hidden = true)
+    private Long teamId;
+
+    @ApiModelProperty("关联销售记录")
+    @JsonProperty("saleRecord")
+    private SaleRecordVO saleRecord;
+
     public String getName() {
         return name;
     }
@@ -99,11 +118,7 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.name = name;
     }
 
-    /**
-     * 统一零售价
-     * @return saleMoney
-     **/
-    @ApiModelProperty(value = "统一零售价")
+
     public String getSaleMoney() {
         return saleMoney;
     }
@@ -112,11 +127,7 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.saleMoney = saleMoney;
     }
 
-    /**
-     * 单位
-     * @return unit
-     **/
-    @ApiModelProperty(value = "单位")
+
     public String getUnit() {
         return unit;
     }
@@ -125,11 +136,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.unit = unit;
     }
 
-    /**
-     * 数量
-     * @return num
-     **/
-    @ApiModelProperty(value = "数量")
     public String getNum() {
         return num;
     }
@@ -138,11 +144,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.num = num;
     }
 
-    /**
-     * 总价
-     * @return total
-     **/
-    @ApiModelProperty(value = "总价")
     public String getTotal() {
         return total;
     }
@@ -151,11 +152,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.total = total;
     }
 
-    /**
-     * 实际成交价
-     * @return realTotal
-     **/
-    @ApiModelProperty(value = "实际成交价")
     public String getRealTotal() {
         return realTotal;
     }
@@ -164,11 +160,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.realTotal = realTotal;
     }
 
-    /**
-     * 左耳产品描述
-     * @return leftDesc
-     **/
-    @ApiModelProperty(value = "左耳产品描述")
     public String getLeftDesc() {
         return leftDesc;
     }
@@ -177,11 +168,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.leftDesc = leftDesc;
     }
 
-    /**
-     * 左耳产品编号
-     * @return leftCode
-     **/
-    @ApiModelProperty(value = "左耳产品编号")
     public String getLeftCode() {
         return leftCode;
     }
@@ -190,11 +176,7 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.leftCode = leftCode;
     }
 
-    /**
-     * 左耳产品维护到期时间
-     * @return leftDate
-     **/
-    @ApiModelProperty(value = "左耳产品维护到期时间")
+
     public Date getLeftDate() {
         return leftDate;
     }
@@ -202,11 +184,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.leftDate = leftDate;
     }
 
-    /**
-     * 右耳产品描述
-     * @return rightDesc
-     **/
-    @ApiModelProperty(value = "右耳产品描述")
     public String getRightDesc() {
         return rightDesc;
     }
@@ -215,11 +192,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.rightDesc = rightDesc;
     }
 
-    /**
-     * 右耳产品编号
-     * @return rightCode
-     **/
-    @ApiModelProperty(value = "右耳产品编号")
     public String getRightCode() {
         return rightCode;
     }
@@ -228,11 +200,6 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.rightCode = rightCode;
     }
 
-    /**
-     * 右耳产品维护到期时间
-     * @return rightDate
-     **/
-    @ApiModelProperty(value = "右耳产品维护到期时间")
     public Date getRightDate() {
         return rightDate;
     }
@@ -241,18 +208,41 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         this.rightDate = rightDate;
     }
 
-
-    /**
-     * 折扣
-     * @return discount
-     **/
-    @ApiModelProperty(value = "折扣")
     public String getDiscount() {
         return discount;
     }
 
     public void setDiscount(String discount) {
         this.discount = discount;
+    }
+
+    public SaleRecordVO getSaleRecord() {
+        if(saleRecord == null){
+            saleRecord = new SaleRecordVO();
+        }
+        return saleRecord;
+    }
+
+    public void setSaleRecord(SaleRecordVO saleRecord) {
+        this.saleRecord = saleRecord;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    @Override
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -279,6 +269,9 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
         saleProductRecord.setSaleMoney(saleProductRecordVO.getSaleMoney());
         saleProductRecord.setTotal(saleProductRecordVO.getTotal());
         saleProductRecord.setUnit(saleProductRecordVO.getUnit());
+        saleProductRecord.setTeamId(saleProductRecordVO.getTeamId());
+        //关联销售记录
+        saleProductRecord.setSaleRecord(saleProductRecordVO.getSaleRecord().toDTO());
         return saleProductRecord;
     }
 
@@ -295,22 +288,7 @@ public class SaleProductRecordVO implements BaseVO<SaleProductRecord, SaleProduc
      * 封装成web需要的对象
      */
     public SaleProductRecordVO toVO(SaleProductRecord saleProductRecord){
-        SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
-        saleProductRecordVO.setDiscount(saleProductRecord.getDiscount());
-        saleProductRecordVO.setId(saleProductRecord.getId());
-        saleProductRecordVO.setLeftCode(saleProductRecord.getLeftCode());
-        saleProductRecordVO.setLeftDate(saleProductRecord.getLeftDate());
-        saleProductRecordVO.setLeftDesc(saleProductRecord.getLeftDesc());
-        saleProductRecordVO.setName(saleProductRecord.getName());
-        saleProductRecordVO.setNum(saleProductRecord.getNum());
-        saleProductRecordVO.setRealTotal(saleProductRecord.getRealTotal());
-        saleProductRecordVO.setRightCode(saleProductRecord.getRightCode());
-        saleProductRecordVO.setRightDate(saleProductRecord.getRightDate());
-        saleProductRecordVO.setRightDesc(saleProductRecord.getRightDesc());
-        saleProductRecordVO.setSaleMoney(saleProductRecord.getSaleMoney());
-        saleProductRecordVO.setTotal(saleProductRecord.getTotal());
-        saleProductRecordVO.setUnit(saleProductRecord.getUnit());
-        return saleProductRecordVO;
+        return new SaleProductRecordVO(saleProductRecord);
     }
 
     @Override

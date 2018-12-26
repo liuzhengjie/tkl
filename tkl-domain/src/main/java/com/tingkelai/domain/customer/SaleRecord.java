@@ -60,8 +60,8 @@ public class SaleRecord  extends DataEntity<Long> {
     /**
      * 销售来源
      **/
-    @TableField("channel")
-    private String channel = null;
+    @TableField(value = "dict_channel_id", el = "channelDict.id")
+    private DictItem channelDict = null;
 
     /**
      * 预约标识
@@ -137,12 +137,15 @@ public class SaleRecord  extends DataEntity<Long> {
         this.user = user;
     }
 
-    public String getChannel() {
-        return channel;
+    public DictItem getChannelDict() {
+        if(channelDict == null){
+            channelDict = new DictItem();
+        }
+        return channelDict;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setChannelDict(DictItem channelDict) {
+        this.channelDict = channelDict;
     }
 
     public String getOrderFlag() {

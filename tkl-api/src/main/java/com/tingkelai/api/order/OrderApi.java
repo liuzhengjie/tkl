@@ -42,9 +42,13 @@ public interface OrderApi<T> {
 
 
     @ApiOperation(value = "获取订单（账单）列表", nickname = "orderListGet", notes = "", tags={ "order", })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页", required = false, paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示条数", required = false, paramType = "query"),
+    })
     @RequestMapping(value = "/order/list",
-            method = RequestMethod.GET)
-    ResponseMessage orderListGet(T requestBody, BasePage basePage);
+            method = RequestMethod.POST)
+    ResponseMessage orderListGet(@RequestBody T requestBody, BasePage basePage);
 
 
     @ApiOperation(value = "添加订单（账单）", nickname = "orderPost", notes = "", tags={ "order", })
