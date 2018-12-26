@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.dao.customer.SaleRecordMapper;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.exception.ex400.LackParamsException;
+import com.tingkelai.exception.ex500.TokenFailureException;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.customer.ISaleRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,10 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
             //设置查询条件
             SaleRecord saleRecord = wrapper.getEntity();
             QueryWrapper<SaleRecord> queryWrapper = new QueryWrapper<>();
+            if(saleRecord.getTeamId() == null){
+                throw new TokenFailureException();
+            }
+            queryWrapper.eq("t.team_id", saleRecord.getTeamId());
             queryWrapper.setEntity(saleRecord);
             //获取查询结果
             IPage<SaleRecord> saleRecordIPage = saleRecordMapper.page(page, queryWrapper);

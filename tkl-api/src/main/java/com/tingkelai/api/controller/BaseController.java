@@ -1,12 +1,9 @@
 package com.tingkelai.api.controller;
 
-import com.tingkelai.domain.sys.Team;
-import com.tingkelai.domain.sys.User;
 import com.tingkelai.shiro.jwt.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;

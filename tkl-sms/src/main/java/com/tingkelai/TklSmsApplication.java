@@ -1,5 +1,6 @@
-package com.tingkelai.tklsms;
+package com.tingkelai;
 
+import com.tingkelai.util.redis.RedisUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

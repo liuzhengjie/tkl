@@ -1,9 +1,17 @@
 package com.tingkelai.api.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.tingkelai.domain.sys.Team;
+import com.tingkelai.exception.ex200.PhoneNotFoundException;
 import com.tingkelai.exception.ex200.VerifyCodeException;
+import com.tingkelai.exception.ex300.AccountPasswordException;
 import com.tingkelai.exception.ex400.LackParamsException;
-import com.tingkelai.vo.LoginUserVO;
+import com.tingkelai.service.sms.bean.SmsBean;
+import com.tingkelai.service.sms.bean.SmsSendResult;
+import com.tingkelai.service.sms.sender.SmsSender;
+import com.tingkelai.util.RandomUtils;
+import com.tingkelai.util.redis.RedisUtils;
+import com.tingkelai.vo.user.LoginUserVO;
 import com.tingkelai.api.login.LoginApi;
 import com.tingkelai.constant.SystemConstant;
 import com.tingkelai.domain.ResponseMessage;
@@ -12,9 +20,11 @@ import com.tingkelai.exception.ex200.MultipleTeamException;
 import com.tingkelai.service.sys.impl.SysUserServiceImpl;
 import com.tingkelai.shiro.authc.StatelessToken;
 import com.tingkelai.shiro.jwt.JwtUtil;
-import com.tingkelai.vo.RegistUserVO;
+import com.tingkelai.vo.user.RegistUserVO;
 import com.tingkelai.vo.sys.UserVO;
+import com.tingkelai.vo.user.ResetUserVO;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
@@ -26,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -110,7 +121,8 @@ public class LoginController implements LoginApi {
             map.put("teamList", e.getTeamList());
             responseMessage.setData(map);
         }catch (Exception e){
-            responseMessage.setMessage("账号或密码错误");
+            e.printStackTrace();
+            return new ResponseMessage<>(new AccountPasswordException());
         }
         return responseMessage;
     }
@@ -125,7 +137,7 @@ public class LoginController implements LoginApi {
                 return new ResponseMessage<>(new VerifyCodeException());
             }else{
                 // 校验验证码
-                boolean verifyFlag = verifyCode(registUserVO.getPhone(), registUserVO.getVerifyCode());
+                boolean verifyFlag = verifyCode(SystemConstant.REGIST_NAME_PRE + registUserVO.getPhone(), registUserVO.getVerifyCode());
                 if(!verifyFlag){
                     return new ResponseMessage<>(new VerifyCodeException());
                 }
@@ -141,6 +153,12 @@ public class LoginController implements LoginApi {
                 Team team = new Team();
                 team.setName(registUserVO.getTeamName());
                 boolean flag = sysUserService.regist(user, team);
+                Map<String, Object> tokenMap = new HashMap<>();
+                tokenMap.put("username", user.getUsername());
+                tokenMap.put("userId", user.getId());
+                tokenMap.put("teamId", user.getTeamId());
+                String token = JwtUtil.signSessionToken(tokenMap);
+                response.setHeader(JwtUtil.TOKEN_NAME, token);
                 if(flag){
                     responseMessage.setMessage("注册成功");
                 }else{
@@ -156,10 +174,14 @@ public class LoginController implements LoginApi {
 
     /** 校验验证码是否正确 */
     private boolean verifyCode(String phone, String verifyCode) {
-        if("123456".equals(verifyCode)){
-            return true;
+        String code = RedisUtils.getKey(phone);
+        if(code == null){
+            return false;
         }
-        return false;
+        if(code.length() != 6 || !code.equals(verifyCode)){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -191,6 +213,42 @@ public class LoginController implements LoginApi {
             responseMessage.setMessage("注销失败");
         }
         return responseMessage;
+    }
+
+    @Override
+    @ResponseBody
+    public ResponseMessage<Map<String, Object>> resetPassword(HttpServletRequest request, HttpServletResponse response, ResetUserVO resetUserVO) {
+        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage<>();
+        try {
+            String phone = resetUserVO.getPhone();
+            String verifyCode = resetUserVO.getVerifyCode();
+            if(verifyCode(SystemConstant.RESET_NAME_PRE + phone,verifyCode)){
+                sysUserService.resetPassword(resetUserVO.getPhone(), resetUserVO.getPassword());
+            }else{
+                return new ResponseMessage<>(new VerifyCodeException());
+            }
+            responseMessage.setMessage("重置密码成功");
+            return responseMessage;
+        }catch (Exception e){
+            responseMessage = new ResponseMessage<>(e);
+        }
+        return responseMessage;
+    }
+
+    @Override
+    @ResponseBody
+    public ResponseMessage verifyPhone(String phone) {
+        ResponseMessage<Map<String, Object>> responseMessage = new ResponseMessage<>();
+        try {
+            List<User> userList = sysUserService.findListByPhone(phone);
+            if(userList == null || userList.size() == 0){
+                return new ResponseMessage(new PhoneNotFoundException());
+            }
+            responseMessage.setMessage("ok");
+            return responseMessage;
+        }catch (Exception e){
+            return new ResponseMessage<>(e);
+        }
     }
 
 

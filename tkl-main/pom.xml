@@ -39,6 +39,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.tingkelai</groupId>
+			<artifactId>tkl-sms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tingkelai</groupId>
 			<artifactId>tkl-order</artifactId>
 		</dependency>
 	</dependencies>

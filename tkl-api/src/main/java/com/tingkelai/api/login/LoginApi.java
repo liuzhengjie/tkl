@@ -1,8 +1,9 @@
 package com.tingkelai.api.login;
 
-import com.tingkelai.vo.LoginUserVO;
+import com.tingkelai.vo.user.LoginUserVO;
 import com.tingkelai.domain.ResponseMessage;
-import com.tingkelai.vo.RegistUserVO;
+import com.tingkelai.vo.user.RegistUserVO;
+import com.tingkelai.vo.user.ResetUserVO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +56,19 @@ public interface LoginApi {
     @RequestMapping(value = "/logout",
             method = RequestMethod.GET)
     ResponseMessage logout(HttpServletRequest request);
+
+    @ApiOperation(value = "重置密码", nickname = "reset-password", notes = "重置密码", tags={ "login", })
+    @RequestMapping(value = "/reset-password",
+            method = RequestMethod.POST)
+    ResponseMessage resetPassword(HttpServletRequest request, HttpServletResponse response, @RequestBody ResetUserVO resetUserVO);
+
+    @ApiOperation(value = "手机号校验（判断系统是否存在该号码）", nickname = "verifyPhone", notes = "手机号校验", tags={ "login", })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "body"),
+    })
+    @RequestMapping(value = "/verifyPhone",
+            method = RequestMethod.POST)
+    ResponseMessage verifyPhone(@RequestBody String phone);
 
 }
 

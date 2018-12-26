@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tingkelai.dao.product.ProductMapper;
 import com.tingkelai.domain.product.Product;
+import com.tingkelai.exception.ex500.TokenFailureException;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ProductServiceImpl extends CommonServiceImpl<Product> implements IP
                 queryWrapper.like("t.code", product.getCode());
                 product.setCode(null);
             }
+
+            if(product.getTeamId() == null){
+                throw new TokenFailureException();
+            }
+            queryWrapper.eq("t.team_id", product.getTeamId());
 
             queryWrapper.setEntity(product);
 

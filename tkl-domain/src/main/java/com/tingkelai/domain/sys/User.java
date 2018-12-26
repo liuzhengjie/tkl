@@ -85,7 +85,7 @@ public class User extends DataEntity<Long>{
     private Long teamId = null;
 
     @JsonProperty("teamName")
-    private String teamName;
+    private transient String teamName;
 
     public String getTeamName() {
         return teamName;
@@ -150,7 +150,6 @@ public class User extends DataEntity<Long>{
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public Integer getUserStatus() {
         return userStatus;

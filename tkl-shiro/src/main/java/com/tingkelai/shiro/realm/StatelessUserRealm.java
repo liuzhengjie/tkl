@@ -125,6 +125,8 @@ public class StatelessUserRealm extends AuthorizingRealm {
 			throw new AuthenticationException();
 		}
 
+		authcToken.setUsername(user.getUsername());
+
 		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user.getUsername(), // 用户名

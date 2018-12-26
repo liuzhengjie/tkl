@@ -76,6 +76,17 @@ public class SysUserServiceImpl extends CommonServiceImpl<User> implements ISysU
     }
 
     @Override
+    public boolean resetPassword(String phone, String password) {
+        List<User> userList = sysUserMapper.findListByPhone(phone);
+        //重设密码
+        for(User user : userList){
+            user.setPassword(password);
+            saveOrUpdate(user);
+        }
+        return true;
+    }
+
+    @Override
     public boolean saveOrUpdate(User user) {
         passwordService.encryptPassword(user);
         return super.saveOrUpdate(user);

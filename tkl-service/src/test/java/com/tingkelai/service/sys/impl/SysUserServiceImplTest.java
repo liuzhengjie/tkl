@@ -20,13 +20,6 @@ public class SysUserServiceImplTest {
     private SysUserMapper sysUserMapper;
 
     @Test
-    public void sysUserGet() throws Exception {
-        Long id = 1L;
-        User user = sysUserMapper.sysUserGet(id);
-        assertThat(user, notNullValue());
-    }
-
-    @Test
     public void sysUserDelete() throws Exception {
     }
 

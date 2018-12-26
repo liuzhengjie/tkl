@@ -29,6 +29,8 @@ public class PasswordServiceImpl {
 		user.setSalt(randomNumberGenerator.nextBytes().toHex());
 		String newPassword = new SimpleHash(algorithmName, user.getPassword(),
 				ByteSource.Util.bytes(user.getCredentialsSalt()), hashIterations).toHex();
+		System.out.println(user.getCredentialsSalt());
+		System.out.println(ByteSource.Util.bytes(user.getCredentialsSalt()));
 		user.setPassword(newPassword);
 	}
 }

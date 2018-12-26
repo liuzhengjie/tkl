@@ -16,4 +16,9 @@ public class SystemConstant {
     //teamId标识
     public static final String TEAM_ID_NAME = "teamId";
 
+    // redis不同模块前缀值
+    // 注册前缀
+    public static final String REGIST_NAME_PRE = "regist_";
+    // 重置密码前缀
+    public static final String RESET_NAME_PRE = "reset_";
 }

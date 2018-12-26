@@ -69,6 +69,15 @@ public class StatelessShiroConfig {
         filterChainDefinitionMap.put("/v2/api-docs/**", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
 
+        /** 短信发送拦截器 */
+        // TODO
+        filterChainDefinitionMap.put("sms", "anon");
+        /** 重置密码 */
+        // TODO
+        filterChainDefinitionMap.put("reset-password", "anon");
+        // TODO
+        filterChainDefinitionMap.put("verfiyPhone", "anon");
+
         // 听客来主系统拦截器
         filterChainDefinitionMap.put("/v1/**", "statelessAuthenticationFilter");
         // 听客来后台管理系统拦截器

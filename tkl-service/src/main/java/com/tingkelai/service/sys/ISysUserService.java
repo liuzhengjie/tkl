@@ -32,7 +32,11 @@ public interface ISysUserService extends ICommonService<User> {
     /** 根据用户id获取用户的所有角色 */
     List<Menu> findMenuListByUserId(Long id);
 
+    /** 根据username重置密码 */
     boolean changePassword(String username, String password);
+
+    /** 根据手机号重置密码 */
+    boolean resetPassword(String phone, String password);
 
     /** 用户注册 */
     boolean regist(User user, Team team);
