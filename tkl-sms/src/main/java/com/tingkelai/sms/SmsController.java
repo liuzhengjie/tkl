@@ -8,6 +8,7 @@ import com.tingkelai.service.sms.bean.SmsBean;
 import com.tingkelai.service.sms.bean.SmsSendResult;
 import com.tingkelai.service.sms.sender.SmsSender;
 import com.tingkelai.util.redis.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -22,6 +23,9 @@ import java.util.Map;
 @RestController
 public class SmsController implements SmsApi{
 
+    @Autowired
+    private SmsSender smsSender;
+
     @Override
     public ResponseMessage sendRegistVerifyCode(String phone) {
         try{
@@ -33,7 +37,7 @@ public class SmsController implements SmsApi{
             map.put("product", "听客来");
             smsBean.setTemplateParam(JSON.toJSONString(map));
             smsBean.setTemplateCode("SMS_3710271");
-            SmsSendResult smsSendResult = SmsSender.sendSms(smsBean);
+            SmsSendResult smsSendResult = smsSender.sendSms(smsBean);
             if(smsSendResult == null){
                 return new ResponseMessage(new Exception());
             }
@@ -60,7 +64,7 @@ public class SmsController implements SmsApi{
             map.put("code", smsBean.getOutId());
             smsBean.setTemplateParam(JSON.toJSONString(map));
             smsBean.setTemplateCode("SMS_3710269");
-            SmsSendResult smsSendResult = SmsSender.sendSms(smsBean);
+            SmsSendResult smsSendResult = smsSender.sendSms(smsBean);
             if(smsSendResult == null){
                 return new ResponseMessage(new Exception());
             }

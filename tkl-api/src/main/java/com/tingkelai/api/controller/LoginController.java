@@ -23,16 +23,14 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 登录相关controller
@@ -47,8 +45,17 @@ public class LoginController implements LoginApi {
     @Autowired
     private SysUserServiceImpl sysUserService;
 
+    @Autowired
+    private Environment env;
+
     @RequestMapping("/")
     public String helloWorld(){
+//        System.out.println(env.getProperty("justTest"));
+//        System.out.println(env.getProperty("justTest2.tingkelai"));
+//        System.out.println(env.getProperty("url"));
+//        System.err.println(EnvUtil.getString("justTest"));
+//        EnvUtil.getString("justTest");
+//        System.out.println(        EnvUtil.getStringValue("url"));
         return "redirect:/swagger-ui.html";
     }
 

@@ -56,4 +56,4 @@
 # 目前有4种环境配置，dev：开发环境，test：测试环境，beta：内测环境，prod：正式环境
 spring:
   profiles:
-    active: dev
+    active: beta

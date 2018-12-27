@@ -29,6 +29,9 @@ import java.util.List;
 public class DruidConfig {
     private Logger logger = LoggerFactory.getLogger(DruidConfig.class);
 
+    @Autowired
+    private Environment env;
+
     @Value("${spring.datasource.url:#{null}}")
     private String dbUrl;
     @Value("${spring.datasource.username: #{null}}")
@@ -63,21 +66,23 @@ public class DruidConfig {
     private Integer maxPoolPreparedStatementPerConnectionSize;
     @Value("${spring.datasource.filters:#{null}}")
     private String filters;
-    @Value("{spring.datasource.connectionProperties:#{null}}")
+    @Value("${spring.datasource.connectionProperties:#{null}}")
     private String connectionProperties;
 
-    @Autowired
-    private Environment env;
 
     @Bean
     @Primary
     public DataSource dataSource(){
+        System.out.println(env.getProperty("justTest"));
+        System.out.println(env.getProperty("justTest2.tingkelai"));
+        System.out.println(env.getProperty("url"));
         DruidDataSource datasource = new DruidDataSource();
-        if(env.getProperty("dbUrl") != null){
-            datasource.setUrl(env.getProperty("dbUrl"));
-        }else{
+//        if(env.getProperty("url") != null){
+//            System.err.println(env.getProperty("url"));
+//            datasource.setUrl(env.getProperty("url"));
+//        }else{
+//        }
             datasource.setUrl(dbUrl);
-        }
         datasource.setUsername(username);
         datasource.setPassword(password);
         datasource.setDriverClassName(driverClassName);

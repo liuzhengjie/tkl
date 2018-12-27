@@ -12,28 +12,37 @@ import com.tingkelai.service.sms.bean.SmsBean;
 import com.tingkelai.service.sms.bean.SmsSendResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
  * 短信发送实体
  */
-@Service
+@Configuration
 public class SmsSender {
 
-    private static Logger logger = LoggerFactory.getLogger(SmsSender.class);
+    private Logger logger = LoggerFactory.getLogger(SmsSender.class);
 
     //产品名称:云通信短信API产品,开发者无需替换
-    private static final String product = "Dysmsapi";
+    @Value("${sms.product:#{null}}")
+    private  String product;
     //产品域名,开发者无需替换
-    private static final String domain = "dysmsapi.aliyuncs.com";
+    @Value("${sms.domain:#{null}}")
+    private  String domain;
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    private static final String accessKeyId = "LTAIWWsSR8ljxXzs";
-    private static final String accessKeySecret = "hDYx9W1rRwGj3mg9gfkmK4fxbEhHRm";
+    @Value("${sms.accessKeyId:#{null}}")
+    private  String accessKeyId;
+    @Value("${sms.accessKeySecret:#{null}}")
+    private  String accessKeySecret;
     //短信签名
-    private static String signature = "tkl-test";
+    @Value("${sms.signature:#{null}}")
+    private  String signature;
 
-    public static SmsSendResult sendSms(SmsBean smsBean) throws ClientException {
+    public  SmsSendResult sendSms(SmsBean smsBean) throws ClientException {
         SmsSendResult smsSendResult = new SmsSendResult();
 
         //可自助调整超时时间

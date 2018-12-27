@@ -15,7 +15,7 @@ public class RedisUtils {
 
     //Redis服务器IP
     @Value("${spring.redis.host}")
-    private static String ADDR = "127.0.0.1";
+    private static String ADDR = "39.105.214.95";
 
     //Redis的端口号
     @Value("${spring.redis.port}")
