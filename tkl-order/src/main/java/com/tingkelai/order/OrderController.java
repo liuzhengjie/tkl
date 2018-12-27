@@ -6,13 +6,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.order.OrderApi;
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.domain.customer.Customer;
+import com.tingkelai.domain.customer.SaleProductRecord;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.service.customer.ISaleRecordService;
 import com.tingkelai.vo.BasePage;
+import com.tingkelai.vo.customer.SaleProductRecordVO;
 import com.tingkelai.vo.customer.SaleRecordVO;
+import com.tingkelai.vo.order.SaleOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +40,23 @@ public class OrderController extends BaseCRUDController<SaleRecord, Long> implem
 
     @Override
     public ResponseMessage<SaleRecordVO> orderGet(SaleRecordVO requestBody) {
+//        ResponseMessage<SaleOrderVO> responseMessage = new ResponseMessage<>();
+//        try{
+//            // 要保存的销售产品列表
+//            List<SaleProductRecord> saleProductRecordList = new ArrayList<>();
+//            List<SaleProductRecordVO> saleProductRecordVOList = saleOrderVO.getSaleProductRecordList();
+//            SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
+//            saleProductRecordList = saleProductRecordVO.toDTO(saleProductRecordVOList);
+//            // 要保存的销售订单基本信息
+//            SaleRecord saleRecord = saleOrderVO.getSaleRecord().toDTO();
+//
+//            boolean flag = saleRecordService.updateSaleOrder(saleRecord, saleProductRecordList);
+//            responseMessage.setMessage("修改成功！");
+//            return responseMessage;
+//        }catch (Exception e){
+//            logger.error(e.getMessage());
+//            return new ResponseMessage<>(e);
+//        }
         return getEntity(requestBody);
     }
 
@@ -69,12 +91,44 @@ public class OrderController extends BaseCRUDController<SaleRecord, Long> implem
     }
 
     @Override
-    public ResponseMessage<SaleRecordVO> orderPost(SaleRecordVO requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SaleOrderVO> orderPost(SaleOrderVO saleOrderVO) {
+        try{
+            ResponseMessage<SaleOrderVO> responseMessage = new ResponseMessage<>();
+            // 要保存的销售订单基本信息
+            SaleRecord saleRecord = saleOrderVO.getSaleRecord().toDTO();
+            // 要保存的销售产品列表
+            List<SaleProductRecord> saleProductRecordList = new ArrayList();
+            List<SaleProductRecordVO> saleProductRecordVOList = saleOrderVO.getSaleProductRecordList();
+            SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
+            saleProductRecordList = saleProductRecordVO.toDTO(saleProductRecordVOList);
+
+            boolean flag = saleRecordService.saveSaleOrder(saleRecord, saleProductRecordList);
+            responseMessage.setMessage("保存成功！");
+            return responseMessage;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ResponseMessage<>(e);
+        }
     }
 
     @Override
-    public ResponseMessage<SaleRecordVO> orderPut(SaleRecordVO requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SaleOrderVO> orderPut(SaleOrderVO saleOrderVO) {
+        try{
+            ResponseMessage<SaleOrderVO> responseMessage = new ResponseMessage<>();
+            // 要保存的销售产品列表
+            List<SaleProductRecord> saleProductRecordList = new ArrayList<>();
+            List<SaleProductRecordVO> saleProductRecordVOList = saleOrderVO.getSaleProductRecordList();
+            SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
+            saleProductRecordList = saleProductRecordVO.toDTO(saleProductRecordVOList);
+            // 要保存的销售订单基本信息
+            SaleRecord saleRecord = saleOrderVO.getSaleRecord().toDTO();
+
+            boolean flag = saleRecordService.updateSaleOrder(saleRecord, saleProductRecordList);
+            responseMessage.setMessage("修改成功！");
+            return responseMessage;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ResponseMessage<>(e);
+        }
     }
 }

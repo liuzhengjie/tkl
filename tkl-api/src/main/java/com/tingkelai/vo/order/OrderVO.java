@@ -1,10 +1,12 @@
-package com.tingkelai.vo.customer;
+package com.tingkelai.vo.order;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.vo.BaseVO;
+import com.tingkelai.vo.customer.CustomerVO;
+import com.tingkelai.vo.customer.SaleProductRecordVO;
 import com.tingkelai.vo.dict.DictItemVO;
 import com.tingkelai.vo.sys.DeptVO;
 import com.tingkelai.vo.sys.UserVO;
@@ -22,26 +24,11 @@ import java.util.List;
  * @date 2018-11-27 20:03:42
  * @version 1.0
  */
-@ApiModel(description = "销售记录")
-public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
+@ApiModel(description = "销售订单记录")
+public class OrderVO{
 
-    public SaleRecordVO(){
+    public OrderVO(){
 
-    }
-
-    public SaleRecordVO(SaleRecord saleRecord){
-        setChannelDict(new DictItemVO(saleRecord.getChannelDict()));
-        setCode(saleRecord.getCode());
-        setId(saleRecord.getId());
-        setOrderFlag(saleRecord.getOrderFlag());
-        setSaleDate(saleRecord.getSaleDate());
-        setDept(new DeptVO(saleRecord.getDept()));
-        setUser(new UserVO(saleRecord.getUser()));
-        setCustomer(new CustomerVO(saleRecord.getCustomer()));
-        setDiscount(saleRecord.getDiscount());
-        setOriginalPrice(saleRecord.getOriginalPrice());
-        setRealPrice(saleRecord.getRealPrice());
-        setStateDict(new DictItemVO(saleRecord.getStateDict()));
     }
 
     @JsonProperty("id")
@@ -55,12 +42,10 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
         return id;
     }
 
-    @Override
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
     }
 
-    @Override
     public Long getTeamId() {
         return teamId;
     }
@@ -114,6 +99,7 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     @JsonProperty("stateDict")
     @ApiModelProperty("状态")
     private DictItemVO stateDict;
+
 
     public String getCode() {
         return code;
@@ -216,63 +202,6 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
 
     public void setStateDict(DictItemVO stateDict) {
         this.stateDict = stateDict;
-    }
-
-    /**
-     * 封装成业务需要的对象
-     */
-    public SaleRecord toDTO(){
-        return toDTO(this);
-    }
-
-    @Override
-    public SaleRecord toDTO(SaleRecordVO saleRecordVO) {
-        SaleRecord saleRecord = new SaleRecord();
-        saleRecord.setCode(saleRecordVO.getCode());
-        saleRecord.setId(saleRecordVO.getId());
-        saleRecord.setOrderFlag(saleRecordVO.getOrderFlag());
-        saleRecord.setSaleDate(saleRecordVO.getSaleDate());
-        saleRecord.setTeamId(saleRecordVO.getTeamId());
-        saleRecord.setDiscount(saleRecordVO.getDiscount());
-        saleRecord.setOriginalPrice(saleRecordVO.getOriginalPrice());
-        saleRecord.setRealPrice(saleRecordVO.getRealPrice());
-        // 关联客户
-        saleRecord.setCustomer(saleRecordVO.getCustomer().toDTO());
-        // 销售状态
-        saleRecord.setStateDict(saleRecordVO.getStateDict().toDTO());
-        // 销售来源
-        saleRecord.setChannelDict(saleRecordVO.getChannelDict().toDTO());
-        // 门店
-        saleRecord.setDept(saleRecordVO.getDept().toDTO());
-        // 服务人员
-        saleRecord.setUser(saleRecordVO.getUser().toDTO());
-        // 关联商品列表
-        return saleRecord;
-    }
-
-    @Override
-    public List<SaleRecord> toDTO(List<SaleRecordVO> voList) {
-        List<SaleRecord> list = new ArrayList<>();
-        for(SaleRecordVO temp : voList){
-            list.add(temp.toDTO());
-        }
-        return list;
-    }
-
-    /**
-     * 封装成web需要的对象
-     */
-    public SaleRecordVO toVO(SaleRecord saleRecord){
-        return new SaleRecordVO(saleRecord);
-    }
-
-    @Override
-    public List<SaleRecordVO> toVO(List<SaleRecord> list) {
-        List<SaleRecordVO> resList = new ArrayList<>();
-        for(SaleRecord temp : list){
-            resList.add(toVO(temp));
-        }
-        return resList;
     }
 }
 

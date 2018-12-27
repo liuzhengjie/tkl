@@ -2,6 +2,7 @@ package com.tingkelai.api.order;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.vo.BasePage;
+import com.tingkelai.vo.order.SaleOrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -54,11 +55,12 @@ public interface OrderApi<T> {
     @ApiOperation(value = "添加订单（账单）", nickname = "orderPost", notes = "", tags={ "order", })
     @RequestMapping(value = "/order",
             method = RequestMethod.POST)
-    ResponseMessage orderPost(@Valid @RequestBody T requestBody);
+    ResponseMessage orderPost(@RequestBody SaleOrderVO requestBody);
 
 
     @ApiOperation(value = "修改订单（账单）", nickname = "orderPut", notes = "", tags={ "order", })
     @RequestMapping(value = "/order",
             method = RequestMethod.PUT)
-    ResponseMessage orderPut(@Valid @RequestBody T requestBody);
+    ResponseMessage orderPut(@Valid @RequestBody SaleOrderVO requestBody);
+
 }

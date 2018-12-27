@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tingkelai.dao.customer.CustomerMapper;
+import com.tingkelai.dao.customer.SaleProductRecordMapper;
 import com.tingkelai.dao.customer.SaleRecordMapper;
+import com.tingkelai.domain.customer.Customer;
+import com.tingkelai.domain.customer.SaleProductRecord;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.exception.ex400.LackParamsException;
 import com.tingkelai.exception.ex500.TokenFailureException;
@@ -13,10 +17,15 @@ import com.tingkelai.service.customer.ISaleRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("saleRecordService")
 public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> implements ISaleRecordService{
     @Autowired
     private SaleRecordMapper saleRecordMapper;
+
+    @Autowired
+    private SaleProductRecordServiceImpl saleProductRecordService;
 
     @Override
     public IPage<SaleRecord> page(IPage<SaleRecord> iPage, Wrapper<SaleRecord> wrapper) {
@@ -66,5 +75,29 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
         }catch (Exception e){
             throw e;
         }
+    }
+
+    @Override
+    public boolean saveSaleOrder(SaleRecord saleRecord,List<SaleProductRecord> saleProductRecordList) {
+        // 保存基本信息
+        super.save(saleRecord);
+        // 保存商品信息
+        for(SaleProductRecord temp : saleProductRecordList){
+            temp.setSaleRecord(saleRecord);
+            saleProductRecordService.save(temp);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateSaleOrder(SaleRecord saleRecord, List<SaleProductRecord> saleProductRecordList) {
+        // 修改信息
+        super.saveOrUpdate(saleRecord);
+        // 修改商品信息
+        for(SaleProductRecord temp : saleProductRecordList){
+            temp.setSaleRecord(saleRecord);
+            saleProductRecordService.saveOrUpdate(temp);
+        }
+        return true;
     }
 }
