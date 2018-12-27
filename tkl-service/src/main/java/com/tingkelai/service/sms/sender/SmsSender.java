@@ -23,23 +23,23 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class SmsSender {
 
-    private static Logger logger = LoggerFactory.getLogger(SmsSender.class);
+    private Logger logger = LoggerFactory.getLogger(SmsSender.class);
 
     //产品名称:云通信短信API产品,开发者无需替换
-    @Value("sms.product")
-    private static final String product = "product";
+    @Value("${sms.product}")
+    private String product = "product";
     //产品域名,开发者无需替换
-    @Value("sms.product")
-    private static final String domain = "domain";
-    @Value("sms.product")
-    private static final String accessKeyId = "accessKeyId";
-    @Value("sms.product")
-    private static final String accessKeySecret = "accessKeySecret";
+    @Value("${sms.domain}")
+    private String domain = "domain";
+    @Value("${sms.accessKeyId}")
+    private String accessKeyId = "accessKeyId";
+    @Value("${sms.accessKeySecret}")
+    private String accessKeySecret = "accessKeySecret";
     //短信签名
-    @Value("sms.product")
-    private static String signature = "signature";
+    @Value("${sms.signature}")
+    private String signature = "signature";
 
-    public static SmsSendResult sendSms(SmsBean smsBean) throws ClientException {
+    public SmsSendResult sendSms(SmsBean smsBean) throws ClientException {
         SmsSendResult smsSendResult = new SmsSendResult();
 
         //可自助调整超时时间
