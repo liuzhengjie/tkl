@@ -1,5 +1,6 @@
 package com.tingkelai;
 
+import com.tingkelai.config.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,9 @@ public class TklShiroApplication {
 	public static void main(String[] args) {
 		logger.debug("====tingkelai shiro module start");
 		System.out.println("========== 听客来shiro模块启动 ===========");
-		SpringApplication.run(TklShiroApplication.class, args);
+		SpringApplication springApplication = new SpringApplication(TklShiroApplication.class);
+		springApplication.setDefaultProperties(EnvConfig.getProperties());
+		springApplication.run(args);
 		System.out.println("======== 听客来shiro模块启动完成！ ===========");
 	}
 

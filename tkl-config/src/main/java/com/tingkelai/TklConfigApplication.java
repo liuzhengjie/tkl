@@ -26,8 +26,9 @@ public class TklConfigApplication{
 	public static void main(String[] args) {
 		logger.debug("====tingkelai config module start");
 		System.out.println("========== 听客来config模块启动 ===========");
-//		args = EnvConfig.getEnvArgs();
-		SpringApplication.run(TklConfigApplication.class, args);
+		SpringApplication springApplication = new SpringApplication(TklConfigApplication.class);
+		springApplication.setDefaultProperties(EnvConfig.getProperties());
+		springApplication.run(args);
 		System.out.println("======== 听客来config模块启动成功！ ===========");
 	}
 //
