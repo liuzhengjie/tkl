@@ -7,6 +7,8 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +18,8 @@ import org.springframework.stereotype.Service;
  * @author liuzhengjie
  * @version 1.0
  */
-@Service("passwordService")
+@Configuration("passwordService")
+@PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class PasswordServiceImpl {
 
 	private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();

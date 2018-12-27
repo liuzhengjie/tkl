@@ -5,7 +5,6 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import com.tingkelai.util.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -27,48 +27,49 @@ import java.util.List;
  * 2018-11-22 15:29:03
  */
 @Configuration
+@PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class DruidConfig {
     private Logger logger = LoggerFactory.getLogger(DruidConfig.class);
 
     @Autowired
     private Environment env;
 
-//    @Value("${spring.datasource.url:#{null}}")
-    private String dbUrl = EnvConfig.getPropertyString("spring.datasource.url");
-//    @Value("${spring.datasource.username: #{null}}")
-    private String username = EnvConfig.getPropertyString("spring.datasource.username");
-//    @Value("${spring.datasource.password:#{null}}")
-    private String password = EnvConfig.getPropertyString("spring.datasource.password");
-//    @Value("${spring.datasource.driverClassName:#{null}}")
-    private String driverClassName = EnvConfig.getPropertyString("spring.datasource.driverClassName");
-//    @Value("${spring.datasource.initialSize:#{null}}")
-    private Integer initialSize = EnvConfig.getPropertyInteger("spring.datasource.initialSize");
-//    @Value("${spring.datasource.minIdle:#{null}}")
-    private Integer minIdle  = EnvConfig.getPropertyInteger("spring.datasource.minIdle:");
-//    @Value("${spring.datasource.maxActive:#{null}}")
-    private Integer maxActive  = EnvConfig.getPropertyInteger("spring.datasource.maxActive");
-//    @Value("${spring.datasource.maxWait:#{null}}")
-    private Integer maxWait  = EnvConfig.getPropertyInteger("spring.datasource.maxWait");
-//    @Value("${spring.datasource.timeBetweenEvictionRunsMillis:#{null}}")
-    private Integer timeBetweenEvictionRunsMillis = EnvConfig.getPropertyInteger("spring.datasource.timeBetweenEvictionRunsMillis");
-//    @Value("${spring.datasource.minEvictableIdleTimeMillis:#{null}}")
-    private Integer minEvictableIdleTimeMillis = EnvConfig.getPropertyInteger("spring.datasource.minEvictableIdleTimeMillis");
-//    @Value("${spring.datasource.validationQuery:#{null}}")
-    private String validationQuery = EnvConfig.getPropertyString("spring.datasource.validationQuery");
-//    @Value("${spring.datasource.testWhileIdle:#{null}}")
-    private Boolean testWhileIdle  = EnvConfig.getPropertyBoolean("spring.datasource.testWhileIdle");
-//    @Value("${spring.datasource.testOnBorrow:#{null}}")
-    private Boolean testOnBorrow  = EnvConfig.getPropertyBoolean("spring.datasource.testOnBorrow");
-//    @Value("${spring.datasource.testOnReturn:#{null}}")
-    private Boolean testOnReturn = EnvConfig.getPropertyBoolean("spring.datasource.testOnReturn");
-//    @Value("${spring.datasource.poolPreparedStatements:#{null}}")
-    private Boolean poolPreparedStatements  = EnvConfig.getPropertyBoolean("spring.datasource.poolPreparedStatements");
-//    @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize:#{null}}")
-    private Integer maxPoolPreparedStatementPerConnectionSize = EnvConfig.getPropertyInteger("spring.datasource.maxPoolPreparedStatementPerConnectionSize");
-//    @Value("${spring.datasource.filters:#{null}}")
-    private String filters = EnvConfig.getPropertyString("spring.datasource.filters");
-//    @Value("${spring.datasource.connectionProperties:#{null}}")
-    private String connectionProperties = EnvConfig.getPropertyString("spring.datasource.connectionProperties");
+    @Value("${spring.datasource.url:#{null}}")
+    private String dbUrl;
+    @Value("${spring.datasource.username: #{null}}")
+    private String username;
+    @Value("${spring.datasource.password:#{null}}")
+    private String password;
+    @Value("${spring.datasource.driverClassName:#{null}}")
+    private String driverClassName;
+    @Value("${spring.datasource.initialSize:#{null}}")
+    private Integer initialSize = 2;
+    @Value("${spring.datasource.minIdle:#{null}}")
+    private Integer minIdle = 0;
+    @Value("${spring.datasource.maxActive:#{null}}")
+    private Integer maxActive = 20;
+    @Value("${spring.datasource.maxWait:#{null}}")
+    private Integer maxWait = 60000;
+    @Value("${spring.datasource.timeBetweenEvictionRunsMillis:#{null}}")
+    private Integer timeBetweenEvictionRunsMillis;
+    @Value("${spring.datasource.minEvictableIdleTimeMillis:#{null}}")
+    private Integer minEvictableIdleTimeMillis;
+    @Value("${spring.datasource.validationQuery:#{null}}")
+    private String validationQuery = "SELECT 1";
+    @Value("${spring.datasource.testWhileIdle:#{null}}")
+    private Boolean testWhileIdle = true;
+    @Value("${spring.datasource.testOnBorrow:#{null}}")
+    private Boolean testOnBorrow = false;
+    @Value("${spring.datasource.testOnReturn:#{null}}")
+    private Boolean testOnReturn;
+    @Value("${spring.datasource.poolPreparedStatements:#{null}}")
+    private Boolean poolPreparedStatements = false;
+    @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize:#{null}}")
+    private Integer maxPoolPreparedStatementPerConnectionSize;
+    @Value("${spring.datasource.filters:#{null}}")
+    private String filters;
+    @Value("{spring.datasource.connectionProperties:#{null}}")
+    private String connectionProperties;
 
 
     @Bean
@@ -78,11 +79,10 @@ public class DruidConfig {
         System.out.println(env.getProperty("justTest2.tingkelai"));
         System.out.println(env.getProperty("url"));
         DruidDataSource datasource = new DruidDataSource();
-//        if(env.getProperty("url") != null){
-//            System.err.println(env.getProperty("url"));
-//            datasource.setUrl(env.getProperty("url"));
-//        }else{
-//        }
+        if(env.getProperty("url") != null){
+            datasource.setUrl(env.getProperty("dbUrl"));
+        }else{
+        }
             datasource.setUrl(dbUrl);
         datasource.setUsername(username);
         datasource.setPassword(password);

@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import com.tingkelai.util.env.EnvConfig;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.naming.Context;
@@ -29,12 +29,13 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan("com.tingkelai.dao.**")
+@PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class MybatisPlusConfig {
 
     private Logger logger = LoggerFactory.getLogger(MybatisPlusConfig.class);
 
-//    @Value("${mybatis-plus.mapper-locations}")
-    private String mapperLocations =  EnvConfig.getPropertyString("mybatis-plus.mapper-locations");
+    @Value("${mybatis-plus.mapper-locations}")
+    private String mapperLocations;
 
     private final DataSource dataSource;
     @Autowired

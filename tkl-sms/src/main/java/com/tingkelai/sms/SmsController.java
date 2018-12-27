@@ -32,6 +32,7 @@ public class SmsController implements SmsApi{
             // 发送信息
             SmsBean smsBean = new SmsBean();
             smsBean.setPhoneNumbers(phone);
+            smsBean.setSignName("注册验证");
             Map map = new HashMap<>();
             map.put("code", smsBean.getOutId());
             map.put("product", "听客来");
@@ -59,6 +60,7 @@ public class SmsController implements SmsApi{
             // 发送信息
             SmsBean smsBean = new SmsBean();
             smsBean.setPhoneNumbers(phone);
+            smsBean.setSignName("变更验证");
             Map map = new HashMap<>();
             map.put("product", "听客来");
             map.put("code", smsBean.getOutId());

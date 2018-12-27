@@ -1,5 +1,6 @@
 package com.tingkelai;
 
+import com.tingkelai.util.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ public class TklMainApplication{
 	public static void main(String[] args) {
 		logger.debug("====tingkelai start");
 		System.out.println("========== 听客来系统启动 ===========");
+		args = EnvConfig.getEnvArgs();
 		SpringApplication springApplication = new SpringApplication(TklMainApplication.class);
 //		List<File> fileList = new ArrayList<>();
 //		fileList = FileUtil.getFileList(GlobalConfig.CONFIG_ROOT_PATH, fileList);

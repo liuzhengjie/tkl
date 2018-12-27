@@ -2,10 +2,11 @@ package com.tingkelai.shiro.jwt;
 
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
-import com.tingkelai.util.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,33 +19,35 @@ import java.util.Map;
  * @author liuzhengjie
  * @version 1.0
  */
+@Configuration
+@PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class JwtUtil {
 
     /** 日志 */
     private static Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
     //默认token名字
-//    @Value("${tkl.jwt.tokenName}")
-    public static String TOKEN_NAME = EnvConfig.getPropertyString("tkl.jwt.tokenName");
+    @Value("${tkl.jwt.tokenName}")
+    public static String TOKEN_NAME = "token";
 
     public static String USER_ID_NAME = "userId";
 
     public static String TEAM_ID_NAME = "teamId";
 
     //密钥
-//    @Value("${tkl.jwt.apiKey}")
-    public static String apiKey =  EnvConfig.getPropertyString("tkl.jwt.apiKey");
+    @Value("${tkl.jwt.apiKey}")
+    public static String apiKey = "liuzhengjie";
 
     //token到期时间小于autoUpdateSeconds时，自动更新token
-//    @Value("${tkl.jwt.autoUpdateSeconds}")
-    private static Integer autoUpdateSeconds =  EnvConfig.getPropertyInteger("tkl.jwt.autoUpdateSeconds");
+    @Value("${tkl.jwt.autoUpdateSeconds}")
+    private static int autoUpdateSeconds = 60 * 60 * 60 * 100;
 
     //auth token有效期为15天
-//    @Value("${tkl.jwt.authTokenExpireSeconds}")
-    private static Integer authTokenExpireSeconds = EnvConfig.getPropertyInteger("tkl.jwt.authTokenExpireSeconds");
+    @Value("${tkl.jwt.authTokenExpireSeconds}")
+    private static int authTokenExpireSeconds = 60 * 60 * 60 * 100;
 
-//    @Value("${tkl.jwt.showIssuedAt}")
-    private static Boolean showIssuedAt = EnvConfig.getPropertyBoolean("tkl.jwt.showIssuedAt");
+    @Value("${tkl.jwt.showIssuedAt}")
+    private static boolean showIssuedAt = true;
 
     // 到期时间标识
     private static final String DEADLINE_FLAG = "deadLine";

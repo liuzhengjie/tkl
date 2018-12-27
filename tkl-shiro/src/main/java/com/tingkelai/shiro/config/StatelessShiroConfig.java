@@ -1,13 +1,9 @@
 package com.tingkelai.shiro.config;
 
 import com.tingkelai.shiro.authc.credential.StatelessCredentialsMatcher;
-import com.tingkelai.shiro.filter.FormAuthenticationFilter;
 import com.tingkelai.shiro.filter.StatelessAuthenticationFilter;
-import com.tingkelai.shiro.filter.SysUserFilter;
 import com.tingkelai.shiro.realm.StatelessUserRealm;
-import com.tingkelai.shiro.realm.UserRealm;
 import com.tingkelai.shiro.session.SessionManager;
-import com.tingkelai.util.env.EnvConfig;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -16,6 +12,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -30,14 +27,15 @@ import java.util.Map;
  * @version 1.0
  */
 @Configuration
+@PropertySource(value = "file:${TKL_CONFIG_PATH}/application-test.properties")
 public class StatelessShiroConfig {
     /** shiro相关参数 */
-//    @Value(value = "${shiro.credentials.hashAlgorithmName}")
-    private String algorithmName = EnvConfig.getPropertyString("shiro.credentials.hashAlgorithmName");
-//    @Value(value = "${shiro.credentials.hashIterations}")
-    private final Integer hashIterations = EnvConfig.getPropertyInteger("shiro.credentials.hashIterations");
-//    @Value(value = "${shiro.credentials.storedCredentialsHexEncoded}")
-    private final Boolean storedCredentialsHexEncoded = EnvConfig.getPropertyBoolean("shiro.credentials.storedCredentialsHexEncoded");
+    @Value(value = "${shiro.credentials.hashAlgorithmName}")
+    private String algorithmName = "md5";
+    @Value(value = "${shiro.credentials.hashIterations}")
+    private final int hashIterations = 2;
+    @Value(value = "${shiro.credentials.storedCredentialsHexEncoded}")
+    private final boolean storedCredentialsHexEncoded = true;
 
     /** 自定义认证器 */
     private StatelessCredentialsMatcher statelessCredentialsMatcher(){

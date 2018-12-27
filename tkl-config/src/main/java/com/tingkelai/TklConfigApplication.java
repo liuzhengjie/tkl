@@ -1,5 +1,6 @@
 package com.tingkelai;
 
+import com.tingkelai.util.env.EnvConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class TklConfigApplication{
 	public static void main(String[] args) {
 		logger.debug("====tingkelai config module start");
 		System.out.println("========== 听客来config模块启动 ===========");
+		args = EnvConfig.getEnvArgs();
 		SpringApplication springApplication = new SpringApplication(TklConfigApplication.class);
 //		springApplication.setDefaultProperties(EnvConfig.getProperties());
 		springApplication.run(args);
