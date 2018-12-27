@@ -1,8 +1,11 @@
-package com.tingkelai.config.env;
+package com.tingkelai.util.env;
 
 import org.apache.commons.codec.Charsets;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Properties;
 

@@ -1,6 +1,7 @@
 package com.tingkelai.service.sys.impl;
 
 import com.tingkelai.domain.sys.User;
+import com.tingkelai.util.env.EnvConfig;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -21,9 +22,9 @@ public class PasswordServiceImpl {
 	private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 	
 //	@Value(value = "${shiro.credentials.hashAlgorithmName}")
-	private String algorithmName = "md5";
+	private String algorithmName = EnvConfig.getPropertyString("shiro.credentials.hashAlgorithmName");
 //	@Value(value = "${shiro.credentials.hashIterations}")
-	private final int hashIterations = 2;
+	private final Integer hashIterations = EnvConfig.getPropertyInteger("shiro.credentials.hashIterations");
 
 	public void encryptPassword(User user) {
 		user.setSalt(randomNumberGenerator.nextBytes().toHex());

@@ -1,6 +1,5 @@
 package com.tingkelai;
 
-import com.tingkelai.config.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +14,7 @@ public class TklSmsApplication {
 		logger.debug("====tingkelai start");
 		System.out.println("========== 听客来系统启动 ===========");
 		SpringApplication springApplication = new SpringApplication(TklSmsApplication.class);
-		springApplication.setDefaultProperties(EnvConfig.getProperties());
+//		springApplication.setDefaultProperties(EnvConfig.getProperties());
 		springApplication.run(args);
 		logger.debug("====tingkelai start");
 		System.out.println("========== 听客来系统启动 ===========");

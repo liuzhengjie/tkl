@@ -10,6 +10,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.tingkelai.service.sms.bean.SmsBean;
 import com.tingkelai.service.sms.bean.SmsSendResult;
+import com.tingkelai.util.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +28,20 @@ public class SmsSender {
     private Logger logger = LoggerFactory.getLogger(SmsSender.class);
 
     //产品名称:云通信短信API产品,开发者无需替换
-    @Value("${sms.product:#{null}}")
-    private  String product;
+//    @Value("${sms.product:#{null}}")
+    private  String product = EnvConfig.getPropertyString("sms.product");
     //产品域名,开发者无需替换
-    @Value("${sms.domain:#{null}}")
-    private  String domain;
+//    @Value("${sms.domain:#{null}}")
+    private  String domain = EnvConfig.getPropertyString("sms.domain");
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    @Value("${sms.accessKeyId:#{null}}")
-    private  String accessKeyId;
-    @Value("${sms.accessKeySecret:#{null}}")
-    private  String accessKeySecret;
+//    @Value("${sms.accessKeyId:#{null}}")
+    private  String accessKeyId = EnvConfig.getPropertyString("sms.accessKeyId");
+//    @Value("${sms.accessKeySecret:#{null}}")
+    private  String accessKeySecret = EnvConfig.getPropertyString("sms.accessKeySecret");
     //短信签名
-    @Value("${sms.signature:#{null}}")
-    private  String signature;
+//    @Value("${sms.signature:#{null}}")
+    private  String signature = EnvConfig.getPropertyString("sms.signature");
 
     public  SmsSendResult sendSms(SmsBean smsBean) throws ClientException {
         SmsSendResult smsSendResult = new SmsSendResult();

@@ -1,5 +1,6 @@
 package com.tingkelai.util.redis;
 
+import com.tingkelai.util.env.EnvConfig;
 import org.springframework.beans.factory.annotation.Value;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -14,32 +15,33 @@ import java.util.Map;
 public class RedisUtils {
 
     //Redis服务器IP
-    @Value("${spring.redis.host}")
-    private static String ADDR = "39.105.214.95";
+//    @Value("${spring.redis.host}")
+//    private static String ADDR = "39.105.214.95";
+    private static String ADDR = EnvConfig.getPropertyString("spring.redis.host");
 
     //Redis的端口号
     @Value("${spring.redis.port}")
-    private static int PORT = 6379;
+    private static int PORT = EnvConfig.getPropertyInteger("spring.redis.port");
 
     //访问密码
     @Value("${spring.redis.password}")
-    private static String AUTH;
+    private static String AUTH = EnvConfig.getPropertyString("spring.redis.password");
 
     //可用连接实例的最大数目，默认值为8；
     //如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
     @Value("${spring.redis.jedis.pool.max-active}")
-    private static int MAX_ACTIVE = 8;
+    private static int MAX_ACTIVE = EnvConfig.getPropertyInteger("spring.redis.jedis.pool.max-active");
 
     //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例，默认值也是8。
     @Value("${spring.redis.jedis.pool.max-idle}")
-    private static int MAX_IDLE = 8;
+    private static int MAX_IDLE = EnvConfig.getPropertyInteger("spring.redis.jedis.pool.max-idle");
 
     //等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException；
     @Value("${spring.redis.jedis.pool.max-wait}")
-    private static int MAX_WAIT = 1;
+    private static int MAX_WAIT = EnvConfig.getPropertyInteger("spring.redis.jedis.pool.max-wait");
 
     @Value("${spring.redis.timeout}")
-    private static int TIMEOUT;
+    private static int TIMEOUT = EnvConfig.getPropertyInteger("spring.redis.timeout");
 
     //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
     private static boolean TEST_ON_BORROW = false;

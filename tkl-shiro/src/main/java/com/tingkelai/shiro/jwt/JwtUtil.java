@@ -2,6 +2,7 @@ package com.tingkelai.shiro.jwt;
 
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
+import com.tingkelai.util.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,27 +24,27 @@ public class JwtUtil {
     private static Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
     //默认token名字
-    @Value("${tkl.jwt.tokenName}")
-    public static String TOKEN_NAME = "token";
+//    @Value("${tkl.jwt.tokenName}")
+    public static String TOKEN_NAME = EnvConfig.getPropertyString("tkl.jwt.tokenName");
 
     public static String USER_ID_NAME = "userId";
 
     public static String TEAM_ID_NAME = "teamId";
 
     //密钥
-    @Value("${tkl.jwt.apiKey}")
-    public static String apiKey = "liuzhengjie";
+//    @Value("${tkl.jwt.apiKey}")
+    public static String apiKey =  EnvConfig.getPropertyString("tkl.jwt.apiKey");
 
     //token到期时间小于autoUpdateSeconds时，自动更新token
-    @Value("${tkl.jwt.autoUpdateSeconds}")
-    private static int autoUpdateSeconds = 60 * 60 * 60 * 100;
+//    @Value("${tkl.jwt.autoUpdateSeconds}")
+    private static Integer autoUpdateSeconds =  EnvConfig.getPropertyInteger("tkl.jwt.autoUpdateSeconds");
 
     //auth token有效期为15天
-    @Value("${tkl.jwt.authTokenExpireSeconds}")
-    private static int authTokenExpireSeconds = 60 * 60 * 60 * 100;
+//    @Value("${tkl.jwt.authTokenExpireSeconds}")
+    private static Integer authTokenExpireSeconds = EnvConfig.getPropertyInteger("tkl.jwt.authTokenExpireSeconds");
 
-    @Value("${tkl.jwt.showIssuedAt}")
-    private static boolean showIssuedAt = true;
+//    @Value("${tkl.jwt.showIssuedAt}")
+    private static Boolean showIssuedAt = EnvConfig.getPropertyBoolean("tkl.jwt.showIssuedAt");
 
     // 到期时间标识
     private static final String DEADLINE_FLAG = "deadLine";

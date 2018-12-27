@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.tingkelai.util.env.EnvConfig;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -32,8 +33,8 @@ public class MybatisPlusConfig {
 
     private Logger logger = LoggerFactory.getLogger(MybatisPlusConfig.class);
 
-    @Value("${mybatis-plus.mapper-locations}")
-    private String mapperLocations;
+//    @Value("${mybatis-plus.mapper-locations}")
+    private String mapperLocations =  EnvConfig.getPropertyString("mybatis-plus.mapper-locations");
 
     private final DataSource dataSource;
     @Autowired
