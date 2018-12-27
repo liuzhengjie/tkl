@@ -20,9 +20,9 @@ public class PasswordServiceImpl {
 
 	private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 	
-	@Value(value = "${shiro.credentials.hashAlgorithmName}")
+//	@Value(value = "${shiro.credentials.hashAlgorithmName}")
 	private String algorithmName = "md5";
-	@Value(value = "${shiro.credentials.hashIterations}")
+//	@Value(value = "${shiro.credentials.hashIterations}")
 	private final int hashIterations = 2;
 
 	public void encryptPassword(User user) {

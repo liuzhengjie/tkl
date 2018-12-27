@@ -31,11 +31,11 @@ import java.util.Map;
 @Configuration
 public class StatelessShiroConfig {
     /** shiro相关参数 */
-    @Value(value = "${shiro.credentials.hashAlgorithmName}")
+//    @Value(value = "${shiro.credentials.hashAlgorithmName}")
     private String algorithmName = "md5";
-    @Value(value = "${shiro.credentials.hashIterations}")
+//    @Value(value = "${shiro.credentials.hashIterations}")
     private final int hashIterations = 2;
-    @Value(value = "${shiro.credentials.storedCredentialsHexEncoded}")
+//    @Value(value = "${shiro.credentials.storedCredentialsHexEncoded}")
     private final boolean storedCredentialsHexEncoded = true;
 
     /** 自定义认证器 */
