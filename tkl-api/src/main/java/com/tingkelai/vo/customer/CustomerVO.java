@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * 客户主表
  *
+ * 2018-11-27 19:24:37
  * @author liuzhengjie
- * @date 2018-11-27 19:24:37
  * @version 1.0
  */
 @ApiModel(description = "客户主表")
@@ -60,27 +60,11 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
     }
 
     @JsonProperty("id")
+    @ApiModelProperty(name = "id", value = "id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setTeamId(Long teamId) {
-
-    }
-
-    @Override
-    public Long getTeamId() {
-        return null;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ApiModelProperty(hidden = true)
+    private Long teamId;
 
     /**
      * 客户名字
@@ -92,7 +76,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 客户编号
-     * @return code
      **/
     @ApiModelProperty(value = "客户编号")
     @JsonProperty("code")
@@ -100,7 +83,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 客户性别
-     * @return sex
      **/
     @ApiModelProperty(value = "客户性别")
     @JsonProperty("sex")
@@ -108,7 +90,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 省
-     * @return provience
      **/
     @ApiModelProperty(value = "省")
     @JsonProperty("provience")
@@ -116,7 +97,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 市
-     * @return city
      **/
     @ApiModelProperty(value = "市")
     @JsonProperty("city")
@@ -124,7 +104,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 区
-     * @return region
      **/
     @ApiModelProperty(value = "区")
     @JsonProperty("region")
@@ -132,7 +111,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 地址
-     * @return area
      **/
     @ApiModelProperty(value = "地址")
     @JsonProperty("area")
@@ -140,7 +118,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 注册时间
-     * @return registDate
      **/
     @ApiModelProperty(value = "注册时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -148,7 +125,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 生日
-     * @return birthday
      **/
     @ApiModelProperty(value = "生日")
     @JsonProperty("birthday")
@@ -156,12 +132,12 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     /**
      * 年龄
-     * @return age
      **/
     @ApiModelProperty(value = "年龄")
     @JsonProperty("age")
     private Integer age = null;
 
+    @ApiModelProperty(value = "职业")
     @JsonProperty("job")
     private String job = null;
 
@@ -172,7 +148,6 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
     /** 所属人员 */
     @JsonProperty("userOwner")
     private UserVO userOwner = null;
-
 
     /** 客户来源 */
     @ApiModelProperty(value = "客户来源")
@@ -351,6 +326,25 @@ public class CustomerVO implements BaseVO<Customer, CustomerVO>{
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    @Override
+    public Long getTeamId() {
+        return this.teamId;
     }
 
 

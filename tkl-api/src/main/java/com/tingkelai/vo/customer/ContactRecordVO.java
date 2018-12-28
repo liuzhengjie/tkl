@@ -45,45 +45,39 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
     private Long teamId;
 
     @JsonProperty("id")
+    @ApiModelProperty(name = "id", value = "id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
-    }
-
-    @Override
-    public Long getTeamId() {
-        return teamId;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    /** 联系类别 */
+    @ApiModelProperty(value = "联系类别")
     @JsonProperty("type")
     private String type = null;
 
+    /** 联系方式 **/
+    @ApiModelProperty(value = "联系方式")
     @JsonProperty("way")
     private String way = null;
 
+    /** 联系时间 */
+    @ApiModelProperty(value = "联系时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("contactDate")
     private String contactDate = null;
 
+    /** 下次联系时间 */
+    @ApiModelProperty(value = "下次联系时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("nextContactDate")
     private String nextContactDate = null;
 
+    /** 预约计划标识 */
+    @ApiModelProperty(value = "预约计划标识")
     @JsonProperty("orderFlag")
     private String orderFlag = null;
 
+
+    /** 联系内容 */
+    @ApiModelProperty(value = "联系内容")
     @JsonProperty("context")
     private String context = null;
 
@@ -95,11 +89,7 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
 
     @ApiModelProperty("关联客户")
     private CustomerVO customer;
-    /**
-     * 联系类别
-     * @return type
-     **/
-    @ApiModelProperty(value = "联系类别")
+
     public String getType() {
         return type;
     }
@@ -108,11 +98,6 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
         this.type = type;
     }
 
-    /**
-     * 联系方式
-     * @return way
-     **/
-    @ApiModelProperty(value = "联系方式")
     public String getWay() {
         return way;
     }
@@ -121,11 +106,6 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
         this.way = way;
     }
 
-    /**
-     * 联系时间
-     * @return contactDate
-     **/
-    @ApiModelProperty(value = "联系时间")
     public String getContactDate() {
         return contactDate;
     }
@@ -134,12 +114,6 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
         this.contactDate = contactDate;
     }
 
-
-    /**
-     * 下次联系时间
-     * @return nextContactDate
-     **/
-    @ApiModelProperty(value = "下次联系时间")
     public String getNextContactDate() {
         return nextContactDate;
     }
@@ -148,11 +122,6 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
         this.nextContactDate = nextContactDate;
     }
 
-    /**
-     * 预约计划标识
-     * @return orderFlag
-     **/
-    @ApiModelProperty(value = "预约计划标识")
     public String getOrderFlag() {
         return orderFlag;
     }
@@ -161,11 +130,6 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
         this.orderFlag = orderFlag;
     }
 
-    /**
-     * 联系内容
-     * @return context
-     **/
-    @ApiModelProperty(value = "联系内容")
     public String getContext() {
         return context;
     }
@@ -196,6 +160,25 @@ public class ContactRecordVO implements BaseVO<ContactRecord, ContactRecordVO>{
 
     public void setCustomer(CustomerVO customer) {
         this.customer = customer;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    @Override
+    public Long getTeamId() {
+        return teamId;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

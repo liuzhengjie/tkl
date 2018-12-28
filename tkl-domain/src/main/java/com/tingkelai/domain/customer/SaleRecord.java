@@ -90,7 +90,7 @@ public class SaleRecord  extends DataEntity<Long> {
     /**
      * 状态
      */
-    @TableField(value = "dict_state_id", el = "stateDict")
+    @TableField(value = "dict_state_id", el = "stateDict.id")
     private DictItem stateDict;
 
     /**
