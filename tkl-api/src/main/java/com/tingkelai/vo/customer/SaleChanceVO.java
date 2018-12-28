@@ -222,13 +222,13 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         if(saleChanceVO.getCustomer() != null){
             saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
         }
-        if(saleChance.getPhaseDict() != null){
+        if(saleChanceVO.getPhaseDict() != null){
             saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
         }
-        if(saleChance.getUser() != null){
+        if(saleChanceVO.getUser() != null){
             saleChance.setUser(saleChanceVO.getUser().toDTO());
         }
-        if(saleChance.getDept() != null){
+        if(saleChanceVO.getDept() != null){
             saleChance.setDept(saleChanceVO.getDept().toDTO());
         }
         saleChance.setTeamId(saleChanceVO.getTeamId());

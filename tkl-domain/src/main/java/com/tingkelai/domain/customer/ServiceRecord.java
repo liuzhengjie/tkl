@@ -95,7 +95,7 @@ public class ServiceRecord  extends DataEntity<Long> {
     private User user = null;
 
     @JsonProperty("serviceType")
-    @TableField("serevice_type")
+    @TableField("service_type")
     private String serviceType = null;
 
     @JsonProperty("charge")

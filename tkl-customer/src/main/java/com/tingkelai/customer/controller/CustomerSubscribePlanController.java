@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSubscribePlanApi;
 import com.tingkelai.domain.customer.SubscribePlan;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.SubscribePlanVO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +32,8 @@ public class CustomerSubscribePlanController extends BaseCRUDController<Subscrib
     }
 
     @Override
-    public ResponseMessage<List<SubscribePlanVO>> customerSubscribePlanListGet(SubscribePlanVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage<List<SubscribePlanVO>> customerSubscribePlanListGet(SubscribePlanVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

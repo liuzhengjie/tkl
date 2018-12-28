@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerFollowRecordApi;
 import com.tingkelai.domain.customer.FollowRecord;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.FollowRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,8 @@ public class CustomerFollowRecordController  extends BaseCRUDController<FollowRe
     }
 
     @Override
-    public ResponseMessage customerFollowRecordListGet(FollowRecordVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage customerFollowRecordListGet(FollowRecordVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerServiceRecordApi;
 import com.tingkelai.domain.customer.ServiceRecord;
+import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.customer.ServiceRecordVO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +32,8 @@ public class CustomerServiceRecordController extends BaseCRUDController<ServiceR
     }
 
     @Override
-    public ResponseMessage<List<ServiceRecordVO>> customerServiceRecordListGet(ServiceRecordVO requestBody) {
-        return getEntityList(requestBody);
+    public ResponseMessage<List<ServiceRecordVO>> customerServiceRecordListGet(ServiceRecordVO requestBody, BasePage basePage) {
+        return list(requestBody, basePage);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.BasePage;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public interface CustomerServiceRecordApi<T> {
     @ApiOperation(value = "获取客户服务记录列表", nickname = "customerServiceRecordListGet", notes = "", tags={ "customer/service-record", })
     @RequestMapping(value = "/customer/service-record/list",
             method = RequestMethod.GET)
-    ResponseMessage customerServiceRecordListGet(T requestBody);
+    ResponseMessage customerServiceRecordListGet(T requestBody, BasePage basePage);
 
 
     @ApiOperation(value = "添加客户服务记录", nickname = "customerServiceRecordPost", notes = "", tags={ "customer/service-record", })

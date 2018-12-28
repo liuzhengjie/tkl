@@ -1,6 +1,7 @@
 package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
+import com.tingkelai.vo.BasePage;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public interface CustomerSubscribePlanApi<T> {
     @ApiOperation(value = "获取客户预约计划列表", nickname = "customerSubscribePlanListGet", notes = "", tags={ "customer/subscribe-plan", })
     @RequestMapping(value = "/customer/subscribe-plan/list",
             method = RequestMethod.GET)
-    ResponseMessage customerSubscribePlanListGet(T requestBody);
+    ResponseMessage customerSubscribePlanListGet(T requestBody, BasePage basePage);
 
 
     @ApiOperation(value = "添加客户预约计划", nickname = "customerSubscribePlanPost", notes = "", tags={ "customer/subscribe-plan", })
