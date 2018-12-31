@@ -87,6 +87,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     private String machineCode;
 
     public CustomerVO getCustomerVO() {
+        if(customerVO == null){
+            customerVO = new CustomerVO();
+        }
         return customerVO;
     }
 
@@ -110,12 +113,12 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
         if(useRecordVO.getCustomerVO() != null){
             useRecord.setCustomer(useRecordVO.getCustomerVO().toDTO());
         }
-//        useRecord.setDictBrand(useRecordVO.getDictBrand().toDTO());
-//        useRecord.setDictEar(useRecordVO.getDictEar().toDTO());
-//        useRecord.setDictMachineType(useRecordVO.getDictMachineType().toDTO());
-//        useRecord.setDictUseOrNo(useRecordVO.getDictUseOrNo().toDTO());
-//        useRecord.setDictUseResult(useRecordVO.getDictUseResult().toDTO());
-//        useRecord.setDictUseYear(useRecordVO.getDictUseYear().toDTO());
+        useRecord.setDictBrand(useRecordVO.getDictBrand().toDTO());
+        useRecord.setDictEar(useRecordVO.getDictEar().toDTO());
+        useRecord.setDictMachineType(useRecordVO.getDictMachineType().toDTO());
+        useRecord.setDictUseOrNo(useRecordVO.getDictUseOrNo().toDTO());
+        useRecord.setDictUseResult(useRecordVO.getDictUseResult().toDTO());
+        useRecord.setDictUseYear(useRecordVO.getDictUseYear().toDTO());
         useRecord.setMachineCode(useRecordVO.getMachineCode());
         useRecord.setTeamId(useRecordVO.getTeamId());
         return useRecord;
@@ -159,6 +162,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictMachineType() {
+        if(dictMachineType == null){
+            dictMachineType = new DictItemVO();
+        }
         return dictMachineType;
     }
 
@@ -167,6 +173,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictBrand() {
+        if(dictBrand == null){
+            dictBrand = new DictItemVO();
+        }
         return dictBrand;
     }
 
@@ -175,6 +184,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictUseOrNo() {
+        if(dictUseOrNo == null){
+            dictUseOrNo = new DictItemVO();
+        }
         return dictUseOrNo;
     }
 
@@ -183,6 +195,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictEar() {
+        if(dictEar == null){
+            dictEar = new DictItemVO();
+        }
         return dictEar;
     }
 
@@ -191,6 +206,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictUseYear() {
+        if(dictUseYear == null){
+            dictUseYear = new DictItemVO();
+        }
         return dictUseYear;
     }
 
@@ -199,6 +217,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     }
 
     public DictItemVO getDictUseResult() {
+        if(dictUseResult == null){
+            dictUseResult = new DictItemVO();
+        }
         return dictUseResult;
     }
 

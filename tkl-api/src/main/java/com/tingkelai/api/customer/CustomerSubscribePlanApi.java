@@ -22,9 +22,6 @@ import java.util.List;
 public interface CustomerSubscribePlanApi<T> {
 
     @ApiOperation(value = "删除客户预约计划", nickname = "customerSubscribePlanDelete", notes = "", tags={ "customer/subscribe-plan", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
     @RequestMapping(value = "/customer/subscribe-plan",
             method = RequestMethod.DELETE)
     ResponseMessage customerSubscribePlanDelete(T requestBody);

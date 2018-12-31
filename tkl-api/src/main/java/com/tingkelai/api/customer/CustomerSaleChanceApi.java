@@ -22,9 +22,6 @@ import java.util.List;
 public interface CustomerSaleChanceApi<T> {
 
     @ApiOperation(value = "删除销售机会", nickname = "customerSaleChanceDelete", notes = "", tags={ "customer/sale-chance", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.DELETE)
     ResponseMessage customerSaleChanceDelete(T requestBody);

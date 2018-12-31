@@ -21,9 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/v1")
 public interface CustomerContactRecordApi<T> {
     @ApiOperation(value = "删除客户联系记录", nickname = "customerContactRecordDelete", notes = "", tags={ "customer/contact-record", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
     @RequestMapping(value = "/customer/contact-record",
             method = RequestMethod.DELETE)
     ResponseMessage customerContactRecordDelete(T requestBody);

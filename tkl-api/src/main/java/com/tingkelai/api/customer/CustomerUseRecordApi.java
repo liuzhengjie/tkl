@@ -53,9 +53,6 @@ public interface CustomerUseRecordApi<VO> {
 
 
     @ApiOperation(value = "删除使用情况", nickname = "useRecordDelete", notes = "删除使用情况", tags={ "customer/use-record", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "使用情况id", required = true, paramType = "query"),
-    })
     @RequestMapping(value = "/customer/use-record",
             method = RequestMethod.DELETE)
     ResponseMessage useRecordDelete(VO vo);

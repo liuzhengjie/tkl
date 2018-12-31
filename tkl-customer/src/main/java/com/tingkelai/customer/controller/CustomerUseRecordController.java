@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerUseRecordApi;
 import com.tingkelai.api.product.ProductApi;
@@ -45,6 +46,8 @@ public class CustomerUseRecordController extends BaseCRUDController<UseRecord, L
 
     @Override
     public ResponseMessage<UseRecordVO> useRecordDelete(UseRecordVO useRecordVO) {
-        return deleteEntity(useRecordVO);
+        QueryWrapper<UseRecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", useRecordVO.getId());
+        return removeEntity(useRecordVO, queryWrapper);
     }
 }

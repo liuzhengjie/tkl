@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerLinkManApi;
 import com.tingkelai.domain.ResponseMessage;
@@ -22,7 +23,9 @@ public class CustomerLinkManController extends BaseCRUDController<LinkMan, Long>
 
     @Override
     public ResponseMessage<LinkManVO> customerLinkmanDelete(LinkManVO requestBody) {
-        return deleteEntity(requestBody);
+        QueryWrapper<LinkMan> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", requestBody.getId());
+        return removeEntity(requestBody, queryWrapper);
     }
 
     @Override

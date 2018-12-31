@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleChanceApi;
@@ -22,7 +23,9 @@ public class CustomerSaleChanceController extends BaseCRUDController<SaleChance,
 
     @Override
     public ResponseMessage<SaleChanceVO> customerSaleChanceDelete(SaleChanceVO requestBody) {
-        return deleteEntity(requestBody);
+        QueryWrapper<SaleChance> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", requestBody.getId());
+        return removeEntity(requestBody, queryWrapper);
     }
 
     @Override

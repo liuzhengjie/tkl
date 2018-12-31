@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerContactRecordApi;
 import com.tingkelai.domain.ResponseMessage;
@@ -30,7 +31,9 @@ public class CustomerContactRecordController extends BaseCRUDController<ContactR
 
     @Override
     public ResponseMessage<ContactRecordVO> customerContactRecordDelete(ContactRecordVO requestBody) {
-        return deleteEntity(requestBody);
+        QueryWrapper<ContactRecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", requestBody.getId());
+        return removeEntity(requestBody, queryWrapper);
     }
 
     @Override

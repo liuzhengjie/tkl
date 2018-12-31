@@ -31,6 +31,7 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     }
 
     public SaleChanceVO(SaleChance saleChance){
+        setContent(saleChance.getContent());
         setDiscoverDate(saleChance.getDiscoverDate());
         setId(saleChance.getId());
         setName(saleChance.getName());
@@ -69,15 +70,20 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.id = id;
     }
 
+    @ApiModelProperty(value = "销售机会名称")
     @JsonProperty("name")
     private String name = null;
 
+    @ApiModelProperty(value = "预约计划标识")
     @JsonProperty("orderFlag")
     private String orderFlag = null;
 
+    @ApiModelProperty(value = "发现日期")
     @JsonProperty("discoverDate")
-    private String discoverDate = null;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date discoverDate = null;
 
+    @ApiModelProperty(value = "下次联系日期")
     @JsonProperty("nextContactDate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date nextContactDate = null;
@@ -103,11 +109,10 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     @ApiModelProperty("最后跟进时间")
     private Date lastFollowFate = null;
 
-    /**
-     * 销售机会名称
-     * @return name
-     **/
-    @ApiModelProperty(value = "销售机会名称")
+    @JsonProperty("content")
+    @ApiModelProperty("跟进内容")
+    private String content;
+
     public String getName() {
         return name;
     }
@@ -116,11 +121,14 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.name = name;
     }
 
-    /**
-     * 预约计划标识
-     * @return orderFlag
-     **/
-    @ApiModelProperty(value = "预约计划标识")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getOrderFlag() {
         return orderFlag;
     }
@@ -129,12 +137,6 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.orderFlag = orderFlag;
     }
 
-
-    /**
-     * 下次联系日期
-     * @return nextContactDate
-     **/
-    @ApiModelProperty(value = "下次联系日期")
     public Date getNextContactDate() {
         return nextContactDate;
     }
@@ -143,16 +145,11 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.nextContactDate = nextContactDate;
     }
 
-    /**
-     * 发现日期
-     * @return discoverDate
-     **/
-    @ApiModelProperty(value = "发现日期")
-    public String getDiscoverDate() {
+    public Date getDiscoverDate() {
         return discoverDate;
     }
 
-    public void setDiscoverDate(String discoverDate) {
+    public void setDiscoverDate(Date discoverDate) {
         this.discoverDate = discoverDate;
     }
 
@@ -219,6 +216,7 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         saleChance.setName(saleChanceVO.getName());
         saleChance.setNextContactDate(saleChanceVO.getNextContactDate());
         saleChance.setOrderFlag(saleChanceVO.getOrderFlag());
+        saleChance.setContent(saleChanceVO.getContent());
         if(saleChanceVO.getCustomer() != null){
             saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
         }
@@ -230,6 +228,9 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         }
         if(saleChanceVO.getDept() != null){
             saleChance.setDept(saleChanceVO.getDept().toDTO());
+        }
+        if(saleChanceVO.getLinkMan() != null){
+            saleChance.setLinkMan(saleChanceVO.getLinkMan().toDTO());
         }
         saleChance.setTeamId(saleChanceVO.getTeamId());
         return saleChance;

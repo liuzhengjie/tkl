@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerApi;
 import com.tingkelai.domain.ResponseMessage;
@@ -29,7 +30,9 @@ public class CustomerController extends BaseCRUDController<Customer, Long> imple
 
     @Override
     public ResponseMessage<CustomerVO> customerDelete(CustomerVO customerVO) {
-        return deleteEntity(customerVO);
+        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", customerVO.getId());
+        return removeEntity(customerVO, queryWrapper);
     }
 
     @Override

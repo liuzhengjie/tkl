@@ -43,9 +43,6 @@ public interface CustomerApi<VO> {
 
 
     @ApiOperation(value = "删除客户信息", nickname = "customerDelete", notes = "", tags={ "customer", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true,  paramType = "query"),
-    })
     @RequestMapping(value = "/customer",
             method = RequestMethod.DELETE)
     ResponseMessage customerDelete(VO requestBody);

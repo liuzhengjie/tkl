@@ -27,33 +27,59 @@ import java.util.Objects;
 @Mapper
 public class SaleChance  extends DataEntity<Long> {
 
+    /**
+     * 关联公司id
+     */
     @TableField("team_id")
     private Long teamId;
 
+    /**
+     * 销售机会名称
+     **/
     @TableField("name")
-    private String name = null;
+    private String name;
 
+    /**
+     * 预约计划标识
+     **/
     @TableField("order_flag")
-    private String orderFlag = null;
+    private String orderFlag;
 
+    /**
+     * 最后发现时间
+     */
     @TableField("discover_date")
-    private String discoverDate = null;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date discoverDate;
 
+    /**
+     * 关联部门
+     **/
     @TableField(value = "dept_id", el = "dept.id")
-    private Dept dept = null;
+    private Dept dept;
 
+
+    /**
+     * 关联用户
+     **/
     @TableField(value = "user_id", el = "user.id")
-    private User user = null;
+    private User user;
 
+    /**
+     * 关联客户
+     */
     @TableField(value = "customer_id", el = "customer.id")
-    private Customer customer = null;
+    private Customer customer;
 
+    /**
+     * 发现日期
+     **/
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField("next_contact_date")
-    private Date nextContactDate = null;
+    private Date nextContactDate;
 
     /** 关联联系人 */
-    @TableField(value = "linkman_id", el = "linkman.id")
+    @TableField(value = "linkman_id", el = "linkMan.id")
     private LinkMan linkMan;
 
     /** 目前阶段 */
@@ -62,13 +88,11 @@ public class SaleChance  extends DataEntity<Long> {
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField("last_follow_date")
-    private Date lastFollowFate = null;
+    private Date lastFollowFate;
 
-    /**
-     * 销售机会名称
-     * @return name
-     **/
-    @ApiModelProperty(value = "销售机会名称")
+    @TableField("content")
+    private String content;
+
     public String getName() {
         return name;
     }
@@ -77,11 +101,6 @@ public class SaleChance  extends DataEntity<Long> {
         this.name = name;
     }
 
-    /**
-     * 预约计划标识
-     * @return orderFlag
-     **/
-    @ApiModelProperty(value = "预约计划标识")
     public String getOrderFlag() {
         return orderFlag;
     }
@@ -90,24 +109,14 @@ public class SaleChance  extends DataEntity<Long> {
         this.orderFlag = orderFlag;
     }
 
-    /**
-     * 发现日期
-     * @return discoverDate
-     **/
-    @ApiModelProperty(value = "发现日期")
-    public String getDiscoverDate() {
+    public Date getDiscoverDate() {
         return discoverDate;
     }
 
-    public void setDiscoverDate(String discoverDate) {
+    public void setDiscoverDate(Date discoverDate) {
         this.discoverDate = discoverDate;
     }
 
-    /**
-     * Get dept
-     * @return dept
-     **/
-    @ApiModelProperty(value = "部门")
     public Dept getDept() {
         if(dept == null){
             dept = new Dept();
@@ -119,11 +128,6 @@ public class SaleChance  extends DataEntity<Long> {
         this.dept = dept;
     }
 
-    /**
-     * Get user
-     * @return user
-     **/
-    @ApiModelProperty(value = "用户")
     public User getUser() {
         if(user == null){
             user = new User();
@@ -135,11 +139,6 @@ public class SaleChance  extends DataEntity<Long> {
         this.user = user;
     }
 
-    /**
-     * Get customer
-     * @return customer
-     **/
-    @ApiModelProperty(value = "关联客户")
     public Customer getCustomer() {
         if(customer == null){
             customer = new Customer();
@@ -150,13 +149,6 @@ public class SaleChance  extends DataEntity<Long> {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    /**
-     * 下次联系日期
-     * @return nextContactDate
-     **/
-    @ApiModelProperty(value = "下次联系日期")
-
 
     public Long getTeamId() {
         return teamId;
@@ -202,5 +194,13 @@ public class SaleChance  extends DataEntity<Long> {
 
     public void setLastFollowFate(Date lastFollowFate) {
         this.lastFollowFate = lastFollowFate;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

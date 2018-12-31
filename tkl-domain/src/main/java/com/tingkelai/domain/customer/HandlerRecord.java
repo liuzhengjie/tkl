@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -21,56 +22,51 @@ import java.util.Objects;
 @Mapper
 public class HandlerRecord extends DataEntity<Long> {
 
+    private Long teamId;
+
+    @ApiModelProperty(value = "变更时间")
     @JsonProperty("changeDate")
     @TableField("change_date")
-    private String changeDate = null;
+    private Date changeDate;
 
+    @ApiModelProperty(value = "经手部门")
     @JsonProperty("dept")
     @TableField(value = "dept_id", el = "dept.id")
-    private Dept dept = null;
+    private Dept dept;
 
+
+    @ApiModelProperty(value = "经手人员")
     @JsonProperty("user")
     @TableField(value = "user_id", el = "user.id")
-    private User user = null;
+    private User user;
 
+    @ApiModelProperty(value = "变更原因")
     @JsonProperty("reason")
     @TableField("reason")
     private String reason = null;
 
+    @ApiModelProperty(value = "操作人员")
     @JsonProperty("operUser")
     @TableField(value = "oper_user_id", el = "operUser.id")
     private User operUser = null;
 
+    @ApiModelProperty(value = "关联客户")
     @JsonProperty("customer")
     @TableField(value = "customer_id", el = "customer.id")
-    private Customer customer = null;
+    private Customer customer;
 
-    /**
-     * 变更时间
-     * @return changeDate
-     **/
-    @ApiModelProperty(value = "变更时间")
-
-
-    public String getChangeDate() {
+    public Date getChangeDate() {
         return changeDate;
     }
 
-    public void setChangeDate(String changeDate) {
+    public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
 
-    public HandlerRecord dept(Dept dept) {
-        this.dept = dept;
-        return this;
-    }
-
-    /**
-     * Get dept
-     * @return dept
-     **/
-    @ApiModelProperty(value = "经手部门")
     public Dept getDept() {
+        if(dept == null){
+            dept = new Dept();
+        }
         return dept;
     }
 
@@ -78,35 +74,16 @@ public class HandlerRecord extends DataEntity<Long> {
         this.dept = dept;
     }
 
-    public HandlerRecord user(User user) {
-        this.user = user;
-        return this;
-    }
-
-    /**
-     * Get user
-     * @return user
-     **/
-    @ApiModelProperty(value = "")
     public User getUser() {
+        if(user == null){
+            user = new User();
+        }
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
-
-    public HandlerRecord reason(String reason) {
-        this.reason = reason;
-        return this;
-    }
-
-    /**
-     * 变更原因
-     * @return reason
-     **/
-    @ApiModelProperty(value = "变更原因")
-
 
     public String getReason() {
         return reason;
@@ -116,17 +93,10 @@ public class HandlerRecord extends DataEntity<Long> {
         this.reason = reason;
     }
 
-    public HandlerRecord operUser(User operUser) {
-        this.operUser = operUser;
-        return this;
-    }
-
-    /**
-     * Get operUser
-     * @return operUser
-     **/
-    @ApiModelProperty(value = "")
     public User getOperUser() {
+        if(operUser == null){
+            operUser = new User();
+        }
         return operUser;
     }
 
@@ -134,17 +104,10 @@ public class HandlerRecord extends DataEntity<Long> {
         this.operUser = operUser;
     }
 
-    public HandlerRecord customer(Customer customer) {
-        this.customer = customer;
-        return this;
-    }
-
-    /**
-     * Get customer
-     * @return customer
-     **/
-    @ApiModelProperty(value = "关联客户")
     public Customer getCustomer() {
+        if(customer == null){
+            customer = new Customer();
+        }
         return customer;
     }
 
@@ -152,53 +115,12 @@ public class HandlerRecord extends DataEntity<Long> {
         this.customer = customer;
     }
 
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        HandlerRecord handlerRecord = (HandlerRecord) o;
-        return Objects.equals(this.changeDate, handlerRecord.changeDate) &&
-                Objects.equals(this.dept, handlerRecord.dept) &&
-                Objects.equals(this.user, handlerRecord.user) &&
-                Objects.equals(this.reason, handlerRecord.reason) &&
-                Objects.equals(this.operUser, handlerRecord.operUser) &&
-                Objects.equals(this.customer, handlerRecord.customer);
+    public Long getTeamId() {
+        return teamId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(changeDate, dept, user, reason, operUser, customer);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class HandlerRecord {\n");
-
-        sb.append("    changeDate: ").append(toIndentedString(changeDate)).append("\n");
-        sb.append("    dept: ").append(toIndentedString(dept)).append("\n");
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
-        sb.append("    operUser: ").append(toIndentedString(operUser)).append("\n");
-        sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }
 

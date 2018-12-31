@@ -1,5 +1,6 @@
 package com.tingkelai.customer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSubscribePlanApi;
@@ -23,7 +24,9 @@ public class CustomerSubscribePlanController extends BaseCRUDController<Subscrib
 
     @Override
     public ResponseMessage<SubscribePlanVO> customerSubscribePlanDelete(SubscribePlanVO requestBody) {
-        return deleteEntity(requestBody);
+        QueryWrapper<SubscribePlan> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", requestBody.getId());
+        return removeEntity(requestBody, queryWrapper);
     }
 
     @Override

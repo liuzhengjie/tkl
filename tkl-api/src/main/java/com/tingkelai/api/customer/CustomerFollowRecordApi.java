@@ -22,9 +22,6 @@ import java.util.List;
 public interface CustomerFollowRecordApi<T> {
 
     @ApiOperation(value = "删除客户跟进记录", nickname = "customerFollowRecordDelete", notes = "", tags={ "customer/follow-record", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
     @RequestMapping(value = "/customer/follow-record",
             method = RequestMethod.DELETE)
     ResponseMessage customerFollowRecordDelete(@RequestBody T requestBody);
