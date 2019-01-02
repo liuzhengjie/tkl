@@ -10,6 +10,8 @@ import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.product.ProductInventoryVO;
 import com.tingkelai.vo.product.ProductOrderVO;
 import com.tingkelai.vo.product.ProductVO;
+import com.tingkelai.vo.product.inventory.InventoryVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -25,6 +27,7 @@ import java.util.List;
 public class ProductInventoryController extends BaseCRUDController<ProductInventory, Long> implements ProductInventoryApi<ProductInventoryVO> {
 
     /** 出入库相关service */
+    @Autowired
     private ProductInventoryServiceImpl productInventoryService;
 
     @Override
@@ -38,16 +41,13 @@ public class ProductInventoryController extends BaseCRUDController<ProductInvent
     }
 
     @Override
-    public ResponseMessage<ProductOrderVO> productInventoryPost(@Valid ProductOrderVO productOrderVO) {
+    public ResponseMessage<InventoryVO> productInventoryPost(@Valid InventoryVO inventoryVO) {
         try{
-            ResponseMessage<ProductOrderVO> responseMessage = new ResponseMessage<>();
-            // 要保存的出入库订单基本信息
-            ProductInventory productInventory = productOrderVO.getProductInventoryVO().toDTO();
-            // 要保存的出入库产品列表
-            List<ProductVO> productVOList = productOrderVO.getProductVOList();
-            ProductVO productVO = new ProductVO();
-            List<Product> productList = productVO.toDTO(productVOList);
-            boolean flag = productInventoryService.saveInventoryOrder(productInventory, productList);
+            ResponseMessage<InventoryVO> responseMessage = new ResponseMessage<>();
+            // 转换成dto
+            inventoryVO.setTeamId(getCurrentUserTeamId());
+            List<ProductInventory> productInventory = inventoryVO.toDTO();
+            boolean flag = productInventoryService.saveInventoryList(productInventory);
             responseMessage.setMessage("保存成功！");
             return responseMessage;
         }catch (Exception e){
@@ -57,16 +57,13 @@ public class ProductInventoryController extends BaseCRUDController<ProductInvent
     }
 
     @Override
-    public ResponseMessage<ProductOrderVO> productInventoryPut(@Valid ProductOrderVO productOrderVO) {
+    public ResponseMessage<InventoryVO> productInventoryPut(@Valid InventoryVO inventoryVO) {
         try{
-            ResponseMessage<ProductOrderVO> responseMessage = new ResponseMessage<>();
-            // 要保存的出入库订单基本信息
-            ProductInventory productInventory = productOrderVO.getProductInventoryVO().toDTO();
-            // 要修改的出入库产品列表
-            List<ProductVO> productVOList = productOrderVO.getProductVOList();
-            ProductVO productVO = new ProductVO();
-            List<Product> productList = productVO.toDTO(productVOList);
-            boolean flag = productInventoryService.updateInventoryOrder(productInventory, productList);
+            ResponseMessage<InventoryVO> responseMessage = new ResponseMessage<>();
+            // 转换成dto
+            inventoryVO.setTeamId(getCurrentUserTeamId());
+            List<ProductInventory> productInventory = inventoryVO.toDTO();
+            boolean flag = productInventoryService.updateInventoryList(productInventory);
             responseMessage.setMessage("修改成功！");
             return responseMessage;
         }catch (Exception e){

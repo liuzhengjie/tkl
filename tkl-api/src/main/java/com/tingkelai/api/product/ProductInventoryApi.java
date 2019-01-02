@@ -3,6 +3,7 @@ package com.tingkelai.api.product;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.vo.BasePage;
 import com.tingkelai.vo.product.ProductOrderVO;
+import com.tingkelai.vo.product.inventory.InventoryVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -45,13 +46,13 @@ public interface ProductInventoryApi<VO> {
     @ApiOperation(value = "添加库存", nickname = "productInventoryPost", notes = "添加库存", tags={ "product/inventory", })
     @RequestMapping(value = "/product/inventory",
             method = RequestMethod.POST)
-    ResponseMessage productInventoryPost(@Valid @RequestBody ProductOrderVO vo);
+    ResponseMessage productInventoryPost(@Valid @RequestBody InventoryVO vo);
 
 
     @ApiOperation(value = "修改库存", nickname = "productInventoryPut", notes = "修改库存", tags={ "product/inventory", })
     @RequestMapping(value = "/product/inventory",
             method = RequestMethod.PUT)
-    ResponseMessage productInventoryPut(@Valid @RequestBody ProductOrderVO vo);
+    ResponseMessage productInventoryPut(@Valid @RequestBody InventoryVO vo);
 
 
     @ApiOperation(value = "删除库存", nickname = "productInventoryDelete", notes = "删除库存", tags={ "product/inventory", })

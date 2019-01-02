@@ -105,6 +105,9 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 			QueryWrapper<Entity> queryWrapper = new QueryWrapper<>();
 			queryWrapper.setEntity(vo.toDTO());
 			entity = commonService.getOne(queryWrapper);
+			if(entity == null){
+				return new ResponseMessage<>();
+			}
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			logger.error(e.getMessage());
@@ -132,6 +135,9 @@ public abstract class BaseCRUDController<Entity extends AbstractEntity<ID>, ID e
 	protected <VO extends BaseVO<Entity, VO>> ResponseMessage<VO> getEntity(VO vo, Entity entity, Wrapper<Entity> wrapper) {
 		try {
 			entity = commonService.getOne(wrapper);
+			if(entity == null){
+				return new ResponseMessage<>();
+			}
 			return new ResponseMessage<>(vo.toVO(entity));
 		}catch (Exception e){
 			logger.error(e.getMessage());

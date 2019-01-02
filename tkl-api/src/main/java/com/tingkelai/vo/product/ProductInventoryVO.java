@@ -252,7 +252,7 @@ public class ProductInventoryVO implements BaseVO<ProductInventory, ProductInven
 		productInventory.setOrderCompanyDict(productInventoryVO.getOrderCompanyDict().toDTO());
 		// 订货方式
 		productInventory.setOrderWayDict(productInventoryVO.getOrderWayDict().toDTO());
-		return null;
+		return productInventory;
 	}
 
 	@Override

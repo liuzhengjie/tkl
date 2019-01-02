@@ -2,4 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tingkelai.dao.product.ProductInventoryMapper" >
 
+    <sql id="Base_Column_List" >
+        t.*,
+        orderWayDict.id as "orderWayDict.id",
+        orderWayDict.name as "orderWayDict.name",
+        orderWayDict.code as "orderWayDict.code",
+        orderCompanyDict.id as "orderCompanyDict.id",
+        orderCompanyDict.name as "orderCompanyDict.name",
+        orderCompanyDict.code as "orderCompanyDict.code",
+
+        product.id as "product.id",
+        product.name as "product.name",
+        product.code as "product.code",
+        product.unit as "product.unit",
+        product.total_num as "product.totalNum",
+
+        operUser.id as "operUser.id",
+        operUser.username as "operUser.username",
+        operUser.realname as "operUser.realname",
+
+        operDept.id as "operDept.id",
+        operDept.name as "operDept.name"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_dict_item orderWayDict ON orderWayDict.id = t.dict_order_way_id
+        LEFT JOIN tkl_dict_item orderCompanyDict ON orderCompanyDict.id = t.dict_order_company_id
+        LEFT JOIN tkl_product product ON product.id = t.product_id
+        LEFT JOIN tkl_sys_dept operDept ON operDept.id = t.oper_dept_id
+        LEFT JOIN tkl_sys_user operUser ON operUser.id = t.oper_user_id
+    </sql>
+
+    <!-- 获取出入库详情 -->
+    <select id="getOne" resultType="com.tingkelai.domain.product.ProductInventory">
+        select
+          <include refid="Base_Column_List" />
+        from
+          tkl_product_inventory t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <!-- 获取指定商品的出入库列表 -->
+    <select id="page" resultType="com.tingkelai.domain.product.ProductInventory">
+        select
+        <include refid="Base_Column_List" />
+        from
+        tkl_product_inventory t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 </mapper>

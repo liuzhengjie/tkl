@@ -1,6 +1,7 @@
 package com.tingkelai.dao.product;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -19,4 +20,9 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ProductInventoryMapper extends BaseMapper<ProductInventory> {
 
+    /** 获取商品出入库详情 */
+    ProductInventory getOne(@Param(Constants.WRAPPER) QueryWrapper<ProductInventory> queryWrapper);
+
+    /** 获取指定商品的出入库列表 */
+    IPage<ProductInventory> page(@Param("iPage") IPage<ProductInventory> iPage, @Param(Constants.WRAPPER) Wrapper<ProductInventory> wrapper);
 }
