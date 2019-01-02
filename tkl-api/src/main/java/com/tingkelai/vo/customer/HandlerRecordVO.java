@@ -1,6 +1,7 @@
 package com.tingkelai.vo.customer;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.HandlerRecord;
 import com.tingkelai.domain.sys.Team;
@@ -43,6 +44,7 @@ public class HandlerRecordVO implements BaseVO<HandlerRecord, HandlerRecordVO>{
 
     @ApiModelProperty(value = "变更时间")
     @JsonProperty("changeDate")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date changeDate;
 
     @ApiModelProperty(value = "经手部门")
