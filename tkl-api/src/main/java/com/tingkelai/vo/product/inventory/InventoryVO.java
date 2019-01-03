@@ -1,16 +1,11 @@
 package com.tingkelai.vo.product.inventory;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.product.ProductInventory;
-import com.tingkelai.vo.dict.DictItemVO;
-import com.tingkelai.vo.sys.DeptVO;
-import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +32,7 @@ public class InventoryVO {
 	@JsonProperty("inventoryExtInfoVOList")
 	private List<InventoryExtInfoVO> inventoryExtInfoVOList;
 
+	@ApiModelProperty(hidden = true)
 	private Long teamId;
 
 	public Long getTeamId() {

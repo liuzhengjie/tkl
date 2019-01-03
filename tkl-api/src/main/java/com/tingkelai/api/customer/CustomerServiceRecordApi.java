@@ -28,9 +28,9 @@ public interface CustomerServiceRecordApi<T> {
 
 
     @ApiOperation(value = "获取客户服务记录", nickname = "customerServiceRecordGet", notes = "", tags={ "customer/service-record", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id", value = "id", required = true),
+//    })
     @RequestMapping(value = "/customer/service-record",
             method = RequestMethod.GET)
     ResponseMessage customerServiceRecordGet(T requestBody);

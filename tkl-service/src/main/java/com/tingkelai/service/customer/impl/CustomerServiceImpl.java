@@ -24,11 +24,11 @@ public class CustomerServiceImpl extends CommonServiceImpl<Customer> implements 
             QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
             //产品名非空，则模糊查询
             if(product.getName() != null){
-                queryWrapper.like("name", product.getName());
+                queryWrapper.like("t.name", product.getName());
             }
             //产品code非空，则模糊查询
             if(product.getCode() != null){
-                queryWrapper.like("code", product.getCode());
+                queryWrapper.like("t.code", product.getCode());
             }
 
             //获取查询结果

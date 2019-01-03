@@ -3,9 +3,14 @@ package com.tingkelai.vo.customer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.customer.Customer;
+import com.tingkelai.domain.customer.LinkMan;
 import com.tingkelai.domain.customer.SubscribePlan;
-import com.tingkelai.domain.sys.Team;
+import com.tingkelai.domain.sys.Dept;
+import com.tingkelai.domain.sys.User;
 import com.tingkelai.vo.BaseVO;
+import com.tingkelai.vo.sys.DeptVO;
+import com.tingkelai.vo.sys.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -20,49 +25,68 @@ import java.util.List;
 public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
 
     @JsonProperty("id")
+    @ApiModelProperty(name = "id", value = "id")
     private Long id = null;
 
-    @ApiModelProperty(name = "id", value = "id")
+    @ApiModelProperty(hidden = true)
+    private Long teamId;
+
     public Long getId() {
         return id;
     }
 
     @Override
     public void setTeamId(Long teamId) {
-
+        this.teamId = teamId;
     }
 
     @Override
     public Long getTeamId() {
-        return null;
+        return teamId;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    @ApiModelProperty(value = "预约类型")
     @JsonProperty("planType")
     private String planType = null;
 
+    @ApiModelProperty(value = "主题")
+    @JsonProperty("theme")
+    private String theme = null;
+
+    @ApiModelProperty(value = "预约时间")
     @JsonProperty("planDate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date planDate = null;
 
+    @ApiModelProperty(value = "处理方式")
     @JsonProperty("dealWay")
     private String dealWay = null;
 
+    @ApiModelProperty(value = "处理类型")
     @JsonProperty("dealType")
     private String dealType = null;
 
-    @JsonProperty("theme")
-    private String theme = null;
+    @ApiModelProperty(value = "关联联系人")
+    @JsonProperty("linkman")
+    private LinkManVO linkman = null;
 
-    /**
-     * 预约类型
-     * @return planType
-     **/
-    @ApiModelProperty(value = "预约类型")
+    @ApiModelProperty(value = "关联用户")
+    @JsonProperty("dept")
+    private DeptVO dept = null;
+
+    @ApiModelProperty(value = "关联用户")
+    @JsonProperty("user")
+    private UserVO user = null;
+
+    @ApiModelProperty(value = "关联客户")
+    @JsonProperty("customer")
+    private CustomerVO customer = null;
+
+
     public String getPlanType() {
         return planType;
     }
@@ -71,11 +95,7 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         this.planType = planType;
     }
 
-    /**
-     * 预约时间
-     * @return planDate
-     **/
-    @ApiModelProperty(value = "预约时间")
+
     public Date getPlanDate() {
         return planDate;
     }
@@ -84,11 +104,6 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         this.planDate = planDate;
     }
 
-    /**
-     * 处理方式
-     * @return dealWay
-     **/
-    @ApiModelProperty(value = "处理方式")
     public String getDealWay() {
         return dealWay;
     }
@@ -97,11 +112,6 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         this.dealWay = dealWay;
     }
 
-    /**
-     * 处理类型
-     * @return dealType
-     **/
-    @ApiModelProperty(value = "处理类型")
     public String getDealType() {
         return dealType;
     }
@@ -110,17 +120,56 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         this.dealType = dealType;
     }
 
-    /**
-     * 主题
-     * @return theme
-     **/
-    @ApiModelProperty(value = "主题")
     public String getTheme() {
         return theme;
     }
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public LinkManVO getLinkman() {
+        if(linkman == null){
+            linkman = new LinkManVO();
+        }
+        return linkman;
+    }
+
+    public void setLinkman(LinkManVO linkman) {
+        this.linkman = linkman;
+    }
+
+    public DeptVO getDept() {
+        if(dept == null){
+            dept = new DeptVO();
+        }
+        return dept;
+    }
+
+    public void setDept(DeptVO dept) {
+        this.dept = dept;
+    }
+
+    public UserVO getUser() {
+        if(user == null){
+            user = new UserVO();
+        }
+        return user;
+    }
+
+    public void setUser(UserVO user) {
+        this.user = user;
+    }
+
+    public CustomerVO getCustomer() {
+        if(customer == null){
+            customer = new CustomerVO();
+        }
+        return customer;
+    }
+
+    public void setCustomer(CustomerVO customer) {
+        this.customer = customer;
     }
 
     /**
@@ -139,6 +188,10 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         subscribePlan.setPlanDate(subscribePlanVO.getPlanDate());
         subscribePlan.setPlanType(subscribePlanVO.getPlanType());
         subscribePlan.setTheme(subscribePlanVO.getTheme());
+        subscribePlan.setCustomer(subscribePlanVO.getCustomer().toDTO());
+        subscribePlan.setLinkman(subscribePlanVO.getLinkman().toDTO());
+        subscribePlan.setDept(subscribePlanVO.getDept().toDTO());
+        subscribePlan.setUser(subscribePlanVO.getUser().toDTO());
         return subscribePlan;
     }
 
@@ -162,6 +215,9 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         subscribePlanVO.setPlanDate(subscribePlan.getPlanDate());
         subscribePlanVO.setPlanType(subscribePlan.getPlanType());
         subscribePlanVO.setTheme(subscribePlan.getTheme());
+        subscribePlanVO.setLinkman(new LinkManVO(subscribePlan.getLinkman()));
+        subscribePlanVO.setDept(new DeptVO(subscribePlan.getDept()));
+        subscribePlanVO.setUser(new UserVO(subscribePlan.getUser()));
         return subscribePlanVO;
     }
 

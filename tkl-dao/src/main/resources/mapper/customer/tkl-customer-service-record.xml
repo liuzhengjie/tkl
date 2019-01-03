@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.customer.ServiceRecordMapper" >
+
+    <sql id="Base_Column_List" >
+        t.*,
+                adornEarDict.id as "adornEarDict.id",
+        adornEarDict.name as "adornEarDict.name",
+        adornEarDict.code as "adornEarDict.code",
+                productSourceDict.id as "productSourceDict.id",
+        productSourceDict.name as "productSourceDict.name",
+        productSourceDict.code as "productSourceDict.code",
+                        serviceTypeDict.id as "serviceTypeDict.id",
+        serviceTypeDict.name as "serviceTypeDict.name",
+        serviceTypeDict.code as "serviceTypeDict.code",
+                                serviceWayDict.id as "serviceWayDict.id",
+        serviceWayDict.name as "serviceWayDict.name",
+        serviceWayDict.code as "serviceWayDict.code",
+                                problemTypeDict.id as "problemTypeDict.id",
+        problemTypeDict.name as "problemTypeDict.name",
+        problemTypeDict.code as "problemTypeDict.code",
+                                        problemTemplateDict.id as "problemTemplateDict.id",
+        problemTemplateDict.name as "problemTemplateDict.name",
+        problemTemplateDict.code as "problemTemplateDict.code",
+
+                                        dealStateDict.id as "dealStateDict.id",
+        dealStateDict.name as "dealStateDict.name",
+        dealStateDict.code as "dealStateDict.code",
+
+                                                returnRepairDict.id as "returnRepairDict.id",
+        returnRepairDict.name as "returnRepairDict.name",
+        returnRepairDict.code as "returnRepairDict.code",
+
+                                                dealTemplateDict.id as "dealTemplateDict.id",
+        dealTemplateDict.name as "dealTemplateDict.name",
+        dealTemplateDict.code as "dealTemplateDict.code",
+
+                                chargeDict.id as "chargeDict.id",
+        chargeDict.name as "chargeDict.name",
+        chargeDict.code as "chargeDict.code",
+
+        dept.id as "dept.id",
+        dept.name as "dept.name",
+
+                usert.id as "usert.id",
+        usert.username as "usert.username",
+        usert.realname as "usert.realname",
+
+                                        product.id as "product.id",
+        product.name as "product.name",
+        product.code as "product.code",
+
+                                       linkman.id as "linkman.id",
+        linkman.name as "linkman.name",
+
+        customer.id as "customer.id",
+        customer.name as "customer.name",
+        customer.code as "customer.code"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
+        LEFT JOIN tkl_sys_dept dept ON dept.id = t.dept_id
+        LEFT JOIN tkl_sys_user usert ON usert.id = t.user_id
+        LEFT JOIN tkl_product product ON product.id = t.product_id
+        LEFT JOIN tkl_customer_linkman linkman ON linkman.id = t.customer_id
+        LEFT JOIN tkl_dict_item adornEarDict ON adornEarDict.id = t.adorn_ear_id
+        LEFT JOIN tkl_dict_item productSourceDict ON productSourceDict.id = t.product_source_id
+        LEFT JOIN tkl_dict_item serviceTypeDict ON serviceTypeDict.id = t.dict_service_type_id
+        LEFT JOIN tkl_dict_item serviceWayDict ON serviceWayDict.id = t.dict_service_way_id
+        LEFT JOIN tkl_dict_item problemTypeDict ON problemTypeDict.id = t.dict_problem_type_id
+        LEFT JOIN tkl_dict_item problemTemplateDict ON problemTemplateDict.id = t.dict_problem_template_id
+        LEFT JOIN tkl_dict_item dealStateDict ON dealStateDict.id = t.dict_deal_state_id
+        LEFT JOIN tkl_dict_item returnRepairDict ON returnRepairDict.id = t.dict_return_repair_id
+        LEFT JOIN tkl_dict_item dealTemplateDict ON dealTemplateDict.id = t.dict_deal_template_id
+        LEFT JOIN tkl_dict_item chargeDict ON chargeDict.id = t.dict_charge_id
+    </sql>
+
+
+    <select id="page" resultType="com.tingkelai.domain.customer.ServiceRecord">
+        select
+          <include refid="Base_Column_List" />
+        from tkl_customer_service_record t
+          <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <!-- 根据id获取服务记录 -->
+    <select id="getOne" resultType="com.tingkelai.domain.customer.ServiceRecord">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_service_record t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+</mapper>

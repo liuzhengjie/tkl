@@ -23,49 +23,51 @@ import java.util.Objects;
 @Mapper
 public class SubscribePlan  extends DataEntity<Long> {
 
+    @ApiModelProperty(value = "预约类型")
     @JsonProperty("planType")
     @TableField("plan_type")
     private String planType = null;
 
+    @ApiModelProperty(value = "预约时间")
     @JsonProperty("planDate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField("plan_date")
     private Date planDate = null;
 
+    @ApiModelProperty(value = "处理方式")
     @JsonProperty("dealWay")
     @TableField("deal_way")
     private String dealWay = null;
 
+    @ApiModelProperty(value = "处理类型")
     @JsonProperty("dealType")
     @TableField("deal_type")
     private String dealType = null;
 
+    @ApiModelProperty(value = "关联联系人")
     @JsonProperty("linkman")
     @TableField(value = "linkman_id", el = "linkman.id")
     private LinkMan linkman = null;
 
+    @ApiModelProperty(value = "关联用户")
     @JsonProperty("dept")
     @TableField(value = "dept_id", el = "dept.id")
     private Dept dept = null;
 
+    @ApiModelProperty(value = "关联用户")
     @JsonProperty("user")
     @TableField(value = "user_id", el = "user.id")
     private User user = null;
 
+    @ApiModelProperty(value = "主题")
     @JsonProperty("theme")
     @TableField("theme")
     private String theme = null;
 
+    @ApiModelProperty(value = "关联客户")
     @JsonProperty("customer")
     @TableField(value = "customer_id", el = "customer.id")
     private Customer customer = null;
-
-    /**
-     * 预约类型
-     * @return planType
-     **/
-    @ApiModelProperty(value = "预约类型")
-
 
     public String getPlanType() {
         return planType;
@@ -75,16 +77,6 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.planType = planType;
     }
 
-    public SubscribePlan planDate(Date planDate) {
-        this.planDate = planDate;
-        return this;
-    }
-
-    /**
-     * 预约时间
-     * @return planDate
-     **/
-    @ApiModelProperty(value = "预约时间")
     public Date getPlanDate() {
         return planDate;
     }
@@ -92,18 +84,6 @@ public class SubscribePlan  extends DataEntity<Long> {
     public void setPlanDate(Date planDate) {
         this.planDate = planDate;
     }
-
-    public SubscribePlan dealWay(String dealWay) {
-        this.dealWay = dealWay;
-        return this;
-    }
-
-    /**
-     * 处理方式
-     * @return dealWay
-     **/
-    @ApiModelProperty(value = "处理方式")
-
 
     public String getDealWay() {
         return dealWay;
@@ -113,18 +93,6 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.dealWay = dealWay;
     }
 
-    public SubscribePlan dealType(String dealType) {
-        this.dealType = dealType;
-        return this;
-    }
-
-    /**
-     * 处理类型
-     * @return dealType
-     **/
-    @ApiModelProperty(value = "处理类型")
-
-
     public String getDealType() {
         return dealType;
     }
@@ -133,17 +101,10 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.dealType = dealType;
     }
 
-    public SubscribePlan linkman(LinkMan linkman) {
-        this.linkman = linkman;
-        return this;
-    }
-
-    /**
-     * Get linkman
-     * @return linkman
-     **/
-    @ApiModelProperty(value = "")
     public LinkMan getLinkman() {
+        if(linkman == null){
+            linkman = new LinkMan();
+        }
         return linkman;
     }
 
@@ -151,17 +112,10 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.linkman = linkman;
     }
 
-    public SubscribePlan dept(Dept dept) {
-        this.dept = dept;
-        return this;
-    }
-
-    /**
-     * Get dept
-     * @return dept
-     **/
-    @ApiModelProperty(value = "")
     public Dept getDept() {
+        if(dept == null){
+            dept = new Dept();
+        }
         return dept;
     }
 
@@ -169,34 +123,17 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.dept = dept;
     }
 
-    public SubscribePlan user(User user) {
-        this.user = user;
-        return this;
-    }
 
-    /**
-     * Get user
-     * @return user
-     **/
-    @ApiModelProperty(value = "")
     public User getUser() {
+        if(user == null){
+            user = new User();
+        }
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
-
-    public SubscribePlan theme(String theme) {
-        this.theme = theme;
-        return this;
-    }
-
-    /**
-     * 主题
-     * @return theme
-     **/
-    @ApiModelProperty(value = "主题")
 
 
     public String getTheme() {
@@ -207,77 +144,16 @@ public class SubscribePlan  extends DataEntity<Long> {
         this.theme = theme;
     }
 
-    public SubscribePlan customer(Customer customer) {
-        this.customer = customer;
-        return this;
-    }
 
-    /**
-     * Get customer
-     * @return customer
-     **/
-    @ApiModelProperty(value = "关联客户")
     public Customer getCustomer() {
+        if(customer == null){
+            customer = new Customer();
+        }
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SubscribePlan subscribePlan = (SubscribePlan) o;
-        return Objects.equals(this.planType, subscribePlan.planType) &&
-                Objects.equals(this.planDate, subscribePlan.planDate) &&
-                Objects.equals(this.dealWay, subscribePlan.dealWay) &&
-                Objects.equals(this.dealType, subscribePlan.dealType) &&
-                Objects.equals(this.linkman, subscribePlan.linkman) &&
-                Objects.equals(this.dept, subscribePlan.dept) &&
-                Objects.equals(this.user, subscribePlan.user) &&
-                Objects.equals(this.theme, subscribePlan.theme) &&
-                Objects.equals(this.customer, subscribePlan.customer);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(planType, planDate, dealWay, dealType, linkman, dept, user, theme, customer);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class SubscribePlan {\n");
-
-        sb.append("    planType: ").append(toIndentedString(planType)).append("\n");
-        sb.append("    planDate: ").append(toIndentedString(planDate)).append("\n");
-        sb.append("    dealWay: ").append(toIndentedString(dealWay)).append("\n");
-        sb.append("    dealType: ").append(toIndentedString(dealType)).append("\n");
-        sb.append("    linkman: ").append(toIndentedString(linkman)).append("\n");
-        sb.append("    dept: ").append(toIndentedString(dept)).append("\n");
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    theme: ").append(toIndentedString(theme)).append("\n");
-        sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
     }
 }
 
