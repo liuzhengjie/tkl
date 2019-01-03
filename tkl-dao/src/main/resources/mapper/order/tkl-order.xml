@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.order.OrderMapper" >
+
+    <!-- 获取账单列表（包括销售账单和维修账单） -->
+    <select id="page" resultType="com.tingkelai.domain.order.Order">
+        SELECT
+            t.id AS id,
+            t.team_id AS teamId,
+            t. CODE AS CODE,
+            t.sale_date AS saleDate,
+            t.original_price AS originalPrice,
+            t.discount AS discount,
+            t.real_price AS realPrice,
+            "sale" AS orderType,
+            customer.id AS "customer.id",
+            customer. NAME AS "customer.name",
+            customer. CODE AS "customer.code",
+            userOwner.id AS "user.id",
+            userOwner.username AS "user.username",
+            userOwner.realname AS "user.realname",
+            deptOwner.id AS "dept.id",
+            deptOwner. NAME AS "dept.name",
+            stateDict.id AS "stateDict.id",
+            stateDict. NAME AS "stateDict.name",
+            stateDict. CODE AS "stateDict.code"
+        FROM
+            tkl_customer_sale_record t
+        LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
+        LEFT JOIN tkl_sys_user userOwner ON userOwner.id = t.user_id
+        LEFT JOIN tkl_sys_dept deptOwner ON deptOwner.id = t.dept_id
+        LEFT JOIN tkl_dict_item stateDict ON stateDict.id = t.dict_state_id
+        WHERE
+            t.team_id = 5
+        UNION
+            SELECT
+                t.id AS id,
+                t.team_id AS teamId,
+                t. CODE AS CODE,
+                t.service_date AS saleDate,
+                t.charge_price AS originalPrice,
+                "10" AS discount,
+                t.charge_price AS realPrice,
+                "service" AS orderType,
+                customer.id AS "customer.id",
+                customer. NAME AS "customer.name",
+                customer. CODE AS "customer.code",
+                userOwner.id AS "user.id",
+                userOwner.username AS "user.username",
+                userOwner.realname AS "user.realname",
+                deptOwner.id AS "dept.id",
+                deptOwner. NAME AS "dept.name",
+                stateDict.id AS "stateDict.id",
+                stateDict. NAME AS "stateDict.name",
+                stateDict. CODE AS "stateDict.code"
+            FROM
+                tkl_customer_service_record t
+            LEFT JOIN tkl_customer customer ON customer.id = t.customer_id
+            LEFT JOIN tkl_sys_user userOwner ON userOwner.id = t.user_id
+            LEFT JOIN tkl_sys_dept deptOwner ON deptOwner.id = t.dept_id
+            LEFT JOIN tkl_dict_item stateDict ON stateDict.id = t.dict_charge_id
+        WHERE
+            t.team_id = 5
+    </select>
+</mapper>

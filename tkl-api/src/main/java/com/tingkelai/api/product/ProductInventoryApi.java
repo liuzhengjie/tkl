@@ -2,7 +2,6 @@ package com.tingkelai.api.product;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.vo.BasePage;
-import com.tingkelai.vo.product.ProductOrderVO;
 import com.tingkelai.vo.product.inventory.InventoryVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
