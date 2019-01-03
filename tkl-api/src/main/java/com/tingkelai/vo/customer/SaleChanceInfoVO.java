@@ -67,7 +67,9 @@ public class SaleChanceInfoVO{
 
     /** 获取销售机会 */
     public SaleChance gainSaleChance(){
-        return saleChance.toDTO();
+        SaleChance res = saleChance.toDTO();
+        res.setTeamId(teamId);
+        return res;
     }
 
     /** 获取跟进记录 */
