@@ -28,9 +28,6 @@ public interface CustomerSaleChanceApi<T> {
 
 
     @ApiOperation(value = "获取销售机会", nickname = "customerSaleChanceGet", notes = "", tags={ "customer/sale-chance", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.GET)
     ResponseMessage customerSaleChanceGet(T requestBody);

@@ -3,6 +3,7 @@ package com.tingkelai.vo.customer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tingkelai.domain.customer.FollowRecord;
 import com.tingkelai.domain.customer.SaleChance;
 import com.tingkelai.vo.BaseVO;
 import com.tingkelai.vo.sys.DeptVO;
@@ -22,32 +23,38 @@ import java.util.List;
  * @version 1.0
  */
 @ApiModel(description = "销售机会")
-public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
+public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
 
-    public SaleChanceVO(){
+    public SaleChanceListVO(){
 
     }
 
-    public SaleChanceVO(SaleChance saleChance){
+    public SaleChanceListVO(SaleChance saleChance){
         setId(saleChance.getId());
+        setName(saleChance.getName());
         setDept(new DeptVO(saleChance.getDept()));
         setUser(new UserVO(saleChance.getUser()));
         setCustomer(new CustomerVO(saleChance.getCustomer()));
-        setOrderFlag(saleChance.getOrderFlag());
+    }
+
+    public SaleChanceListVO(SaleChance saleChance, FollowRecord followRecord){
+        setId(saleChance.getId());
         setName(saleChance.getName());
-        setDiscoverDate(saleChance.getDiscoverDate());
-        setNextContactDate(saleChance.getNextContactDate());
-        setPlanSaleDate(saleChance.getPlanSaleDate());
-        setPlanSaleMoney(saleChance.getPlanSaleMoney());
+        setDept(new DeptVO(saleChance.getDept()));
+        setUser(new UserVO(saleChance.getUser()));
+        setCustomer(new CustomerVO(saleChance.getCustomer()));
+        if(followRecord != null){
+            setFollowRecordVO(new FollowRecordVO(followRecord));
+        }
     }
 
     @JsonProperty("id")
-    @ApiModelProperty(name = "id", value = "id")
     private Long id = null;
 
     @ApiModelProperty(hidden = true)
     private Long teamId;
 
+    @ApiModelProperty(name = "id", value = "id")
     public Long getId() {
         return id;
     }
@@ -78,32 +85,13 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     @JsonProperty("user")
     private UserVO user;
 
-    @ApiModelProperty(value = "发现日期")
-    @JsonProperty("discoverDate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date discoverDate;
-
-    @JsonProperty("planSaleDate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "预计日期")
-    private Date planSaleDate;
-
-    @JsonProperty("planSaleMoney")
-    @ApiModelProperty(value = "预计销售额")
-    private String planSaleMoney;
-
-    @ApiModelProperty(value = "下次联系日期")
-    @JsonProperty("nextContactDate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date nextContactDate;
-
-    @ApiModelProperty(value = "预约计划标识")
-    @JsonProperty("orderFlag")
-    private String orderFlag;
-
     @ApiModelProperty("关联客户")
     @JsonProperty("customer")
     private CustomerVO customer;
+
+    @ApiModelProperty("最新的跟进记录")
+    @JsonProperty("followRecordVO")
+    private FollowRecordVO followRecordVO;
 
     public String getName() {
         return name;
@@ -135,46 +123,6 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.user = user;
     }
 
-    public Date getDiscoverDate() {
-        return discoverDate;
-    }
-
-    public void setDiscoverDate(Date discoverDate) {
-        this.discoverDate = discoverDate;
-    }
-
-    public Date getPlanSaleDate() {
-        return planSaleDate;
-    }
-
-    public void setPlanSaleDate(Date planSaleDate) {
-        this.planSaleDate = planSaleDate;
-    }
-
-    public String getPlanSaleMoney() {
-        return planSaleMoney;
-    }
-
-    public void setPlanSaleMoney(String planSaleMoney) {
-        this.planSaleMoney = planSaleMoney;
-    }
-
-    public Date getNextContactDate() {
-        return nextContactDate;
-    }
-
-    public void setNextContactDate(Date nextContactDate) {
-        this.nextContactDate = nextContactDate;
-    }
-
-    public String getOrderFlag() {
-        return orderFlag;
-    }
-
-    public void setOrderFlag(String orderFlag) {
-        this.orderFlag = orderFlag;
-    }
-
     public CustomerVO getCustomer() {
         if(customer == null){
             customer = new CustomerVO();
@@ -186,6 +134,17 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         this.customer = customer;
     }
 
+    public FollowRecordVO getFollowRecordVO() {
+        if(followRecordVO == null){
+            followRecordVO = new FollowRecordVO();
+        }
+        return followRecordVO;
+    }
+
+    public void setFollowRecordVO(FollowRecordVO followRecordVO) {
+        this.followRecordVO = followRecordVO;
+    }
+
     /**
      * 封装成业务需要的对象
      */
@@ -194,26 +153,21 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     }
 
     @Override
-    public SaleChance toDTO(SaleChanceVO saleChanceVO) {
+    public SaleChance toDTO(SaleChanceListVO saleChanceVO) {
         SaleChance saleChance = new SaleChance();
         saleChance.setId(saleChanceVO.getId());
-        saleChance.setDept(saleChanceVO.getDept().toDTO());
         saleChance.setUser(saleChanceVO.getUser().toDTO());
+        saleChance.setDept(saleChanceVO.getDept().toDTO());
         saleChance.setTeamId(saleChanceVO.getTeamId());
         saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
-        saleChance.setOrderFlag(saleChanceVO.getOrderFlag());
         saleChance.setName(saleChanceVO.getName());
-        saleChance.setDiscoverDate(saleChanceVO.getDiscoverDate());
-        saleChance.setNextContactDate(saleChanceVO.getNextContactDate());
-        saleChance.setPlanSaleDate(saleChanceVO.getPlanSaleDate());
-        saleChance.setPlanSaleMoney(saleChanceVO.getPlanSaleMoney());
         return saleChance;
     }
 
     @Override
-    public List<SaleChance> toDTO(List<SaleChanceVO> voList) {
+    public List<SaleChance> toDTO(List<SaleChanceListVO> voList) {
         List<SaleChance> list = new ArrayList<>();
-        for(SaleChanceVO temp : voList){
+        for(SaleChanceListVO temp : voList){
             list.add(temp.toDTO());
         }
         return list;
@@ -222,13 +176,13 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
     /**
      * 封装成web需要的对象
      */
-    public SaleChanceVO toVO(SaleChance saleChance){
-        return new SaleChanceVO(saleChance);
+    public SaleChanceListVO toVO(SaleChance saleChance){
+        return new SaleChanceListVO(saleChance, saleChance.getFollowRecord());
     }
 
     @Override
-    public List<SaleChanceVO> toVO(List<SaleChance> list) {
-        List<SaleChanceVO> resList = new ArrayList<>();
+    public List<SaleChanceListVO> toVO(List<SaleChance> list) {
+        List<SaleChanceListVO> resList = new ArrayList<>();
         for(SaleChance temp : list){
             resList.add(toVO(temp));
         }

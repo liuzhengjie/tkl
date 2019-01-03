@@ -34,7 +34,7 @@ public class CustomerFollowRecordController  extends BaseCRUDController<FollowRe
     }
 
     @Override
-    public ResponseMessage customerFollowRecordListGet(FollowRecordVO requestBody, BasePage basePage) {
+    public ResponseMessage<List<FollowRecordVO>> customerFollowRecordListGet(FollowRecordVO requestBody, BasePage basePage) {
         return list(requestBody, basePage);
     }
 

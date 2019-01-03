@@ -48,6 +48,7 @@ public class SaleProductRecordServiceImpl extends CommonServiceImpl<SaleProductR
         QueryWrapper<SaleProductRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("team_id", saleProductRecord.getTeamId());
         queryWrapper.eq("id", saleProductRecord.getId());
+        queryWrapper.eq("del_flag", 0);
         return super.getOne(queryWrapper);
     }
 }

@@ -40,30 +40,51 @@ public class SaleChance  extends DataEntity<Long> {
     private String name;
 
     /**
-     * 预约计划标识
-     **/
-    @TableField("order_flag")
-    private String orderFlag;
-
-    /**
-     * 最后发现时间
-     */
-    @TableField("discover_date")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date discoverDate;
-
-    /**
-     * 关联部门
+     * 关联部门（门店）
      **/
     @TableField(value = "dept_id", el = "dept.id")
     private Dept dept;
 
 
     /**
-     * 关联用户
+     * 关联用户（服务人员）
      **/
     @TableField(value = "user_id", el = "user.id")
     private User user;
+
+
+    /**
+     * 发现时间
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("discover_date")
+    private Date discoverDate;
+
+    /**
+     * 预计时间
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("plan_sale_date")
+    private Date planSaleDate;
+
+    /**
+     * 预计消息额
+     **/
+    @TableField("plan_sale_money")
+    private String planSaleMoney;
+
+    /**
+     * 下次联系日期
+     **/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("next_contact_date")
+    private Date nextContactDate;
+
+    /**
+     * 预约计划标识
+     **/
+    @TableField("order_flag")
+    private String orderFlag;
 
     /**
      * 关联客户
@@ -71,27 +92,19 @@ public class SaleChance  extends DataEntity<Long> {
     @TableField(value = "customer_id", el = "customer.id")
     private Customer customer;
 
-    /**
-     * 发现日期
-     **/
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @TableField("next_contact_date")
-    private Date nextContactDate;
+    @TableField(exist = false)
+    private FollowRecord followRecord;
 
-    /** 关联联系人 */
-    @TableField(value = "linkman_id", el = "linkMan.id")
-    private LinkMan linkMan;
+    public FollowRecord getFollowRecord() {
+        if(followRecord == null){
+            followRecord = new FollowRecord();
+        }
+        return followRecord;
+    }
 
-    /** 目前阶段 */
-    @TableField(value = "dict_phase_id", el = "phaseDict.id")
-    private DictItem phaseDict;
-
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @TableField("last_follow_date")
-    private Date lastFollowFate;
-
-    @TableField("content")
-    private String content;
+    public void setFollowRecord(FollowRecord followRecord) {
+        this.followRecord = followRecord;
+    }
 
     public String getName() {
         return name;
@@ -166,41 +179,19 @@ public class SaleChance  extends DataEntity<Long> {
         this.nextContactDate = nextContactDate;
     }
 
-    public LinkMan getLinkMan() {
-        if(linkMan == null){
-            linkMan = new LinkMan();
-        }
-        return linkMan;
+    public Date getPlanSaleDate() {
+        return planSaleDate;
     }
 
-    public void setLinkMan(LinkMan linkMan) {
-        this.linkMan = linkMan;
+    public void setPlanSaleDate(Date planSaleDate) {
+        this.planSaleDate = planSaleDate;
     }
 
-    public DictItem getPhaseDict() {
-        if(phaseDict == null){
-            phaseDict = new DictItem();
-        }
-        return phaseDict;
+    public String getPlanSaleMoney() {
+        return planSaleMoney;
     }
 
-    public void setPhaseDict(DictItem phaseDict) {
-        this.phaseDict = phaseDict;
-    }
-
-    public Date getLastFollowFate() {
-        return lastFollowFate;
-    }
-
-    public void setLastFollowFate(Date lastFollowFate) {
-        this.lastFollowFate = lastFollowFate;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setPlanSaleMoney(String planSaleMoney) {
+        this.planSaleMoney = planSaleMoney;
     }
 }

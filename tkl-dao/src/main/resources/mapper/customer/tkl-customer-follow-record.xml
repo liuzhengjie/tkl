@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tingkelai.dao.customer.FollowRecordMapper" >
+
+    <sql id="Base_Column_List" >
+        t.*,
+              linkman.id as "linkMan.id",
+        linkman.name as "linkMan.name",
+                                                wayDict.id as "wayDict.id",
+        wayDict.name as "wayDict.name",
+        wayDict.code as "wayDict.code",
+                                                phaseDict.id as "phaseDict.id",
+        phaseDict.name as "phaseDict.name",
+        phaseDict.code as "phaseDict.code"
+    </sql>
+    <sql id="parentJoins">
+        LEFT JOIN tkl_customer_linkman linkman ON linkman.id = t.linkman_id
+        LEFT JOIN tkl_dict_item wayDict ON wayDict.id = t.dict_way_id
+        LEFT JOIN tkl_dict_item phaseDict ON phaseDict.id = t.dict_phase_id
+    </sql>
+
+
+    <select id="getLastFollowRecord" resultType="com.tingkelai.domain.customer.FollowRecord">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_follow_record t
+        <include refid="parentJoins"/>
+        WHERE
+        1=1
+        AND t.sale_chance_id = #{saleChance.id}
+        AND t.team_id = #{saleChance.teamId}
+        AND t.del_flag = 0
+        order by contact_date desc
+        limit 1
+    </select>
+</mapper>
