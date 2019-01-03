@@ -2,6 +2,7 @@ package com.tingkelai.api.customer;
 
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.vo.BasePage;
+import com.tingkelai.vo.customer.SaleChanceInfoVO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,11 +43,11 @@ public interface CustomerSaleChanceApi<T> {
     @ApiOperation(value = "添加销售机会", nickname = "customerSaleChancePost", notes = "", tags={ "customer/sale-chance", })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.POST)
-    ResponseMessage customerSaleChancePost(@Valid @RequestBody T requestBody);
+    ResponseMessage customerSaleChancePost(@Valid @RequestBody SaleChanceInfoVO requestBody);
 
 
     @ApiOperation(value = "修改销售机会", nickname = "customerSaleChancePut", notes = "", tags={ "customer/sale-chance", })
     @RequestMapping(value = "/customer/sale-chance",
             method = RequestMethod.PUT)
-    ResponseMessage customerSaleChancePut(@Valid @RequestBody T requestBody);
+    ResponseMessage customerSaleChancePut(@Valid @RequestBody SaleChanceInfoVO requestBody);
 }

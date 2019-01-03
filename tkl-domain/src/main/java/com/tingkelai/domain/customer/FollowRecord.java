@@ -78,12 +78,10 @@ public class FollowRecord  extends DataEntity<Long> {
         this.wayDict = wayDict;
     }
 
-    public FollowRecord linkman(LinkMan linkman) {
-        this.linkman = linkman;
-        return this;
-    }
-
     public LinkMan getLinkman() {
+        if(linkman == null){
+            linkman = new LinkMan();
+        }
         return linkman;
     }
 

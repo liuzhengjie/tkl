@@ -6,10 +6,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.customer.CustomerSaleChanceApi;
+import com.tingkelai.domain.customer.FollowRecord;
 import com.tingkelai.domain.customer.SaleChance;
+import com.tingkelai.service.customer.impl.SaleChanceServiceImpl;
 import com.tingkelai.vo.BasePage;
+import com.tingkelai.vo.customer.FollowRecordVO;
+import com.tingkelai.vo.customer.SaleChanceInfoVO;
 import com.tingkelai.vo.customer.SaleChanceListVO;
 import com.tingkelai.vo.customer.SaleChanceVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,6 +29,9 @@ import java.util.List;
 @RestController
 public class CustomerSaleChanceController extends BaseCRUDController<SaleChance, Long> implements CustomerSaleChanceApi<SaleChanceVO> {
 
+    @Autowired
+    private SaleChanceServiceImpl saleChanceService;
+
     @Override
     public ResponseMessage<SaleChanceVO> customerSaleChanceDelete(SaleChanceVO requestBody) {
         QueryWrapper<SaleChance> queryWrapper = new QueryWrapper<>();
@@ -32,8 +40,22 @@ public class CustomerSaleChanceController extends BaseCRUDController<SaleChance,
     }
 
     @Override
-    public ResponseMessage<SaleChanceVO> customerSaleChanceGet(SaleChanceVO requestBody) {
-        return getEntity(requestBody);
+    public ResponseMessage<SaleChanceInfoVO> customerSaleChanceGet(SaleChanceVO requestBody) {
+        try{
+            ResponseMessage<SaleChanceInfoVO> responseMessage = new ResponseMessage<>();
+            // 获取销售机会
+            SaleChance saleChance = saleChanceService.getById(requestBody.getId());
+            // 获取跟进记录
+            List<FollowRecord> followRecordList = saleChanceService.getFollowRecordList(saleChance);
+            SaleChanceInfoVO saleChanceInfoVO = new SaleChanceInfoVO();
+            saleChanceInfoVO.setSaleChance(new SaleChanceVO(saleChance));
+            saleChanceInfoVO.setFollowRecordVOList(new FollowRecordVO().toVO(followRecordList));
+            responseMessage.setData(saleChanceInfoVO);
+            return responseMessage;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ResponseMessage<>(e);
+        }
     }
 
     @Override
@@ -68,12 +90,36 @@ public class CustomerSaleChanceController extends BaseCRUDController<SaleChance,
     }
 
     @Override
-    public ResponseMessage<SaleChanceVO> customerSaleChancePost(SaleChanceVO requestBody) {
-        return saveEntity(requestBody);
+    public ResponseMessage<SaleChanceInfoVO> customerSaleChancePost(SaleChanceInfoVO requestBody) {
+        try{
+            ResponseMessage<SaleChanceInfoVO> responseMessage = new ResponseMessage<>();
+            // 转换成dto
+            requestBody.setTeamId(getCurrentUserTeamId());
+            SaleChance saleChance = requestBody.gainSaleChance();
+            List<FollowRecord> followRecordList = requestBody.gainFollowRecordList();
+            boolean flag = saleChanceService.saveChanceList(saleChance, followRecordList);
+            responseMessage.setMessage("保存成功！");
+            return responseMessage;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ResponseMessage<>(e);
+        }
     }
 
     @Override
-    public ResponseMessage<SaleChanceVO> customerSaleChancePut(SaleChanceVO requestBody) {
-        return updateEntity(requestBody);
+    public ResponseMessage<SaleChanceInfoVO> customerSaleChancePut(SaleChanceInfoVO requestBody) {
+        try{
+            ResponseMessage<SaleChanceInfoVO> responseMessage = new ResponseMessage<>();
+            // 转换成dto
+            requestBody.setTeamId(getCurrentUserTeamId());
+            SaleChance saleChance = requestBody.gainSaleChance();
+            List<FollowRecord> followRecordList = requestBody.gainFollowRecordList();
+            boolean flag = saleChanceService.updateChanceList(saleChance, followRecordList);
+            responseMessage.setMessage("修改成功！");
+            return responseMessage;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ResponseMessage<>(e);
+        }
     }
 }
