@@ -98,7 +98,8 @@ public class LoginController implements LoginApi {
             responseMessage.setMessage("登录成功");
 
             //添加用户基本信息
-            User user = sysUserService.findByPhoneAndTeamId(username, teamId);
+            String tempUserName = (String)subject.getPrincipal();
+            User user = sysUserService.findByUsername(tempUserName);
             Map<String, Object> map = new HashMap<>();
             UserVO userVO = new UserVO();
             map.put("user", userVO.toVO(user));
