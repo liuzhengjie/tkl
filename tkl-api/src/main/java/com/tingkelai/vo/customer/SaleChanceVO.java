@@ -207,6 +207,7 @@ public class SaleChanceVO implements BaseVO<SaleChance, SaleChanceVO>{
         saleChance.setNextContactDate(saleChanceVO.getNextContactDate());
         saleChance.setPlanSaleDate(saleChanceVO.getPlanSaleDate());
         saleChance.setPlanSaleMoney(saleChanceVO.getPlanSaleMoney());
+        saleChance.setTeamId(saleChanceVO.getTeamId());
         return saleChance;
     }
 

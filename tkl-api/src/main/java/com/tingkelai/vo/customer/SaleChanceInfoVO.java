@@ -73,6 +73,10 @@ public class SaleChanceInfoVO{
     /** 获取跟进记录 */
     public List<FollowRecord> gainFollowRecordList(){
         FollowRecordVO followRecordVO = new FollowRecordVO();
-        return followRecordVO.toDTO(followRecordVOList);
+        List<FollowRecord> followRecordList = followRecordVO.toDTO(followRecordVOList);
+        for(FollowRecord followRecord : followRecordList){
+            followRecord.setTeamId(teamId);
+        }
+        return followRecordList;
     }
 }
