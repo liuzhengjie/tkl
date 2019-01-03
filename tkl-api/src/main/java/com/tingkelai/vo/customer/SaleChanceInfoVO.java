@@ -45,7 +45,7 @@ public class SaleChanceInfoVO{
 
     /** 销售记录跟进记录列表信息 */
     @ApiModelProperty(value = "销售记录跟进记录列表信息")
-    @JsonProperty("inventoryExtInfoVOList")
+    @JsonProperty("followRecordVOList")
     private List<FollowRecordVO> followRecordVOList;
 
     public SaleChanceVO getSaleChance() {
