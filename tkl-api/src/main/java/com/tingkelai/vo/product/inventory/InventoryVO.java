@@ -96,9 +96,13 @@ public class InventoryVO {
 			// 入库时间
 			productInventory.setStorageDate(inventoryBaseInfoVO.getStorageDate());
 
-			productInventory.setId(0l);
+			if(inventoryBaseInfoVO.getId() == null){
+				productInventory.setId(0l);
+			}else{
+				productInventory.setId(inventoryBaseInfoVO.getId());
+			}
 
-			productInventory.setTeamId(inventoryBaseInfoVO.getTeamId());
+			productInventory.setTeamId(teamId);
 
 			list.add(productInventory);
 		}

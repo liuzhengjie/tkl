@@ -192,6 +192,7 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         subscribePlan.setLinkman(subscribePlanVO.getLinkman().toDTO());
         subscribePlan.setDept(subscribePlanVO.getDept().toDTO());
         subscribePlan.setUser(subscribePlanVO.getUser().toDTO());
+        subscribePlan.setTeamId(subscribePlanVO.getTeamId());
         return subscribePlan;
     }
 
@@ -218,6 +219,7 @@ public class SubscribePlanVO implements BaseVO<SubscribePlan, SubscribePlanVO>{
         subscribePlanVO.setLinkman(new LinkManVO(subscribePlan.getLinkman()));
         subscribePlanVO.setDept(new DeptVO(subscribePlan.getDept()));
         subscribePlanVO.setUser(new UserVO(subscribePlan.getUser()));
+        subscribePlanVO.setTeamId(subscribePlan.getTeamId());
         return subscribePlanVO;
     }
 

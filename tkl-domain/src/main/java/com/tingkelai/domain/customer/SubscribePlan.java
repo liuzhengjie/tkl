@@ -23,6 +23,10 @@ import java.util.Objects;
 @Mapper
 public class SubscribePlan  extends DataEntity<Long> {
 
+    @JsonProperty("teamId")
+    @TableField("team_id")
+    private Long teamId;
+
     @ApiModelProperty(value = "预约类型")
     @JsonProperty("planType")
     @TableField("plan_type")
@@ -154,6 +158,14 @@ public class SubscribePlan  extends DataEntity<Long> {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }
 
