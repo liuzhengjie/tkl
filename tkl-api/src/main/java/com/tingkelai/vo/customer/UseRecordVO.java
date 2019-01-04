@@ -33,7 +33,8 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
         setDictMachineType(new DictItemVO(useRecord.getDictMachineType()));
         setDictUseOrNo(new DictItemVO((useRecord.getDictUseOrNo())));
         setDictUseResult(new DictItemVO(useRecord.getDictUseResult()));
-        setDictUseYear(new DictItemVO(useRecord.getDictUseYear()));
+        setUseYear(useRecord.getUseYear());
+        setDictMachineModel(new DictItemVO(useRecord.getDictMachineModel()));
         setMachineCode(useRecord.getMachineCode());
     }
 
@@ -56,6 +57,11 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     @ApiModelProperty(value = "机器类型")
     private DictItemVO dictMachineType;
 
+    /** 机器型号 */
+    @JsonProperty("dictMachineModel")
+    @ApiModelProperty(value = "机器型号")
+    private DictItemVO dictMachineModel;
+
     /** 品牌 */
     @JsonProperty("dictBrand")
     @ApiModelProperty(value = "品牌")
@@ -72,9 +78,9 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
     private DictItemVO dictEar;
 
     /** 使用年限 */
-    @JsonProperty("dictUseYear")
+    @JsonProperty("useYear")
     @ApiModelProperty(value = "使用年限")
-    private DictItemVO dictUseYear;
+    private int useYear;
 
     /** 使用效果 */
     @JsonProperty("dictUseResult")
@@ -118,7 +124,8 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
         useRecord.setDictMachineType(useRecordVO.getDictMachineType().toDTO());
         useRecord.setDictUseOrNo(useRecordVO.getDictUseOrNo().toDTO());
         useRecord.setDictUseResult(useRecordVO.getDictUseResult().toDTO());
-        useRecord.setDictUseYear(useRecordVO.getDictUseYear().toDTO());
+        useRecord.setDictMachineModel(useRecordVO.getDictMachineModel().toDTO());
+        useRecord.setUseYear(useRecordVO.getUseYear());
         useRecord.setMachineCode(useRecordVO.getMachineCode());
         useRecord.setTeamId(useRecordVO.getTeamId());
         return useRecord;
@@ -205,16 +212,6 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
         this.dictEar = dictEar;
     }
 
-    public DictItemVO getDictUseYear() {
-        if(dictUseYear == null){
-            dictUseYear = new DictItemVO();
-        }
-        return dictUseYear;
-    }
-
-    public void setDictUseYear(DictItemVO dictUseYear) {
-        this.dictUseYear = dictUseYear;
-    }
 
     public DictItemVO getDictUseResult() {
         if(dictUseResult == null){
@@ -233,5 +230,24 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
 
     public void setMachineCode(String machineCode) {
         this.machineCode = machineCode;
+    }
+
+    public DictItemVO getDictMachineModel() {
+        if(dictMachineModel == null){
+            dictMachineModel = new DictItemVO();
+        }
+        return dictMachineModel;
+    }
+
+    public void setDictMachineModel(DictItemVO dictMachineModel) {
+        this.dictMachineModel = dictMachineModel;
+    }
+
+    public int getUseYear() {
+        return useYear;
+    }
+
+    public void setUseYear(int useYear) {
+        this.useYear = useYear;
     }
 }

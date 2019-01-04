@@ -20,9 +20,9 @@
                                 dictEar.id as "dictEar.id",
         dictEar.name as "dictEar.name",
         dictEar.code as "dictEar.code",
-                                dictUseYear.id as "dictUseYear.id",
-        dictUseYear.name as "dictUseYear.name",
-        dictUseYear.code as "dictUseYear.code",
+                                dictMachineModel.id as "dictMachineModel.id",
+        dictMachineModel.name as "dictMachineModel.name",
+        dictMachineModel.code as "dictMachineModel.code",
                                         dictUseResult.id as "dictUseResult.id",
         dictUseResult.name as "dictUseResult.name",
         dictUseResult.code as "dictUseResult.code",
@@ -37,7 +37,7 @@
         LEFT JOIN tkl_dict_item dictBrand ON dictBrand.id = t.dict_brand
         LEFT JOIN tkl_dict_item dictUseOrNo ON dictUseOrNo.id = t.dict_use_or_no
         LEFT JOIN tkl_dict_item dictEar ON dictEar.id = t.dict_ear
-        LEFT JOIN tkl_dict_item dictUseYear ON dictUseYear.id = t.dict_use_year
+        LEFT JOIN tkl_dict_item dictMachineModel ON dictMachineModel.id = t.dict_machine_model
         LEFT JOIN tkl_dict_item dictUseResult ON dictUseResult.id = t.dict_use_result
     </sql>
 

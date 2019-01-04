@@ -32,6 +32,10 @@ public class UseRecord extends DataEntity<Long> {
     @TableField(value = "dict_machine_type", el = "dictMachineType.id")
     private DictItem dictMachineType;
 
+    /** 机器型号 */
+    @TableField(value = "dict_machine_model", el = "dictMachineModel.id")
+    private DictItem dictMachineModel;
+
     /** 品牌 */
     @TableField(value = "dict_brand", el = "dictBrand.id")
     private DictItem dictBrand;
@@ -45,8 +49,8 @@ public class UseRecord extends DataEntity<Long> {
     private DictItem dictEar;
 
     /** 使用年限 */
-    @TableField(value = "dict_use_year", el = "dictUseYear.id")
-    private DictItem dictUseYear;
+    @TableField(value = "use_year")
+    private Integer useYear;
 
     /** 使用效果 */
     @TableField(value = "dict_use_result", el = "dictUseResult.id")
@@ -119,15 +123,12 @@ public class UseRecord extends DataEntity<Long> {
         this.dictEar = dictEar;
     }
 
-    public DictItem getDictUseYear() {
-        if(dictUseYear == null){
-            dictUseYear = new DictItem();
-        }
-        return dictUseYear;
+    public Integer getUseYear() {
+        return useYear;
     }
 
-    public void setDictUseYear(DictItem dictUseYear) {
-        this.dictUseYear = dictUseYear;
+    public void setUseYear(Integer useYear) {
+        this.useYear = useYear;
     }
 
     public DictItem getDictUseResult() {
@@ -157,5 +158,16 @@ public class UseRecord extends DataEntity<Long> {
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public DictItem getDictMachineModel() {
+        if(dictMachineModel == null){
+            dictMachineModel = new DictItem();
+        }
+        return dictMachineModel;
+    }
+
+    public void setDictMachineModel(DictItem dictMachineModel) {
+        this.dictMachineModel = dictMachineModel;
     }
 }
