@@ -1,6 +1,7 @@
 package com.tingkelai.vo.customer;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.FollowRecord;
 import com.tingkelai.domain.customer.SaleChance;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
         setDept(new DeptVO(saleChance.getDept()));
         setUser(new UserVO(saleChance.getUser()));
         setCustomer(new CustomerVO(saleChance.getCustomer()));
+        setNextContactDate(saleChance.getNextContactDate());
     }
 
     public SaleChanceListVO(SaleChance saleChance, FollowRecord followRecord){
@@ -41,6 +44,7 @@ public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
         setDept(new DeptVO(saleChance.getDept()));
         setUser(new UserVO(saleChance.getUser()));
         setCustomer(new CustomerVO(saleChance.getCustomer()));
+        setNextContactDate(saleChance.getNextContactDate());
         if(followRecord != null){
             setFollowRecordVO(new FollowRecordVO(followRecord));
         }
@@ -90,6 +94,13 @@ public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
     @ApiModelProperty("最新的跟进记录")
     @JsonProperty("followRecordVO")
     private FollowRecordVO followRecordVO;
+
+    /**
+     * 下次联系日期
+     **/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("下次联系时间")
+    private Date nextContactDate;
 
     public String getName() {
         return name;
@@ -143,6 +154,14 @@ public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
         this.followRecordVO = followRecordVO;
     }
 
+    public Date getNextContactDate() {
+        return nextContactDate;
+    }
+
+    public void setNextContactDate(Date nextContactDate) {
+        this.nextContactDate = nextContactDate;
+    }
+
     /**
      * 封装成业务需要的对象
      */
@@ -159,6 +178,7 @@ public class SaleChanceListVO implements BaseVO<SaleChance, SaleChanceListVO>{
         saleChance.setTeamId(saleChanceVO.getTeamId());
         saleChance.setCustomer(saleChanceVO.getCustomer().toDTO());
         saleChance.setName(saleChanceVO.getName());
+        saleChance.setNextContactDate(saleChanceVO.getNextContactDate());
         return saleChance;
     }
 

@@ -23,10 +23,10 @@ public class SubscribePlanServiceImpl extends CommonServiceImpl<SubscribePlan> i
             if(saleChance.getCustomer() == null || saleChance.getCustomer().getId() == null){
                 throw new LackParamsException("缺少参数customer.id");
             }else{
-                queryWrapper.eq("customer_id", saleChance.getCustomer().getId());
+                queryWrapper.eq("t.customer_id", saleChance.getCustomer().getId());
             }
-            queryWrapper.eq("team_id", saleChance.getTeamId());
-            queryWrapper.eq("del_flag", 0);
+            queryWrapper.eq("t.team_id", saleChance.getTeamId());
+            queryWrapper.eq("t.del_flag", 0);
             //获取查询结果
             //加工返回值
             return super.page(iPage, queryWrapper);
