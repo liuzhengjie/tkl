@@ -54,4 +54,14 @@
         </where>
     </select>
 
+    <select id="selectById" resultType="com.tingkelai.domain.customer.SaleChance">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_sale_chance t
+        <include refid="parentJoins"/>
+        <where>
+            t.id = #{id}
+        </where>
+    </select>
+
 </mapper>

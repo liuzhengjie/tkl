@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tingkelai.dao.order.OrderMapper;
+import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.domain.order.Order;
 import com.tingkelai.exception.ex300.NoPermissionException;
 import com.tingkelai.service.common.ICommonService;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
+import com.tingkelai.service.customer.impl.SaleRecordServiceImpl;
 import net.sf.ehcache.search.expression.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,9 @@ public class OrderServiceImpl extends CommonServiceImpl<Order> implements ICommo
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private SaleRecordServiceImpl saleRecordService;
+
     @Override
     public IPage<Order> page(IPage<Order> iPage, Wrapper<Order> wrapper) {
         try {
@@ -46,4 +51,6 @@ public class OrderServiceImpl extends CommonServiceImpl<Order> implements ICommo
             throw e;
         }
     }
+
+
 }

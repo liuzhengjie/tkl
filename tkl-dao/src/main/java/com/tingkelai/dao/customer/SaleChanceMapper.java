@@ -8,6 +8,8 @@ import com.tingkelai.domain.customer.SaleChance;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.Serializable;
+
 /**
  * 销售机会mapper
  *
@@ -20,4 +22,7 @@ public interface SaleChanceMapper extends BaseMapper<SaleChance> {
     IPage<SaleChance> page(@Param("iPage") IPage<SaleChance> iPage, @Param(Constants.WRAPPER) QueryWrapper<SaleChance> queryWrapper);
 
     SaleChance getById(Long id);
+
+    @Override
+    SaleChance selectById(@Param("id") Serializable id);
 }

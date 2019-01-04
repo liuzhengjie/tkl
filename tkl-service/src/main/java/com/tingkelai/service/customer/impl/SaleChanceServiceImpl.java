@@ -105,9 +105,9 @@ public class SaleChanceServiceImpl extends CommonServiceImpl<SaleChance> impleme
     public List<FollowRecord> getFollowRecordList(SaleChance saleChance) {
         try {
             QueryWrapper<FollowRecord> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("team_id", saleChance.getTeamId());
-            queryWrapper.eq("del_flag", 0);
-            queryWrapper.eq("sale_chance_id", saleChance.getId());
+            queryWrapper.eq("t.team_id", saleChance.getTeamId());
+            queryWrapper.eq("t.del_flag", 0);
+            queryWrapper.eq("t.sale_chance_id", saleChance.getId());
             List<FollowRecord> followRecordList = followRecordService.list(queryWrapper);
             return followRecordList;
         }catch (Exception e){

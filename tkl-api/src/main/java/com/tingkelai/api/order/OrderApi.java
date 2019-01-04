@@ -35,9 +35,9 @@ public interface OrderApi<T> {
 
 
     @ApiOperation(value = "获取订单（账单）", nickname = "orderGet", notes = "", tags={ "order", })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true),
-    })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id", value = "id", required = true),
+//    })
     @RequestMapping(value = "/order",
             method = RequestMethod.GET)
     ResponseMessage orderGet(T requestBody);

@@ -80,11 +80,11 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
     @Override
     public boolean saveSaleOrder(SaleRecord saleRecord,List<SaleProductRecord> saleProductRecordList) {
         // 保存基本信息
-        super.save(saleRecord);
+        super.saveOrUpdate(saleRecord);
         // 保存商品信息
         for(SaleProductRecord temp : saleProductRecordList){
             temp.setSaleRecord(saleRecord);
-            saleProductRecordService.save(temp);
+            saleProductRecordService.saveOrUpdate(temp);
         }
         return true;
     }

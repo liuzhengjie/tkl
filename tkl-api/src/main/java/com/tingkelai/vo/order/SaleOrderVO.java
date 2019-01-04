@@ -2,6 +2,7 @@ package com.tingkelai.vo.order;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tingkelai.domain.customer.SaleProductRecord;
+import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.vo.customer.CustomerVO;
 import com.tingkelai.vo.customer.SaleProductRecordVO;
 import com.tingkelai.vo.customer.SaleRecordVO;
@@ -24,6 +25,16 @@ import java.util.List;
  */
 @ApiModel(description = "销售订单记录")
 public class SaleOrderVO{
+
+    public SaleOrderVO(){
+
+    }
+
+    public SaleOrderVO(SaleRecord saleRecord, List<SaleProductRecord> saleProductRecordList){
+        this.saleRecord = new SaleRecordVO(saleRecord);
+        SaleProductRecordVO saleProductRecordVO = new SaleProductRecordVO();
+        this.saleProductRecordList = saleProductRecordVO.toVO(saleProductRecordList);
+    }
 
     /** 销售订单基本信息 */
     @ApiModelProperty(value = "销售订单基本信息")

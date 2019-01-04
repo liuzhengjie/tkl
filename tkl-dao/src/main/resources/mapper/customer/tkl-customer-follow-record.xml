@@ -33,4 +33,14 @@
         order by contact_date desc
         limit 1
     </select>
+
+    <select id="selectList" resultType="com.tingkelai.domain.customer.FollowRecord">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_customer_follow_record t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 </mapper>
