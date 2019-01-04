@@ -157,7 +157,7 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
     //===============================================
 
     /** 服务产品 */
-    @JsonProperty("product_id")
+    @JsonProperty("product")
     @ApiModelProperty(value = "服务产品")
     private ProductVO product;
 

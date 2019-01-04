@@ -243,11 +243,11 @@ public class UseRecordVO implements BaseVO<UseRecord, UseRecordVO> {
         this.dictMachineModel = dictMachineModel;
     }
 
-    public int getUseYear() {
+    public Integer getUseYear() {
         return useYear;
     }
 
-    public void setUseYear(int useYear) {
+    public void setUseYear(Integer useYear) {
         this.useYear = useYear;
     }
 }

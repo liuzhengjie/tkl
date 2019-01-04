@@ -73,6 +73,7 @@ public class OrderController extends BaseCRUDController<SaleRecord, Long> implem
             //包装成返回对象
             ResponseMessage<List<OrderVO>> responseMessage = new ResponseMessage<>();
             responseMessage.setData(requestBody.toVO(list));
+            responseMessage.setExt(basePage.toMap());
             return responseMessage;
         }catch (Exception e){
             logger.error(e.getMessage());

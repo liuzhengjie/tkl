@@ -42,9 +42,9 @@
         dept.id as "dept.id",
         dept.name as "dept.name",
 
-                usert.id as "usert.id",
-        usert.username as "usert.username",
-        usert.realname as "usert.realname",
+                usert.id as "user.id",
+        usert.username as "user.username",
+        usert.realname as "user.realname",
 
                                         product.id as "product.id",
         product.name as "product.name",
@@ -62,7 +62,7 @@
         LEFT JOIN tkl_sys_dept dept ON dept.id = t.dept_id
         LEFT JOIN tkl_sys_user usert ON usert.id = t.user_id
         LEFT JOIN tkl_product product ON product.id = t.product_id
-        LEFT JOIN tkl_customer_linkman linkman ON linkman.id = t.customer_id
+        LEFT JOIN tkl_customer_linkman linkman ON linkman.id = t.linkman_id
         LEFT JOIN tkl_dict_item adornEarDict ON adornEarDict.id = t.adorn_ear_id
         LEFT JOIN tkl_dict_item productSourceDict ON productSourceDict.id = t.product_source_id
         LEFT JOIN tkl_dict_item serviceTypeDict ON serviceTypeDict.id = t.dict_service_type_id

@@ -72,7 +72,7 @@ public class ServiceRecord  extends DataEntity<Long> {
     //===============================================
 
     /** 服务产品 */
-    @JsonProperty("product_id")
+    @JsonProperty("product")
     @TableField(value = "product_id", el = "product.id")
     private Product product;
 
@@ -104,7 +104,7 @@ public class ServiceRecord  extends DataEntity<Long> {
 
     /** 是否保修 */
     @JsonProperty("repairFlag")
-    @TableField("repair_flag")
+    @TableField("dict_return_repair_id")
     private String repairFlag;
 
 
