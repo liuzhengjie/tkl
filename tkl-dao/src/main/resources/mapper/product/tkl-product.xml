@@ -55,5 +55,14 @@
             ${ew.sqlSegment}
         </where>
     </select>
+    <select id="selectOne" resultType="com.tingkelai.domain.product.Product">
+        select
+        <include refid="Base_Column_List" />
+        from tkl_product t
+        <include refid="parentJoins"/>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 
 </mapper>

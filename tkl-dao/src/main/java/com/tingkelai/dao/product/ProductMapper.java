@@ -1,6 +1,7 @@
 package com.tingkelai.dao.product;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,4 +25,6 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     Product getOne(@Param(Constants.WRAPPER)  QueryWrapper<Product> queryWrapper);
 
+    @Override
+    Product selectOne(@Param(Constants.WRAPPER)  Wrapper<Product> queryWrapper);
 }

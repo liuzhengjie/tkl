@@ -56,8 +56,8 @@ public class ProductServiceImpl extends CommonServiceImpl<Product> implements IP
     public Product getOne(Wrapper<Product> wrapper) {
         Product product = wrapper.getEntity();
         QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("team_id", product.getTeamId());
-        queryWrapper.eq("id", product.getId());
+        queryWrapper.eq("t.team_id", product.getTeamId());
+        queryWrapper.eq("t.id", product.getId());
         return super.getOne(queryWrapper);
     }
 }
