@@ -61,6 +61,7 @@ public class LinkMan  extends DataEntity<Long> {
     @TableField("postcode")
     private String postcode = null;
 
+    /** 主联系人1，其他联系人0 */
     @JsonProperty("primaryFlag")
     @TableField("primary_flag")
     private String primaryFlag = null;

@@ -115,6 +115,10 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
     @ApiModelProperty("状态")
     private DictItemVO stateDict;
 
+    @JsonProperty("orderPrice")
+    @ApiModelProperty("已付定金")
+    private Double orderPrice;
+
     public String getCode() {
         return code;
     }
@@ -216,6 +220,14 @@ public class SaleRecordVO implements BaseVO<SaleRecord, SaleRecordVO>{
 
     public void setStateDict(DictItemVO stateDict) {
         this.stateDict = stateDict;
+    }
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
     }
 
     /**

@@ -87,6 +87,18 @@ public class Order {
     @ApiModelProperty("账单（订单）类型")
     private String orderType;
 
+    @JsonProperty("orderPrice")
+    @ApiModelProperty("已付定金")
+    private Double orderPrice;
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
     public String getOrderType() {
         return orderType;
     }

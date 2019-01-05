@@ -51,6 +51,14 @@ public class ProductInventoryVO implements BaseVO<ProductInventory, ProductInven
 		setOrderCompanyDict(new DictItemVO(productInventory.getOrderCompanyDict()));
 		// 订货方式
 		setOrderWayDict(new DictItemVO(productInventory.getOrderWayDict()));
+		// 发生金额
+		if(getStoragePrice() != null && getChangeNum() != null){
+			setPayPrice(getChangeNum() * getStoragePrice());
+		}
+		// 原始数量
+		if(getChangeNum() != null && getStorageNum() != null){
+			setOriginNum(getStorageNum() - getChangeNum());
+		}
 	}
 
 	/** 主键 */
@@ -103,6 +111,16 @@ public class ProductInventoryVO implements BaseVO<ProductInventory, ProductInven
 	@JsonProperty("storageNum")
 	@ApiModelProperty(value = "库存量")
 	private Integer storageNum;
+
+	/** 发生金额 */
+	@JsonProperty("payPrice")
+	@ApiModelProperty(value = "发生金额")
+	private Double payPrice;
+
+	/** 原始数量 */
+	@JsonProperty("originNum")
+	@ApiModelProperty(value = "原始数量")
+	private Integer originNum;
 
 	/** 关联商品 */
 	@JsonProperty("product")
@@ -225,6 +243,22 @@ public class ProductInventoryVO implements BaseVO<ProductInventory, ProductInven
 
 	public void setProduct(ProductVO product) {
 		this.product = product;
+	}
+
+	public Double getPayPrice() {
+		return payPrice;
+	}
+
+	public void setPayPrice(Double payPrice) {
+		this.payPrice = payPrice;
+	}
+
+	public Integer getOriginNum() {
+		return originNum;
+	}
+
+	public void setOriginNum(Integer originNum) {
+		this.originNum = originNum;
 	}
 
 	@Override

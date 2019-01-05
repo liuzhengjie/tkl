@@ -43,9 +43,19 @@ public class LinkmanServiceImpl extends CommonServiceImpl<LinkMan> implements IL
     @Override
     public LinkMan getOne(Wrapper<LinkMan> wrapper) {
         LinkMan useRecord = wrapper.getEntity();
-        if(useRecord.getId() != null){
+        if(useRecord != null && useRecord.getId() != null){
             return linkManMapper.getById(useRecord.getId());
         }
         return super.getOne(wrapper);
+    }
+
+    /** 通过客户id获取客户的主联系人 */
+    public LinkMan getCustomerMainLinkMan(Long customerId){
+        // 客户的主联系人
+        QueryWrapper<LinkMan> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("customer_id", customerId);
+        queryWrapper.eq("del_flag", 0);
+        queryWrapper.eq("primary_flag", "1");
+        return getOne(queryWrapper);
     }
 }

@@ -8,6 +8,8 @@ import com.tingkelai.domain.order.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.Serializable;
+
 /**
  * 订单（账单）管理mapper
  *
@@ -20,4 +22,7 @@ public interface OrderMapper extends BaseMapper<Order> {
 
     /** 获取订单（账单）列表 */
     IPage<Order> page(@Param("iPage") IPage<Order> iPage, @Param(Constants.WRAPPER) Wrapper<Order> wrapper);
+
+    @Override
+    Order selectById(@Param("id") Serializable id);
 }

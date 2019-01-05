@@ -7,14 +7,18 @@ import com.tingkelai.api.controller.BaseCRUDController;
 import com.tingkelai.api.order.OrderApi;
 import com.tingkelai.domain.ResponseMessage;
 import com.tingkelai.domain.customer.Customer;
+import com.tingkelai.domain.customer.LinkMan;
 import com.tingkelai.domain.customer.SaleProductRecord;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.domain.order.Order;
 import com.tingkelai.service.customer.ISaleRecordService;
+import com.tingkelai.service.customer.impl.LinkmanServiceImpl;
 import com.tingkelai.service.customer.impl.SaleProductRecordServiceImpl;
+import com.tingkelai.service.customer.impl.SaleRecordServiceImpl;
 import com.tingkelai.service.order.IOrderService;
 import com.tingkelai.service.order.impl.OrderServiceImpl;
 import com.tingkelai.vo.BasePage;
+import com.tingkelai.vo.customer.LinkManVO;
 import com.tingkelai.vo.customer.SaleProductRecordVO;
 import com.tingkelai.vo.customer.SaleRecordVO;
 import com.tingkelai.vo.order.OrderVO;
@@ -23,7 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 客户销售记录处理类
@@ -36,13 +42,16 @@ import java.util.List;
 public class OrderController extends BaseCRUDController<SaleRecord, Long> implements OrderApi<SaleRecordVO>{
 
     @Autowired
-    private ISaleRecordService saleRecordService;
+    private SaleRecordServiceImpl saleRecordService;
 
     @Autowired
     private OrderServiceImpl orderService;
 
     @Autowired
     private SaleProductRecordServiceImpl saleProductRecordService;
+
+    @Autowired
+    private LinkmanServiceImpl linkmanService;
 
     @Override
     public ResponseMessage<SaleRecordVO> orderDelete(SaleRecordVO requestBody) {
@@ -56,17 +65,49 @@ public class OrderController extends BaseCRUDController<SaleRecord, Long> implem
             // 获取销售记录
             SaleRecord saleRecord = saleRecordService.getById(requestBody.getId());
             // 获取销售产品列表
-//            List<SaleProductRecord> saleProductRecordList = saleRecordService
             QueryWrapper<SaleProductRecord> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("team_id", teamId);
             queryWrapper.eq("sale_record_id", saleRecord.getId());
             queryWrapper.eq("del_flag", 0);
             List<SaleProductRecord> saleProductRecordList = saleProductRecordService.list(queryWrapper);
             SaleOrderVO saleOrderVO = new SaleOrderVO(saleRecord, saleProductRecordList);
-            return new ResponseMessage<>(saleOrderVO);
+            // 添加主联系人信息
+            if(saleRecord.getCustomer() != null){
+                LinkMan linkMan = linkmanService.getCustomerMainLinkMan(saleRecord.getCustomer().getId());
+                if(linkMan != null){
+                    saleOrderVO.setLinkMan(new LinkManVO(linkMan));
+                }
+            }
+            // 获取商品数量，商品总数，总价格
+            Map<String, Object> extMap = getExtInfo(saleProductRecordList);
+            ResponseMessage<SaleOrderVO> responseMessage = new ResponseMessage<>(saleOrderVO);
+            responseMessage.setExt(extMap);
+            return responseMessage;
         }catch (Exception e){
             return new ResponseMessage<>(e);
         }
+    }
+
+    /** 获取销售记录统计信息 */
+    private Map<String,Object> getExtInfo(List<SaleProductRecord> saleProductRecordList) {
+        Map<String, Object> resMap = new HashMap<>();
+        if(saleProductRecordList != null){
+            // 总金额
+            double totalMoney = 0;
+            // 总产品数量
+            int productNum = 0;
+            // 所有产品总数
+            int totalNum = 0;
+            for(SaleProductRecord saleProductRecord : saleProductRecordList){
+                productNum ++;
+                totalNum += Integer.parseInt(saleProductRecord.getNum());
+                totalMoney += Double.parseDouble(saleProductRecord.getRealTotal());
+            }
+            resMap.put("totalMoney", totalMoney);
+            resMap.put("productNum", productNum);
+            resMap.put("totalNum", totalNum);
+        }
+        return resMap;
     }
 
     @Override

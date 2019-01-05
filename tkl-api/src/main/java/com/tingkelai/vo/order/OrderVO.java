@@ -43,6 +43,7 @@ public class OrderVO implements BaseVO<Order, OrderVO>{
         setStateDict(new DictItemVO(order.getStateDict()));
         setUser(new UserVO(order.getUser()));
         setOrderType(order.getOrderType());
+        setOrderPrice(order.getOrderPrice());
     }
 
     @JsonProperty("id")
@@ -101,6 +102,10 @@ public class OrderVO implements BaseVO<Order, OrderVO>{
     @ApiModelProperty("实际价格")
     private Double realPrice;
 
+    @JsonProperty("orderPrice")
+    @ApiModelProperty("已付定金")
+    private Double orderPrice;
+
     @JsonProperty("stateDict")
     @ApiModelProperty("状态")
     private DictItemVO stateDict;
@@ -108,6 +113,14 @@ public class OrderVO implements BaseVO<Order, OrderVO>{
     @JsonProperty("orderType")
     @ApiModelProperty("账单（订单）类型:sale-销售账单，service售后服务账单")
     private String orderType;
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
 
     public String getCode() {
         return code;
@@ -221,6 +234,7 @@ public class OrderVO implements BaseVO<Order, OrderVO>{
         order.setStateDict(orderVO.getStateDict().toDTO());
         order.setUser(orderVO.getUser().toDTO());
         order.setOrderType(orderVO.getOrderType());
+        order.setOrderPrice(orderVO.getOrderPrice());
         return order;
     }
 

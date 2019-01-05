@@ -255,7 +255,7 @@ public class LinkManVO implements BaseVO<LinkMan, LinkManVO>{
      * 主联系人标识
      * @return primaryFlag
      **/
-    @ApiModelProperty(value = "主联系人标识")
+    @ApiModelProperty(value = "主联系人标识,主联系人1，其他联系人0")
     public String getPrimaryFlag() {
         return primaryFlag;
     }

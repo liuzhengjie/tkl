@@ -76,6 +76,12 @@ public class SaleRecord  extends DataEntity<Long> {
     private Double originalPrice;
 
     /**
+     * 已付定金
+     */
+    @TableField("order_price")
+    private Double orderPrice;
+
+    /**
      * 折扣
      */
     @TableField("discount")
@@ -208,6 +214,14 @@ public class SaleRecord  extends DataEntity<Long> {
 
     public void setStateDict(DictItem stateDict) {
         this.stateDict = stateDict;
+    }
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
     }
 }
 

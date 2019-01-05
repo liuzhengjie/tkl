@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 /**
  * 订单（账单）处理类
  *
@@ -52,5 +54,9 @@ public class OrderServiceImpl extends CommonServiceImpl<Order> implements ICommo
         }
     }
 
-
+    /** 通过id获取销售账单信息 */
+    @Override
+    public Order getById(Serializable serializable) {
+        return super.getById(serializable);
+    }
 }

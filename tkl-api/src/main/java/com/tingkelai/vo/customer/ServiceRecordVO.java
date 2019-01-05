@@ -88,6 +88,8 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
         setChargePrice(serviceRecord.getChargePrice());
         /** 关联客户 */
         setCustomer(new CustomerVO(serviceRecord.getCustomer()));
+        /** 处理结果 */
+        setDealResult(serviceRecord.getDealResult());
     }
 
     @JsonProperty("id")
@@ -262,6 +264,11 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
     @JsonProperty("customer")
     @ApiModelProperty(value = "关联客户")
     private CustomerVO customer;
+
+    /** 处理结果 */
+    @JsonProperty("dealResult")
+    @ApiModelProperty(value = "处理结果")
+    private String dealResult;
 
     public String getCode() {
         return code;
@@ -508,6 +515,14 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
         this.customer = customer;
     }
 
+    public String getDealResult() {
+        return dealResult;
+    }
+
+    public void setDealResult(String dealResult) {
+        this.dealResult = dealResult;
+    }
+
     /**
      * 封装成业务需要的对象
      */
@@ -573,6 +588,9 @@ public class ServiceRecordVO implements BaseVO<ServiceRecord, ServiceRecordVO>{
         serviceRecord.setChargeDict(serviceRecordVO.getChargeDict().toDTO());
         /** 收费金额 */
         serviceRecord.setChargePrice(serviceRecordVO.getChargePrice());
+
+        serviceRecord.setDealResult(serviceRecordVO.getDealResult());
+
         /** 关联客户 */
         serviceRecord.setCustomer(serviceRecordVO.getCustomer().toDTO());
         return serviceRecord;

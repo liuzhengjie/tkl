@@ -8,15 +8,18 @@ import com.tingkelai.dao.customer.CustomerMapper;
 import com.tingkelai.dao.customer.SaleProductRecordMapper;
 import com.tingkelai.dao.customer.SaleRecordMapper;
 import com.tingkelai.domain.customer.Customer;
+import com.tingkelai.domain.customer.LinkMan;
 import com.tingkelai.domain.customer.SaleProductRecord;
 import com.tingkelai.domain.customer.SaleRecord;
 import com.tingkelai.exception.ex400.LackParamsException;
 import com.tingkelai.exception.ex500.TokenFailureException;
 import com.tingkelai.service.common.impl.CommonServiceImpl;
 import com.tingkelai.service.customer.ISaleRecordService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service("saleRecordService")
@@ -26,6 +29,9 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
 
     @Autowired
     private SaleProductRecordServiceImpl saleProductRecordService;
+
+    @Autowired
+    private LinkmanServiceImpl linkmanService;
 
     @Override
     public IPage<SaleRecord> page(IPage<SaleRecord> iPage, Wrapper<SaleRecord> wrapper) {
@@ -100,4 +106,21 @@ public class SaleRecordServiceImpl extends CommonServiceImpl<SaleRecord> impleme
         }
         return true;
     }
+
+    @Override
+    public SaleRecord getById(Serializable serializable) {
+        return saleRecordMapper.getById(serializable);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

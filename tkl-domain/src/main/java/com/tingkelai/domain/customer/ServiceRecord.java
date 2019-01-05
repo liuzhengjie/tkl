@@ -162,8 +162,8 @@ public class ServiceRecord  extends DataEntity<Long> {
     @TableField("finish_date")
     private Date finishDate = null;
 
-    /** 完成时间 */
-    @JsonProperty("finishDate")
+    /** 处理模板 */
+    @JsonProperty("dealTemplateDict")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(value = "dict_deal_template_id", el = "dealTemplateDict.id")
     private DictItem dealTemplateDict;
@@ -177,6 +177,11 @@ public class ServiceRecord  extends DataEntity<Long> {
     @JsonProperty("chargePrice")
     @TableField("charge_price")
     private Double chargePrice;
+
+    /** 处理结果 */
+    @JsonProperty("dealResult")
+    @TableField("deal_result")
+    private String dealResult;
 
     /**
      * 关联客户
@@ -437,6 +442,14 @@ public class ServiceRecord  extends DataEntity<Long> {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public String getDealResult() {
+        return dealResult;
+    }
+
+    public void setDealResult(String dealResult) {
+        this.dealResult = dealResult;
     }
 }
 
