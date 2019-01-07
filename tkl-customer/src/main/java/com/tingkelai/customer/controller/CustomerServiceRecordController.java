@@ -26,7 +26,7 @@ public class CustomerServiceRecordController extends BaseCRUDController<ServiceR
     public ResponseMessage<ServiceRecordVO> customerServiceRecordDelete(ServiceRecordVO requestBody) {
         QueryWrapper<ServiceRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", requestBody.getId());
-        return deleteEntity(requestBody);
+        return removeEntity(requestBody, queryWrapper);
     }
 
     @Override
